@@ -1,0 +1,6 @@
+latex/
+html/
+source/_build
+.idea
+texput.log
+pdf
