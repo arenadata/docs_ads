@@ -14,7 +14,7 @@
 
 Настройка удаленного репозитория не отличается от настройки любого дополнительного репозитория **YUM**. Для добавления репозитория необходимо выполнить от имени *root* команду:
 
-:command:`yum-config-manager –-add-repo http://public-repo-1.hortonworks.com/ambari/centos7/2.x/updates/2.7.0.0/ambari.repo`
+  :command:`yum-config-manager –-add-repo http://public-repo-1.hortonworks.com/ambari/centos7/2.x/updates/2.7.0.0/ambari.repo`
 
 
 Установка сервера Ambari
@@ -22,7 +22,7 @@
 
 Сервер **Ambari** устанавливается из RPM-пакета по команде **YUM**:
 
-:command:`yum install ambari-server`
+  :command:`yum install ambari-server`
 
 Команда устанавливает сервер **Ambari**, являющийся сервером веб-приложений, на порт *8080*. Также устанавливается инстанс сервера
 **PostgreSQL** на порт *5432*.
@@ -34,7 +34,7 @@
 
 Сервер **Ambari** необходимо настроить для корректной работы. В случае если инстанс **PostgreSQL** настроен на порт по умолчанию, следует выполнить следующую команду:
 
-:command:`ambari-server setup`
+  :command:`ambari-server setup`
 
 В процессе настройки необходимо указать или принять по умолчанию параметры:
 
@@ -57,15 +57,15 @@
 
 После установки сервера **Ambari** запуск осуществляется по команде:
 
-:command:`ambari-server start`
+  :command:`ambari-server start`
 
 Для проверки статуса сервера необходимо использовать команду:
 
-:command:`ambari-server status`
+  :command:`ambari-server status`
 
 Для остановки сервера необходимо использовать команду:
 
-:command:`ambari-server stop`
+  :command:`ambari-server stop`
 
 Сервер **Ambari** доступен на порту *8080*. По умолчанию для него установлена следующая учетная запись:
 
@@ -76,7 +76,7 @@
 
 Для входа в веб-интерфейс **Ambari** необходимо в адресной строке браузера указать адрес сервера:
 
-:command:`http://<адрес сервера>:8080`
+  :command:`http://<адрес сервера>:8080`
 
 При этом запрашивается логин и пароль. После авторизации открывается веб-интерфейс **Ambari** (:numref:`Рис.%s.<ADS_install_welcom-to-ambari-before-config>`).
 
