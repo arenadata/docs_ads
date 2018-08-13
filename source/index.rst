@@ -16,11 +16,12 @@ Arenadata Streaming. Документация
    :maxdepth: 2
    :caption: Оглавление:
 
-   Intro
-   Install
-   Architecture
-   Config
-   Release
+   Intro/index
+   Install/index
+   Architecture/index
+   Config/index
+   Release/index
+   glossary
 
 .. toctree::
    :hidden:
