@@ -16,7 +16,7 @@
 
 В случае если архивы загружены в каталог */tmp*, то для их распаковки в каталоге, например, */staging*, необходимо выполнить следующую команду:
 
-:command:`tar –xzvf /tmp/ads-ambari-mpack-{version}.tar.gz -C /staging/`
+  :command:`tar –xzvf /tmp/ads-ambari-mpack-{version}.tar.gz -C /staging/`
 
 
 
