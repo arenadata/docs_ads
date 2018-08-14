@@ -5,7 +5,7 @@ Arenadata Streaming. Документация
 
 .. _ADS_index_scheme:
 
-.. figure:: ../imgs/ADS_index_scheme.*
+.. figure:: ../ADS_index_scheme.*
    :align: center
 
    Принципиальная схема платформы ADS
