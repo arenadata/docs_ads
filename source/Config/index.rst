@@ -13,6 +13,7 @@
    :maxdepth: 2
    :caption: Оглавление:
 
+   intro
    broker
    topic
    Producer
