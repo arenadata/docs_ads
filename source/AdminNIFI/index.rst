@@ -1,10 +1,9 @@
 Руководство администратора по работе с сервисом Nifi
 =====================================================
 
+В руководстве приведены сведения для администраторов системы по работе с платформой ADS в части серсиса Nifi – рекомендации по конфигурации, аутентификация пользователей с настройками их политик и доступа, Kerberos.
 
-
-
-В документации приведены концепции хранения в платформе **Arenadata Streaming**, гарантии и рекомендации по использованию **ADS**. Раздел предлагается к прочтению перед переходом к непосредственной установке системы.
+Руководство может быть полезно администраторам, программистам, разработчикам и сотрудникам подразделений информационных технологий, осуществляющих сопровождение платформы.
 
 
 .. important:: Контактная информация службы поддержки -- e-mail: info@arenadata.io
@@ -14,18 +13,9 @@
    :maxdepth: 2
    :caption: Оглавление:
 
-   concept
-   guarantees
+   BestPractices
+   Authentication
+   Policies
+   Kerberos
    
-   
-Configuration Best Practices из https://nifi.apache.org/docs/nifi-docs/html/administration-guide.html#how-to-install-and-start-nifi
-    b)Security Configuration https://nifi.apache.org/docs/nifi-docs/html/administration-guide.html#security-configuration
-    с) User Authentication (LDAP,Kerberos,OpenId Connect,Apache Knox) https://nifi.apache.org/docs/nifi-docs/html/administration-guide.html#user_authentication
-    *) Multi-Tenant Authorization https://nifi.apache.org/docs/nifi-docs/html/administration-guide.html#multi-tenant-authorization
-    d)Configuring Users & Access Policies (Creating Users and Groups,Access Policies,Global Access Policies,Component Level Access Policies,Access Policy Configuration Examples,Moving a Processor,Editing a Processor,Creating a Connection,Editing a Connection) https://nifi.apache.org/docs/nifi-docs/html/administration-guide.html#config-users-access-policies
-    *) Encryption Configuration https://nifi.apache.org/docs/nifi-docs/html/administration-guide.html#encryption
-    *) Administrative Tools (Prerequisites for Running Admin Toolkit in a Secure Environment, Notify,Node Manager,File Manager) https://nifi.apache.org/docs/nifi-docs/html/administration-guide.html#admin-toolkit
-    *) Clustering Configuration (Why Cluster?, NiFi Cluster Coordinator, Primary Node, Isolated Processors:, Communication within the Cluster,Flow Election, Basic Cluster Setup) https://nifi.apache.org/docs/nifi-docs/html/administration-guide.html#clustering
-    *) State Management (Configuring State Providers абзац и таблицу) https://nifi.apache.org/docs/nifi-docs/html/administration-guide.html#state_management
-    e) Kerberos Service https://nifi.apache.org/docs/nifi-docs/html/administration-guide.html#kerberos_service
-   
+  
