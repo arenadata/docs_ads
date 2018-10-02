@@ -64,6 +64,7 @@
 
    Intro/index
    Install/index
+   AdminNIFI/index
    Architecture/index
    Config/index
    Release/index
