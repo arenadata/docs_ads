@@ -89,7 +89,7 @@ Component Level Access Policies
    :header: "Policy", "Privilege", "Resource Descriptor & Action"
    :widths: 30, 30, 40
 
-   "Просмотр компонента", "Позволяет пользователям просматривать детали конфигурации компонентов", "``resource="/<component-type>/<component-UUID>" action="R"``"
+   "Просмотр компонента", "Позволяет пользователям просматривать детали конфигурации компонентов", " ``resource="/<component-type>/<component-UUID>" action="R"`` "
    "", "", ""
    "", "", ""
    "", "", ""
