@@ -19,7 +19,7 @@
 
 .. _ADS_AdminNIFI_Policies_Users:
 
-.. figure:: imgs/ADS_AdminNIFI_Policies_Users.*
+.. figure:: ../imgs/ADS_AdminNIFI_Policies_Users.*
    :align: center
 
    Nifi Users
@@ -30,7 +30,7 @@
 
 .. _ADS_AdminNIFI_Policies_Identity:
 
-.. figure:: imgs/ADS_AdminNIFI_Policies_Identity.*
+.. figure:: ../imgs/ADS_AdminNIFI_Policies_Identity.*
    :align: center
 
    Создание пользователя
@@ -41,7 +41,7 @@
 
 .. _ADS_AdminNIFI_Policies_Group:
 
-.. figure:: imgs/ADS_AdminNIFI_Policies_Group.*
+.. figure:: ../imgs/ADS_AdminNIFI_Policies_Group.*
    :align: center
 
    Создание группы
