@@ -89,17 +89,15 @@ Component Level Access Policies
    :header: "Policy", "Privilege", "Resource Descriptor & Action"
    :widths: 30, 30, 40
 
-   "Просмотр компонента", "Позволяет пользователям просматривать детали конфигурации компонентов", "::
-      resource="/<component-type>/<component-UUID>" action="R"
-   "
-   "", "", ""
-   "", "", ""
-   "", "", ""
-   "", "", ""
-   "", "", ""
-   "", "", ""
-   "", "", ""
-   "", "", ""
+   "Просмотр компонента", "Позволяет пользователям просматривать детали конфигурации компонентов", resource="/<component-type>/<component-UUID>" action="R"
+   "Изменение компонента", "Позволяет пользователям изменять детали конфигурации компонентов", resource="/<component-type>/<component-UUID>" action="W"
+   "Просмотр происхождения", "Позволяет пользователям просматривать события происхождения, созданные компонентом", resource="/provenance-data/<component-type>/<component-UUID>" action="R"
+   "Просмотр данных", "Позволяет пользователям просматривать метаданные и содержимое компонента в очередях потока в исходящих соединениях и через события происхождения", resource="/data/<component-type>/<component-UUID>" action="R"
+   "Изменение данных", "Позволяет пользователям очищать очереди потоков в исходящих соединениях и повторно отправлять через события происхождения", resource="/data/<component-type>/<component-UUID>" action="W"
+   "Просмотр политик", "Позволяет пользователям просматривать список пользователей, которые могут просматривать/изменять компонент", resource="/policies/<component-type>/<component-UUID>" action="R"
+   "Изменение политик", "Позволяет пользователям изменять список пользователей, которые могут просматривать/изменять компонент", resource="/policies/<component-type>/<component-UUID>" action="W"
+   "Получать данные посредством site-to-site", "Позволяет порту получать данные из инстансов NiFi", resource="/data-transfer/input-ports/<port-UUID>" action="W"
+   "Отправлять данные посредством site-to-site", "Позволяет порту отправлять данные из инстансов NiFi", resource="/data-transfer/output-ports/<port-UUID>" action="W"
 
 
 
