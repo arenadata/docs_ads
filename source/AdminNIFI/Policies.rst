@@ -138,9 +138,9 @@ Component Level Access Policies
 Перемещение процессора
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-*User1* необходимо выполнить следующие шаги для выдачи разрешения пользователю *User2* на перемещение процессора GenerateFlowFile в потоке данных с сохранением привилегий у пользователя *User1*:
+*User1* необходимо выполнить следующие шаги для выдачи разрешения пользователю *User2* на перемещение процессора GenerateFlowFile в потоке данных с сохранением привилегий у *User1*:
 
-1. Выбрать процессор GenerateFlowFile (чтобы он был выделен).
+1. Выбрать процессор GenerateFlowFile.
 
 2. Нажать значок "Access Policies" на панели управления "Operate". При этом открывается диалоговое окно "Access Policies".
 
@@ -154,7 +154,7 @@ Component Level Access Policies
    Modify the component
 
 
-4. Нажать ссылку "Override". При замещении политики необходимо выбрать ее переопределение либо на копию унаследованной политики, либо на пустую политику. Для создания копии следует в диалоговом окне "Override Policy" выбрать "Copy" (:numref:`Рис.%s.<ADS_AdminNIFI_Policies_Override>`).
+4. Нажать ссылку "Override". При замещении политики необходимо выбрать ее переопределение либо на копию унаследованной политики, либо на пустую политику. Для создания копии следует в диалоговом окне "Override Policy" выбрать "Copy" и нажать кнопку "Override" (:numref:`Рис.%s.<ADS_AdminNIFI_Policies_Override>`).
 
 .. _ADS_AdminNIFI_Policies_Override:
 
@@ -171,10 +171,10 @@ Component Level Access Policies
 .. figure:: ../imgs/ADS_AdminNIFI_Policies_Modify-add.*
    :align: center
 
-   Добавления пользователя User2 в политику
+   Добавление User2 в политику
    
 
-С такими изменениями *User1* сохраняет возможность перемещения обоих процессоров в рабочей области. А *User2* теперь может перемещать процессор GenerateFlowFile, но не может воздействовать на процессор LogAttribute (:numref:`Рис.%s.<ADS_AdminNIFI_Policies_Result>`).
+С такими изменениями *User1* сохраняет возможность перемещения обоих процессоров в рабочей области. А *User2* теперь может перемещать процессор GenerateFlowFile (:numref:`Рис.%s.<ADS_AdminNIFI_Policies_Result>`).
 
 .. _ADS_AdminNIFI_Policies_Result:
 
@@ -187,7 +187,9 @@ Component Level Access Policies
 Изменение процессора
 ^^^^^^^^^^^^^^^^^^^^^^
 
-В приведенном примере "Перемещение процессора" *User2* добавлен в политику "modify the component" для процессора GenerateFlowFile. Но без возможности просмотра свойств процессора *User2* не может изменять его конфигурацию -- чтобы отредактировать компонент, пользователь должен быть также включен в политику "view the component". *User1* необходимо выполнить следующие шаги для реализации возможности изменения конфигурации процессора пользователю *User2*:
+В приведенном примере "Перемещение процессора" *User2* добавлен в политику "modify the component" для процессора GenerateFlowFile. Но без возможности просмотра свойств процессора *User2* не может изменять его конфигурацию -- чтобы отредактировать компонент, пользователь должен быть также включен в политику "view the component". 
+
+*User1* необходимо выполнить следующие шаги для реализации возможности изменения конфигурации процессора пользователю *User2*:
 
 1. Выбрать процессор GenerateFlowFile.
 
@@ -212,7 +214,7 @@ Component Level Access Policies
 .. figure:: ../imgs/ADS_AdminNIFI_Policies_View-add.*
    :align: center
 
-   Добавления пользователя User2 в политику 
+   Добавление User2 в политику 
 
 
 С такими изменениями *User1* сохраняет возможность просмотра и редактирования процессоров в рабочей области. А *User2* теперь может просматривать и редактировать процессор GenerateFlowFile (:numref:`Рис.%s.<ADS_AdminNIFI_Policies_Result-view>`).
@@ -257,7 +259,7 @@ Component Level Access Policies
 
 1. Выбрать группу процессов root, при этом панель управления "Operate" обновляется с подробными сведениями.
 
-2. Выбрать значок "Access Policies" на панели управления "Operate". и откроется диалоговое окно «Политики доступа».
+2. Выбрать значок "Access Policies" на панели управления "Operate". При этом открывается диалоговое окно "Access Policies".
 
 3. В диалоговом окне в раскрывающемся списке политики выбрать "modify the component" (:numref:`Рис.%s.<ADS_AdminNIFI_Policies_Connect-modify>`).
 
@@ -266,7 +268,7 @@ Component Level Access Policies
 .. figure:: ../imgs/ADS_AdminNIFI_Policies_Connect-modify.*
    :align: center
 
-   "modify the component" 
+   Modify the component 
 
 
 4. Выбрать значок "Add User". В поле "User Identity" ввести вручную или найти в списке *User2* и нажать "OK" (:numref:`Рис.%s.<ADS_AdminNIFI_Policies_Connect-add>`).
@@ -276,10 +278,10 @@ Component Level Access Policies
 .. figure:: ../imgs/ADS_AdminNIFI_Policies_Connect-add.*
    :align: center
 
-   Добавления пользователя User2 в политику группы 
+   Добавление User2 в политику группы 
 
 
-Добавляя *User2* в политику "modify the component" группы процессов, *User2* так же добавляется к политике "modify the component" в процессоре LogAttribute путем наследования. Чтобы проверить это, необходимо выделить процессор LogAttribute и выбрать значок "Access Policies" на панели управления "Operate". При этом открывается диалоговое окно политик доступа процессора LogAttribute с наличием пользователя *User2* в политике "modify the component" (:numref:`Рис.%s.<ADS_AdminNIFI_Policies_Connect-confirm>`).
+Добавляя *User2* в политику "modify the component" группы процессов, *User2* так же добавляется к политике "modify the component" в процессоре LogAttribute путем наследования. Чтобы проверить это, необходимо в рабочей области выделить процессор LogAttribute и выбрать значок "Access Policies" на панели управления "Operate". При этом открывается диалоговое окно политик доступа процессора LogAttribute с наличием пользователя *User2* в политике "modify the component" (:numref:`Рис.%s.<ADS_AdminNIFI_Policies_Connect-confirm>`).
 
 .. _ADS_AdminNIFI_Policies_Connect-confirm:
 
@@ -308,9 +310,73 @@ Component Level Access Policies
 
 
 
-Editing a Connection
+Изменение соединения
 ^^^^^^^^^^^^^^^^^^^^^^^
 
+В следующем сценарии *User1* и *User2* добавляют процессор ReplaceText в группу процессов root (:numref:`Рис.%s.<ADS_AdminNIFI_Policies_ReplaceText>`).
+
+.. _ADS_AdminNIFI_Policies_ReplaceText:
+
+.. figure:: ../imgs/ADS_AdminNIFI_Policies_ReplaceText.*
+   :align: center
+
+   Добавление процессора ReplaceText
+
+
+*User1* может выбрать и изменить существующее соединение между GenerateFlowFile и LogAttribute, чтобы подключить GenerateFlowFile к ReplaceText (:numref:`Рис.%s.<ADS_AdminNIFI_Policies_EditConnect-user1>`).
+
+.. _ADS_AdminNIFI_Policies_EditConnect-user1:
+
+.. figure:: ../imgs/ADS_AdminNIFI_Policies_EditConnect-user1.*
+   :align: center
+
+   User1 -- изменение соединения
+
+
+При этом *User2* не имеет возможности выполнить такое действие (:numref:`Рис.%s.<ADS_AdminNIFI_Policies_EditConnect-user2>`).
+
+.. _ADS_AdminNIFI_Policies_EditConnect-user2:
+
+.. figure:: ../imgs/ADS_AdminNIFI_Policies_EditConnect-user2.*
+   :align: center
+
+   User2 недоступно изменение соединения
+
+
+*User1* необходимо выполнить следующие шаги для реализации возможности подключения GenerateFlowFile к ReplaceText пользователю *User2*:
+
+1. Выбрать группу процессов root, при этом панель управления "Operate" обновляется с подробными сведениями.
+
+2. Выбрать значок "Access Policies" на панели управления "Operate". При этом открывается диалоговое окно "Access Policies".
+
+3. В диалоговом окне в раскрывающемся списке политики выбрать "view the component" (:numref:`Рис.%s.<ADS_AdminNIFI_Policies_Connect-view>`).
+
+.. _ADS_AdminNIFI_Policies_Connect-view:
+
+.. figure:: ../imgs/ADS_AdminNIFI_Policies_Connect-view.*
+   :align: center
+
+   View the component 
+
+
+4. Выбрать значок "Add User". В поле "User Identity" ввести вручную или найти в списке *User2* и нажать "OK" (:numref:`Рис.%s.<ADS_AdminNIFI_Policies_Connect-view-add>`).
+
+.. _ADS_AdminNIFI_Policies_Connect-view-add:
+
+.. figure:: ../imgs/ADS_AdminNIFI_Policies_Connect-view-add.*
+   :align: center
+
+   Добавление User2 в политику группы
+
+
+Будучи добавленным к политикам просмотра и изменения для группы процессов, *User2* теперь может подключать процессор GenerateFlowFile к процессору ReplaceText (:numref:`Рис.%s.<ADS_AdminNIFI_Policies_EditConnect-user2-result>`).
+
+.. _ADS_AdminNIFI_Policies_EditConnect-user2-result:
+
+.. figure:: ../imgs/ADS_AdminNIFI_Policies_EditConnect-user2-result.*
+   :align: center
+
+   User2 -- изменение соединения
 
 
 
