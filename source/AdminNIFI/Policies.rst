@@ -369,7 +369,7 @@ Component Level Access Policies
    Добавление User2 в политику группы
 
 
-Будучи добавленным к политикам просмотра и изменения для группы процессов, *User2* теперь может подключать процессор GenerateFlowFile к процессору ReplaceText (:numref:`Рис.%s.<ADS_AdminNIFI_Policies_EditConnect-user2-result>`).
+Будучи добавленным к политикам просмотра и изменения для группы процессов *User2* теперь может подключать процессор GenerateFlowFile к процессору ReplaceText (:numref:`Рис.%s.<ADS_AdminNIFI_Policies_EditConnect-user2-result>`).
 
 .. _ADS_AdminNIFI_Policies_EditConnect-user2-result:
 
