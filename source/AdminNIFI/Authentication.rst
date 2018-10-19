@@ -153,5 +153,5 @@ Apache Knox
    "nifi.security.user.knox.url", "URL-адрес страницы входа в Apache Knox"
    "nifi.security.user.knox.publicKey", "Путь к открытому ключу Apache Knox для проверки подписей токенов аутентификации в HTTP Cookie"
    "nifi.security.user.knox.cookieName", "Имя файла HTTP Cookie, которое Apache Knox создает после успешного входа в систему"
-   "nifi.security.user.knox.audiences", "(Опционально) Разделенный запятыми список разрешенных audiences. Если значение задано, audience должна присутствовать в списке. Аudience, заполненная токеном, может быть настроена в Knox"
+   "nifi.security.user.knox.audiences", "(Опционально) Разделенный запятыми список разрешенных подключений. Если значение задано, подключение должно присутствовать в списке. Разрешенные подключения, заполненные токеном, могут быть настроены в Knox"
 
