@@ -8,6 +8,12 @@
 `Скачать инструкцию по установке Arenadata Streaming`_
  .. _Скачать инструкцию по установке Arenadata Streaming: https://storage.googleapis.com/arenadata-repo/docs/ads/pdf/v1.0.0/Установка%20Arenadata%20Streaming.pdf
  
+`Скачать руководство администратора по работе с сервисом Nifi`_
+ .. _Скачать руководство администратора по работе с сервисом Nifi: https://storage.googleapis.com/arenadata-repo/docs/ads/pdf/v1.0.0/Руководство%20администратора%20по%20работе%20с%20сервисом%20Nifi.pdf 
+ 
+`Скачать руководство пользователя по работе с сервисом Nifi`_
+ .. _Скачать руководство пользователя по работе с сервисом Nifi: https://storage.googleapis.com/arenadata-repo/docs/ads/pdf/v1.0.0/Руководство%20пользователя%20по%20работе%20с%20сервисом%20Nifi.pdf
+ 
 `Скачать архитектурные особенности Arenadata Streaming`_
  .. _Скачать архитектурные особенности Arenadata Streaming: https://storage.googleapis.com/arenadata-repo/docs/ads/pdf/v1.0.0/Архитектурные%20особенности%20Arenadata%20Streaming.pdf
  
