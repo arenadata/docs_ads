@@ -42,7 +42,7 @@
 .. figure:: ../imgs/ADS_UserNIFI_UI_breadcrumbs.*
    :align: center
 
-   Панель навигации NiFi
+   Навигация в NiFi
 
 
 
