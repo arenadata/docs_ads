@@ -8,5 +8,19 @@
 Добавление компонентов на рабочую область
 ------------------------------------------
 
+В разделе `Пользовательский интерфейс NiFi <https://docs.arenadata.io/ads/UserNIFI/UI.html>`_ описаны различные сегменты UI и упомянута панель инструментов "Components Toolbar", разбор компонентов которой приведен далее (:numref:`Рис.%s.<ADS_UserNIFI_DataFlow_Components-Toolbar>`).
+
+
+.. _ADS_UserNIFI_DataFlow_Components-Toolbar:
+
+.. figure:: ../imgs/ADS_UserNIFI_DataFlow_Components-Toolbar.*
+   :align: center
+
+   Панель инструментов NiFi
+
+
+
+
+
 
 
