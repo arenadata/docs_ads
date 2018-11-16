@@ -210,3 +210,59 @@
 
 
 
+Версии компонентов
+--------------------
+
+В приложении есть доступ к информации о версии Процессоров, контроллера и задач отчетности. Это особенно полезно при работе в кластерной среде с несколькими инстансами **NiFi**, использующими разные версии компонентов, или при обновлении до более новой версии процессора. Диалоговые окна "Add Processor", "Add Controller Service" и "Add Reporting Task" содержат столбец с версией компонента, а также имя компонента, организации или группы, создавшей его, и пакет NAR, содержащий данный компонент (:numref:`Рис.%s.<ADS_UserNIFI_DataFlow_Component-versions>`).
+
+
+.. _ADS_UserNIFI_DataFlow_Component-versions:
+
+.. figure:: ../imgs/ADS_UserNIFI_DataFlow_Component-versions.*
+   :align: center
+
+   Версии компонентов
+
+
+Каждый компонент на рабочей области также содержит эту информацию (:numref:`Рис.%s.<ADS_UserNIFI_DataFlow_Component-versions2>`).
+
+
+.. _ADS_UserNIFI_DataFlow_Component-versions2:
+
+.. figure:: ../imgs/ADS_UserNIFI_DataFlow_Component-versions2.*
+   :align: center
+
+   Версия компонента
+
+
+Изменение версии компонента
+----------------------------
+
+Для изменения версии компонента необходимо выполнить следующие действия:
+
+1. Кликнуть правой кнопкой мыши на компонент в рабочей области для отображения параметров конфигурации.
+
+2. Выбрать "Change version" (:numref:`Рис.%s.<ADS_UserNIFI_DataFlow_Change-version>`).
+
+
+.. _ADS_UserNIFI_DataFlow_Change-version:
+
+.. figure:: ../imgs/ADS_UserNIFI_DataFlow_Change-version.*
+   :align: center
+
+   Параметры конфигурации компонента
+   
+3. В диалоговом окне "Component Version" выбрать необходимую версию в раскрывающемся меню "Version" (:numref:`Рис.%s.<ADS_UserNIFI_DataFlow_Version>`).
+
+
+.. _ADS_UserNIFI_DataFlow_Version:
+
+.. figure:: ../imgs/ADS_UserNIFI_DataFlow_Version.*
+   :align: center
+
+   Выбор версии компонента
+   
+
+
+
+
