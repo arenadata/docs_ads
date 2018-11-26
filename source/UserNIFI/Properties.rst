@@ -12,10 +12,9 @@ Expression Language (язык выражений) **NiFi** можно испол
 + Свойства FlowFile;
 + Атрибуты FlowFile;
 + Из реестра переменных:
-
- + Пользовательские свойства;
- + Системные свойства;
- + Переменные среды операционной системы.
+  + Пользовательские свойства;
+  + Системные свойства;
+  + Переменные среды операционной системы.
 
 .. important:: При создании пользовательских свойств необходимо убедиться, что каждое такое свойство содержит отдельное значение с целью предотвращения его переопределения существующими свойствами среды, системными свойствами или атрибутами FlowFile
 
@@ -61,6 +60,58 @@ Expression Language (язык выражений) **NiFi** можно испол
    :align: center
 
    Диалоговое окно "Variables"
+
+
+Создание переменной
+^^^^^^^^^^^^^^^^^^^^^^
+
+Для создания новой переменной необходимо в окне "Variables" нажать кнопку с символом "+" и в открывшейся форме ввести наименование (:numref:`Рис.%s.<ADS_UserNIFI_Properties_Variables-name>`).
+
+
+.. _ADS_UserNIFI_Properties_Variables-name:
+
+.. figure:: ../imgs/ADS_UserNIFI_Properties_Variables-name.*
+   :align: center
+
+   Наименование новой переменной
+
+
+Затем нажать кнопку "OK" и в новом окне ввести значение переменной (:numref:`Рис.%s.<ADS_UserNIFI_Properties_Variables-value>`).
+
+
+.. _ADS_UserNIFI_Properties_Variables-value:
+
+.. figure:: ../imgs/ADS_UserNIFI_Properties_Variables-value.*
+   :align: center
+
+   Значение новой переменной
+
+
+После чего в экранной форме "Variables" нажать кнопку "Apply", результатом действия которой является иформационное окно по обновлению/созданию переменной (:numref:`Рис.%s.<ADS_UserNIFI_Properties_Variables-apply>`).
+
+
+.. _ADS_UserNIFI_Properties_Variables-apply:
+
+.. figure:: ../imgs/ADS_UserNIFI_Properties_Variables-apply.*
+   :align: center
+
+   Обновление переменной
+
+
+При этом запускается процесс обновления переменной (идентификация затронутых компонентов, остановка затронутых процессоров и т.д.). Например, в разделе "Referencing Processors" теперь отображается процессор "PutFile-Root". Выбор имени процессора в списке приводит к переходу к указанному процессору на рабочей области. При просмотре свойств процессора *${putfile_dir}* ссылается на свойство *Directory* (:numref:`Рис.%s.<ADS_UserNIFI_Properties_Variables-property>`).
+
+
+.. _ADS_UserNIFI_Properties_Variables-property:
+
+.. figure:: ../imgs/ADS_UserNIFI_Properties_Variables-property.*
+   :align: center
+
+   Просмотр свойств процессора
+
+
+
+
+
 
 
 
