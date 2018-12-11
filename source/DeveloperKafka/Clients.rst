@@ -10,17 +10,17 @@ Kлиенты для работы с Apache Kafka доступны на мног
    :header: "Ссылка на установку", "Ссылка на документацию"
    :widths: 20, 80
 
-   "`C/C++ <https://docs.confluent.io/current/clients/install.html#cpp-client>`_", "`github.com/edenhill/librdkafka <https://github.com/edenhill/librdkafka>`_"
-   "`Go <https://docs.confluent.io/current/clients/install.html#go-client>`_", "`github.com/confluentinc/confluent-kafka-go <https://github.com/confluentinc/confluent-kafka-go/>`_"
-   "`Java <https://docs.confluent.io/current/clients/install.html#installation-maven>`_", "`Kafka Java Consumer <https://docs.confluent.io/current/clients/consumer.html#kafka-consumer>`_ и `Kafka Java Producer <https://docs.confluent.io/current/clients/producer.html#kafka-producer>`_"
-   "`JMS <https://docs.confluent.io/current/clients/install.html#jms-client>`_", "`JMS Client <https://docs.confluent.io/current/clients/kafka-jms-client/docs/index.html#client-jms>`_"
-   "`.NET <https://docs.confluent.io/current/clients/install.html#dotnet-client>`_", "`github.com/confluentinc/confluent-kafka-dotnet <https://github.com/confluentinc/confluent-kafka-dotnet>`_"
-   "`Python <https://docs.confluent.io/current/clients/install.html#python-client>`_", "`github.com/confluentinc/confluent-kafka-python <https://github.com/confluentinc/confluent-kafka-python>`_"  
+   "`C/C++ <>`_", "`github.com/edenhill/librdkafka <https://github.com/edenhill/librdkafka>`_"
+   "`Go <>`_", "`github.com/confluentinc/confluent-kafka-go <https://github.com/confluentinc/confluent-kafka-go/>`_"
+   "`Java <>`_", "`Kafka Java Consumer <https://docs.confluent.io/current/clients/consumer.html#kafka-consumer>`_ и `Kafka Java Producer <https://docs.confluent.io/current/clients/producer.html#kafka-producer>`_"
+   "`JMS <>`_", "`JMS Client <https://docs.confluent.io/current/clients/kafka-jms-client/docs/index.html#client-jms>`_"
+   "`.NET <>`_", "`github.com/confluentinc/confluent-kafka-dotnet <https://github.com/confluentinc/confluent-kafka-dotnet>`_"
+   "`Python <>`_", "`github.com/confluentinc/confluent-kafka-python <https://github.com/confluentinc/confluent-kafka-python>`_"  
 
  
 В следующей таблице описана поддержка клиента по различным функциям платформы **ADS**.
 
-.. csv-table:: Клиентские библиотки для различных языков
+.. csv-table:: Поддержка клиента по различным функциям платформы
    :header: "Функция", "C/C++", "Go", "Java", ".NET", "Python"
    :widths: 50, 10, 10, 10, 10, 10
 
@@ -39,15 +39,32 @@ Kлиенты для работы с Apache Kafka доступны на мног
    "Topic Metadata API", "Да", "Да", "Да", "Нет", "Да" 
 
 
+Java. Установка
+-----------------
 
 
 
 
+C/C++. Установка
+-----------------
 
 
 
 
+JMS. Установка
+-----------------
 
+
+
+
+Python. Установка
+------------------
+
+
+
+
+Go. Установка
+-----------------
 
 
 
