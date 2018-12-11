@@ -66,6 +66,7 @@
    Install/index
    AdminNIFI/index
    UserNIFI/index
+   DeveloperKafka/index
    Architecture/index
    Config/index
    Release/index
