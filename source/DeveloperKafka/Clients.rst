@@ -101,15 +101,15 @@ C/C++
 
 Для дистрибутивов **Linux** необходимо следовать инструкциям для **Debian** или **Red Hat**, а затем использовать *yum* или *apt-get* для установки соответствующих пакетов. Например, разработчику, создающему приложение **C** на дистрибутиве **Red Hat**, рекомендуется использовать пакет *librdkafka-devel*:
 
-:command:`sudo yum install librdkafka-devel`
+  :command:`sudo yum install librdkafka-devel`
 
 В дистрибутиве **Debian** используется пакет *librdkafka-dev*:
 
-:command:`sudo apt-get install librdkafka-dev`
+  :command:`sudo apt-get install librdkafka-dev`
 
 В **macOS** последняя версия доступна через `Homebrew <http://brew.sh/>`_:
 
-:command:`brew install librdkafka`
+  :command:`brew install librdkafka`
 
 Исходный код доступен в архивах *ZIP* и *TAR* в каталоге *src/*.
 
@@ -157,7 +157,7 @@ Python
 
 Клиент **Python**, именуемый *confluent-kafka-python*, доступен в `PyPI <https://pypi.python.org/pypi/confluent-kafka>`_. Клиент **Python** использует *librdkafka* клиента **C**. Поэтому для установки **Python** сначала необходимо инсталлировать `C <https://docs.arenadata.io/ads/DeveloperKafka/Clients.html#c-c>`_, включая его пакет разработки, а затем установить библиотеку с помощью *pip* (как для **Linux**, так и для **macOS**):
 
-:command:`pip install confluent-kafka`
+  :command:`pip install confluent-kafka`
 
 При этом осуществляется глобальная установка пакета для среды **Python**. Для инсталляции клиента только под конкретный проект можно использовать *virtualenv*.
 
@@ -179,19 +179,19 @@ Go
 
 Клиент **Go**, именуемый *confluent-kafka-go*, распространяется через `GitHub <https://github.com/confluentinc/confluent-kafka-go>`_ и `gopkg.in <http://labix.org/gopkg.in>`_ с привязкой к конкретным версиям. Клиент **Go** использует *librdkafka* клиента **C** и представляет его как библиотеку **Go**, используя `cgo <https://golang.org/cmd/cgo/>`_. Для установки клиента **Go** сначала необходимо инсталлировать клиент **C**, включая его пакет разработки, а также набор инструментов для сборки с *pkg-config*. В дистрибутивах **Linux** на основе **Red Hat** в дополнение к *librdkafka* следует установить следующие пакеты:
 
-:command:`sudo yum groupinstall "Development Tools"`
+  :command:`sudo yum groupinstall "Development Tools"`
 
 В дистрибутивах на основе **Debian**, помимо *librdkafka*, необходимо установить:
 
-:command:`sudo apt-get install build-essential pkg-config git`
+  :command:`sudo apt-get install build-essential pkg-config git`
 
 В **macOS** с помощью `Homebrew <http://brew.sh/>`_ установить:
 
-:command:`brew install pkg-config git`
+  :command:`brew install pkg-config git`
 
 Далее использовать *go get* для установки библиотеки:
 
-:command:`go get gopkg.in/confluentinc/confluent-kafka-go.v0/kafka`
+  :command:`go get gopkg.in/confluentinc/confluent-kafka-go.v0/kafka`
 
 Код **Go** теперь может импортировать и использовать клиент. Также можно собрать и запустить небольшую утилиту командной строки **go-kafkacat**, чтобы убедиться, что установка прошла успешно:
 
@@ -213,7 +213,7 @@ Go
 
 Для того, чтобы сослаться на *confluent-kafka-dotnet* из проекта, необходимо выполнить следующую команду в консоли диспетчера пакетов:
 
-:command:`PM> Install-Package Confluent.Kafka`
+  :command:`PM> Install-Package Confluent.Kafka`
 
 .. important:: Зависимый пакет *librdkafka.redist* устанавливается автоматически
 
