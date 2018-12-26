@@ -75,7 +75,7 @@ Consumer group -- группа потребителей, взаимодейст�
    config.put("bootstrap.servers", "host1:9092,host2:9092");
    new KafkaConsumer<K, V>(config);
 
-.. important:: Ошибки конфигурации приведят к возникновению исключения *KafkaException* из конструктора *KafkaConsumer*
+.. important:: Ошибки конфигурации приводят к возникновению исключения *KafkaException* из конструктора *KafkaConsumer*
 
 Конфигурация **C/C++** (*librdkafka*) похожа, но при этом необходимо обрабатывать ошибки конфигурации непосредственно при настройке свойств:
 
@@ -264,8 +264,65 @@ Python, Go and .NET Clients
 
 Клиенты **Python**, **Go** и **.NET** на внутреннем уровне используют *librdkafka*, поэтому у них также применяется многопоточный подход к потреблению **Kafka**. С точки зрения пользователя, взаимодействие с API не слишком отличается от примера, используемого Java-клиентом, когда пользователь вызывает метод *poll()* в цикле, хотя данный API возвращает только одно сообщение за раз.
 
+**Python**:
+
+  ::
+  
+   try:
+       msg_count = 0
+       while running:
+           msg = consumer.poll(timeout=1.0)
+           if msg is None: continue
+   
+           msg_process(msg) # application-specific processing
+           msg_count += 1
+           if msg_count % MIN_COMMIT_COUNT == 0:
+               consumer.commit(async=False)
+   finally:
+       # Shut down consumer
+       consumer.close()
 
 
+**Go**:
+
+  ::
+  
+   for run == true {
+       ev := consumer.Poll(0)
+       switch e := ev.(type) {
+       case *kafka.Message:
+           // application-specific processing
+       case kafka.Error:
+           fmt.Fprintf(os.Stderr, "%% Error: %v\n", e)
+           run = false
+       default:
+           fmt.Printf("Ignored %v\n", e)
+       }
+   }
+
+
+Поведение потребителя **C#** аналогично, за исключением того, что перед входом в цикл *Poll* необходимо настроить обработчики для различных типов событий, что эффективно делается внутри метода *Poll* (важно обратить внимание, что весь код выполняется в том же потоке):
+
+  ::
+  
+   consumer.OnMessage += (_, msg) =>
+   {
+       // handle message.
+   }
+   
+   consumer.OnPartitionEOF += (_, end)
+       => Console.WriteLine($"Reached end of topic {end.Topic} partition {end.Partition}.");
+   
+   consumer.OnError += (_, error)
+   {
+       Console.WriteLine($"Error: {error}");
+       cancelled = true;
+   }
+   
+   while (!cancelled)
+   {
+       consumer.Poll(TimeSpan.FromSeconds(1));
+   }
 
 
 
