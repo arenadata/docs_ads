@@ -259,7 +259,7 @@ C/C++ Client (librdkafka)
    }
 
 
-Python, Go and .NET Clients
+Python, Go и .NET Clients
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Клиенты **Python**, **Go** и **.NET** на внутреннем уровне используют *librdkafka*, поэтому у них также применяется многопоточный подход к потреблению **Kafka**. С точки зрения пользователя, взаимодействие с API не слишком отличается от примера, используемого Java-клиентом, когда пользователь вызывает метод *poll()* в цикле, хотя данный API возвращает только одно сообщение за раз.
@@ -330,6 +330,178 @@ Python, Go and .NET Clients
 ---------
 
 Далее приведены подробные примеры использования consumer API с особым вниманием к управлению смещением и семантике доставки. 
+
+
+Basic Poll Loop
+^^^^^^^^^^^^^^^^
+
+API потребителя сосредоточен вокруг метода *poll()* для получения записей от брокеров и метода *subscribe()* для выбора топиков. Как правило, потребитель первоначально обращается к методу *subscribe()* для настройки интересующих топиков, а затем запускает цикл *poll()* до завершения работы приложения.
+
+Потребитель намеренно избегает конкретной модели потоков, так как это не безопасно для многопоточного доступа и не дает возможности наличия собственных фоновых потоков. В частности, это означает, что все операции ввода-вывода происходят в потоке, вызыванном методом *poll()*. В приведенном ниже примере цикл опроса заключен в *Runnable*, который упрощает использование с *ExecutorService*:
+
+  ::
+  
+   public abstract class BasicConsumeLoop implements Runnable {
+     private final KafkaConsumer<K, V> consumer;
+     private final List<String> topics;
+     private final AtomicBoolean shutdown;
+     private final CountDownLatch shutdownLatch;
+   
+     public BasicConsumeLoop(Properties config, List<String> topics) {
+       this.consumer = new KafkaConsumer<>(config);
+       this.topics = topics;
+       this.shutdown = new AtomicBoolean(false);
+       this.shutdownLatch = new CountDownLatch(1);
+     }
+   
+     public abstract void process(ConsumerRecord<K, V> record);
+   
+     public void run() {
+       try {
+         consumer.subscribe(topics);
+   
+         while (!shutdown.get()) {
+           ConsumerRecords<K, V> records = consumer.poll(500);
+           records.forEach(record -> process(record));
+         }
+       } finally {
+         consumer.close();
+         shutdownLatch.countDown();
+       }
+     }
+   
+     public void shutdown() throws InterruptedException {
+       shutdown.set(true);
+       shutdownLatch.await();
+     }
+   }
+
+
+В примере жестко запрограммировано время ожидания опроса на *500 миллисекунд*, то есть, если никаких записей не получено до истечения тайм-аута, *poll()* возвращает пустой набор записей. В случае если обработка сообщений связана с дополнительными затратами на настройку, можно добавить проверку ярлыков.
+
+Для отключения потребителя добавляется флаг, который проверяется на каждой итерации цикла. При этом потребитель ожидает не более *500 миллисекунд* (плюс время обработки сообщения) перед завершением работы. Лучший подход представлен в следующем примере.
+
+Важно обратить внимание, что всегда следует вызывать *close()* после завершения работы потребителя. Это обеспечивает закрытие активных сокетов и очистку внутреннего состояния. Также это немедленно инициирует перебалансировку группы, что в свою очередь гарантирует переназначение всех принадлежащих данному потребителю партиций другому члену группы. Если не выполнить закрытие должным образом, брокер инициирует перебалансировку только после истечения времени ожидания сессии. В примере добавлена защелка (latch) для того, чтобы у потребителя было время завершить закрытие перед выключением.
+
+Этот же пример выглядит аналогично в *librdkafka*:
+
+  ::
+  
+   static int shutdown = 0;
+   static void msg_process(rd_kafka_message_t message);
+   
+   void basic_consume_loop(rd_kafka_t *rk,
+                           rd_kafka_topic_partition_list_t *topics) {
+     rd_kafka_resp_err_t err;
+   
+     if ((err = rd_kafka_subscribe(rk, topics))) {
+       fprintf(stderr, "%% Failed to start consuming topics: %s\n", rd_kafka_err2str(err));
+       exit(1);
+     }
+   
+     while (running) {
+       rd_kafka_message_t *rkmessage = rd_kafka_consumer_poll(rk, 500);
+       if (rkmessage) {
+         msg_process(rkmessage);
+         rd_kafka_message_destroy(rkmessage);
+       }
+     }
+   
+     err = rd_kafka_consumer_close(rk);
+     if (err)
+       fprintf(stderr, "%% Failed to close consumer: %s\n", rd_kafka_err2str(err));
+     else
+       fprintf(stderr, "%% Consumer closed\n");
+   }
+
+
+В **Python**:
+
+  ::
+  
+   running = True
+   
+   def basic_consume_loop(consumer, topics):
+       try:
+           consumer.subscribe(topics)
+   
+           while running:
+               msg = consumer.poll(timeout=1.0)
+               if msg is None: continue
+   
+               if msg.error():
+                   if msg.error().code() == KafkaError._PARTITION_EOF:
+                       # End of partition event
+                       sys.stderr.write('%% %s [%d] reached end at offset %d\n' %
+                                        (msg.topic(), msg.partition(), msg.offset()))
+                   elif msg.error():
+                       raise KafkaException(msg.error())
+               else:
+                   msg_process(msg)
+       finally:
+           # Close down consumer to commit final offsets.
+           consumer.close()
+   
+   def shutdown():
+       running = False
+
+В **Go**:
+
+  ::
+  
+   err = consumer.SubscribeTopics(topics, nil)
+   
+   for run == true {
+       ev := consumer.Poll(0)
+       switch e := ev.(type) {
+       case *kafka.Message:
+           fmt.Printf("%% Message on %s:\n%s\n",
+               e.TopicPartition, string(e.Value))
+       case kafka.PartitionEOF:
+           fmt.Printf("%% Reached %v\n", e)
+       case kafka.Error:
+           fmt.Fprintf(os.Stderr, "%% Error: %v\n", e)
+           run = false
+       default:
+           fmt.Printf("Ignored %v\n", e)
+       }
+   }
+   
+   consumer.Close()
+
+В **C#**:
+
+  ::
+  
+   using (var consumer = new Consumer<Null, string>(config, null, new StringDeserializer(Encoding.UTF8)))
+   {
+       consumer.OnMessage += (_, msg)
+           => Console.WriteLine($"Message value: {msg.Value}");
+   
+       consumer.OnPartitionEOF += (_, end)
+           => Console.WriteLine($"Reached end of topic {end.Topic} partition {end.Partition}.");
+   
+       consumer.OnError += (_, error)
+       {
+           Console.WriteLine($"Error: {error}");
+           cancelled = true;
+       }
+   
+       consumer.Subscribe(topics);
+   
+       while (!cancelled)
+       {
+           consumer.Poll(TimeSpan.FromSeconds(1));
+       }
+   }
+
+
+Хотя API-интерфейсы схожи, клиенты **C/C++**, **Python**, **Go** и **C#** используют другой подход, нежели **Java**. В то время как потребитель **Java** выполняет все операции ввода-вывода и обработку в потоке переднего плана (foreground thread), остальные клиенты используют фоновый поток (background thread). Основным следствием этого является то, что вызов *rd_kafka_consumer_poll* или *Consumer.poll()* абсолютно безопасен при использовании многопоточности (multiple threads), то есть можно распараллеливать обработку сообщений по нескольким потокам. С высокого уровня опрос извлекает сообщения из очереди, которая заполняется в фоновом потоке.
+
+
+
+
+
 
 
 
