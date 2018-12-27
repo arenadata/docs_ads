@@ -640,5 +640,249 @@ Shutdown и Wakeup
    }
 
 
+В данном примере синхронная фиксация запускается каждые *1000* сообщений. Вторым аргументом *rd_kafka_commit* является список смещений, которые должны быть зафиксированы; при значении *NULL* *librdkafka* фиксирует последние смещения для назначенных позиций. Третий аргумент в *rd_kafka_commit* -- флаг, который определяет асинхронность вызова. Коммит также можно активировать по истечению тайм-аута, чтобы убедиться, что зафиксированная позиция регулярно обновляется.
+
+Поскольку клиент **Python** внутренне использует *librdkafka*, он применяет аналогичный шаблон, устанавливая параметр *async* для вызова метода *Consumer.commit()*. Этот метод также может принимать взаимоисключающие смещения параметров ключевых слов для явного перечисления смещений каждой назначенной партиции топика и *message*, которые фиксируют смещения относительно объекта *Message*, возвращаемого функцией *poll()*.
+
+  ::
+  
+   def consume_loop(consumer, topics):
+       try:
+           consumer.subscribe(topics)
+   
+           msg_count = 0
+           while running:
+               msg = consumer.poll(timeout=1.0)
+               if msg is None: continue
+   
+               if msg.error():
+                   if msg.error().code() == KafkaError._PARTITION_EOF:
+                       # End of partition event
+                       sys.stderr.write('%% %s [%d] reached end at offset %d\n' %
+                                        (msg.topic(), msg.partition(), msg.offset()))
+                   elif msg.error():
+                       raise KafkaException(msg.error())
+               else:
+                   msg_process(msg)
+                   msg_count += 1
+                   if msg_count % MIN_COMMIT_COUNT == 0:
+                       consumer.commit(async=False)
+       finally:
+           # Close down consumer to commit final offsets.
+           consumer.close()
+
+Клиент **Go** также внутренне использует *librdkafka*, поэтому он применяет похожий шаблон, но обеспечивает при этом только синхронный вызов метода *Commit()*. Другие варианты методов фиксации также принимают список смещений для коммитов или *Message*, чтобы зафиксировать смещения относительно считываемого сообщения. При использовании ручного коммита важно отключить конфигурацию *enable.auto.commit*.
+
+  ::
+  
+   msg_count := 0
+   for run == true {
+       ev := consumer.Poll(0)
+       switch e := ev.(type) {
+       case *kafka.Message:
+           msg_count += 1
+           if msg_count % MIN_COMMIT_COUNT == 0 {
+               consumer.Commit()
+           }
+           fmt.Printf("%% Message on %s:\n%s\n",
+               e.TopicPartition, string(e.Value))
+   
+       case kafka.PartitionEOF:
+           fmt.Printf("%% Reached %v\n", e)
+       case kafka.Error:
+           fmt.Fprintf(os.Stderr, "%% Error: %v\n", e)
+           run = false
+       default:
+           fmt.Printf("Ignored %v\n", e)
+       }
+   }
+
+
+Клиент **C#** обеспечивает метод *CommitAsync* с возможными перегрузками. Его можно использовать синхронно, отвечая *Result* или *Wait()* на возвращаемый *Task*. Существуют варианты, которые фиксируют все смещения в текущем назначении, конкретный список смещений или смещение на основе *Message*.
+
+  ::
+  
+   var msgCount = 0;
+   
+   consumer.OnMessage += (_, msg) =>
+   {
+       msgCount += 1;
+       if (msgCount % MIN_COMMIT_COUNT == 0)
+       {
+           consumer.CommitAsync().Wait();
+       }
+       Console.WriteLine($"Message value: {msg.Value}");
+   }
+   
+   consumer.OnPartitionEOF += (_, end)
+       => Console.WriteLine($"Reached end of topic {end.Topic} partition {end.Partition}.");
+   
+   consumer.OnError += (_, error)
+   {
+       Console.WriteLine($"Error: {error}");
+       cancelled = true;
+   }
+   
+   while (!cancelled)
+   {
+       consumer.Poll(TimeSpan.FromSeconds(1));
+   }
+
+
+Использование автоматической фиксации обеспечивает доставку "at least once": **Kafka** гарантирует, что ни одно сообщение не будет пропущено, но возможны дубликаты. В предыдущем примере обеспечивается такая доставка, поскольку фиксация следует за обработкой сообщения. Однако, изменив запрос, можно получить доставку "at most once". Но при этом следует быть осторожнее с ошибкой коммита, для этого необходимо изменить *doCommitSync*, чтобы он возвращал информацию об успешности транзакции. Так же при синхронной фиксации отменяется необходимость в перехвате исключения *WakeupException*.
+
+  ::
+  
+   private boolean doCommitSync() {
+     try {
+       consumer.commitSync();
+       return true;
+     } catch (CommitFailedException e) {
+       // the commit failed with an unrecoverable error. if there is any
+       // internal state which depended on the commit, you can clean it
+       // up here. otherwise it's reasonable to ignore the error and go on
+       log.debug("Commit failed", e);
+       return false;
+     }
+   }
+   
+   public void run() {
+     try {
+       consumer.subscribe(topics);
+   
+       while (true) {
+         ConsumerRecords<K, V> records = consumer.poll(Long.MAX_VALUE);
+         if (doCommitSync())
+           records.forEach(record -> process(record));
+       }
+     } catch (WakeupException e) {
+       // ignore, we're closing
+     } catch (Exception e) {
+       log.error("Unexpected error", e);
+     } finally {
+       consumer.close();
+       shutdownLatch.countDown();
+     }
+   }
+
+
+**C/C++** (*librdkafka*):
+
+  ::
+  
+   void consume_loop(rd_kafka_t *rk,
+                     rd_kafka_topic_partition_list_t *topics) {
+     rd_kafka_resp_err_t err;
+   
+     if ((err = rd_kafka_subscribe(rk, topics))) {
+       fprintf(stderr, "%% Failed to start consuming topics: %s\n", rd_kafka_err2str(err));
+       exit(1);
+     }
+   
+     while (running) {
+       rd_kafka_message_t *rkmessage = rd_kafka_consumer_poll(rk, 500);
+       if (rkmessage && !rd_kafka_commit_message(rk, rkmessage, 0)) {
+         msg_process(rkmessage);
+         rd_kafka_message_destroy(rkmessage);
+       }
+     }
+   
+     err = rd_kafka_consumer_close(rk);
+     if (err)
+       fprintf(stderr, "%% Failed to close consumer: %s\n", rd_kafka_err2str(err));
+     else
+       fprintf(stderr, "%% Consumer closed\n");
+   }
+
+**Python**:
+
+  ::
+  
+   def consume_loop(consumer, topics):
+       try:
+           consumer.subscribe(topics)
+   
+           while running:
+               msg = consumer.poll(timeout=1.0)
+               if msg is None: continue
+   
+               if msg.error():
+                   if msg.error().code() == KafkaError._PARTITION_EOF:
+                       # End of partition event
+                       sys.stderr.write('%% %s [%d] reached end at offset %d\n' %
+                                        (msg.topic(), msg.partition(), msg.offset()))
+                   elif msg.error():
+                       raise KafkaException(msg.error())
+               else:
+                   consumer.commit(async=False)
+                   msg_process(msg)
+   
+       finally:
+           # Close down consumer to commit final offsets.
+           consumer.close()
+
+**Go**:
+
+  ::
+  
+   for run == true {
+       ev := consumer.Poll(0)
+       switch e := ev.(type) {
+       case *kafka.Message:
+           err = consumer.CommitMessage(e)
+           if err == nil {
+               msg_process(e)
+           }
+   
+       case kafka.PartitionEOF:
+           fmt.Printf("%% Reached %v\n", e)
+       case kafka.Error:
+           fmt.Fprintf(os.Stderr, "%% Error: %v\n", e)
+           run = false
+       default:
+           fmt.Printf("Ignored %v\n", e)
+       }
+   }
+
+**C#**:
+
+  ::
+  
+   consumer.OnMessage += (_, msg) =>
+   {
+       var err = consumer.CommitAsync().Result.Error;
+       if (!err)
+       {
+           processMessage(msg);
+       }
+   }
+   
+   consumer.OnPartitionEOF += (_, end)
+       => Console.WriteLine($"Reached end of topic {end.Topic} partition {end.Partition}.");
+   
+   consumer.OnError += (_, error)
+   {
+       Console.WriteLine($"Error: {error}");
+       cancelled = true;
+   }
+   
+   while (!cancelled)
+   {
+       consumer.Poll(TimeSpan.FromSeconds(1));
+   }
+
+
+Для простоты в примере *rd_kafka_commit_message* используется перед обработкой сообщения, так как фиксация каждого сообщения на практике приводит к большим накладным расходам. Поэтому лучшим подходом является сбор пакета сообщений, выполнение синхронного коммита и затем после успешной фиксации обработка сообщений.
+
+Правильное управление смещением имеет решающее значение, поскольку оно влияет на семантику доставки.
+
+
+Асинхронные коммиты
+^^^^^^^^^^^^^^^^^^^^^
+
+
+
+
+
 
 
