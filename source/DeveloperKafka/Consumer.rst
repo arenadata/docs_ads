@@ -880,7 +880,159 @@ Shutdown и Wakeup
 Асинхронные коммиты
 ^^^^^^^^^^^^^^^^^^^^^
 
+Каждый вызов commit API приводит к отправке брокеру запроса на фиксацию смещения. При использовании синхронного API потребитель блокируется до тех пор, пока запрос не будет успешно возвращен. Это может снизить общую пропускную способность, поскольку в противном случае потребитель мог бы обрабатывать записи, ожидающие фиксации. Одним из способов решения этой проблемы является увеличение объема данных, возвращаемых в каждом *poll()*, через параметр конфигурации *fetch.min.bytes*. Тогда брокер удерживает выборку до тех пор, пока не будет достигнуто достаточное количество данных (или не истечет срок *fetch.max.wait.ms*). Побочный эффект заключается в том, что способ также увеличивает количество дубликатов, с которыми приходится сталкиваться при случае сбоя.
 
+Второй вариант -- использовать асинхронные коммиты. Не дожидаясь завершения запроса, потребитель может отправить запрос и немедленно вернуться.
+
+  ::
+  
+   public void run() {
+     try {
+       consumer.subscribe(topics);
+   
+       while (true) {
+         ConsumerRecords<K, V> records = consumer.poll(Long.MAX_VALUE);
+         records.forEach(record -> process(record));
+         consumer.commitAsync();
+       }
+     } catch (WakeupException e) {
+       // ignore, we're closing
+     } catch (Exception e) {
+       log.error("Unexpected error", e);
+     } finally {
+       consumer.close();
+       shutdownLatch.countDown();
+     }
+   }
+
+
+**C/C++** (*librdkafka*):
+
+  ::
+  
+   void consume_loop(rd_kafka_t *rk,
+                     rd_kafka_topic_partition_list_t *topics) {
+     static const int MIN_COMMIT_COUNT = 1000;
+   
+     int msg_count = 0;
+     rd_kafka_resp_err_t err;
+   
+     if ((err = rd_kafka_subscribe(rk, topics))) {
+       fprintf(stderr, "%% Failed to start consuming topics: %s\n", rd_kafka_err2str(err));
+       exit(1);
+     }
+   
+     while (running) {
+       rd_kafka_message_t *rkmessage = rd_kafka_consumer_poll(rk, 500);
+       if (rkmessage) {
+         msg_process(rkmessage);
+         rd_kafka_message_destroy(rkmessage);
+   
+         if ((++msg_count % MIN_COMMIT_COUNT) == 0)
+           rd_kafka_commit(rk, NULL, 1);
+       }
+     }
+   
+     err = rd_kafka_consumer_close(rk);
+     if (err)
+       fprintf(stderr, "%% Failed to close consumer: %s\n", rd_kafka_err2str(err));
+     else
+       fprintf(stderr, "%% Consumer closed\n");
+   }
+
+
+Единственное различие между этим примером и предыдущим заключается в том, что в вызове *rd_kafka_commit* включена асинхронная фиксация.
+
+Изменения в **Python** очень похожи. Параметр *async* для *commit()* изменен на *True*. В примере значение передается явно, но асинхронная фиксация используется по умолчанию, если параметр не включен:
+
+  ::
+  
+   def consume_loop(consumer, topics):
+       try:
+           consumer.subscribe(topics)
+   
+           msg_count = 0
+           while running:
+               msg = consumer.poll(timeout=1.0)
+               if msg is None: continue
+   
+               if msg.error():
+                   if msg.error().code() == KafkaError._PARTITION_EOF:
+                       # End of partition event
+                       sys.stderr.write('%% %s [%d] reached end at offset %d\n' %
+                                        (msg.topic(), msg.partition(), msg.offset()))
+                   elif msg.error():
+                       raise KafkaException(msg.error())
+               else:
+                   msg_process(msg)
+                   msg_count += 1
+                   if msg_count % MIN_COMMIT_COUNT == 0:
+                       consumer.commit(async=True)
+       finally:
+           # Close down consumer to commit final offsets.
+           consumer.close()
+
+В **Go** необходимо просто выполнить коммит в goroutine для асинхронной фиксации:
+
+  ::
+  
+   msg_count := 0
+   for run == true {
+       ev := consumer.Poll(0)
+       switch e := ev.(type) {
+       case *kafka.Message:
+           msg_count += 1
+           if msg_count % MIN_COMMIT_COUNT == 0 {
+               go func() {
+                   offsets, err := consumer.Commit()
+               }()
+           }
+           fmt.Printf("%% Message on %s:\n%s\n",
+               e.TopicPartition, string(e.Value))
+   
+       case kafka.PartitionEOF:
+           fmt.Printf("%% Reached %v\n", e)
+       case kafka.Error:
+           fmt.Fprintf(os.Stderr, "%% Error: %v\n", e)
+           run = false
+       default:
+           fmt.Printf("Ignored %v\n", e)
+       }
+   }
+
+
+В **C#** необходимо просто вызвать метод *CommitAsync*:
+
+  ::
+  
+   var msgCount = 0;
+   
+   consumer.OnMessage += (_, msg) =>
+   {
+       processMessage(msg);
+       msgCount += 1;
+       if (msgCount % MIN_COMMIT_COUNT == 0)
+       {
+           consumer.CommitAsync();
+       }
+   }
+   
+   consumer.OnPartitionEOF += (_, end)
+       => Console.WriteLine($"Reached end of topic {end.Topic} partition {end.Partition}.");
+   
+   consumer.OnError += (_, error)
+   {
+       Console.WriteLine($"Error: {error}");
+       cancelled = true;
+   }
+   
+   while (!cancelled)
+   {
+       consumer.Poll(TimeSpan.FromSeconds(1));
+   }
+
+
+Поскольку такой способ помогает производительности, почему бы всегда не использовать асинхронные коммиты? Основная причина заключается в том, что потребитель не повторяет запрос в случае сбоя фиксации. Это то, что *commitSync* предлагает даром; он повторяется бесконечно, пока фиксация не будет выполнена или не будет найдена неисправимая ошибка. Проблема с асинхронными коммитами связана с порядком фиксации -- к тому времени, когда потребитель узнает, что фиксация не удалась, возможно, уже будет обработан следующий пакет сообщений и даже будет отправлен следующий коммит. В этом случае повторная попытка старой фиксации может привести к дублированию потребления.
 
 
 
