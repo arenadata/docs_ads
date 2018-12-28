@@ -874,7 +874,7 @@ Shutdown и Wakeup
 
 Для простоты в примере *rd_kafka_commit_message* используется перед обработкой сообщения, так как фиксация каждого сообщения на практике приводит к большим накладным расходам. Поэтому лучшим подходом является сбор пакета сообщений, выполнение синхронного коммита и затем после успешной фиксации обработка сообщений.
 
-Правильное управление смещением имеет решающее значение, поскольку оно влияет на семантику доставки.
+.. important:: Правильное управление смещением имеет решающее значение, поскольку оно влияет на семантику доставки
 
 
 Асинхронные коммиты
@@ -972,7 +972,7 @@ Shutdown и Wakeup
            # Close down consumer to commit final offsets.
            consumer.close()
 
-В **Go** необходимо просто выполнить коммит в goroutine для асинхронной фиксации:
+В **Go**  для асинхронной фиксации необходимо выполнить коммит в goroutine:
 
   ::
   
@@ -1001,7 +1001,7 @@ Shutdown и Wakeup
    }
 
 
-В **C#** необходимо просто вызвать метод *CommitAsync*:
+В **C#**  для асинхронной фиксации необходимо вызвать метод *CommitAsync*:
 
   ::
   
@@ -1034,7 +1034,201 @@ Shutdown и Wakeup
 
 Поскольку такой способ помогает производительности, почему бы всегда не использовать асинхронные коммиты? Основная причина заключается в том, что потребитель не повторяет запрос в случае сбоя фиксации. Это то, что *commitSync* предлагает даром; он повторяется бесконечно, пока фиксация не будет выполнена или не будет найдена неисправимая ошибка. Проблема с асинхронными коммитами связана с порядком фиксации -- к тому времени, когда потребитель узнает, что фиксация не удалась, возможно, уже будет обработан следующий пакет сообщений и даже будет отправлен следующий коммит. В этом случае повторная попытка старой фиксации может привести к дублированию потребления.
 
+Вместо того, чтобы усложнять свойства потребителей в попытках самостоятельного решения этой проблемы, API выдает обратный запрос при свершении коммита -- и успешного, и при неудаче. При желании можно использовать этот обратный запрос для повторной фиксации, но тогда также приходится сталкиваться с проблемой переназначения.
 
+  ::
+  
+   public void run() {
+     try {
+       consumer.subscribe(topics);
+   
+       while (true) {
+         ConsumerRecords<K, V> records = consumer.poll(Long.MAX_VALUE);
+         records.forEach(record -> process(record));
+         consumer.commitAsync(new OffsetCommitCallback() {
+           public void onComplete(Map<TopicPartition, OffsetAndMetadata> offsets, Exception exception) {
+             if (e != null)
+               log.debug("Commit failed for offsets {}", offsets, e);
+             }
+         });
+       }
+     } catch (WakeupException e) {
+       // ignore, we're closing
+     } catch (Exception e) {
+       log.error("Unexpected error", e);
+     } finally {
+       consumer.close();
+       shutdownLatch.countDown();
+     }
+   }
+
+Аналогичная функция доступна в **C/C++** (*librdkafka*), но ее необходимо настроить при инициализации:
+
+  ::
+  
+   static void on_commit(rd_kafka_t *rk,
+                         rd_kafka_resp_err_t err,
+                         rd_kafka_topic_partition_list_t *offsets,
+                         void *opaque) {
+     if (err)
+       fprintf(stderr, "%% Failed to commit offsets: %s\n", rd_kafka_err2str(err));
+   }
+   
+   void init_rd_kafka() {
+     rd_kafka_conf_t *conf = rd_kafka_conf_new();
+     rd_kafka_conf_set_offset_commit_cb(conf, on_commit);
+   
+     // initialization omitted
+   }
+
+Аналогично, в **Python** обратный запрос может быть вызван любым коммитом и может быть передан в качестве параметра конфигурации конструктора потребителя:
+
+  ::
+  
+   from confluent_kafka import Consumer
+   
+   def commit_completed(err, partitions):
+       if err:
+           print(str(err))
+       else:
+           print("Committed partition offsets: " + str(partitions))
+   
+   conf = {'bootstrap.servers': "host1:9092,host2:9092",
+           'group.id': "foo",
+           'default.topic.config': {'auto.offset.reset': 'smallest'},
+           'on_commit': commit_completed}
+   
+   consumer = Consumer(conf)
+
+
+В **C#** можно использовать *Task*:
+
+  ::
+  
+   var msgCount = 0;
+   
+   consumer.OnMessage += (_, msg) =>
+   {
+       processMessage(msg);
+       msgCount += 1;
+       if (msgCount % MIN_COMMIT_COUNT == 0)
+       {
+           consumer.CommitAsync().ContinueWith(
+               commitResult =>
+               {
+                   if (commitResult.Error)
+                   {
+                       Console.Error.WriteLine(commitResult.Error);
+                   }
+                   else
+                   {
+                       Console.WriteLine(
+                           $"Committed Offsets [{string.Join(", ", commitResult.Offsets)}]");
+                   }
+               }
+           )
+       }
+   }
+
+
+В **Go** события перебалансировки отображаются как события, возвращаемые методом *Poll()*. Для того чтобы увидеть эти события, необходимо создать потребителя с конфигурацией *go.application.rebalance.enable* и обработать события *AssignedPartitions* и *RevokedPartitions*, явно вызвав *Assign()* и *Unassign()* для *AssignedPartitions* и *RevokedPartitions* соответственно:
+
+  ::
+  
+   consumer, err := kafka.NewConsumer(&kafka.ConfigMap{
+        "bootstrap.servers":    "host1:9092,host2:9092",
+        "group.id":             "foo",
+        "go.application.rebalance.enable": true})
+   
+   msg_count := 0
+   for run == true {
+       ev := consumer.Poll(0)
+       switch e := ev.(type) {
+       case kafka.AssignedPartitions:
+           fmt.Fprintf(os.Stderr, "%% %v\n", e)
+           c.Assign(e.Partitions)
+       case kafka.RevokedPartitions:
+           fmt.Fprintf(os.Stderr, "%% %v\n", e)
+           c.Unassign()
+       case *kafka.Message:
+           msg_count += 1
+           if msg_count % MIN_COMMIT_COUNT == 0 {
+               consumer.Commit()
+           }
+   
+           fmt.Printf("%% Message on %s:\n%s\n",
+               e.TopicPartition, string(e.Value))
+   
+       case kafka.PartitionEOF:
+           fmt.Printf("%% Reached %v\n", e)
+       case kafka.Error:
+           fmt.Fprintf(os.Stderr, "%% Error: %v\n", e)
+           run = false
+       default:
+           fmt.Printf("Ignored %v\n", e)
+       }
+   }
+
+
+Сбои фиксации смещения досаждают, когда последующие коммиты успешны, так как фактически они не должны приводить к повторным чтениям. Однако, если последняя фиксация завершается неудачно до того, как происходит перебалансировка или отключение потребителя, смещения сбрасываются до последнего коммита, и вероятнее всего, отображаются дубликаты. Поэтому общая схема заключается в том, чтобы объединить асинхронные коммиты в цикле опроса с синхронизированными коммитами при перебалансировках или отключении. Фиксация при отключении несложна, но необходимо найти способ закрепления поведения при перебалансировке. Для этого представленный ранее метод *subscribe()* имеет вариант, принимающий *ConsumerRebalanceListener*, который имеет два метода закрепления поведения перебалансировки.
+
+В следующем примере синхронные фиксации включаются при перебалансировках и при отключении:
+
+  ::
+  
+   private void doCommitSync() {
+     try {
+       consumer.commitSync();
+     } catch (WakeupException e) {
+       // we're shutting down, but finish the commit first and then
+       // rethrow the exception so that the main loop can exit
+       doCommitSync();
+       throw e;
+     } catch (CommitFailedException e) {
+       // the commit failed with an unrecoverable error. if there is any
+       // internal state which depended on the commit, you can clean it
+       // up here. otherwise it's reasonable to ignore the error and go on
+       log.debug("Commit failed", e);
+     }
+   }
+   
+   public void run() {
+     try {
+       consumer.subscribe(topics, new ConsumerRebalanceListener() {
+         @Override
+         public void onPartitionsRevoked(Collection<TopicPartition> partitions) {
+           doCommitSync();
+         }
+   
+         @Override
+         public void onPartitionsAssigned(Collection<TopicPartition> partitions) {}
+       });
+   
+       while (true) {
+         ConsumerRecords<K, V> records = consumer.poll(Long.MAX_VALUE);
+         records.forEach(record -> process(record));
+         consumer.commitAsync();
+       }
+     } catch (WakeupException e) {
+       // ignore, we're closing
+     } catch (Exception e) {
+       log.error("Unexpected error", e);
+     } finally {
+       try {
+         doCommitSync();
+       } finally {
+         consumer.close();
+         shutdownLatch.countDown();
+       }
+     }
+   }
+
+
+Каждая перебалансировка имеет две фазы: отзыв и назначение партиции. Отзыв партиции всегда вызывается перед перебалансировкой и является последним шансом фиксации смещения перед переназначением. Фаза назначения партиции всегда вызывается после перебалансировки и может использоваться для установки начальной позиции назначенных партиций. В этом случае отзыв используется для синхронной фиксации текущих смещений.
+
+Как правило, асинхронные коммиты следует считать менее безопасными, чем синхронные, так как последовательные неудачи фиксации приводят к увеличению обработки дубликатов. Можно снизить эту опасность, добавив логику для обработки ошибок фиксации в обратном запросе или периодически смешивая с вызовами *commitSync()*, но не следует добавлять слишком много сложностей при отсутствии прямой необходимости. При синхронных коммитах можно повысить надежность, увеличив число партиций топика и количество потребителей в группе. А если необходимо максимизировать пропускную способность при готовности некоторого увеличения числа дубликатов, то асинхронные коммиты могут стать хорошим вариантом.
+
+Довольно очевидный момент, но стоит отметить, что асинхронные коммиты имеют смысл только для "at least once" доставки сообщений. Чтобы получить "at most once", прежде чем считывать сообщение необходимо знать, успешна ли фиксация. А это подразумевает синхронную фиксацию, за исключением случая наличия возможности "непрочтения" сообщения после того, как обнаружится, что фиксация не удалась.
 
 
 
