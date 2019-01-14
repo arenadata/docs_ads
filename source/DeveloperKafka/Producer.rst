@@ -324,3 +324,51 @@ Kafka Java Producer
 
 Синхронные записи
 ^^^^^^^^^^^^^^^^^^^^
+
+Чтобы сделать запись синхронной, следует дождаться возвращения future. Как правило, это плохая затея, так как она может существенно снизить пропускную способность, но в некоторых случаях может быть оправдана.
+
+  ::
+  
+   Future<RecordMetadata> future = producer.send(record);
+   RecordMetadata metadata = future.get();
+
+
+Аналогичная возможность может быть достигнута в **C/C++** и **Python** с помощью обратного вызова доставки, но это более трудоемко. Полный пример приведен по `ссылке <https://github.com/edenhill/librdkafka/wiki/Sync-producer>`_. Клиент **Python** также содержит метод *flush()*, имеющий тот же эффект:
+
+  ::
+  
+   producer.produce(topic, key="key", value="value")
+   producer.flush()
+
+
+В **Go** осуществляется через канал доставки, посредством вызова метода *Produce()*:
+
+  ::
+  
+   delivery_chan := make(chan kafka.Event, 10000)
+   err = p.Produce(&kafka.Message{
+       TopicPartition: kafka.TopicPartition{Topic: "topic", Partition: kafka.PartitionAny},
+       Value: []byte(value)},
+       delivery_chan
+   )
+   
+    e := <-delivery_chan
+    m := e.(*kafka.Message)
+
+
+Для ожидания подтверждения всех сообщений используется метод *Flush()*:
+
+  ::
+   
+   p.Flush()
+
+
+Важно обратить внимание, что *Flush()* обслуживает только канал *Events()* поставщика, а не каналы доставки, указанные приложением. Если *Flush()* вызывается, и при этом никакая горутина не обрабатывает канал доставки, то буфер может заполниться и привести к истечению времени ожидания.
+
+В **C#** необходимо получить доступ к свойству *.Result* объекта *Task*, возвращенного из *.ProduceAsync*, которое будет блокироваться до тех пор, пока не станет доступен отчет о доставке:
+
+  ::
+  
+   var deliveryReport = producer.ProduceAsync("topic", key, value).Result;
+
+
