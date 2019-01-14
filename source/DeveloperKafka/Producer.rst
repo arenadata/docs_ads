@@ -62,5 +62,265 @@ Kafka Java Producer
 Примеры
 ----------
 
+Начальная настройка
+^^^^^^^^^^^^^^^^^^^^^^
+
+Поставщик **Java** создается с помощью стандартного файла свойств *Properties*:
+
+  ::
+  
+   Properties config = new Properties();
+   config.put("client.id", InetAddress.getLocalHost().getHostName());
+   config.put("bootstrap.servers", "host1:9092,host2:9092");
+   config.put("acks", "all");
+   new KafkProducer<K, V>(config);
 
 
+Ошибки конфигурации приводят к появлению *KafkaException* от конструктора *KafkaProducer*. Основное отличие *librdkafka* заключается в том, что она обрабатывает ошибки для каждого параметра напрямую:
+
+  ::
+  
+   char hostname[128];
+   char errstr[512];
+   
+   rd_kafka_conf_t *conf = rd_kafka_conf_new();
+   
+   if (gethostname(hostname, sizeof(hostname))) {
+     fprintf(stderr, "%% Failed to lookup hostname\n");
+     exit(1);
+   }
+   
+   if (rd_kafka_conf_set(conf, "client.id", hostname,
+                         errstr, sizeof(errstr)) != RD_KAFKA_CONF_OK) {
+     fprintf(stderr, "%% %s\n", errstr);
+     exit(1);
+   }
+   
+   if (rd_kafka_conf_set(conf, "bootstrap.servers", "host1:9092,host2:9092",
+                         errstr, sizeof(errstr)) != RD_KAFKA_CONF_OK) {
+     fprintf(stderr, "%% %s\n", errstr);
+     exit(1);
+   }
+   
+   rd_kafka_topic_conf_t *topic_conf = rd_kafka_topic_conf_new();
+   
+   if (rd_kafka_topic_conf_set(topic_conf, "acks", "all",
+                         errstr, sizeof(errstr)) != RD_KAFKA_CONF_OK) {
+     fprintf(stderr, "%% %s\n", errstr);
+     exit(1);
+   }
+   
+   /* Create Kafka producer handle */
+   rd_kafka_t *rk;
+   if (!(rk = rd_kafka_new(RD_KAFKA_PRODUCER, conf,
+                           errstr, sizeof(errstr)))) {
+     fprintf(stderr, "%% Failed to create new producer: %s\n", errstr);
+     exit(1);
+   }
+
+
+В **Python**:
+
+  ::
+  
+   from confluent_kafka import Producer
+   import socket
+   
+   conf = {'bootstrap.servers': "host1:9092,host2:9092",
+           'client.id': socket.gethostname(),
+           'default.topic.config': {'acks': 'all'}}
+   
+   producer = Producer(conf)
+
+
+В **Go**:
+
+  ::
+
+   import (
+       "github.com/confluentinc/confluent-kafka-go/kafka"
+   )
+   
+   p, err := kafka.NewProducer(&kafka.ConfigMap{
+       "bootstrap.servers": "host1:9092,host2:9092",
+       "client.id": socket.gethostname(),
+       "default.topic.config": kafka.ConfigMap{'acks': 'all'}
+   })
+   
+   if err != nil {
+       fmt.Printf("Failed to create producer: %s\n", err)
+       os.Exit(1)
+   }
+
+
+В **C#**:
+
+  ::
+
+   using Confluent.Kafka;
+   using System.Net;
+   
+   ...
+   
+   var config = new Dictionary<string, object>
+   {
+       { "bootstrap.servers", "host1:9092,host2:9092" },
+       { "client.id", Dns.GetHostName() },
+       { "default.topic.config", new Dictionary<string, object>
+           {
+               { "acks", "all" }
+           }
+       }
+   }
+   
+   using (var producer = new Producer<Null, string>(config, null, new StringSerializer(Encoding.UTF8)))
+   {
+       ...
+   }
+
+
+Асинхронные записи
+^^^^^^^^^^^^^^^^^^^^
+
+Все записи являются асинхронными по умолчанию. Поставщик **Java** включает в себя API *send()*, возвращающий future, которое можно опрашивать для получения результата отправки:
+
+  ::
+  
+   final ProducerRecord<K, V> = new ProducerRecord<>(topic, key, value);
+   Future<RecordMetadata> future = producer.send(record);
+
+
+В *librdkafka* сначала необходимо создать дескриптор *rd_kafka_topic_t* для топика, в который планируется запись, а затем использовать *rd_kafka_produce* для отправки в него сообщений. Например:
+
+  ::
+  
+   rd_kafka_topic_t *rkt = rd_kafka_topic_new(rk, topic, topic_conf);
+   
+   if (rd_kafka_produce(rkt, RD_KAFKA_PARTITION_UA,
+                        RD_KAFKA_MSG_F_COPY,
+                        payload, payload_len,
+                        key, key_len,
+                        NULL) == -1) {
+     fprintf(stderr, "%% Failed to produce to topic %s: %s\n",
+          topic, rd_kafka_err2str(rd_kafka_errno2err(errno)));
+   }
+
+
+Конкретную топику конфигурацию можно назначить третьему аргументу *rd_kafka_topic_new* -- тогда необходимо передать *topic_conf* и добавить настройку для подтверждений. Значение *NULL* приводит к использованию поставщиком конфигурации по умолчанию.
+
+Второй аргумент для *rd_kafka_produce* может использоваться для установки желаемой партиции для сообщения. При установленом значении *RD_KAFKA_PARTITION_UA*, как в данном примере, выбор партиции для сообщения осуществляется механизмом partitioner по умолчанию. Третий аргумент указывает, что *librdkafka* должна скопировать информацию и ключ, что позволяет освободить его по возвращении.
+
+В **Python** отправка инициируется методом *produce* с передачей значения и по необходимости -- ключа, партиции и обратного вызова. Запрос возвращается немедленно без значения:
+
+  ::
+  
+   producer.produce(topic, key="key", value="value")
+
+
+Аналогично, в **Go** отправка инициируется методом *Produce()* с передачей объекта *Message` object and an optional ``chan Event*, применяемого для прослушивания результата отправки. Объект *Message* содержит непрозрачное поле *interface{}*, которое может использоваться для передачи произвольных данных вместе с сообщением последующему обработчику событий.
+
+  ::
+  
+   delivery_chan := make(chan kafka.Event, 10000)
+   err = p.Produce(&kafka.Message{
+       TopicPartition: kafka.TopicPartition{Topic: "topic", Partition: kafka.PartitionAny},
+       Value: []byte(value)},
+       delivery_chan,
+   )
+
+
+В **C#** отправка инициируется вызовом метода *ProduceAsync* в инстансе *Producer*. Например:
+
+  ::
+  
+   producer.ProduceAsync("topic", key, value);
+
+
+При необходимости применения некоторого кода после завершения записи может быть предоставлен обратный вызов. В **Java** это реализовано как объект *Callback*:
+
+  ::
+  
+   final ProducerRecord<K, V> = new ProducerRecord<>(topic, key, value);
+   producer.send(record, new Callback() {
+     public void onCompletion(RecordMetadata metadata, Exception e) {
+       if (e != null)
+         log.debug("Send failed for record {}", record, e);
+     }
+   });
+
+
+В реализации **Java** следует избегать дорогостоящей работы с обратным вызовом, поскольку он выполняется в потоке ввода-вывода поставщика.
+
+Аналогичная функция доступна в *librdkafka*, но ее необходимо настраивать при инициализации:
+
+  ::
+  
+   static void on_delivery(rd_kafka_t *rk,
+                           const rd_kafka_message_t *rkmessage
+                           void *opaque) {
+     if (rkmessage->err)
+       fprintf(stderr, "%% Message delivery failed: %s\n",
+               rd_kafka_message_errstr(rkmessage));
+   }
+   
+   void init_rd_kafka() {
+     rd_kafka_conf_t *conf = rd_kafka_conf_new();
+     rd_kafka_conf_set_dr_msg_cb(conf, on_delivery);
+   
+     // initialization ommitted
+   }
+
+
+Обратный вызов доставки (delivery callback) в *librdkafka* осуществляется в потоке пользователя путем вызова *rd_kafka_poll*. Распространенным шаблоном является вызов функции после каждого вызова API поставщика, но этого может быть недостаточно для обеспечения регулярных отчетов о доставке, если скорость создания сообщений не равномерна. Так же данный API не предоставляет прямого способа блокировки для получения результата доставки конкретного сообщения. При наличии такой необходимости рекомендуется рассмотреть пример синхронной записи (`Синхронные записи`_).
+
+В **Python** параметр *callback* можно передать с помощью любого вызываемого средства, например, лямбды, функции, связанного метода или вызываемого объекта. Хотя метод *produce()* сразу ставит сообщение в очередь для пакетной обработки, сжатия и передачи брокеру, он не свершает обработку каких-либо событий (то есть подтверждений и обратных вызовов, которые они инициируют) до вызова *poll()*.
+
+  ::
+  
+   def acked(err, msg):
+       if err is not None:
+           print("Failed to deliver message: %s: %s" % (str(msg), str(err))
+       else
+           print("Message produced: %s" % (str(msg))
+   
+   producer.produce(topic, key="key", value="value", callback=acked)
+   
+   # Wait up to 1 second for events. Callbacks will be invoked during
+   # this method call if the message is acknowledged.
+   producer.poll(1)
+
+
+В **Go** можно использовать канал отчета о доставке в *Produce*, чтобы дождаться результата отправки сообщения:
+
+  ::
+  
+   e := <-delivery_chan
+   m := e.(*kafka.Message)
+   
+   if m.TopicPartition.Error != nil {
+       fmt.Printf("Delivery failed: %v\n", m.TopicPartition.Error)
+   } else {
+       fmt.Printf("Delivered message to topic %s [%d] at offset %v\n",
+                  *m.TopicPartition.Topic, m.TopicPartition.Partition, m.TopicPartition.Offset)
+   }
+
+   close(delivery_chan)
+
+
+В **C#** есть два варианта. Первый: можно использовать *ProduceAsync*, возвращающий стандартный объект *Task*, который выполняет await (приостановку выполнения метода до завершения выполнения ожидаемой задачи), обрабатывается с помощью метода *.ContinueWith* или ожидает использования методов *.Wait* или *.WaitAll*:
+
+  ::
+  
+   var deliveryReportTask = producer.ProduceAsync("topic", key, val);
+   deliveryReportTask.ContinueWith(task =>
+   {
+       Console.WriteLine($"Partition: {task.Result.Partition}, Offset: {task.Result.Offset}");
+   });
+
+
+Во втором варианте используется *.ProduceAsync*, который принимает реализацию *IDeliveryHandler*. Данный подход следует использовать при необходимости получения уведомлений о доставке сообщений (или сбое доставки) строго в порядке подтверждения брокером, поскольку *Tasks* могут выполняться в любом потоке, что не гарантирует их упорядоченность.
+
+
+
+Синхронные записи
+^^^^^^^^^^^^^^^^^^^^
