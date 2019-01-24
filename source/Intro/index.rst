@@ -42,7 +42,7 @@
 + В кластере **ADS** потоки записей хранятся по категориям, называемым *topics* (топики);
 + Каждая запись состоит из ключа, значения и временной метки.
 
-**ADS** имеет четыре основных **API** (:numref:`Pic.%s.<ADS_intro_API-ADS>`):
+**ADS** имеет четыре основных **API** (:numref:`Pic.%s.<ADS_intro_API-ADS>`):1
 
 + **Producer API** (поставщик) позволяет приложению публиковать поток записей по одному или нескольким топикам платформы. Примеры использования приведены в `javadocs <https://kafka.apache.org/11/javadoc/index.html?org/apache/kafka/clients/producer/KafkaProducer.html>`_;
 + **Consumer API** (потребитель) позволяет приложению подписываться на один или несколько топиков и обрабатывать принадлежащие им потоки записей. Примеры использования приведены в `javadocs <https://kafka.apache.org/11/javadoc/index.html?org/apache/kafka/clients/consumer/KafkaConsumer.html>`_;
