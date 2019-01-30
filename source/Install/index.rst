@@ -1,7 +1,13 @@
-Установка Arenadata Streaming
-===============================
+.. _ADCM: https://arenadata.tech/products/adcm/
 
-В документации приведен принцип установки платформы Arenadata Streaming c помощью Ambari 2.7.0 и порядок подготовки к установке Arenadata Streaming MPack.
+Установка Arenadata Streaming
+=============================
+
+На текущий момент существует несколько способов установки кластера **ADS**: с помощью Ambari 2.7.0, а также **Arenadata Cluster Manager** -- `ADCM <https://arenadata.tech/products/adcm/>`_.
+
+В документации приведены:
+* принцип установки платформы Arenadata Streaming c помощью Ambari 2.7.0 и порядок подготовки к установке Arenadata Streaming MPack.
+* принцип установки платформы Arenadata Streaming c помощью ADCM и порядок подготовки к загрузке и установке бандла Arenadata Streaming.
 
 Инструкция может быть полезна администраторам, программистам, разработчикам и сотрудникам подразделений информационных технологий, осуществляющих внедрение системы.
 
