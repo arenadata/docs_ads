@@ -161,28 +161,31 @@
 
 В блоке настроек "Main" задаются основные параметры:
 
-<<<<<<< HEAD
-* *data_dirs* -- каталог для хранения данных в *Kafka*. Указывается к качестве параметра *log.dirs* в конфигурационном файле `server.properties  <../../Config/index>`;
+* *data_dirs* -- каталог для хранения данных в *Kafka*. Указывается к качестве параметра *log.dirs* в конфигурационном файле `server.properties  <../../../Config/index>`;
 
-* *listeners* -- список URI (протокол, хост и порт, на котором поднят брокер), разделенный запятыми. Если используется не *PLAINTEXT*  протокол, то необходимо также указать listener.security.protocol.map. Укажите имя хоста как 0.0.0.0 для привязки ко всем интерфейсам. Оставьте имя хоста пустым для привязки к интерфейсу по умолчанию. Указывается к качестве параметра *listeners* в конфигурационном файле `server.properties  <../../Config/index>`; 
+* *listeners* -- список URI (протокол, хост и порт, на котором поднят брокер), разделенный запятыми. Если используется не *PLAINTEXT*  протокол, то необходимо также указать listener.security.protocol.map. Укажите имя хоста как 0.0.0.0 для привязки ко всем интерфейсам. Оставьте имя хоста пустым для привязки к интерфейсу по умолчанию. Указывается к качестве параметра *listeners* в конфигурационном файле `server.properties  <../../../Config/index>`; 
 
-* *default_replication_factor* -- фактор репликации, с которым по умолчанию создаются и хранятся топики. Указывается в качестве параметра *default.replication.factor* в конфигурационном файле `server.properties  <../../Config/index>`;
+* *default_replication_factor* -- фактор репликации, с которым по умолчанию создаются и хранятся топики. Указывается в качестве параметра *default.replication.factor* в конфигурационном файле `server.properties  <../../../Config/index>`;
 
-* *delete_topic_enable* -- данный параметр позваляет удалять топики. Если данный параметр выключен, то невозможно удалить то  с которым по умолчанию создаются и хранятся топики. Указывается к качестве параметра *default.replication.factor* в конфигурационном файле `server.properties  <../../Config/index>`;
+* *delete_topic_enable* -- данный параметр позваляет удалять топики. Если данный параметр выключен, то невозможно удалить то  с которым по умолчанию создаются и хранятся топики. Указывается к качестве параметра *default.replication.factor* в конфигурационном файле `server.properties  <../../../Config/index>`;
 
-* *log_retention_hours* -- количество часов, в течение которых топики храняться в *Kafka*. Указывается в качестве параметра *log.retention.hours* в конфигурационном файле `server.properties  <../../Config/index>`;
+* *log_retention_hours* -- количество часов, в течение которых топики храняться в *Kafka*. Указывается в качестве параметра *log.retention.hours* в конфигурационном файле `server.properties  <../../../Config/index>`;
 
-* *log_roll_hours* -- максимальное время, после которого пояляется новый журнал сегмента, даже если старый журнал не переполненю Указывается к качестве параметра *log.roll.hours* в конфигурационном файле `server.properties  <../../Config/index>`;
+* *log_roll_hours* -- максимальное время, после которого пояляется новый журнал сегмента, даже если старый журнал не переполненю Указывается к качестве параметра *log.roll.hours* в конфигурационном файле `server.properties  <../../../Config/index>`;
 
-* *broker_jmx_port* -- порт, по которому *Kafka* брокер отдает *jmx* метрики. Указывается в качестве параметра ** в конфигурационном файле `server.properties  <../../Config/topic>`;
+* *broker_jmx_port* -- порт, по которому *Kafka* брокер отдает *jmx* метрики. Указывается в качестве параметра *JMX_PORT* в файле *kafka-env.sh*;
+
+* *manager_port* -- порт, на котором поднимается *Kafka-Manager*. Указывается в файле *kafka-manager-env.sh*;
+
+* *schema_registry_heap_opts* -- размер кучи, выделяемый процессу сервиса *schema-registry*. Указывается в качестве параметра *SCHEMA_REGISTRY_HEAP_OPTS* в *schema-registry-env.sh*;
+
+* *schema_registry_listener_port* -- порт, который слушает *schema-registry*. Указывается в качестве параметра *listeners* в конфигурационном файле *schema-registry.properties*;
 
 В блоке настроек "Advanced" задаются следующие расширенные параметры:
 
-* *zoo_cfg_content* -- содержимое файла *zoo.cfg*, которое в дальнейшем шаблонизируется. Данный параметр может использоваться для внесения `дополнительных настроек <https://zookeeper.apache.org/doc/r3.4.12/zookeeperAdmin.html#sc_configuration>`_;
+* *server_properties_content* -- содержимое файла *server.properties*, которое в дальнейшем шаблонизируется. Данный параметр может использоваться для внесения `дополнительных настроек <../../../Config/index>`_;
 
-* *zookeeper_env_content* -- каталог для хранения данных на хостах сегментов. При отсутствии каталога, создается автоматически;
-
-* *log_retention_hours* -- количество часов, в течение которых топики храняться в *Kafka*. Указывается в качестве параметра *log.retention.hours* в конфигурационном файле `server.properties  <../../Config/index>`;
+* *kafka_env_content* -- содержимое файла *kafka-env.sh*, которое в дальнейшем шаблонизируется. Данный параметр может использоваться для внесения переменных окружения.
 
   
 Настройка сервиса monitoring clients
@@ -201,7 +204,7 @@
 
 .. _img_15:
 
-.. figure:: ../../../images/adcm.*
+.. figure:: ../../../imgs/adcm.*
    :align: center
 
    Вкладка "Hosts" кластера adb
@@ -210,7 +213,7 @@
 
 .. _img_16:
 
-.. figure:: ../../../images/adcm.*
+.. figure:: ../../../imgs/adcm.*
    :align: center
 
    Выбор хостов
@@ -221,7 +224,7 @@
 
 .. _img_17:
 
-.. figure:: ../../../images/adcm.*
+.. figure:: ../../../imgs/adcm.*
    :align: center
 
    Результат успешного добавления хостов
@@ -236,7 +239,7 @@
 
 .. _img_18:
 
-.. figure:: ../../../images/adcm.*
+.. figure:: ../../../imgs/adcm.*
    :align: center
 
    Размещение компонентов сервисов на хостах
@@ -254,7 +257,7 @@
 
 .. _img_19:
 
-.. figure:: ../../../images/adcm.*
+.. figure:: ../../../imgs/adcm.*
    :align: center
 
    Компоненты сервиса adb
@@ -270,7 +273,7 @@
 
 .. _img_20:
 
-.. figure:: ../../../images/adcm.*
+.. figure:: ../../../imgs/adcm.*
    :align: center
 
    Компоненты сервиса chrony
@@ -292,7 +295,7 @@
 
 .. _img_23:
 
-.. figure:: ../../../images/adcm.*
+.. figure:: ../../../imgs/adcm.*
    :align: center
 
    Install_ADB
@@ -302,7 +305,7 @@
 
 .. _img_24:
 
-.. figure:: ../../../images/adcm.*
+.. figure:: ../../../imgs/adcm.*
    :align: center
 
    Action parameters
@@ -312,7 +315,7 @@
 
 .. _img_25:
 
-.. figure:: ../../../images/adcm.*
+.. figure:: ../../../imgs/adcm.*
    :align: center
 
    Статус сервиса
@@ -324,7 +327,7 @@
 
 .. _img_26:
 
-.. figure:: ../../../images/adcm.*
+.. figure:: ../../../imgs/adcm.*
    :align: center
 
    Initdb
@@ -334,7 +337,7 @@
 
 .. _img_27:
 
-.. figure:: ../../../images/adcm.*
+.. figure:: ../../../imgs/adcm.*
    :align: center
 
    Запрос на подтверждение действия
@@ -344,7 +347,7 @@
 
 .. _img_28:
 
-.. figure:: ../../../images/adcm.*
+.. figure:: ../../../imgs/adcm.*
    :align: center
 
    Кластер инициализирован, доступна кнопка "Check"
@@ -356,7 +359,7 @@
 
 .. _img_29:
 
-.. figure:: ../../../images/adcm.*
+.. figure:: ../../../imgs/adcm.*
    :align: center
 
    Create_Database
@@ -365,7 +368,7 @@
 
 .. _img_30:
 
-.. figure:: ../../../images/adcm.*
+.. figure:: ../../../imgs/adcm.*
    :align: center
 
    Запрос на подтверждение действия
@@ -381,7 +384,7 @@
 
 .. _img_31:
 
-.. figure:: ../../../images/adcm.*
+.. figure:: ../../../imgs/adcm.*
    :align: center
 
    Install chrony
@@ -391,7 +394,7 @@
 
 .. _img_32:
 
-.. figure:: ../../../images/adcm.*
+.. figure:: ../../../imgs/adcm.*
    :align: center
 
    Запрос на подтверждение действия
@@ -401,7 +404,7 @@
 
 .. _img_33:
 
-.. figure:: ../../../images/adcm.*
+.. figure:: ../../../imgs/adcm.*
    :align: center
 
    Статус сервиса
@@ -417,7 +420,7 @@
 
 .. _img_35:
 
-.. figure:: ../../../images/adcm.*
+.. figure:: ../../../imgs/adcm.*
    :align: center
 
    Импорт конфигурации мониторинга
@@ -429,7 +432,7 @@
 
 .. _img_36:
 
-.. figure:: ../../../images/adcm.*
+.. figure:: ../../../imgs/adcm.*
    :align: center
 
    Установка клиентов мониторинга
@@ -439,7 +442,7 @@
 
 .. _img_37:
 
-.. figure:: ../../../images/adcm.*
+.. figure:: ../../../imgs/adcm.*
    :align: center
 
    Запрос на подтверждение действия
@@ -449,7 +452,7 @@
 
 .. _img_38:
 
-.. figure:: ../../../images/adcm.*
+.. figure:: ../../../imgs/adcm.*
    :align: center
 
    Статус службы
