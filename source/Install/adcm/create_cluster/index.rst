@@ -11,11 +11,7 @@
 
 .. _img_4:
 
-<<<<<<< HEAD
 .. figure:: ../../imgs/adcm.*
-=======
-.. figure:: ../../imgs/adcm.\*
->>>>>>> 3ad52ce1c363cbc21c3e32c75b561cbf3232a04e
    :align: center
 
    Список объектов в ADCM
@@ -43,11 +39,7 @@
 
 .. _img_5:
 
-<<<<<<< HEAD
 .. figure:: ../../imgs/adcm.*
-=======
-.. figure:: ../../imgs/adcm.\*
->>>>>>> 3ad52ce1c363cbc21c3e32c75b561cbf3232a04e
    :align: center
 
    Вкладка "CLUSTERS"
@@ -57,11 +49,7 @@
 
 .. _img_6:
 
-<<<<<<< HEAD
 .. figure:: ../../imgs/adcm.*
-=======
-.. figure:: ../../imgs/adcm.\*
->>>>>>> 3ad52ce1c363cbc21c3e32c75b561cbf3232a04e
    :align: center
 
    Создание экземпляра кластера
@@ -72,11 +60,7 @@
 
 .. _img_7:
 
-<<<<<<< HEAD
 .. figure:: ../../imgs/adcm.*
-=======
-.. figure:: ../../imgs/adcm.\*
->>>>>>> 3ad52ce1c363cbc21c3e32c75b561cbf3232a04e
    :align: center
 
    Результат успешного создания экземпляра кластера
@@ -90,11 +74,7 @@
 
 .. _img_8:
 
-<<<<<<< HEAD
 .. figure:: ../../imgs/adcm.*
-=======
-.. figure:: ../../imgs/adcm.\*
->>>>>>> 3ad52ce1c363cbc21c3e32c75b561cbf3232a04e
    :align: center
 
    Окно конфигурации кластера
@@ -145,11 +125,7 @@
 
 .. _img_13:
 
-<<<<<<< HEAD
 .. figure:: ../../imgs/adcm.*
-=======
-.. figure:: ../../imgs/adcm.\*
->>>>>>> 3ad52ce1c363cbc21c3e32c75b561cbf3232a04e
    :align: center
 
    Окно конфигурации сервиса Zookeeper
@@ -177,11 +153,7 @@
 
 .. _img_14:
 
-<<<<<<< HEAD
 .. figure:: ../../imgs/adcm.*
-=======
-.. figure:: ../../imgs/adcm.\*
->>>>>>> 3ad52ce1c363cbc21c3e32c75b561cbf3232a04e
    :align: center
 
    Окно конфигурации сервиса Kafka
@@ -203,19 +175,6 @@
 * *log_roll_hours* -- максимальное время, после которого пояляется новый журнал сегмента, даже если старый журнал не переполненю Указывается к качестве параметра *log.roll.hours* в конфигурационном файле `server.properties  <../../Config/index>`;
 
 * *broker_jmx_port* -- порт, по которому *Kafka* брокер отдает *jmx* метрики. Указывается в качестве параметра ** в конфигурационном файле `server.properties  <../../Config/topic>`;
-=======
-* *data_dirs* -- каталог для хранения данных в *Kafka*. Указывается к качестве параметра *log.dirs* в конфигурационном файле `server.properties  <../../Config/topic>`;
-
-* *listeners* -- список URI (протокол, хост и порт, на котором поднят брокер), разделенный запятыми. Если используется не *PLAINTEXT*  протокол, то необходимо также указать listener.security.protocol.map. Укажите имя хоста как 0.0.0.0 для привязки ко всем интерфейсам. Оставьте имя хоста пустым для привязки к интерфейсу по умолчанию. Указывается к качестве параметра *listeners* в конфигурационном файле `server.properties  <../../Config/topic>`; 
-
-* *default_replication_factor* -- фактор репликации, с которым по умолчанию создаются и хранятся топики. Указывается в качестве параметра *default.replication.factor* в конфигурационном файле `server.properties  <../../Config/topic>`;
-
-* *delete_topic_enable* -- данный параметр позваляет удалять топики. Если данный параметр выключен, то невозможно удалить то  с которым по умолчанию создаются и хранятся топики. Указывается к качестве параметра *default.replication.factor* в конфигурационном файле `server.properties  <../../Config/topic>`;
-
-* *log_retention_hours* -- количество часов, в течение которых топики храняться в *Kafka*. Указывается в качестве параметра *log.retention.hours* в конфигурационном файле `server.properties  <../../Config/topic>`;
-
-* *log_roll_hours* -- максимальное время, после которого пояляется новый журнал сегмента, даже если старый журнал не переполненю Указывается к качестве параметра *log.roll.hours* в конфигурационном файле `server.properties  <../../Config/topic>`;
->>>>>>> 3ad52ce1c363cbc21c3e32c75b561cbf3232a04e
 
 В блоке настроек "Advanced" задаются следующие расширенные параметры:
 
@@ -242,11 +201,7 @@
 
 .. _img_15:
 
-<<<<<<< HEAD
 .. figure:: ../../../images/adcm.*
-=======
-.. figure:: ../../../images/adcm.\*
->>>>>>> 3ad52ce1c363cbc21c3e32c75b561cbf3232a04e
    :align: center
 
    Вкладка "Hosts" кластера adb
@@ -255,11 +210,7 @@
 
 .. _img_16:
 
-<<<<<<< HEAD
 .. figure:: ../../../images/adcm.*
-=======
-.. figure:: ../../../images/adcm.\*
->>>>>>> 3ad52ce1c363cbc21c3e32c75b561cbf3232a04e
    :align: center
 
    Выбор хостов
@@ -270,11 +221,7 @@
 
 .. _img_17:
 
-<<<<<<< HEAD
 .. figure:: ../../../images/adcm.*
-=======
-.. figure:: ../../../images/adcm.\*
->>>>>>> 3ad52ce1c363cbc21c3e32c75b561cbf3232a04e
    :align: center
 
    Результат успешного добавления хостов
@@ -289,11 +236,7 @@
 
 .. _img_18:
 
-<<<<<<< HEAD
 .. figure:: ../../../images/adcm.*
-=======
-.. figure:: ../../../images/adcm.\*
->>>>>>> 3ad52ce1c363cbc21c3e32c75b561cbf3232a04e
    :align: center
 
    Размещение компонентов сервисов на хостах
@@ -311,11 +254,7 @@
 
 .. _img_19:
 
-<<<<<<< HEAD
 .. figure:: ../../../images/adcm.*
-=======
-.. figure:: ../../../images/adcm.\*
->>>>>>> 3ad52ce1c363cbc21c3e32c75b561cbf3232a04e
    :align: center
 
    Компоненты сервиса adb
@@ -331,11 +270,7 @@
 
 .. _img_20:
 
-<<<<<<< HEAD
 .. figure:: ../../../images/adcm.*
-=======
-.. figure:: ../../../images/adcm.\*
->>>>>>> 3ad52ce1c363cbc21c3e32c75b561cbf3232a04e
    :align: center
 
    Компоненты сервиса chrony
@@ -357,11 +292,7 @@
 
 .. _img_23:
 
-<<<<<<< HEAD
 .. figure:: ../../../images/adcm.*
-=======
-.. figure:: ../../../images/adcm.\*
->>>>>>> 3ad52ce1c363cbc21c3e32c75b561cbf3232a04e
    :align: center
 
    Install_ADB
@@ -371,11 +302,7 @@
 
 .. _img_24:
 
-<<<<<<< HEAD
 .. figure:: ../../../images/adcm.*
-=======
-.. figure:: ../../../images/adcm.\*
->>>>>>> 3ad52ce1c363cbc21c3e32c75b561cbf3232a04e
    :align: center
 
    Action parameters
@@ -385,11 +312,7 @@
 
 .. _img_25:
 
-<<<<<<< HEAD
 .. figure:: ../../../images/adcm.*
-=======
-.. figure:: ../../../images/adcm.\*
->>>>>>> 3ad52ce1c363cbc21c3e32c75b561cbf3232a04e
    :align: center
 
    Статус сервиса
@@ -401,11 +324,7 @@
 
 .. _img_26:
 
-<<<<<<< HEAD
 .. figure:: ../../../images/adcm.*
-=======
-.. figure:: ../../../images/adcm.\*
->>>>>>> 3ad52ce1c363cbc21c3e32c75b561cbf3232a04e
    :align: center
 
    Initdb
@@ -415,11 +334,7 @@
 
 .. _img_27:
 
-<<<<<<< HEAD
 .. figure:: ../../../images/adcm.*
-=======
-.. figure:: ../../../images/adcm.\*
->>>>>>> 3ad52ce1c363cbc21c3e32c75b561cbf3232a04e
    :align: center
 
    Запрос на подтверждение действия
@@ -429,11 +344,7 @@
 
 .. _img_28:
 
-<<<<<<< HEAD
 .. figure:: ../../../images/adcm.*
-=======
-.. figure:: ../../../images/adcm.\*
->>>>>>> 3ad52ce1c363cbc21c3e32c75b561cbf3232a04e
    :align: center
 
    Кластер инициализирован, доступна кнопка "Check"
@@ -445,11 +356,7 @@
 
 .. _img_29:
 
-<<<<<<< HEAD
 .. figure:: ../../../images/adcm.*
-=======
-.. figure:: ../../../images/adcm.\*
->>>>>>> 3ad52ce1c363cbc21c3e32c75b561cbf3232a04e
    :align: center
 
    Create_Database
@@ -458,11 +365,7 @@
 
 .. _img_30:
 
-<<<<<<< HEAD
 .. figure:: ../../../images/adcm.*
-=======
-.. figure:: ../../../images/adcm.\*
->>>>>>> 3ad52ce1c363cbc21c3e32c75b561cbf3232a04e
    :align: center
 
    Запрос на подтверждение действия
@@ -478,11 +381,7 @@
 
 .. _img_31:
 
-<<<<<<< HEAD
 .. figure:: ../../../images/adcm.*
-=======
-.. figure:: ../../../images/adcm.\*
->>>>>>> 3ad52ce1c363cbc21c3e32c75b561cbf3232a04e
    :align: center
 
    Install chrony
@@ -492,11 +391,7 @@
 
 .. _img_32:
 
-<<<<<<< HEAD
 .. figure:: ../../../images/adcm.*
-=======
-.. figure:: ../../../images/adcm.\*
->>>>>>> 3ad52ce1c363cbc21c3e32c75b561cbf3232a04e
    :align: center
 
    Запрос на подтверждение действия
@@ -506,11 +401,7 @@
 
 .. _img_33:
 
-<<<<<<< HEAD
 .. figure:: ../../../images/adcm.*
-=======
-.. figure:: ../../../images/adcm.\*
->>>>>>> 3ad52ce1c363cbc21c3e32c75b561cbf3232a04e
    :align: center
 
    Статус сервиса
@@ -526,11 +417,7 @@
 
 .. _img_35:
 
-<<<<<<< HEAD
 .. figure:: ../../../images/adcm.*
-=======
-.. figure:: ../../../images/adcm.\*
->>>>>>> 3ad52ce1c363cbc21c3e32c75b561cbf3232a04e
    :align: center
 
    Импорт конфигурации мониторинга
@@ -542,11 +429,7 @@
 
 .. _img_36:
 
-<<<<<<< HEAD
 .. figure:: ../../../images/adcm.*
-=======
-.. figure:: ../../../images/adcm.\*
->>>>>>> 3ad52ce1c363cbc21c3e32c75b561cbf3232a04e
    :align: center
 
    Установка клиентов мониторинга
@@ -556,11 +439,7 @@
 
 .. _img_37:
 
-<<<<<<< HEAD
 .. figure:: ../../../images/adcm.*
-=======
-.. figure:: ../../../images/adcm.\*
->>>>>>> 3ad52ce1c363cbc21c3e32c75b561cbf3232a04e
    :align: center
 
    Запрос на подтверждение действия
@@ -570,11 +449,7 @@
 
 .. _img_38:
 
-<<<<<<< HEAD
 .. figure:: ../../../images/adcm.*
-=======
-.. figure:: ../../../images/adcm.\*
->>>>>>> 3ad52ce1c363cbc21c3e32c75b561cbf3232a04e
    :align: center
 
    Статус службы

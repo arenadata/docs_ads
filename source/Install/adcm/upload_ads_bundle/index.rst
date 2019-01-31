@@ -9,11 +9,7 @@
 
 .. _img_1:
 
-<<<<<<< HEAD
 .. figure:: ../../imgs/adcm.*
-=======
-.. figure:: ../../imgs/adcm.\*
->>>>>>> 3ad52ce1c363cbc21c3e32c75b561cbf3232a04e
    :align: center
 
    Вкладка "BUNDLES"
@@ -23,11 +19,7 @@
 
 .. _img_2:
 
-<<<<<<< HEAD
 .. figure:: ../../imgs/adcm.*
-=======
-.. figure:: ../../imgs/adcm.\*
->>>>>>> 3ad52ce1c363cbc21c3e32c75b561cbf3232a04e
    :align: center
 
    Выбор бандла
@@ -37,11 +29,7 @@
 
 .. _img_3:
 
-<<<<<<< HEAD
 .. figure:: ../../imgs/adcm.*
-=======
-.. figure:: ../../imgs/adcm.\*
->>>>>>> 3ad52ce1c363cbc21c3e32c75b561cbf3232a04e
    :align: center
 
    Результат успешной загрузки бандла
