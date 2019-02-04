@@ -82,7 +82,7 @@
 
 .. _ADS_install_welcom-to-ambari-before-config:
 
-.. figure:: ./imgs/ADS_install_welcom-to-ambari-before-config.*
+.. figure:: ../imgs/ADS_install_welcom-to-ambari-before-config.*
    :align: center
 
    Веб-интерфейс Ambari до настройки кластера

@@ -9,7 +9,7 @@
 
 .. _img_1:
 
-.. figure:: ../../imgs/adcm.*
+.. figure:: ../../imgs/bundles.*
    :align: center
 
    Вкладка "BUNDLES"
@@ -19,7 +19,7 @@
 
 .. _img_2:
 
-.. figure:: ../../imgs/adcm.*
+.. figure:: ../../imgs/choose_bundle.*
    :align: center
 
    Выбор бандла
@@ -29,7 +29,7 @@
 
 .. _img_3:
 
-.. figure:: ../../imgs/adcm.*
+.. figure:: ../../imgs/load_bundle.*
    :align: center
 
    Результат успешной загрузки бандла
