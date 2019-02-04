@@ -254,7 +254,7 @@
 
 .. _img_16:
 
-.. figure:: ../../../imgs/hosts_list.*
+.. figure:: ../../../imgs/hosts_list.png
    :align: center
 
    Вкладка "Hosts" кластера ads
@@ -274,7 +274,7 @@
 
 .. _img_18:
 
-.. figure:: ../../../imgs/hosts_list.*
+.. figure:: ../../../imgs/hosts_list2.png
    :align: center
 
    Результат успешного добавления хостов
