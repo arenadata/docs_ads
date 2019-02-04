@@ -254,7 +254,7 @@
 
 .. _img_16:
 
-.. figure:: ../../../imgs/hosts_list.png
+.. figure:: ../../imgs/hosts_list.*
    :align: center
 
    Вкладка "Hosts" кластера ads
@@ -263,7 +263,7 @@
 
 .. _img_17:
 
-.. figure:: ../../../imgs/add_hosts.*
+.. figure:: ../../imgs/add_hosts.*
    :align: center
 
    Выбор хостов
@@ -274,7 +274,7 @@
 
 .. _img_18:
 
-.. figure:: ../../../imgs/hosts_list2.png
+.. figure:: ../../imgs/hosts_list2.*
    :align: center
 
    Результат успешного добавления хостов
@@ -289,7 +289,7 @@
 
 .. _img_19:
 
-.. figure:: ../../../imgs/components.*
+.. figure:: ../../imgs/components.*
    :align: center
 
    Размещение компонентов сервисов на хостах
@@ -303,7 +303,7 @@
 
 .. _img_20:
 
-.. figure:: ../../../imgs/zk_components.*
+.. figure:: ../../imgs/zk_components.*
    :align: center
 
    Компоненты сервиса *Zookeeper*
@@ -319,7 +319,7 @@
 
 .. _img_21:
 
-.. figure:: ../../../imgs/kafka_components.*
+.. figure:: ../../imgs/kafka_components.*
    :align: center
 
    Компоненты сервиса *Kafka*
@@ -331,7 +331,7 @@
 
 .. _img_22:
 
-.. figure:: ../../../imgs/nifi_components.*
+.. figure:: ../../imgs/nifi_components.*
    :align: center
 
    Компоненты сервиса *Nifi*
@@ -345,7 +345,7 @@
 
 .. _img_23:
 
-.. figure:: ../../../imgs/mc_components.*
+.. figure:: ../../imgs/mc_components.*
    :align: center
 
    Компоненты сервиса Monitoring Clients
@@ -379,7 +379,7 @@
 
 .. _img_24:
 
-.. figure:: ../../../imgs/zk_install.*
+.. figure:: ../../imgs/zk_install.*
    :align: center
 
    Install
@@ -390,7 +390,7 @@
 
 .. _img_25:
 
-.. figure:: ../../../imgs/adcm.*
+.. figure:: ../../imgs/adcm.*
    :align: center
 
    Статус сервиса
@@ -407,7 +407,7 @@
 
 .. _img_31:
 
-.. figure:: ../../../imgs/kafka_install.*
+.. figure:: ../../imgs/kafka_install.*
    :align: center
 
    Install Kafka
@@ -418,7 +418,7 @@
 
 .. _img_33:
 
-.. figure:: ../../../imgs/adcm.*
+.. figure:: ../../imgs/adcm.*
    :align: center
 
    Статус сервиса
@@ -434,7 +434,7 @@
 
 .. _img_35:
 
-.. figure:: ../../../imgs/import_configs.*
+.. figure:: ../../imgs/import_configs.*
    :align: center
 
    Импорт конфигурации мониторинга
@@ -446,7 +446,7 @@
 
 .. _img_36:
 
-.. figure:: ../../../imgs/mc_install.*
+.. figure:: ../../imgs/mc_install.*
    :align: center
 
    Установка клиентов мониторинга
@@ -457,7 +457,7 @@
 
 .. _img_38:
 
-.. figure:: ../../../imgs/adcm.*
+.. figure:: ../../imgs/adcm.*
    :align: center
 
    Статус службы
