@@ -35,11 +35,11 @@
 
 При создании кластера в веб-интерфейсе **ADCM** генерируется новый экземпляр кластера *ads*, что означает только добавление данных о нем в базу данных **ADCM** -- на этом этапе не производится установка *ads* на хосты.
 
-1. Открыть в ADCM вкладку "CLUSTERS" (:numref:`Рис.%s. <adcm>`).
+1. Открыть в ADCM вкладку "CLUSTERS" (:numref:`Рис.%s. <cluster_mon>`).
 
-.. _adcm:
+.. _cluster_mon:
 
-.. figure:: ../../imgs/adcm.PNG
+.. figure:: ../../imgs/cluster_mon.png
    :align: center
 
    Вкладка "CLUSTERS"
