@@ -7,31 +7,31 @@
 
 Для загрузки бандла следует выполнить следующие действия:
 
-1. Открыть в ADCM вкладку "BUNDLES" (:numref:`Рис.%s.<img_1>`).
+1. Открыть в ADCM вкладку "BUNDLES" (:numref:`Рис.%s.<bundles>`).
 
-.. _img_1:
+.. _bundles:
 
-.. figure:: ../../imgs/bundles.*
+.. figure:: ../../imgs/bundles.png
    :align: center
 
    Вкладка "BUNDLES"
 
 
-2. Нажать "Upload bundle" и в открывшейся форме выбрать файл бандла ADS (:numref:`Рис.%s.<img_2>`).
+2. Нажать "Upload bundle" и в открывшейся форме выбрать файл бандла ADS (:numref:`Рис.%s.<choose_bundle>`).
 
-.. _img_2:
+.. _choose_bundle:
 
-.. figure:: ../../imgs/choose_bundle.*
+.. figure:: ../../imgs/choose_bundle.png
    :align: center
 
    Выбор бандла
 
 
-3. В результате выполненных действий факт успешной загрузки отображается в общем списке бандлов на вкладке "BUNDLES" (:numref:`Рис.%s.<img_3>`).
+3. В результате выполненных действий факт успешной загрузки отображается в общем списке бандлов на вкладке "BUNDLES" (:numref:`Рис.%s.<load_bundle>`).
 
-.. _img_3:
+.. _load_bundle:
 
-.. figure:: ../../imgs/load_bundle.*
+.. figure:: ../../imgs/load_bundle.png
    :align: center
 
    Результат успешной загрузки бандла
