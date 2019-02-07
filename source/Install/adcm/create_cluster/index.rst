@@ -39,7 +39,7 @@
 
 .. _adcm:
 
-.. figure:: ../../imgs/adcm.png
+.. figure:: ../../imgs/adcm.PNG
    :align: center
 
    Вкладка "CLUSTERS"
@@ -271,9 +271,7 @@
 
    Выбор хостов
 
-
 3. В результате выполненных действий факт добавления хостов отображается в кластере *ads* в списке вкладки "Hosts" (:numref:`Рис.%s. <hosts_list2>`).
-
 
 .. _hosts_list2:
 
@@ -281,7 +279,6 @@
    :align: center
 
    Результат успешного добавления хостов
-
 
 
 Размещение компонентов сервисов на хостах
@@ -391,7 +388,7 @@
 
 .. _img_25:
 
-.. figure:: ../../imgs/adcm.png
+.. figure:: ../../imgs/adcm.PNG
    :align: center
 
    Статус сервиса Zookeeper
@@ -416,7 +413,7 @@
 
 .. _img_33:
 
-.. figure:: ../../imgs/adcm.png
+.. figure:: ../../imgs/adcm.PNG
    :align: center
 
    Статус сервиса Kafka
@@ -454,7 +451,7 @@
 
 .. _img_38:
 
-.. figure:: ../../imgs/adcm.png
+.. figure:: ../../imgs/adcm.PNG
    :align: center
 
    Статус сервиса Monitoring Clients
