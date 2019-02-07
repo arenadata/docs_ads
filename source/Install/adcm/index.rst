@@ -57,7 +57,7 @@
 -----------------
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 2
 
    upload_ads_bundle/index
    create_cluster/index
