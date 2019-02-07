@@ -384,9 +384,9 @@
    Install Zookeeper
 
 
-* По результатам инсталляции сервис *Zookeeper* меняет состояние с *created* -- создан, на *installed* -- установлен (:numref:`Рис.%s.<img_25>`).
+* По результатам инсталляции сервис *Zookeeper* меняет состояние с *created* -- создан, на *installed* -- установлен (:numref:`Рис.%s.<adcm>`).
 
-.. _img_25:
+.. _adcm:
 
 .. figure:: ../../imgs/adcm.PNG
    :align: center
@@ -409,9 +409,9 @@
    Install Kafka
 
 
-* По результатам инсталляции сервис *Kafka* меняет состояние с *created* -- создан, на *installed* -- установлен (:numref:`Рис.%s.<img_33>`).
+* По результатам инсталляции сервис *Kafka* меняет состояние с *created* -- создан, на *installed* -- установлен (:numref:`Рис.%s.<adcm>`).
 
-.. _img_33:
+.. _adcm:
 
 .. figure:: ../../imgs/adcm.PNG
    :align: center
@@ -447,9 +447,9 @@
    Установка клиентов мониторинга
 
 
-* По результатам инсталляции служба *monitoring clients* меняет состояние с *created* -- создана, на *monitored* -- мониторится (:numref:`Рис.%s. <img_38>`).
+* По результатам инсталляции служба *monitoring clients* меняет состояние с *created* -- создана, на *monitored* -- мониторится (:numref:`Рис.%s. <adcm>`).
 
-.. _img_38:
+.. _adcm:
 
 .. figure:: ../../imgs/adcm.PNG
    :align: center
