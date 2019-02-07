@@ -376,17 +376,15 @@
    Установка всех сервисов кластера
 
 
-По результатам установки все добавленные сервисы меняют состояние с *created* -– создан, на *installed* -– установлен (:numref:`Рис.%s. <cluster_install>`).
+По результатам установки все добавленные сервисы меняют состояние с *created* -– создан, на *installed* -– установлен (:numref:`Рис.%s. <cluster_actions>`).
 
-.. _cluster_install:
+.. _cluster_actions:
 
 .. figure:: ../../imgs/cluster_actions.png
    :align: center
 
    Установка всех сервисов кластера
 
-
-cluster_actions.png
 
 
 Установка сервиса Zookeeper
