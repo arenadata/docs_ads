@@ -436,7 +436,7 @@
 .. figure:: ../../imgs/nifi_install.png
    :align: center
 
-   Install Kafka
+   Install Nifi
 
 
 * По результатам инсталляции сервис *Nifi* меняет состояние с *created* -- создан, на *installed* -- установлен.
