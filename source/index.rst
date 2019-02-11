@@ -5,57 +5,59 @@
    :align: center
 
 
-Эффективное решение для потоковой обработки данных в режиме реального времении 
-==============================================================================
+Distributed streaming platform 
+===============================
 
-**Arenadata Streaming** (**ADS**) -- платформа потоковых операций, построенная на базе Apache Kafka и Apache Nifi, проектов с открытым исходным кодом, адаптированное для корпоративного использования. ADS содержит в себе все необходимые компоненты для сбора, анализа и обработки данных в режиме реального времени, обеспечивает хранение и передачу в семантике «exactly-once delivery» безопасным и отказоустойчивым способом, предоставляя удобный интерфейс для администрирования и разработки. Также платформа может выступать в качестве корпоративной шины данных и ETL-инструмента (:numref:`Рис.%s.<ADS_index_scheme>`).
+**Arenadata Streaming** (**ADS**) -- enterprise-ready Streaming Platform that makes it easy build real-time data pipelines and streaming applications based on Apache Kafka and Apache Nifi -- open source projects. **ADS** contains all the necessary components for collecting, analyzing and processing data in real time, provides storage and transmission in the semantics of "exactly-once delivery" in a safe and fault-tolerant way, providing a convenient interface for administration and development. The platform can also act as a corporate data bus and ETL tool (:numref:`Рис.%s.<ADS_index_scheme>`).
 
 
 .. _ADS_index_scheme:
 
-.. figure:: imgs/ADS_index_scheme.*
+.. figure:: imgs/ADS_index_scheme.png
    :align: center
 
-   Принципиальная схема платформы ADS
+   ADS Platform Concept
 
 
-Идея платформы распределенных потоковых операций заключается в обеспечении:
+The idea of a distributed streaming platform is to provide:
 
-+ Единой точки доступа;
-+ Легкого, безопасного и надежного способа управления потоком данных;
-+ Политики безопасности;
-+ Быстрой и непрерывной разработки.
-
-Одной из особенностей реализации платформы является применение техники, сходной с журналами транзакций, используемыми в системах управления базами данных. **ADS** обладает следующими отличительными техническими качествами:
-
-+ *Отказоустойчивость* -- обеспечение консистентности при потоковой передаче данных в режиме реального времени;
-+ *Масштабируемость* -- добавление новых серверов в кластер по мере необходимости;
-+ *Распределенность* -- возможность построения гео-распределенной инфраструктуры;
-+ *Доступное оборудование* -- работу на любом x86-совместимом оборудовании;
-+ *Реальное время* -- управление потоками, добавление и настройка источников данных в режиме реального времени;
-+ *Безопасность* -- гибкие механизмы контроля доступа к данным;
-+ *Интеграция* -- коннекторы к различным системам: Elasticsearch, SAP HANA, Vertica, Couchbase, Cassandra, CouchDB, IBM MQ и т.д. Широкий набор API для интеграции с другими внешними системами;
-+ *Простота и гибкость* -- возможность создания workflow с помощью графического интерфейса или разрабатывать свои собственные приложения с помощью SDK для повышения эффективности работы.
-
- **Apache Kafka** -- распределённый программный брокер сообщений, проект с открытым исходным кодом, разработанный в рамках **Apache Software Foundation**. 
-
-Текущий релиз версии **ADS 1.0.0** вышел во втором квартале 2018 года. В состав версии входят следующие компоненты: **Ambari**, **Zookeeper**, **NiFi**, **Kafka**. Интеграция с **ZooKeeper** позволяет системе работать не только быстро и слаженно, но безопасно, что особенно важно в случае больших данных.
-
-С **Arenadata Streaming** Вы получаете эффективное решение для потоковой обработки данных:
-
-+ Используйте в качестве корпоративной шины обмена данными для всех своих приложений;
-+ Собирайте большие потоки данных безопасно и эффективно управляйте ими в режиме реального времени;
-+ Создавайте потоки данных с поддержкой разграничения прав доступа к ним;
-+ Разрабатывайте потоковые аналитические приложения за считанные минуты в режиме реального времени без единой строчки кода.
-
-Оригинальная документация на русском языке позволяет облегчить процесс планирования и разворачивания платформы. Инструкция может быть полезна администраторам, программистам, разработчикам и сотрудникам подразделений информационных технологий, осуществляющих внедрение и сопровождение кластеров **Arenadata**. 
-
-Далее в документации приведено описание платформы **Arenadata Streaming**: концепции хранения, установка, архитектурные особенности, APIs и настройки платформы.
++ Single access point;
++ Easy, safe and reliable way to control data flow;
++ Security policies;
++ Fast and continuous development.
 
 
-.. important:: Контактная информация службы поддержки -- e-mail: info@arenadata.io
+One of the features of the implementation of the platform is the use of technology, similar to the transaction logs used in database management systems. **ADS** has the following distinctive technical qualities:
 
-.. important:: В настоящий момент автоматическая установка Arenadata Streaming доступна только через Ambari версии не ниже 2.7.0
++ *Fault tolerance* -- ensuring consistency in real-time streaming;
++ *Scalability* -- adding new servers to the cluster as needed;
++ *Distribution* -- possibility of building geo-distributed infrastructure;
++ *Available equipment* -- work on any x86-compatible hardware;
++ *Real time* -- stream management, adding and configuring real-time data sources;
++ *Security* -- flexible data access control mechanisms;
++ *Integration* -- connectors to different systems: Elasticsearch, SAP HANA, Vertica, Couchbase, Cassandra, CouchDB, IBM MQ, etc. A wide range of APIs for integration with other external systems;
++ *Simplicity and flexibility* -- the ability to create workflow using a graphical interface or develop your own applications using the SDK to improve performance.
+
+**Apache Kafka** -- distributed software message broker, an open source project developed within the **Apache Software Foundation**. 
+ 
+**Apache NiFi** supports powerful and scalable directed graphs of data routing, transformation, and system mediation logic developed within the **Apache Software Foundation**.
+
+Version **ADS 1.0.0** was released in the second quarter of 2018. The version includes the following components: **Ambari**, **Zookeeper**, **NiFi**, **Kafka**. Integration with **ZooKeeper** allows the system to work not only quickly and smoothly, but safely, which is especially important in the case of big data.
+
+With **Arenadata Streaming** you get an effective solution for stream processing:
+
++ Use as a corporate data bus for all your applications;
++ Collect large data streams safely and efficiently manage them in real time;
++ Create data streams with support for access rights to them;
++ Develop streaming analytic applications in minutes in real time without writing a line of code.
+
+The manual may be useful for administrators, programmers, developers and employees of information technology departments who implement and maintain clusters **Arenadata**. 
+
+The following documentation describes the platform **Arenadata Streaming**: storage concepts, installation, architectural features and platform settings.
+
+.. important:: Contact information support service -- e-mail: info@arenadata.io
+
+.. important:: Currently, the automatic installation of Arenadata Streaming is only available through Ambari version 2.7.0 or higher
 
 
 .. toctree::
