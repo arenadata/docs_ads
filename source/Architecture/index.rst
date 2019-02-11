@@ -1,4 +1,4 @@
-Архитектурные особенности Arenadata Streaming
+Architectural features of Arenadata Streaming
 ==============================================
 
 В документации приведены архитектурные особенности платформы Arenadata Streaming.
