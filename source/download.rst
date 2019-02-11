@@ -1,27 +1,18 @@
-Скачать документацию
-====================
+Download documentation
+=======================
 
 
-`Скачать общий обзор Arenadata Streaming`_
- .. _Скачать общий обзор Arenadata Streaming: https://storage.googleapis.com/arenadata-repo/docs/ads/pdf/v1.0.0/Общий%20обзор%20Arenadata%20Streaming.pdf
+`Download Arenadata Streaming Overview`_
+ .. _Download Arenadata Streaming Overview: https://storage.googleapis.com/arenadata-repo/docs/ads/pdf/v1.0.0/Arenadata%20Streaming%20Overview.pdf
 
-`Скачать инструкцию по установке Arenadata Streaming`_
- .. _Скачать инструкцию по установке Arenadata Streaming: https://storage.googleapis.com/arenadata-repo/docs/ads/pdf/v1.0.0/Установка%20Arenadata%20Streaming.pdf
+`Download Installing Arenadata Streaming`_
+ .. _Download Installing Arenadata Streaming: https://storage.googleapis.com/arenadata-repo/docs/ads/pdf/v1.0.0/Installing%20Arenadata%20Streaming.pdf
+
+`Download Architectural features of Arenadata Streaming`_
+ .. _Download Architectural features of Arenadata Streaming: https://storage.googleapis.com/arenadata-repo/docs/ads/pdf/v1.0.0/Architectural%20features%20of%20Arenadata%20Streaming.pdf
  
-`Скачать руководство администратора по работе с сервисом Nifi`_
- .. _Скачать руководство администратора по работе с сервисом Nifi: https://storage.googleapis.com/arenadata-repo/docs/ads/pdf/v1.0.0/Руководство%20администратора%20по%20работе%20с%20сервисом%20Nifi.pdf 
- 
-`Скачать руководство пользователя по работе с сервисом Nifi`_
- .. _Скачать руководство пользователя по работе с сервисом Nifi: https://storage.googleapis.com/arenadata-repo/docs/ads/pdf/v1.0.0/Руководство%20пользователя%20по%20работе%20с%20сервисом%20Nifi.pdf
+`Download Arenadata Streaming Platform Settings`_
+ .. _Download Arenadata Streaming Platform Settings: https://storage.googleapis.com/arenadata-repo/docs/ads/pdf/v1.0.0/Arenadata%20Streaming%20Platform%20Settings.pdf
 
-`Скачать руководство разработчика приложений для сервиса Kafka`_
- .. _Скачать руководство разработчика приложений для сервиса Kafka: https://storage.googleapis.com/arenadata-repo/docs/ads/pdf/v1.0.0/Руководство%20разработчика%20приложений%20для%20сервиса%20Kafka.pdf
-
-`Скачать архитектурные особенности Arenadata Streaming`_
- .. _Скачать архитектурные особенности Arenadata Streaming: https://storage.googleapis.com/arenadata-repo/docs/ads/pdf/v1.0.0/Архитектурные%20особенности%20Arenadata%20Streaming.pdf
- 
-`Скачать настройки платформы Arenadata Streaming`_
- .. _Скачать настройки платформы Arenadata Streaming: https://storage.googleapis.com/arenadata-repo/docs/ads/pdf/v1.0.0/Настройки%20платформы%20Arenadata%20Streaming.pdf
-
-`Скачать новые функциональности Arenadata Streaming`_
- .. _Скачать новые функциональности Arenadata Streaming: https://storage.googleapis.com/arenadata-repo/docs/ads/pdf/v1.0.0/Новые%20функциональности%20Arenadata%20Streaming.pdf
+`Download New functionality Arenadata Streaming`_
+ .. _Download New functionality Arenadata Streaming: https://storage.googleapis.com/arenadata-repo/docs/ads/pdf/v1.0.0/New%20functionality%20Arenadata%20Streaming.pdf
