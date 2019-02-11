@@ -109,11 +109,11 @@
 
 Для каждого из сервисов есть возможность управления им независимо от остальных, выполнять такие операции как *Stop*, *Start*, *Restart*.
 
-Например, для того чтобы перезапустить все компоненты сервиса *Kafka* необходимо перейти в кластер *ads* в ADCM, на вкладке "Services" для сервиса *Kafka* в поле "Actions" нажать на пиктограмму и выбрать действие *Restart* (:numref:`Рис.%s <kafka_actions>`).
+Например, для того чтобы перезапустить все компоненты сервиса *Kafka* необходимо перейти в кластер *ads* в ADCM, на вкладке "Services" для сервиса *Kafka* в поле "Actions" нажать на пиктограмму и выбрать действие *Restart* (:numref:`Рис.%s <kafka_actions_ads>`).
 
-.. _kafka_actions:
+.. _kafka_actions_ads:
 
-.. figure:: ../../imgs/kafka_actions.png
+.. figure:: ../../imgs/kafka_actions_ads.png
    :align: center
    
    Допустимые операции над сервисом *Kafka*
