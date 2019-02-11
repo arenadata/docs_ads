@@ -1,4 +1,4 @@
-Настройки платформы Arenadata Streaming
+Arenadata Streaming Platform Settings
 =========================================
 
 В документации приведены настройки платформы Arenadata Streaming на уровне брокера и топика, а также конфигурирование Producer, Consumer, Connect, Streams.
