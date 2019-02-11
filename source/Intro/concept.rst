@@ -1,33 +1,36 @@
-Концепция хранения
+Storage concept
 ===================
 
-Для начала в главе описывается основная абстракция, которую **ADS** обеспечивает для потока записей – топик.
+Let's first dive into the core abstraction **ADS** provides for a stream of records -- the topic.
 
-Топики -- это категории, по которым записи публикуются в платформе. В **ADS** топики могут иметь нескольких потребителей, которые подписываются на получение находящихся в них данных. Для каждого топика платформа поддерживает партиционированный журнал, схематично представленный на :numref:`Рис.%s.<ADS_intro_Topic>`
+A topic is a category or feed name to which records are published. Topics in **ADS** are always multi-subscriber; that is, a topic can have zero, one, or many consumers that subscribe to the data written to it. For each topic, the platform maintains a partitioned log that looks like this :numref:`Pic.%s.<ADS_intro_Topic>`
 
 .. _ADS_intro_Topic:
 
-.. figure:: ./imgs/ADS_intro_Topic.*
+.. figure:: ./imgs/ADS_intro_Topic.png
    :align: center
 
-   Партиционированный журнал 
+   Partitioned log 
 
-Каждая партиция представляет собой упорядоченную неизменяемую последовательность записей, которая постоянно добавляется в структурированный журнал. Каждой записи в партиции присваивается порядковый номер *id*, называемый смещением (*offset*), который однозначно идентифицирует каждую запись.
+Each partition is an ordered, immutable sequence of records that is continually appended to—a structured commit log. The records in the partitions are each assigned a sequential *id* number called the *offset* that uniquely identifies each record within the partition.
 
-Платформа **ADS** надежно сохраняет все опубликованные записи в соответствии с настройкой периода их хранения. Например, если политика хранения установлена на два дня, то в течение двух дней после публикации запись доступна для потребления, после чего она удаляется с целью освобождения места. Производительность **ADS** фактически постоянна по отношению к размеру данных, что обеспечивает возможность хранения знаписей в течение длительного времени (:numref:`Рис.%s.<ADS_intro_offset>`).
+**ADS** persists all published records -- whether or not they have been consumed -- using a configurable retention period. For example, if the retention policy is set to two days, then for the two days after a record is published, it is available for consumption, after which it will be discarded to free up space. Platform's performance is effectively constant with respect to data size so storing data for a long time is not a problem (:numref:`Pic.%s.<ADS_intro_offset>`).
 
 .. _ADS_intro_offset:
 
-.. figure:: ./imgs/ADS_intro_offset.*
+.. figure:: ./imgs/ADS_intro_offset.png
    :align: center
 
-   Логика смещения 
+   Offset logic 
 
-Фактически, метаданные, сохраненные для каждого потребителя, являются его смещением или положением в журнале. Это смещение контролируется самим потребителем: обычно потребитель линейно продвигает свое смещение при считывании записи, но так как его позиция контролируется им самим, то он может считывать записи в любом порядке. Например, потребитель может вернуться к более старому смещению для повторной обработки данных или перейти к самой последней актуальной записи и начать считывание с настоящего момента.
 
-Такое сочетание функций означает, что потребители **ADS** могут приходить и уходить без особого влияния на кластер и на других потребителей. Например, можно использовать инструменты командной строки для считывания данных с конца любого топика без какого-либо влияния на то, что считывается другими потребителями.
+In fact, the only metadata retained on a per-consumer basis is the offset or position of that consumer in the log. This offset is controlled by the consumer: normally a consumer will advance its offset linearly as it reads records, but, in fact, since the position is controlled by the consumer it can consume records in any order it likes. For example a consumer can reset to an older offset to reprocess data from the past or skip ahead to the most recent record and start consuming from "now".
 
-Партиции в журнале служат нескольким целям. Во-первых, они позволяют журналу масштабироваться сверх размера, который помещается на одном сервере. Каждая отдельная партиция располагается на конкретном сервере, но топик может иметь много партиций и располагаться на нескольких серверах для возможности обработки произвольного количества данных. Во-вторых, партиции действуют как единица параллелизма.
+This combination of features means that **ADS** consumers are very cheap -- they can come and go without much impact on the cluster or on other consumers. For example, you can use our command line tools to "tail" the contents of any topic without changing what is consumed by any existing consumers.
+
+The partitions in the log serve several purposes. First, they allow the log to scale beyond a size that will fit on a single server. Each individual partition must fit on the servers that host it, but a topic may have many partitions so it can handle an arbitrary amount of data. Second they act as the unit of parallelism—more on that in a bit.
+
+
 
 Партиции журнала распределяются по серверам кластера **ADS**, при этом каждый сервер обрабатывает данные и запросы к определенным партициям. Каждая партиция реплицируется на настраиваемое число серверов для обеспечения отказоустойчивости.
 
