@@ -115,7 +115,7 @@
 
 .. figure:: ../../imgs/kafka_actions.png
    :align: center
-
+   
    Допустимые операции над сервисом *Kafka*
 
 
