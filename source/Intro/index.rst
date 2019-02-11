@@ -38,7 +38,7 @@ A few concepts of  **Arenadata Streaming**:
 + The Kafka cluster stores streams of records in categories called topics;
 + Each record consists of a key, a value, and a timestamp.
 
-**ADS** has four core APIs (:numref:`Рис.%s.<ADS_intro_API-ADS>`):
+**ADS** has four core APIs (:numref:`Pic.%s.<ADS_intro_API-ADS>`):
 
 + The **Producer API** allows an application to publish a stream of records to one or more Kafka topics. Examples of use are given in `javadocs <https://kafka.apache.org/11/javadoc/index.html?org/apache/kafka/clients/producer/KafkaProducer.html>`_;
 + The **Consumer API** allows an application to subscribe to one or more topics and process the stream of records produced to them. Examples of use are given in `javadocs <https://kafka.apache.org/11/javadoc/index.html?org/apache/kafka/clients/consumer/KafkaConsumer.html>`_;
