@@ -1,100 +1,91 @@
 Arenadata Streaming Overview
 ================================
 
-**Arenadata Streaming** (**ADS**) -- **платформа распределенных потоковых операций**, включающая интегрированный набор компонентов корпоративного уровня на базе решений с открытым исходным кодом. Платформа содержит в себе все необходимые компоненты для потоковой передачи и обработки данных в реальном времени, их преобразования, взаимодействия и хранения, передачи в семантике "exactly-once delivery", интеграции, безопасности и администрирования. Также платформа может выступать в качестве корпоративной шины данных и ETL-инструмента.
+**Arenadata Streaming** (**ADS**) -- **distributed streaming platform**, which includes an integrated set of enterprise-level components based on open source solutions. The platform contains all the necessary components for streaming and processing real-time data, their transformation, interaction and storage, transmission in the semantics of "exactly-once delivery", security and administration. Also, the platform can act as a corporate data bus and ETL tool.
 
-Идея платформы распределенных потоковых операций заключается в обеспечении:
+The idea of a distributed streaming platform is to provide:
 
-+ Единой точки доступа -- возможность использования в качестве корпоративной шины обмена данными для приложений;
-+ Легкого, безопасного и надежного способа управления потоком данных -- возможность безопасного сбора больших потоков данных и эффективного управления ими в режиме реального времени;
-+ Политики безопасности -- возможность создания потоков данных с поддержкой разграничения прав доступа к ним;
-+ Быстрой и непрерывной разработки -- возможность разработки потоковых аналитических приложений за считанные минуты в режиме реального времени без единой строчки кода.
++ Single access point -- use as a corporate data bus for all your applications;
++ Easy, safe and reliable way to control data flow -- the ability to safely collect large data streams and efficiently manage them in real time;
++ Security policies -- the ability to create data streams with support for differentiation of access rights to them;
++ Fast and continuous development -- Develop streaming analytic applications in minutes in real time without writing a line of code.
 
-Одной из особенностей реализации платформы является применение техники, сходной с журналами транзакций, используемыми в системах управления базами данных. **ADS** обладает следующими отличительными техническими качествами:
+One of the features of the implementation of the platform is the use of technology, similar to the transaction logs used in database management systems. **ADS** has the following distinctive technical qualities:
 
-+ Отказоустойчивость;
-+ Масштабируемость;
-+ Распределенность;
-+ Доступное оборудование;
-+ Реальное время;
-+ Безопасность;
-+ Интеграция;
-+ Простота и гибкость.
++ Fault tolerance;
++ Scalability;
++ Distribution;
++ Available equipment;
++ Real time;
++ Security;
++ Integration;
++ Simplicity and flexibility/
 
-**Arenadata Streaming** (**ADS**) -- это полноценный дистрибутив платформы потоковых операций на базе **Apache Kafka**, адаптированный для корпоративного использования. **Apache Kafka** -- распределённый программный брокер сообщений, проект с открытым исходным кодом, разработанный в рамках **Apache Software Foundation**. 
+A streaming platform has three key capabilities:
 
-Текущий релиз версии **ADS 1.0.0** вышел во втором квартале 2018 года. В состав версии входят следующие компоненты: **Ambari**, **Zookeeper**, **NiFi**, **Kafka**. Интеграция с **ZooKeeper** позволяет системе работать не только быстро и слаженно, но безопасно, что особенно важно в случае больших данных.
++ Publish and subscribe to streams of records, similar to a message queue or enterprise messaging system;
++ Store streams of records in a fault-tolerant durable way;
++ Process streams of records as they occur.
 
-Платформа потоковой передачи данных имеет три ключевые возможности:
+**ADS** is generally used for two broad classes of applications:
 
-+ Публикация и подписка на потоковую передачу данных, похожую на очередь сообщений или корпоративную систему обмена сообщениями;
-+ Хранение потоков записей отказоустойчивым способом;
-+ Обработка потоков записей по мере их возникновения.
++ Building real-time streaming data pipelines that reliably get data between systems or applications;
++ Building real-time streaming applications that transform or react to the streams of dat.
 
-Платформа **ADS**, как правило, используется для двух обширных классов приложений:
+A few concepts of  **Arenadata Streaming**:
 
-+ Создание канала для потоковой передачи данных в реальном времени с целью надежного обмена данными между системами и приложениями;
-+ Создание приложений для потоковой передачи данных в реальном времени с целью их преобразования и взаимодействия с другими потоками.
++ Kafka is run as a cluster on one or more servers that can span multiple datacenters;
++ The Kafka cluster stores streams of records in categories called topics;
++ Each record consists of a key, a value, and a timestamp.
 
-Несколько концепций **Arenadata Streaming**:
+**ADS** has four core APIs (:numref:`Рис.%s.<ADS_intro_API-ADS>`):
 
-+ **ADS** запускается как кластер на одном или нескольких серверах, которые могут располагаться в разных центрах обработки данных;
-+ В кластере **ADS** потоки записей хранятся по категориям, называемым *topics* (топики);
-+ Каждая запись состоит из ключа, значения и временной метки.
-
-**ADS** имеет четыре основных **API** (:numref:`Рис.%s.<ADS_intro_API-ADS>`):
-
-+ **Producer API** (поставщик) позволяет приложению публиковать поток записей по одному или нескольким топикам платформы. Примеры использования приведены в `javadocs <https://kafka.apache.org/11/javadoc/index.html?org/apache/kafka/clients/producer/KafkaProducer.html>`_;
-+ **Consumer API** (потребитель) позволяет приложению подписываться на один или несколько топиков и обрабатывать принадлежащие им потоки записей. Примеры использования приведены в `javadocs <https://kafka.apache.org/11/javadoc/index.html?org/apache/kafka/clients/consumer/KafkaConsumer.html>`_;
-+ **Streams API** позволяет приложению выступать в качестве *stream processor* (потокового процессора), потребляя входной поток данных из одного или нескольких топиков и создавая выходной поток данных так же для одного или нескольких топиков, эффективно преобразуя входные потоки в выходные. Примеры использования приведены в `javadocs <https://kafka.apache.org/11/javadoc/index.html?org/apache/kafka/streams/KafkaStreams.html>`_;
-+ **Connector API** позволяет создавать и запускать повторное использование поставщиков и потребителей, которые связывают топики с существующими приложениями или системами данных. Например, коннектор для реляционной базы данных может записывать каждое изменение в таблицу. Примеры использования приведены в `javadocs <https://kafka.apache.org/11/javadoc/index.html?org/apache/kafka/connect>`_.
++ The **Producer API** allows an application to publish a stream of records to one or more Kafka topics. Examples of use are given in `javadocs <https://kafka.apache.org/11/javadoc/index.html?org/apache/kafka/clients/producer/KafkaProducer.html>`_;
++ The **Consumer API** allows an application to subscribe to one or more topics and process the stream of records produced to them. Examples of use are given in `javadocs <https://kafka.apache.org/11/javadoc/index.html?org/apache/kafka/clients/consumer/KafkaConsumer.html>`_;
++ The **Streams API** allows an application to act as a stream processor, consuming an input stream from one or more topics and producing an output stream to one or more output topics, effectively transforming the input streams to output streams. Examples of use are given in `javadocs <https://kafka.apache.org/11/javadoc/index.html?org/apache/kafka/streams/KafkaStreams.html>`_;
++ The **Connector API** allows building and running reusable producers or consumers that connect Kafka topics to existing applications or data systems. For example, a connector to a relational database might capture every change to a table.. Examples of use are given in `javadocs <https://kafka.apache.org/11/javadoc/index.html?org/apache/kafka/connect>`_.
 
 
 .. _ADS_intro_API-ADS:
 
-.. figure:: ../imgs/ADS_intro_API-ADS.*
+.. figure:: ../imgs/ADS_intro_API-ADS.png
    :align: center
 
-   API платформы ADS
+   ADS Platform API
 
-Kлиенты для работы с **Apache Kafka** доступны на многих языках программирования (`Clients <https://cwiki.apache.org/confluence/display/KAFKA/Clients>`_).
+**Apache Kafka** clients are available in many programming languages. (`Clients <https://cwiki.apache.org/confluence/display/KAFKA/Clients>`_).
 
-Сервис **NiFi** в составе платформы **ADS** мощный инструмент для построения масштабируемых ориентированных графов маршрутизации данных и их преобразования. Некоторые из высокоуровневых возможностей и целей **NiFi**:
+The **NiFi** service as part of the platform **ADS** is a powerful tool for building scalable oriented data routing graphs and their conversion. Some of the high-level features and goals **NiFi**:
 
-+ Веб-интерфейс пользователя
++ Web user interface:
+  + Development, management and monitoring in a single interface;
 
-  + Разработка, управление и мониторинг в едином интерфейсе
++ Flexible configuration depending on needs:
+  + Loss resistance or guaranteed delivery;
+  + Low latency or high bandwidth;
+  + Dynamic prioritization;
+  + The ability to change the flow at run time;
 
-+ Гибкое конфигурирование в зависимости от потребностей
++ Origin of data:
+  + Tracking data flow from start to finish;
 
-  + Устойчивость к потерям или гарантированная доставка
-  + Низкая задержка или высокая пропускной способности
-  + Динамическое определение приоритетов
-  + Возможность изменения потока во время выполнения
++ Expansion of functionality:
+  + The ability to create your own processors and much more;
+  + Ensuring rapid development and effective testing;
 
-+ Происхождение данных
++ Security:
+  + SSL, SSH, HTTPS, encrypted content, etc.;
+  + Multi-tenant authorization and internal authorization/policy management.
 
-  + Отслеживание потока данных от начала до конца
-
-+ Расширение функционциональных возможностей
-
-  + Возможность создания собственных процессоров и многого другого
-  + Обеспечение быстрой разработки и эффективного тестирования
-
-+ Безопасность
-
-  + SSL, SSH, HTTPS, зашифрованный контент и т.д.
-  + Multi-tenant авторизация и внутренняя авторизация/управление политикой
-
-В документации приведены концепции хранения в платформе **Arenadata Streaming**, гарантии и рекомендации по использованию **ADS**. Раздел предлагается к прочтению перед переходом к непосредственной установке системы.
+The documentation contains storage concepts for the **Arenadata Streaming** platform, warranties and recommendations for using **ADS**. The section is proposed for reading before proceeding to the direct installation of the system.
 
 
-.. important:: Контактная информация службы поддержки -- e-mail: info@arenadata.io
+.. important:: Contact information support service -- e-mail: info@arenadata.io
 
 
 .. toctree::
    :maxdepth: 2
-   :caption: Оглавление:
+   :caption: Table of contents:
 
    concept
    guarantees
