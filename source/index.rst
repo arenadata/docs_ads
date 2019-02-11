@@ -8,7 +8,7 @@
 Distributed streaming platform 
 ===============================
 
-**Arenadata Streaming** (**ADS**) -- enterprise-ready Streaming Platform that makes it easy build real-time data pipelines and streaming applications based on Apache Kafka and Apache Nifi -- open source projects. **ADS** contains all the necessary components for collecting, analyzing and processing data in real time, provides storage and transmission in the semantics of "exactly-once delivery" in a safe and fault-tolerant way, providing a convenient interface for administration and development. The platform can also act as a corporate data bus and ETL tool (:numref:`Рис.%s.<ADS_index_scheme>`).
+**Arenadata Streaming** (**ADS**) -- enterprise-ready Streaming Platform that makes it easy build real-time data pipelines and streaming applications based on Apache Kafka and Apache Nifi -- open source projects. **ADS** contains all the necessary components for collecting, analyzing and processing data in real time, provides storage and transmission in the semantics of "exactly-once delivery" in a safe and fault-tolerant way, providing a convenient interface for administration and development. The platform can also act as a corporate data bus and ETL tool (:numref:`Pic.%s.<ADS_index_scheme>`).
 
 
 .. _ADS_index_scheme:
