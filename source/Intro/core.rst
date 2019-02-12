@@ -1,25 +1,25 @@
-Концепция потоков NiFi
-=======================
+The core concepts of NiFi
+==========================
 
-Ключевые концепции **NiFi** тесно связаны с основными идеями потокового программирования (`Flow Based Programming -- FBP <https://en.wikipedia.org/wiki/Flow-based_programming#Concepts>`_). Далее в таблице приведены некоторые из основных концепций **NiFi** и их сопоставление с **FBP**.
+NiFi’s fundamental design concepts closely relate to the main ideas of `Flow Based Programming -- FBP <https://en.wikipedia.org/wiki/Flow-based_programming#Concepts>`_. Here are some of the main **NiFi** concepts and how they map to **FBP**.
 
-.. csv-table:: Сопоставление концепций NiFi и FBP
-   :header: "NiFi Term", "FBP Term", "Описание"
+.. csv-table:: The core concepts of NiFi
+   :header: "NiFi Term", "FBP Term", "	Description"
    :widths: 25, 25, 50
 
-   "FlowFile", "Information Packet", "FlowFile представляет каждый объект, перемещающийся через систему, и для каждого из них NiFi отслеживает список атрибутов (пары ключ/значение) и связанного с ним содержимое с количеством байт от нуля и больше"
-   "FlowFile Processor", "Black Box", "Процессоры, выполняющие задание. В терминах `eip <https://www.enterpriseintegrationpatterns.com/>`_ процессор выполняет некоторую комбинацию маршрутизации, преобразования и обмена информацией между системами. Процессоры имеют доступ к атрибутам предоставленного FlowFile и его контенту. Процессоры могут работать с ноль и более FlowFiles в данном блоке задания, либо выполнять работу (commit), либо отменять результат ее выполнения откатом (rollback)"
-   "Connection", "Bounded Buffer", "Соединения выступают в роли фактической связи между процессорами. Они действуют как очереди и позволяют разным процессам взаимодействовать с разной скоростью. Очереди могут быть распределены по приоритетам и иметь верхние границы нагрузки, инициализирующие процесс *back pressure*"
-   "Flow Controller", "Scheduler", "Контроллер потока хранит знание о том, как соединены процессы, управляет и распределяет потоки, которые используются процессами. Flow Controller выступает в качестве брокера, облегчающего обмен FlowFiles между процессорами"
-   "Process Group", "subnet", "Группа процессов представляет собой определенный набор процессоров и их соединений, которые могут принимать данные через порты для входящих соединений и отправлять их через выходные порты. Таким образом, группы процессов позволяют создавать совершенно новые компоненты просто посредством композиции других компонентов"
+   "FlowFile", "Information Packet", "A FlowFile represents each object moving through the system and for each one, NiFi keeps track of a map of key/value pair attribute strings and its associated content of zero or more bytes"
+   "FlowFile Processor", "Black Box", "Processors actually perform the work. In `eip <https://www.enterpriseintegrationpatterns.com/>`_ terms a processor is doing some combination of data routing, transformation, or mediation between systems. Processors have access to attributes of a given FlowFile and its content stream. Processors can operate on zero or more FlowFiles in a given unit of work and either commit that work or rollback"
+   "Connection", "Bounded Buffer", "Connections provide the actual linkage between processors. These act as queues and allow various processes to interact at differing rates. These queues can be prioritized dynamically and can have upper bounds on load, which enable *back pressure*"
+   "Flow Controller", "Scheduler", "The Flow Controller maintains the knowledge of how processes connect and manages the threads and allocations thereof which all processes use. The Flow Controller acts as the broker facilitating the exchange of FlowFiles between processors"
+   "Process Group", "subnet", "A Process Group is a specific set of processes and their connections, which can receive data via input ports and send data out via output ports. In this manner, process groups allow creation of entirely new components simply by composition of other components"
 
-Такая модель проектирования (схожая с `seda <https://www.mdw.la/papers/seda-sosp01.pdf>`_) предоставляет множество преимуществ по созданию мощных и масштабируемых потоков данных, например:
+This design model, also similar to `seda <https://www.mdw.la/papers/seda-sosp01.pdf>`_, provides many beneficial consequences that help NiFi to be a very effective platform for building powerful and scalable dataflows. A few of these benefits include:
 
-+ Хорошо подходит для визуального создания и управления направленными графами процессоров;
-+ По своей сути является асинхронной, что обеспечивает очень высокую пропускную способность и естественную буферизацию даже при колебаниях скорости обработки и потока;
-+ Обеспечивает высококонкурентную модель без необходимости участия разработчика в вопросах потокобезопасности;
-+ Способствует развитию связанных и слабосвязанных компонентов, которые в последствии могут быть повторно использованы в других контекстах и способствовать тестированию;
-+ Соединения с верхними и нижними границами по ресурсам делают такие критические функции, как *back pressure* и *pressure release*, закономерными и интуитивно понятными;
-+ Обработка ошибок становится ожидаемым результатом успешного выполения конкретного сценария процесса (happy-path), а не catch-all;
-+ Точки входа и выхода данных, а также перемещение потоков в системе, понятны и легко отслеживаются.
++ Lends well to visual creation and management of directed graphs of processors;
++ Is inherently asynchronous which allows for very high throughput and natural buffering even as processing and flow rates fluctuate;
++ Provides a highly concurrent model without a developer having to worry about the typical complexities of concurrency;
++ Promotes the development of cohesive and loosely coupled components which can then be reused in other contexts and promotes testable units;
++ The resource constrained connections make critical functions such as *back-pressure* and *pressure release* very natural and intuitive;
++ Error handling becomes as natural as the happy-path rather than a coarse grained catch-all;
++ The points at which data enters and exits the system as well as how it flows through are well understood and easily tracked.
 
