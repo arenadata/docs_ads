@@ -1,31 +1,32 @@
-Производительность
-===================
+Efficiency
+==============
 
-Специалисты **Arenadata** приложили значительные усилия для повышения производительности платформы. Одним из основных вариантов использования является обработка данных веб-активности, которая очень велика: каждый просмотр страницы может генерировать десятки записей. Кроме того, каждое опубликованное сообщение читается как минимум одним потребителем (а часто -- многими), поэтому есть стремление сделать потребление как можно более дешевым.
+Specialists of **Arenadata** put significant effort into efficiency. One of our primary use cases is handling web activity data, which is very high volume: each page view may generate dozens of writes. Furthermore, we assume each message published is read by at least one consumer (often many), hence we strive to make consumption as cheap as possible.
 
-По опыту разработки и эксплуатации ряда аналогичных систем выяснилось, что производительность является ключом к эффективным многопользовательским операциям. Если нижестоящий сервис инфраструктуры может легко стать узким местом из-за незначительного увеличения по использованию приложения, то такие небольшие изменения часто создают проблемы. В результате приложение выйдет из строя под нагрузкой перед инфраструктурой. Это особенно важно при попытке запуска централизованного сервиса, поддерживающего десятки или сотни приложений в централизованном кластере, поскольку изменения в шаблонах использования происходят почти ежедневно.
+We have also found, from experience building and running a number of similar systems, that efficiency is a key to effective multi-tenant operations. If the downstream infrastructure service can easily become a bottleneck due to a small bump in usage by the application, such small changes will often create problems. By being very fast we help ensure that the application will tip-over under load before the infrastructure. This is particularly important when trying to run a centralized service that supports dozens or hundreds of applications on a centralized cluster as changes in usage patterns are a near-daily occurrence.
 
-После устранения неудачных шаблонов доступа к диску остается две общие причины неэффективности в подобном типе системы: слишком много мелких операций ввода-вывода и избыточное копирование байтов.
+Once poor disk access patterns have been eliminated, there are two common causes of inefficiency in this type of system: too many small I/O operations, and excessive byte copying.
 
-Проблема множества мелких операций ввода-вывода происходит как между клиентом и сервером, так и в собственных персистентных операциях сервера. Во избежание этого протокол **Arenadata** построен вокруг абстракции "набор сообщений", группирующей сообщения. Это позволяет сетевым запросам объединять сообщения вместе, амортизировав накладные расходы в сети, а не отправлять каждый раз по одному сообщению. Сервер единоразово добавляет фрагменты сообщений в свой журнал, а потребитель извлекает большие линейные фрагменты за раз.
+The small I/O problem happens both between the client and the server and in the server's own persistent operations. To avoid this, **ADS** protocol is built around a "message set" abstraction that naturally groups messages together. This allows network requests to group messages together and amortize the overhead of the network roundtrip rather than sending a single message at a time. The server in turn appends chunks of messages to its log in one go, and the consumer fetches large linear chunks at a time.
 
-Такая простая оптимизация на порядок увеличивает скорость работы. Пакетирование приводит к увеличению сетевых пакетов, последовательных операций с дисками и смежными блоками памяти и т.д., что позволяет платформе **ADS** превращать поток случайных сообщений в линейные записи, которые поступают потребителям.
+This simple optimization produces orders of magnitude speed up. Batching leads to larger network packets, larger sequential disk operations, contiguous memory blocks, and so on, all of which allows Kafka to turn a bursty stream of random message writes into linear writes that flow to the consumers.
 
-Другая непродуктивность заключается в копировании байтов. При низких скоростях передачи сообщений это не проблема, но под нагрузкой влияние значительно. Во избежание этого **ADS** использует стандартный бинарный формат сообщений, который совместно применяется поставщиком, брокером и потребителем (таким образом, блоки данных могут передаваться без изменений).
+The other inefficiency is in byte copying. At low message rates this is not an issue, but under load the impact is significant. To avoid this **ADS** employ a standardized binary message format that is shared by the producer, the broker, and the consumer (so data chunks can be transferred without modification between them).
 
-Журнал сообщений, поддерживаемый брокером, сам по себе является просто каталогом файлов, каждый из которых заполняется рядом наборов сообщений, которые были записаны на диск в том же формате, который используется поставщиком и потребителем. Поддержка общего формата позволяет оптимизировать наиболее важную операцию -- сетевую передачу персистентных блоков журнала. Современные операционные системы **unix** предлагают высоко оптимизированный путь кода для передачи данных из pagecache в сокет; в **Linux** это делается с помощью системного вызова *sendfile*.
+The message log maintained by the broker is itself just a directory of files, each populated by a sequence of message sets that have been written to disk in the same format used by the producer and consumer. Maintaining this common format allows optimization of the most important operation: network transfer of persistent log chunks. Modern **unix** operating systems offer a highly optimized code path for transferring data out of pagecache to a socket; in **Linux** this is done with the *sendfile* system call.
 
-Путь передачи данных из файла в сокет заключается в следующем:
+To understand the impact of *sendfile*, it is important to understand the common data path for transfer of data from file to socket:
 
-1. Операционная система считывает данные с диска в pagecache в пространстве ядра.
-2. Приложение считывает данные из пространства ядра в буфер пространства пользователя.
-3. Приложение записывает данные в пространство ядра в буфер сокета.
-4. Операционная система копирует данные из буфера сокета в буфер сетевого адаптера по сети.
+1. The operating system reads data from the disk into pagecache in kernel space.
+2. The application reads the data from kernel space into a user-space buffer.
+3. The application writes the data back into kernel space into a socket buffer.
+4. The operating system copies the data from the socket buffer to the NIC buffer where it is sent over the network.
 
-Такой метод явно неэффективен -- он предполагает четыре операции копирования и два системных вызова. А при использовании *sendfile* повторное копирование исключается (zero-copy), позволяя ОС напрямую отправлять данные из pagecache в сеть. Таким образом, из оптимизированного пути требуется только последняя копия в буфер сетевого адаптера.
+This is clearly inefficient, there are four copies and two system calls. Using *sendfile*, this re-copying is avoided by allowing the OS to send the data from pagecache to the network directly. So in this optimized path, only the final copy to the NIC buffer is needed.
 
-Как правило, общий вариант использования состоит из нескольких потребителей топика. При приведенной выше оптимизации данные копируются в pagecache только один раз и при каждом потреблении используются повторно, а не хранятся в памяти и копируются в пространство пользователя при каждом чтении. Это позволяет считывать сообщения со скоростью, приближенной к пределу сетевого подключения.
+A common use case to be multiple consumers on a topic. Using the zero-copy optimization above, data is copied into pagecache exactly once and reused on each consumption instead of being stored in memory and copied out to user-space every time it is read. This allows messages to be consumed at a rate that approaches the limit of the network connection.
 
-Такая комбинация использования pagecache и *sendfile* означает, что в кластере **ADS** нет активности чтения на дисках, поскольку данные полностью обслуживаются из кэша.
+This combination of pagecache and *sendfile* means that on a **ADS** cluster where the consumers are mostly caught up you will see no read activity on the disks whatsoever as they will be serving data entirely from cache.
 
-Дополнительные сведения о поддержке *sendfile* и zero-copy в **Java** приведены в `статье <http://www.ibm.com/developerworks/linux/library/j-zerocopy>`_.
+For more background on the *sendfile* and zero-copy support in **Java**, see this `article <http://www.ibm.com/developerworks/linux/library/j-zerocopy>`_.
+
