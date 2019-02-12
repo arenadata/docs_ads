@@ -1,14 +1,16 @@
-Поставщики данных
-===================
+The Producer
+==============
 
-Балансировка нагрузки
-----------------------
+Load balancing
+----------------
 
-Поставщик отправляет данные непосредственно брокеру, являющемуся лидером партиции, без какого-либо промежуточного уровня маршрутизации. При этом все узлы **ADS** могут ответить на запрос метаданных, какие серверы активны, и где лидеры партиций топика находятся в любой момент времени, чтобы позволить поставщику соответствующим образом направлять свои заявки.
+The producer sends data directly to the broker that is the leader for the partition without any intervening routing tier. To help the producer do this all **ADS** nodes can answer a request for metadata about which servers are alive and where the leaders for the partitions of a topic are at any given time to allow the producer to appropriately direct its requests.
 
-Клиент контролирует, в какую партицию публикуются сообщения. Публикация данных может осуществляться произвольным образом, реализуя некую случайную балансировку нагрузки, либо с помощью некоторой функции семантического разбиения, предоставленной интерфейсом **ADS**, которая позволяет пользователю указывать ключ для секционирования, и использует этот хэш в партиции (при необходимости функцию можно переопределить). Например, если выбранный ключ является id пользователя, то все данные по конкретному пользователю публикуются в данную партицию. Потребителям, в свою очередь, это позволяет делать выводы относительно их потребления. Данный стиль партицирования явно разработан таким образом, чтобы разрешить локально-чувствительную обработку.
+The client controls which partition it publishes messages to. This can be done at random, implementing a kind of random load balancing, or it can be done by some semantic partitioning function. The interface **ADS** exposes for semantic partitioning by allowing the user to specify a key to partition by and using this to hash to a partition (there is also an option to override the partition function if need be). For example if the key chosen was a user id then all data for a given user would be sent to the same partition. This in turn will allow consumers to make locality assumptions about their consumption. This style of partitioning is explicitly designed to allow locality-sensitive processing in consumers.
 
-Асинхронная передача
----------------------
 
-Пакетирование является одним из главных факторов эффективности, и для ее обеспечения поставщик накапливает данные в памяти и затем отправляет их большими партиями в одном запросе. Пакетная обработка может быть сконфигурирована таким образом, чтобы накапливание не превышало фиксированного количества сообщений, и/или время ожидания было не больше указанного (например, *64k* или *10 мс*). Это позволяет накапливать больше байтов для передачи и большее количество операций ввода-вывода на серверах. Буферизация настраиваема и дает возможность обмена небольшой дополнительной задержки по времени на лучшую пропускную способность.
+Asynchronous send
+-------------------
+
+Batching is one of the big drivers of efficiency, and to enable batching the producer will attempt to accumulate data in memory and to send out larger batches in a single request. The batching can be configured to accumulate no more than a fixed number of messages and to wait no longer than some fixed latency bound (say *64k* or *10 ms*). This allows the accumulation of more bytes to send, and few larger I/O operations on the servers. This buffering is configurable and gives a mechanism to trade off a small amount of additional latency for better throughput.
+
