@@ -1,17 +1,17 @@
 Architectural features of Arenadata Streaming
 ==============================================
 
-В документации приведены архитектурные особенности платформы Arenadata Streaming.
+The documentation describes the architectural features of the platform Arenadata Streaming.
 
-Инструкция может быть полезна администраторам, программистам, разработчикам и сотрудникам подразделений информационных технологий, осуществляющих внедрение и сопровождение системы.
+The instruction can be useful to administrators, programmers, developers and employees of information technology departments who implement and maintain the system.
 
 
-.. important:: Контактная информация службы поддержки -- e-mail: info@arenadata.io
+.. important:: Contact information support service -- e-mail: info@arenadata.io
 
 
 .. toctree::
    :maxdepth: 2
-   :caption: Оглавление:
+   :caption: Table of contents:
 
    intro
    persistence
