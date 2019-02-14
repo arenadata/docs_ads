@@ -1,17 +1,17 @@
-Настройка брокера
+Broker Configs
 ===================
 
-Все настройки брокера хранятся в конфигурационном файле */etc/kafka/conf/server.properties*.
+All broker settings are stored in the configuration file */etc/kafka/conf/server.properties*.
 
-Основные конфигурации брокера:
+The essential configurations are the following:
 
 + *broker.id*
 + *log.dirs*
 + *zookeeper.connect*
 
-Далее приведен список настроек с описанием и указанием их типа, значений по умолчанию и действительных, их важностью и режимом обновления.
+The following is a list of settings with a description and an indication of their type, default values and actual values, their importance and update mode.
 
-**zookeeper.connect** -- Строка хоста Zookeeper
+**zookeeper.connect** -- Specifies the ZooKeeper connection string in the form *hostname:port* where host and port are the host and port of a ZooKeeper server. To allow connecting through other ZooKeeper nodes when that ZooKeeper machine is down you can also specify multiple hosts in the form *hostname1:port1,hostname2:port2,hostname3:port3*. The server can also have a ZooKeeper chroot path as part of its ZooKeeper connection string which puts its data under some path in the global ZooKeeper namespace. For example to give a chroot path of */chroot/path* you would give the connection string as *hostname1:port1,hostname2:port2,hostname3:port3/chroot/path*.
 
 + TYPE -- string
 + DEFAULT -- high
