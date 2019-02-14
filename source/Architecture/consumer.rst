@@ -35,25 +35,23 @@ In the case of **Hadoop** we parallelize the data load by splitting the load ove
 Consumer Offset Tracking
 --------------------------
 
-The consumer tracks the maximum offset it has consumed in each partition and has the capability to commit offsets so that it can resume from those offsets in the event of a restart. **ADS** provides the option to store all the offsets for a given consumer group in a designated broker (for that group) called the group coordinator. i.e., any consumer instance in that consumer group should send its offset commits and fetches to that group coordinator (broker). Consumer groups are assigned to coordinators based on their group names. A consumer can look up its coordinator by issuing a *FindCoordinatorRequest* to any **ADS** broker and reading the *FindCoordinatorResponse* which will contain the coordinator details. The consumer can then proceed to commit or fetch offsets from the coordinator broker. In case the coordinator moves, the consumer will need to rediscover the coordinator. Offset commits can be done automatically or manually by consumer instance.
+The high-level consumer tracks the maximum offset it has consumed in each partition and has the capability to commit offsets so that it can resume from those offsets in the event of a restart. **ADS** provides the option to store all the offsets for a given consumer group in a designated broker (for that group) called the group coordinator. i.e., any consumer instance in that consumer group should send its offset commits and fetches to that group coordinator (broker). For high-level consumers, this operation is performed automatically, while the simple consumer manages its offsets manually, since currently automatic transmission of offsets to simple consumers is not supported **Java**, they can only manually capture or extract offsets in **ZooKeeper**. When using **Scala**, a consumer can obviously commit or receive offsets in the coordinator.
 
-Потребитель высокого уровня отслеживает свое максимальное смещение при считывании данных в каждой партиции и периодически фиксирует вектор смещения для возможности возобновления работы с необходимых позиций. **ADS** предоставляет возможность хранения всех смещений группы потребителей в определенном брокере (для каждой группы) -- в менеджере смещений, то есть любой инстанс потребителя группы должен передавать свои смещения и запрашивать выборки через менеджер смещения (брокер). У потребителей высокого уровня эта операция выполняется автоматически, в то время как простой потребитель управляет своими смещениями вручную, так как в настоящее время автоматическая передача смещений простых потребителей не поддерживается **Java**, им доступно только ручное фиксирование или извлечение смещений в **ZooKeeper**. При использовании **Scala** простой потребитель может явно зафиксировать или получить смещения в менеджере. 
+When the group coordinator receives an *OffsetCommitRequest*, it appends the request to a special compacted **ADS** topic named *__consumer_offsets*. The broker sends a successful offset commit response to the consumer only after all the replicas of the offsets topic receive the offsets. In case the offsets fail to replicate within a configurable timeout, the offset commit will fail and the consumer may retry the commit after backing off. The brokers periodically compact the offsets topic since it only needs to maintain the most recent offset commit per partition. The coordinator also caches the offsets in an in-memory table in order to serve offset fetches quickly.
 
-Поиск менеджера смещения осуществляется по запросу *GroupCoordinatorRequest* в любой брокер **ADS** с последующим ответом *GroupCoordinatorResponse*, в котором содержится менеджер смещения. После чего потребитель может перейти к фиксации или извлечению смещений. В случае перемещения менеджера смещений потребителю необходимо повторно выполнить его поиск.
-
-При получении менеджером смещения запроса на фиксацию *OffsetCommitRequest*, он добавляет смещение в специальный сжатый топик **ADS** с именем *__consumer_offsets*. Менеджер смещения отправляет успешный ответ фиксации смещения потребителю только после получения смещений всеми репликами топика. В случае если смещения не могут реплицироваться в пределах настренного времени ожидания, фиксация смещения завершается неудачей, и потребитель может повторить ее после отмены действия (у потребителей высокого уровня процедура выполняется автоматически). Брокеры периодически сжимают топик смещения, так как ему требуется поддерживать только последнее смещение на партицию. Менеджер смещения также упорядоченно кэширует все смещения в таблице in-memory для возможности их быстрой обработки.
-
-Когда менеджер смещения получает запрос на извлечение смещения, он просто возвращает последний зафиксированный вектор смещения из кэша. В случае если менеджер был только что запущен или стал менеджером смещения для нового набора групп потребителей (став лидером для партиции топика смещения), может потребоваться загрузка партиции топика смещений в кэш. В это время операции по извлечению смещения завершаются ошибкой *OffsetsLoadInProgress*, и потребитель может повторить запрос *OffsetFetchRequest* после окончания копирования (у потребителей высокого уровня процедура выполняется автоматически).
+When the coordinator receives an offset fetch request, it simply returns the last committed offset vector from the offsets cache. In case coordinator was just started or if it just became the coordinator for a new set of consumer groups (by becoming a leader for a partition of the offsets topic), it may need to load the offsets topic partition into the cache. In this case, the offset fetch will fail with an *CoordinatorLoadInProgressException* and the consumer may retry the *OffsetFetchRequest* after backing off.
 
 
 Миграция смещений из ZooKeeper в ADS
 --------------------------------------
 
-Для миграции потребителей и смещений из **ZooKeeper** в **ADS** необходимо выполнить следующие действия:
+To migrate consumers and their offsets from **ZooKeeper** to **ADS**:
 
-1. Установить *offsets.storage=ads* и *dual.commit.enabled=true* в настройках потребителя.
-2. Выполнить резкий переход к потребителям и убедиться в их исправности.
-3. Установить *dual.commit.enabled=false* в настройках потребителя.
-4. Выполнить резкий переход к потребителям и убедиться в их исправности.
+1. Set *offsets.storage=ads* and *dual.commit.enabled=true* in your consumer config.
+2. Do a rolling bounce of your consumers and then verify that your consumers are healthy.
+3. Set *dual.commit.enabled=false* in your consumer config.
+4. Do a rolling bounce of your consumers and then verify that your consumers are healthy.
 
-Обратный переход (с **ADS** в **ZooKeeper**) также может выполняться с помощью вышеуказанных шагов при установке *offsets.storage=zookeeper*.
+A roll-back (i.e., migrating from **ADS** back to **ZooKeeper**) can also be performed using the above steps if you set *offsets.storage=zookeeper*.
+
+
