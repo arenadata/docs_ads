@@ -17,42 +17,42 @@ The following is a list of settings with a description and an indication of thei
 + DEFAULT -- high
 + DYNAMIC UPDATE MODE -- read-only
 
-**advertised.host.name** -- Применяется при неустановленном параметре *advertised.listeners* или *listeners*. Рекомендуется использовать *advertized.listeners*. Обозначает имя хоста для публикации в ZooKeeper для использования клиентами. В средах IaaS может отличаться от интерфейса, к которому привязывается брокер. Если параметр не задан, используется настроенное значение для *host.name*. В противном случае -- значение из *java.net.InetAddress.getCanonicalHostName()*
+**advertised.host.name** -- only used when *advertised.listeners* or *listeners* are not set. Use *advertised.listeners* instead. Hostname to publish to ZooKeeper for clients to use. In IaaS environments, this may need to be different from the interface to which the broker binds. If this is not set, it will use the value for *host.name* if configured. Otherwise it will use the value returned from *java.net.InetAddress.getCanonicalHostName()*
 
 + TYPE -- string
 + DEFAULT -- null
 + IMPORTANCE -- high
 + DYNAMIC UPDATE MODE -- read-only
 
-**advertised.listeners** -- Слушатели для публикации в ZooKeeper для использования клиентами (если есть отличие от свойства *listeners*). В средах IaaS может отличаться от интерфейса, к которому привязывается брокер. Если параметр не задан, используется значение для *listeners*. В отличие от *listeners* значение "0.0.0.0" недопустимо
+**advertised.listeners** -- Listeners to publish to ZooKeeper for clients to use, if different than the *listeners* config property. In IaaS environments, this may need to be different from the interface to which the broker binds. If this is not set, the value for *listeners* will be used. Unlike *listeners* it is not valid to advertise the *0.0.0.0* meta-address
 
 + TYPE -- string
 + DEFAULT -- null
 + IMPORTANCE -- high
 + DYNAMIC UPDATE MODE -- per-broker
 
-**advertised.port** -- Применяется при неустановленном параметре *advertised.listeners* или *listeners*. Рекомендуется использовать *advertized.listeners*. Обозначает имя хоста для публикации в ZooKeeper для использования клиентами. В средах IaaS может отличаться от интерфейса, к которому привязывается брокер. Если параметр не задан, публикуется тот же порт, к которому привязан брокер
+**advertised.port** -- only used when *advertised.listeners* or *listeners* are not set. Use *advertised.listeners* instead. The port to publish to ZooKeeper for clients to use. In IaaS environments, this may need to be different from the port to which the broker binds. If this is not set, it will publish the same port that the broker binds to
 
 + TYPE -- int
 + DEFAULT -- null
 + IMPORTANCE -- high
 + DYNAMIC UPDATE MODE -- read-only
 
-**auto.create.topics.enable** -- Включение автоматического создания топика на сервере
+**auto.create.topics.enable** -- Enable auto creation of topic on the server
 
 + TYPE -- boolean
 + DEFAULT -- true
 + IMPORTANCE -- high
 + DYNAMIC UPDATE MODE -- read-only
 
-**auto.leader.rebalance.enable** -- Включение автоматической балансировки лидера. Балансировка лидера в фоновом режиме через регулярные промежутки времени
+**auto.leader.rebalance.enable** -- Enables auto leader balancing. A background thread checks and triggers leader balance if required at regular intervals
 
 + TYPE -- boolean
 + DEFAULT -- true
 + IMPORTANCE -- high
 + DYNAMIC UPDATE MODE -- read-only 
 
-**background.threads** -- Количество потоков для различных задач фоновой обработки
+**background.threads** -- The number of threads to use for various background processing tasks
 
 + TYPE -- int
 + DEFAULT -- 10
@@ -60,70 +60,70 @@ The following is a list of settings with a description and an indication of thei
 + IMPORTANCE -- high
 + DYNAMIC UPDATE MODE -- cluster-wide
 
-**broker.id** -- Идентификатор брокера для сервера. Если значение не установлено, создается уникальный идентификатор брокера. Чтобы избежать конфликтов между id брокера, созданными с помощью zookeeper, и id брокера, настроенными пользователем, генерация идентификаторов брокера начинается с *reserved.broker.max.id + 1*
+**broker.id** -- The broker id for this server. If unset, a unique broker id will be generated.To avoid conflicts between zookeeper generated broker id's and user configured broker id's, generated broker ids start from *reserved.broker.max.id + 1*
 
 + TYPE -- int
 + DEFAULT -- - 1
 + IMPORTANCE -- high
 + DYNAMIC UPDATE MODE -- read-only
 
-**compression.type** -- Конечный тип сжатия для топика. Конфигурация принимает стандартные кодеки сжатия ("gzip", "snappy", "lz4"). Так же возможно "uncompressed", что эквивалентно отсутствию сжатия; и "producer", что означает сохранение исходного кодека сжатия, установленного поставщиком
+**compression.type** -- Specify the final compression type for a given topic. This configuration accepts the standard compression codecs ("gzip", "snappy", "lz4", "zstd"). It additionally accepts "uncompressed" which is equivalent to no compression; and "producer" which means retain the original compression codec set by the producer
 
 + TYPE -- string
 + DEFAULT -- producer
 + IMPORTANCE -- high
 + DYNAMIC UPDATE MODE -- cluster-wide
 
-**delete.topic.enable** -- Включение возможности удаления топика. При отключенном параметре удаление топика через администратора не имеет результата
+**delete.topic.enable** -- Enables delete topic. Delete topic through the admin tool will have no effect if this config is turned off
 
 + TYPE -- boolean
 + DEFAULT -- true
 + IMPORTANCE -- high
 + DYNAMIC UPDATE MODE -- read-only
 
-**host.name** -- Применяется только когда параметр *listeners* не установлен. Рекомендуется использовать *listeners*. Обозначает имя хоста брокера. Если параметр задан, то привязка выполняется только к данному адресу. Если параметр не задан, привязка выполняется ко всем интерфейсам
+**host.name** -- only used when *listeners* is not set. Use *listeners* instead. hostname of broker. If this is set, it will only bind to this address. If this is not set, it will bind to all interfaces
 
 + TYPE -- string
 + DEFAULT -- "" 
 + IMPORTANCE -- high
 + DYNAMIC UPDATE MODE -- read-only
 
-**leader.imbalance.check.interval.seconds** -- Частота, с которой контроллер запускает проверку балансировки партиции
+**leader.imbalance.check.interval.seconds** -- The frequency with which the partition rebalance check is triggered by the controller
 
 + TYPE -- long
 + DEFAULT -- 300
 + IMPORTANCE -- high
 + DYNAMIC UPDATE MODE -- read-only
 
-**leader.imbalance.per.broker.percentage** -- Коэффициент дисбаланса лидера, допустимый для каждого брокера. Контроллер запускает балансировку лидера, если он превышает данное значение для брокера. Указывается в процентах
+**leader.imbalance.per.broker.percentage** -- The ratio of leader imbalance allowed per broker. The controller would trigger a leader balance if it goes above this value per broker. The value is specified in percentage
 
 + TYPE -- int
 + DEFAULT -- 10
 + IMPORTANCE -- high
 + DYNAMIC UPDATE MODE -- read-only
 
-**listeners** -- Listener List -- Разделенный запятыми список URI, которые прослушиваются, и имена слушателей сети. Если имя слушателя не является протоколом безопасности, необходимо установить *listener.security.protocol.map*. Для привязки ко всем интерфейсам указать имя хоста "0.0.0.0". Если имя хоста не указано, привязка осуществляется к интерфейсу по умолчанию. Примеры списков слушателей сети: PLAINTEXT://myhost:9092,SSL://:9091,CLIENT://0.0.0.0:9092,REPLICATION://localhost:9093
+**listeners** -- Listener List -- Comma-separated list of URIs we will listen on and the listener names. If the listener name is not a security protocol, *listener.security.protocol.map* must also be set. Specify hostname as *0.0.0.0* to bind to all interfaces. Leave hostname empty to bind to default interface. Examples of legal listener lists: *PLAINTEXT://myhost:9092,SSL://:9091 CLIENT://0.0.0.0:9092,REPLICATION://localhost:9093*
 
 + TYPE -- string
 + DEFAULT -- null
 + IMPORTANCE -- high
 + DYNAMIC UPDATE MODE -- per-broker
 
-**log.dir** -- Каталог хранения данных журнала (дополнительный для свойства log.dirs)
+**log.dir** -- The directory in which the log data is kept (supplemental for *log.dirs* property)
 
 + TYPE -- string
 + DEFAULT -- /tmp/kafka-logs
 + IMPORTANCE -- high
 + DYNAMIC UPDATE MODE -- read-only
 
-**log.dirs** -- Каталоги хранения данных журнала. Если параметр не установлен, используется значение свойства *log.dir*
+**log.dirs** -- The directories in which the log data is kept. If not set, the value in *log.dir* is used
 
 + TYPE -- string
 + DEFAULT -- null
 + IMPORTANCE -- high
 + DYNAMIC UPDATE MODE -- high
 
-**log.flush.interval.messages** -- Количество накопленных в партиции журнала данных перед их сбросом на диск
+**log.flush.interval.messages** -- The number of messages accumulated on a log partition before messages are flushed to disk
 
 + TYPE -- long
 + DEFAULT -- 9223372036854775807
@@ -131,14 +131,14 @@ The following is a list of settings with a description and an indication of thei
 + IMPORTANCE -- high
 + DYNAMIC UPDATE MODE -- cluster-wide
 
-**log.flush.interval.ms** -- Максимальное время хранения данных в любом топике в памяти до их сброса на диск. Указывается в миллисекундах. Если параметр не установлен, используется значение *log.flush.scheduler.interval.ms*
+**log.flush.interval.ms** -- The maximum time in ms that a message in any topic is kept in memory before flushed to disk. If not set, the value in log.flush.scheduler.interval.ms is used
 
 + TYPE -- long
 + DEFAULT -- null
 + IMPORTANCE -- high
 + DYNAMIC UPDATE MODE -- cluster-wide
 
-**log.flush.offset.checkpoint.interval.ms** -- Частота обновления постоянной записи последнего сброса, который действует как точка восстановления журнала
+**log.flush.offset.checkpoint.interval.ms** -- The frequency with which we update the persistent record of the last flush which acts as the log recovery point
 
 + TYPE -- int
 + DEFAULT -- 60000
@@ -146,14 +146,14 @@ The following is a list of settings with a description and an indication of thei
 + IMPORTANCE -- high
 + DYNAMIC UPDATE MODE -- read-only
 
-**log.flush.scheduler.interval.ms** -- Частота log flusher проверки на необходимость сброса какого-либо журнала на диск. Указывается в миллисекундах
+**log.flush.scheduler.interval.ms** -- The frequency in ms that the log flusher checks whether any log needs to be flushed to disk
 
 + TYPE -- long
 + DEFAULT -- 9223372036854775807
 + IMPORTANCE -- high
 + DYNAMIC UPDATE MODE -- read-only
 
-**log.flush.start.offset.checkpoint.interval.ms** -- Частота обновления постоянной записи смещения начала журнала
+**log.flush.start.offset.checkpoint.interval.ms** -- The frequency with which we update the persistent record of log start offset
 
 + TYPE -- int
 + DEFAULT -- 60000
@@ -161,35 +161,35 @@ The following is a list of settings with a description and an indication of thei
 + IMPORTANCE -- high
 + DYNAMIC UPDATE MODE -- read-only
 
-**log.retention.bytes** -- Максимальный размер журнала перед его удалением
+**log.retention.bytes** -- The maximum size of the log before deleting it
 
 + TYPE -- long
 + DEFAULT -- - 1
 + IMPORTANCE -- high
 + DYNAMIC UPDATE MODE -- cluster-wide
 
-**log.retention.hours** -- Количество часов для хранения файла журнала перед его удалением, третично по отношению к свойству *log.retention.ms*. Указывается в часах
+**log.retention.hours** -- The number of hours to keep a log file before deleting it (in hours), tertiary to *log.retention.ms* property
 
 + TYPE -- int
 + DEFAULT -- 168
 + IMPORTANCE -- high
 + DYNAMIC UPDATE MODE -- read-only
 
-**log.retention.minutes** -- Количество минут для хранения файла журнала перед его удалением, вторично по отношению к свойству *log.retention.hours*. Указывается в минутах
+**log.retention.minutes** -- The number of minutes to keep a log file before deleting it (in minutes), secondary to *log.retention.ms* property. If not set, the value in *log.retention.hours* is used
 
 + TYPE -- int
 + DEFAULT -- null
 + IMPORTANCE -- high
 + DYNAMIC UPDATE MODE -- read-only
 
-**log.retention.ms** -- Количество миллисекунд для хранения файла журнала перед его удалением. Указывается в миллисекундах. Если параметр не установлен, используется значение *log.retention.minutes*
+**log.retention.ms** -- The number of milliseconds to keep a log file before deleting it (in milliseconds), If not set, the value in *log.retention.minutes* is used
 
 + TYPE -- long
 + DEFAULT -- null
 + IMPORTANCE -- high
 + DYNAMIC UPDATE MODE -- cluster-wide
 
-**log.roll.hours** -- Максимальное время до развертывания нового сегмента журнала, вторично по отношению к свойству *log.roll.ms*. Указывается в часах
+**log.roll.hours** -- The maximum time before a new log segment is rolled out (in hours), secondary to *log.roll.ms* property
 
 + TYPE -- int	
 + DEFAULT -- 168
@@ -197,7 +197,7 @@ The following is a list of settings with a description and an indication of thei
 + IMPORTANCE -- [1,...]
 + DYNAMIC UPDATE MODE -- read-only
 
-**log.roll.jitter.hours** -- Максимально допустимое значение джиттера для вычитания из *logRollTimeMillis*, вторично по отношению к свойству *log.roll.jitter.ms*. Указывается в часах
+**log.roll.jitter.hours** -- The maximum jitter to subtract from *logRollTimeMillis* (in hours), secondary to *log.roll.jitter.ms* property
 
 + TYPE -- int
 + DEFAULT -- int
@@ -205,21 +205,21 @@ The following is a list of settings with a description and an indication of thei
 + IMPORTANCE -- high
 + DYNAMIC UPDATE MODE -- read-only
 
-**log.roll.jitter.ms** -- Максимально допустимое значение джиттера для вычитания из *logRollTimeMillis*. Указывается в миллисекундах. Если параметр не установлен, используется значение *log.roll.jitter.hours*
+**log.roll.jitter.ms** -- The maximum jitter to subtract from *logRollTimeMillis* (in milliseconds). If not set, the value in *log.roll.jitter.hours* is used
 
 + TYPE -- long
 + DEFAULT -- long
 + IMPORTANCE -- high
 + DYNAMIC UPDATE MODE -- cluster-wide
 
-**log.roll.ms** -- Максимальное время до развертывания нового сегмента журнала. Указывается в миллисекундах. Если параметр не установлен, используется значение *log.roll.hours* 
+**log.roll.ms** -- The maximum time before a new log segment is rolled out (in milliseconds). If not set, the value in *log.roll.hours* is used 
 
 + TYPE -- long
 + DEFAULT -- null
 + IMPORTANCE -- high
 + DYNAMIC UPDATE MODE -- cluster-wide
 
-**log.segment.bytes** -- Максимальный размер одного файла журнала
+**log.segment.bytes** -- The maximum size of a single log file
 
 + TYPE -- int
 + DEFAULT -- 1073741824
@@ -227,7 +227,7 @@ The following is a list of settings with a description and an indication of thei
 + IMPORTANCE -- high
 + DYNAMIC UPDATE MODE -- cluster-wide
 
-**log.segment.delete.delay.ms** -- Время ожидания перед удалением файла из файловой системы
+**log.segment.delete.delay.ms** -- The amount of time to wait before deleting a file from the filesystem
 
 + TYPE -- long
 + DEFAULT -- 60000
@@ -235,7 +235,7 @@ The following is a list of settings with a description and an indication of thei
 + IMPORTANCE -- high
 + DYNAMIC UPDATE MODE -- cluster-wide
 
-**message.max.bytes** -- Наибольший размер пакета данных, разрешенный ADS. При увеличении параметра следует также увеличить размер выборки для потребителей с целью обеспечения возможности получения пакета данных установленного размера. Параметр можно настроить для каждого топика с помощью поуровневой конфирурации топика *max.message.bytes*
+**message.max.bytes** -- The largest record batch size allowed by ADS. Records are always grouped into batches for efficiency. In previous message format versions, uncompressed records are not grouped into batches and this limit only applies to a single record in that case. This can be set per topic with the topic level *max.message.bytes* config
 
 + TYPE -- int
 + DEFAULT -- 1000012
@@ -243,7 +243,7 @@ The following is a list of settings with a description and an indication of thei
 + IMPORTANCE -- high
 + DYNAMIC UPDATE MODE -- cluster-wide
 
-**min.insync.replicas** -- При установленном поставщиком подтверждении acks на "all" или "-1", *min.insync.replicas* задается на минимальное количество реплик для подтверждения записи. Если этот минимум не может быть удовлетворен, то поставщик задает исключение (либо *NotEnoughReplicas*, либо *NotEnoughReplicasAfterAppend*). Совместное использование *min.insync.replicas* и acks обеспечивает более высокую гарантию к устойчивости. Типичным сценарием является создание топика с коэффициентом репликации *3*, параметром *min.insync.replicas* равным *2* и acks установленным на "all". Это гарантирует, что поставщик задает исключение, если большинство реплик не принимает запись
+**min.insync.replicas** -- When a producer sets acks to "all" (or "-1"), *min.insync.replicas* specifies the minimum number of replicas that must acknowledge a write for the write to be considered successful. If this minimum cannot be met, then the producer will raise an exception (either *NotEnoughReplicas* or *NotEnoughReplicasAfterAppend*). When used together, *min.insync.replicas* and acks allow you to enforce greater durability guarantees. A typical scenario would be to create a topic with a replication factor of *3*, set *min.insync.replicas* to *2*, and produce with acks of "all". This will ensure that the producer raises an exception if a majority of replicas do not receive a write
 
 + TYPE -- int
 + DEFAULT -- 1
@@ -251,7 +251,7 @@ The following is a list of settings with a description and an indication of thei
 + IMPORTANCE -- high
 + DYNAMIC UPDATE MODE -- cluster-wide
 
-**num.io.threads** -- Число потоков, используемых сервером для обработки запросов, которые могут включать дисковые операции ввода-вывода
+**num.io.threads** -- The number of threads that the server uses for processing requests, which may include disk I/O
 
 + TYPE -- int
 + DEFAULT -- 8
@@ -259,7 +259,7 @@ The following is a list of settings with a description and an indication of thei
 + IMPORTANCE -- high
 + DYNAMIC UPDATE MODE -- cluster-wide
 
-**num.network.threads** -- Количество потоков, используемых сервером для получения запросов от сети и отправки ответов в сеть
+**num.network.threads** -- The number of threads that the server uses for receiving requests from the network and sending responses to the network
 
 + TYPE -- int
 + DEFAULT -- 3
@@ -267,7 +267,7 @@ The following is a list of settings with a description and an indication of thei
 + IMPORTANCE -- high
 + DYNAMIC UPDATE MODE -- cluster-wide
 
-**num.recovery.threads.per.data.dir** -- Число потоков в каталоге данных, используемых для восстановления журнала при запуске или при сбросе по прекращению работы
+**num.recovery.threads.per.data.dir** -- The number of threads per data directory to be used for log recovery at startup and flushing at shutdown
 
 + TYPE -- int
 + DEFAULT -- 1
@@ -275,35 +275,35 @@ The following is a list of settings with a description and an indication of thei
 + IMPORTANCE -- high
 + DYNAMIC UPDATE MODE -- cluster-wide
 
-**num.replica.alter.log.dirs.threads** -- Число потоков, которые могут перемещать реплики между каталогами журналов, включая дисковые операции ввода-вывода
+**num.replica.alter.log.dirs.threads** -- The number of threads that can move replicas between log directories, which may include disk I/O
 
 + TYPE -- int
 + DEFAULT -- null
 + IMPORTANCE -- high
 + DYNAMIC UPDATE MODE -- read-only
 
-**num.replica.fetchers** -- Количество потоков выборки, используемых для репликации данных от исходного брокера. Увеличение этого значения может увеличить степень параллелизма ввода-вывода в брокере-подписчике
+**num.replica.fetchers** -- Number of fetcher threads used to replicate messages from a source broker. Increasing this value can increase the degree of I/O parallelism in the follower broker
 
 + TYPE -- int
 + DEFAULT -- 1
 + IMPORTANCE -- high
 + DYNAMIC UPDATE MODE -- cluster-wide
 
-**offset.metadata.max.bytes** -- Максимальный размер для записи метаданных с учетом фиксации смещения
+**offset.metadata.max.bytes** -- The maximum size for a metadata entry associated with an offset commit
 
 + TYPE -- int
 + DEFAULT -- 4096
 + IMPORTANCE -- high
 + DYNAMIC UPDATE MODE -- read-only
 
-**offsets.commit.required.acks** -- Принятие необходимых подтверждений acks перед фиксацией данных. Значение по умолчанию "-1" не следует переопределять
+**offsets.commit.required.acks** -- The required acks before the commit can be accepted. In general, the default ("-1") should not be overridden
 
 + TYPE -- short
 + DEFAULT -- - 1
 + IMPORTANCE -- high
 + DYNAMIC UPDATE MODE -- read-only
 
-**offsets.commit.timeout.ms** -- Фиксация смещения откладывается до тех пор, пока все реплики для топика смещения не получат коммит или данный установленный таймаут не будет достигнут. Аналогично времени ожидания запроса поставщика
+**offsets.commit.timeout.ms** -- Offset commit will be delayed until all replicas for the offsets topic receive the commit or this timeout is reached. This is similar to the producer request timeout
 
 + TYPE -- int
 + DEFAULT -- 5000
@@ -311,7 +311,7 @@ The following is a list of settings with a description and an indication of thei
 + IMPORTANCE -- high
 + DYNAMIC UPDATE MODE -- read-only
 
-**offsets.load.buffer.size** -- Размер пакета для чтения из сегментов смещений при загрузке смещений в кэш
+**offsets.load.buffer.size** -- Batch size for reading from the offsets segments when loading offsets into the cache (soft-limit, overridden if records are too large)
 
 + TYPE -- int
 + DEFAULT -- 5242880
@@ -319,7 +319,7 @@ The following is a list of settings with a description and an indication of thei
 + IMPORTANCE -- high
 + DYNAMIC UPDATE MODE -- read-only
 
-**offsets.retention.check.interval.ms** -- Частота проверки устаревших смещений
+**offsets.retention.check.interval.ms** -- Frequency at which to check for stale offsets
 
 + TYPE -- long
 + DEFAULT -- 600000
@@ -327,7 +327,7 @@ The following is a list of settings with a description and an indication of thei
 + IMPORTANCE -- high
 + DYNAMIC UPDATE MODE -- read-only
 
-**offsets.retention.minutes** -- Сброс смещений старше установленного срока хранения
+**offsets.retention.minutes** -- After a consumer group loses all its consumers (i.e. becomes empty) its offsets will be kept for this retention period before getting discarded. For standalone consumers (using manual assignment), offsets will be expired after the time of last commit plus this retention period
 
 + TYPE -- int
 + DEFAULT -- 1440
@@ -335,14 +335,14 @@ The following is a list of settings with a description and an indication of thei
 + IMPORTANCE -- high
 + DYNAMIC UPDATE MODE -- read-only 
 
-**offsets.topic.compression.codec** -- Кодек сжатия для топика смещения. Сжатие может использоваться для достижения "атомных" коммитов
+**offsets.topic.compression.codec** -- Compression codec for the offsets topic - compression may be used to achieve "atomic" commits
 
 + TYPE -- int
 + DEFAULT -- 0
 + IMPORTANCE -- high
 + DYNAMIC UPDATE MODE -- read-only
 
-**offsets.topic.num.partitions** -- Количество партиций для коммита топика смещения (не следует изменять после развертывания)
+**offsets.topic.num.partitions** -- The number of partitions for the offset commit topic (should not change after deployment)
 
 + TYPE -- int
 + DEFAULT -- 50
@@ -350,7 +350,7 @@ The following is a list of settings with a description and an indication of thei
 + IMPORTANCE -- high
 + DYNAMIC UPDATE MODE -- read-only
 
-**offsets.topic.replication.factor** -- Коэффициент репликации для топика смещения (устанавливается выше с целью обеспечения доступности). Создание внутреннего топика невозможно, пока размер кластера не соответствует данному требованию коэффициента репликации
+**offsets.topic.replication.factor** -- The replication factor for the offsets topic (set higher to ensure availability). Internal topic creation will fail until the cluster size meets this replication factor requirement
 
 + TYPE -- short
 + DEFAULT -- 3
@@ -358,7 +358,7 @@ The following is a list of settings with a description and an indication of thei
 + IMPORTANCE -- high
 + DYNAMIC UPDATE MODE -- read-only
 
-**offsets.topic.segment.bytes** -- Размер сегмента топика смещений в байтах. Значение должно быть относительно небольшим с целью ускорения сжатия журнала и загрузку кэша
+**offsets.topic.segment.bytes** -- The offsets topic segment bytes should be kept relatively small in order to facilitate faster log compaction and cache loads
 
 + TYPE -- int
 + DEFAULT -- 104857600
@@ -366,14 +366,14 @@ The following is a list of settings with a description and an indication of thei
 + IMPORTANCE -- high
 + DYNAMIC UPDATE MODE -- read-only
 
-**port** -- Применяется при неустановленном параметре *listeners*. Рекомендуется использовать *listeners*. Обозначает порт для прослушивания и приема подключений
+**port** -- only used when *listeners* is not set. Use *listeners* instead. the port to listen and accept connections on
 
 + TYPE -- int
 + DEFAULT -- 9092
 + IMPORTANCE -- high
 + DYNAMIC UPDATE MODE -- read-only
 
-**queued.max.requests** -- Количество запросов в очереди до блокировки сетевых потоков
+**queued.max.requests** -- The number of queued requests allowed before blocking the network threads
 
 + TYPE -- int
 + DEFAULT -- 500
@@ -381,7 +381,7 @@ The following is a list of settings with a description and an indication of thei
 + IMPORTANCE -- high
 + DYNAMIC UPDATE MODE -- read-only
 
-**quota.consumer.default** -- Применяется при неустановленном параметре динамических квот по умолчанию в Zookeeper. Любой потребитель группы customerId/consumer дросселируется при получении большего количества байтов, чем данное установленное значение в секунду
+**quota.consumer.default** -- Used only when dynamic default quotas are not configured for or in Zookeeper. Any consumer distinguished by clientId/consumer group will get throttled if it fetches more bytes than this value per-second
 
 + TYPE -- long
 + DEFAULT -- 9223372036854775807
@@ -389,7 +389,7 @@ The following is a list of settings with a description and an indication of thei
 + IMPORTANCE -- high
 + DYNAMIC UPDATE MODE -- read-only
 
-**quota.producer.default** -- Применяется при неустановленном параметре динамических квот по умолчанию в Zookeeper. Любой поставщик с известным clientId дросселируется при получении большего количества байтов, чем данное установленное значение в секунду
+**quota.producer.default** -- Used only when dynamic default quotas are not configured for, or in Zookeeper. Any producer distinguished by clientId will get throttled if it produces more bytes than this value per-second
 
 + TYPE -- long
 + DEFAULT -- 9223372036854775807
@@ -397,63 +397,63 @@ The following is a list of settings with a description and an indication of thei
 + IMPORTANCE -- high
 + DYNAMIC UPDATE MODE -- read-only
 
-**replica.fetch.min.bytes** -- Минимальное количество байт, ожидаемое для каждого ответа на выборку. При недостаточном объеме срабатывает параметр *replicaMaxWaitTimeMs*
+**replica.fetch.min.bytes** -- Minimum bytes expected for each fetch response. If not enough bytes, wait up to *replicaMaxWaitTimeMs*
 
 + TYPE -- int
 + DEFAULT -- 1
 + IMPORTANCE -- high
 + DYNAMIC UPDATE MODE -- read-only
 
-**replica.fetch.wait.max.ms** -- Максимальное время ожидания для каждого запроса на выборку с последующей публикацией реплик. Значение всегда должно быть меньше параметра *replica.lag.time.max.ms* для предотвращения частого сжатия ISR низкопроизводительных топиков
+**replica.fetch.wait.max.ms** -- max wait time for each fetcher request issued by follower replicas. This value should always be less than the *replica.lag.time.max.ms* at all times to prevent frequent shrinking of ISR for low throughput topics
 
 + TYPE -- int
 + DEFAULT -- 500
 + IMPORTANCE -- high
 + DYNAMIC UPDATE MODE -- read-only
 
-**replica.high.watermark.checkpoint.interval.ms** -- Верхний предел частоты сохранения на диск (Частота сохранения высокого водяного знака на диск)
+**replica.high.watermark.checkpoint.interval.ms** -- The frequency with which the high watermark is saved out to disk
 
 + TYPE -- long
 + DEFAULT -- 5000
 + IMPORTANCE -- high
 + DYNAMIC UPDATE MODE -- read-only
 
-**replica.lag.time.max.ms** -- Удаление подписчика лидером из isr в случае, если подписчик не отправил ни одного запроса на выборку или не считал конечное смещение журнала лидеров
+**replica.lag.time.max.ms** -- If a follower hasn't sent any fetch requests or hasn't consumed up to the leaders log end offset for at least this time, the leader will remove the follower from ISR
 
 + TYPE -- long
 + DEFAULT -- 10000
 + IMPORTANCE -- high
 + DYNAMIC UPDATE MODE -- read-only
 
-**replica.socket.receive.buffer.bytes** -- Буфер приема сокетов для сетевых запросов
+**replica.socket.receive.buffer.bytes** -- The socket receive buffer for network requests
 
 + TYPE -- int
 + DEFAULT -- 65536
 + IMPORTANCE -- high
 + DYNAMIC UPDATE MODE -- read-only
 
-**replica.socket.timeout.ms** -- Время ожидания сокета для сетевых запросов. Значение должно быть не менее установленного параметра *replica.fetch.wait.max.ms*
+**replica.socket.timeout.ms** -- The socket timeout for network requests. Its value should be at least *replica.fetch.wait.max.ms*
 
 + TYPE -- int
 + DEFAULT -- 30000
 + IMPORTANCE -- high
 + DYNAMIC UPDATE MODE -- read-only
 
-**request.timeout.ms** -- Максимальное время ожидания клиентом ответа на запрос. Если ответ не получен до истечения установленного значения, клиент повторно отправляет запрос при необходимости
+**request.timeout.ms** -- The configuration controls the maximum amount of time the client will wait for the response of a request. If the response is not received before the timeout elapses the client will resend the request if necessary or fail the request if retries are exhausted
 
 + TYPE -- int
 + DEFAULT -- 30000
 + IMPORTANCE -- high
 + DYNAMIC UPDATE MODE -- read-only
 
-**socket.receive.buffer.bytes** -- Буфер SO_RCVBUF сокета сервера сокетов. При значении параметра "-1" используется ОС по умолчанию
+**socket.receive.buffer.bytes** -- The SO_RCVBUF buffer of the socket sever sockets. If the value is "-1", the OS default will be used
 
 + TYPE -- int
 + DEFAULT -- 102400
 + IMPORTANCE -- high
 + DYNAMIC UPDATE MODE -- read-only
 
-**socket.request.max.bytes** -- Максимальное количество байт в запросе сокета
+**socket.request.max.bytes** -- The maximum number of bytes in a socket request
 
 + TYPE -- int
 + DEFAULT -- 104857600
@@ -461,14 +461,14 @@ The following is a list of settings with a description and an indication of thei
 + IMPORTANCE -- high
 + DYNAMIC UPDATE MODE -- read-only
 
-**socket.send.buffer.bytes** -- Буфер SO_SNDBUF сокета сервера сокетов. При значении параметра "-1" используется ОС по умолчанию
+**socket.send.buffer.bytes** -- The SO_SNDBUF buffer of the socket sever sockets. If the value is "-1", the OS default will be used
 
 + TYPE -- int
 + DEFAULT -- 102400
 + IMPORTANCE -- high
 + DYNAMIC UPDATE MODE -- read-only
 
-**transaction.max.timeout.ms** -- Максимально допустимое время ожидания для транзакций. Если запрошенное клиентом время транзакции превышает установленное значение, тогда брокер выдает ошибку в *InitProducerIdRequest*. Это предотвращает чрезмерное превышение времени ожидания для клиента, которое может тормозить чтение данных потребителями из топиков, включенных в транзакцию
+**transaction.max.timeout.ms** -- The maximum allowed timeout for transactions. If a client’s requested transaction time exceed this, then the broker will return an error in *InitProducerIdRequest*. This prevents a client from too large of a timeout, which can stall consumers reading from topics included in the transaction
 
 + TYPE -- int
 + DEFAULT -- 900000
@@ -476,7 +476,7 @@ The following is a list of settings with a description and an indication of thei
 + IMPORTANCE -- high
 + DYNAMIC UPDATE MODE -- read-only
 
-**transaction.state.log.load.buffer.size** -- Размер пакета для чтения из сегментов журнала транзакций при загрузке в кэш идентификаторов поставщиков и транзакций
+**transaction.state.log.load.buffer.size** -- Batch size for reading from the transaction log segments when loading producer ids and transactions into the cache (soft-limit, overridden if records are too large)
 
 + TYPE -- int
 + DEFAULT -- 5242880
@@ -484,7 +484,7 @@ The following is a list of settings with a description and an indication of thei
 + IMPORTANCE -- [1,...]
 + DYNAMIC UPDATE MODE -- read-only
 
-**transaction.state.log.min.isr** -- Переопределение конфигурации *min.insync.replicas* для топика транзакции
+**transaction.state.log.min.isr** -- Overridden *min.insync.replicas* config for the transaction topic
 
 + TYPE -- int
 + DEFAULT -- 2
@@ -492,7 +492,7 @@ The following is a list of settings with a description and an indication of thei
 + IMPORTANCE -- high
 + DYNAMIC UPDATE MODE -- read-only
 
-**transaction.state.log.num.partitions** -- Количество партиций для топика транзакции (после развертывания параметр должен остаться неизменным)
+**transaction.state.log.num.partitions** -- The number of partitions for the transaction topic (should not change after deployment)
 
 + TYPE -- int
 + DEFAULT -- 50
@@ -500,7 +500,7 @@ The following is a list of settings with a description and an indication of thei
 + IMPORTANCE -- high
 + DYNAMIC UPDATE MODE -- read-only
 
-**transaction.state.log.replication.factor** -- Коэффициент репликации для топика транзакции (задается выше для обеспечения доступности). Создание внутреннего топика завершится ошибкой, пока размер кластера не будет соответствовать данному требованию к фактору репликации
+**transaction.state.log.replication.factor** -- The replication factor for the transaction topic (set higher to ensure availability). Internal topic creation will fail until the cluster size meets this replication factor requirement
 
 + TYPE -- short
 + DEFAULT -- 3
@@ -508,7 +508,7 @@ The following is a list of settings with a description and an indication of thei
 + IMPORTANCE -- high
 + DYNAMIC UPDATE MODE -- read-only
 
-**transaction.state.log.segment.bytes** -- Байты сегмента топика транзакции должны быть относительно небольшими для ускорения сжатия журнала и загрузки кэша
+**transaction.state.log.segment.bytes** -- The transaction topic segment bytes should be kept relatively small in order to facilitate faster log compaction and cache loads
 
 + TYPE -- int
 + DEFAULT -- 104857600
@@ -516,7 +516,7 @@ The following is a list of settings with a description and an indication of thei
 + IMPORTANCE -- high
 + DYNAMIC UPDATE MODE -- read-only
 
-**transactional.id.expiration.ms** -- Максимальное время ожидания для координатора транзакций прежде, чем предварительно истечет срок действия идентификатора транзакции поставщика без получения обновлений состояния транзакции. Указывается в миллисекундах
+**transactional.id.expiration.ms** -- The maximum amount of time in ms that the transaction coordinator will wait before proactively expire a producer's transactional id without receiving any transaction status updates from it
 
 + TYPE -- int
 + DEFAULT -- 604800000
@@ -524,21 +524,21 @@ The following is a list of settings with a description and an indication of thei
 + IMPORTANCE -- high
 + DYNAMIC UPDATE MODE -- read-only
 
-**unclean.leader.election.enable** -- Указывает, следует ли включить не входящие в набор ISR реплики и установка последнего средства в качестве лидера, даже если это может привести к потере данных
+**unclean.leader.election.enable** -- Indicates whether to enable replicas not in the ISR set to be elected as leader as a last resort, even though doing so may result in data loss
 
 + TYPE -- boolean
 + DEFAULT -- false
 + IMPORTANCE -- high
 + DYNAMIC UPDATE MODE -- cluster-wide
 
-**zookeeper.connection.timeout.ms** -- Максимальное время ожидания клиентом установки соединения с Zookeeper. Если параметр не задан, используется значение для *zookeeper.session.timeout.ms*. Указывается в миллисекундах
+**zookeeper.connection.timeout.ms** -- The max time that the client waits to establish a connection to zookeeper. If not set, the value in *zookeeper.session.timeout.ms* is used
 
 + TYPE -- int
 + DEFAULT -- null
 + IMPORTANCE -- high
 + DYNAMIC UPDATE MODE -- read-only
 
-**zookeeper.max.in.flight.requests** -- Максимальное количество неподтвержденных запросов, отправленных клиентом в Zookeeper, перед блокировкой
+**zookeeper.max.in.flight.requests** -- The maximum number of unacknowledged requests the client will send to Zookeeper before blocking
 
 + TYPE -- int
 + DEFAULT -- 10
@@ -546,77 +546,77 @@ The following is a list of settings with a description and an indication of thei
 + IMPORTANCE -- high
 + DYNAMIC UPDATE MODE -- read-only
 
-**zookeeper.session.timeout.ms** -- Тайм-аут сеанса Zookeeper. Указывается в миллисекундах
+**zookeeper.session.timeout.ms** -- Zookeeper session timeout
 
 + TYPE -- int
 + DEFAULT -- int
 + IMPORTANCE -- high
 + DYNAMIC UPDATE MODE -- read-only
 
-**zookeeper.set.acl** -- Настройка клиента для использования безопасных списков управления доступом ACL
+**zookeeper.set.acl** -- Set client to use secure ACLs
 
 + TYPE -- boolean
 + DEFAULT -- boolean
 + IMPORTANCE -- high
 + DYNAMIC UPDATE MODE -- read-only
 
-**broker.id.generation.enable** -- Автоматическое создание идентификатора брокера на сервере. При включенном параметре значение, настроенное для *reserved.broker.max.id*, должно быть пересмотрено
+**broker.id.generation.enable** -- Enable automatic broker id generation on the server. When enabled the value configured for *reserved.broker.max.id* should be reviewed
 
 + TYPE -- boolean
 + DEFAULT -- true
 + IMPORTANCE -- medium
 + DYNAMIC UPDATE MODE -- read-only
 
-**broker.rack** -- Стойка брокера. Используется при назначении репликации в стойке для отказоустойчивости. Примеры: "RACK1", "us-east-1d"
+**broker.rack** -- Rack of the broker. This will be used in rack aware replication assignment for fault tolerance. Examples: "RACK1", "us-east-1d"
 
 + TYPE -- string
 + DEFAULT -- string
 + IMPORTANCE -- medium
 + DYNAMIC UPDATE MODE -- read-only
 
-**connections.max.idle.ms** -- Время ожидания бездействующих соединений: потоки процессора сокета сервера закрывают соединения, которые простаивают больше установленного значения. Указывается в миллисекундах
+**connections.max.idle.ms** -- Idle connections timeout: the server socket processor threads close the connections that idle more than this
 
 + TYPE -- long
 + DEFAULT -- 600000
 + IMPORTANCE -- medium
 + DYNAMIC UPDATE MODE -- read-only
 
-**controlled.shutdown.enable** -- Включение контролируемого завершения работы сервера
+**controlled.shutdown.enable** -- Enable controlled shutdown of the server
 
 + TYPE -- boolean
 + DEFAULT -- true
 + IMPORTANCE -- medium
 + DYNAMIC UPDATE MODE -- read-only
 
-**controlled.shutdown.max.retries** -- Контролируемое выключение может завершиться ошибкой по нескольким причинам: параметр определяет количество повторных попыток подключения при возникновении таких сбоев
+**controlled.shutdown.max.retries** -- Controlled shutdown can fail for multiple reasons. This determines the number of retries when such failure happens
 
 + TYPE -- int
 + DEFAULT -- 3
 + IMPORTANCE -- medium
 + DYNAMIC UPDATE MODE -- read-only
 
-**controlled.shutdown.retry.backoff.ms** -- Перед каждой повторной попыткой подключения системе требуется время для восстановления состояния, вызвавшего предыдущий сбой (сбой контроллера, задержка реплики и т.д.). Параметр определяет время ожидания перед повторной попыткой. Указывается в миллисекундах
+**controlled.shutdown.retry.backoff.ms** -- Before each retry, the system needs time to recover from the state that caused the previous failure (Controller fail over, replica lag etc). This config determines the amount of time to wait before retrying
 
 + TYPE -- long
 + DEFAULT -- 5000
 + IMPORTANCE -- medium
 + DYNAMIC UPDATE MODE -- read-only
 
-**controller.socket.timeout.ms** -- Время ожидания сокета для каналов контроллер-брокер. Указывается в миллисекундах
+**controller.socket.timeout.ms** -- The socket timeout for controller-to-broker channels
 
 + TYPE -- int
 + DEFAULT -- 30000
 + IMPORTANCE -- medium
 + DYNAMIC UPDATE MODE -- read-only
 
-**default.replication.factor** -- Коэффициенты репликации по умолчанию для автоматически создаваемых топиков
+**default.replication.factor** -- default replication factors for automatically created topics
 
 + TYPE -- int
 + DEFAULT -- 1
 + IMPORTANCE -- medium
 + DYNAMIC UPDATE MODE -- read-only
 
-**delegation.token.expiry.time.ms** -- Время действия токена перед его обновлением. Значение по умолчанию 1 день. Указывается в миллисекундах
+**delegation.token.expiry.time.ms** -- The token validity time in miliseconds before the token needs to be renewed. Default value *1 day*
 
 + TYPE -- long
 + DEFAULT -- 86400000
@@ -624,14 +624,14 @@ The following is a list of settings with a description and an indication of thei
 + IMPORTANCE -- medium
 + DYNAMIC UPDATE MODE -- read-only
 
-**delegation.token.master.key** -- Мастер/секретный ключ для создания и проверки делегированных токенов. Один и тот же ключ должен быть настроен для всех брокеров. Если ключ не установлен или задана пустая строка, брокеры отключают поддержку делегированных токенов
+**delegation.token.master.key** -- Master/secret key to generate and verify delegation tokens. Same key must be configured across all the brokers. If the key is not set or set to empty string, brokers will disable the delegation token support
 
 + TYPE -- password
 + DEFAULT -- null
 + IMPORTANCE -- medium
 + DYNAMIC UPDATE MODE -- read-only
 
-**delegation.token.max.lifetime.ms** -- Максимальный срок действия токена, по истечении которого он больше не может быть обновлен. Значение по умолчанию 7 дней. Указывается в миллисекундах
+**delegation.token.max.lifetime.ms** -- The token has a maximum lifetime beyond which it cannot be renewed anymore. Default value *7 days*
 
 + TYPE -- long
 + DEFAULT -- 604800000
@@ -639,14 +639,14 @@ The following is a list of settings with a description and an indication of thei
 + IMPORTANCE -- medium
 + DYNAMIC UPDATE MODE -- read-only
 
-**delete.records.purgatory.purge.interval.requests** -- Интервал очистки записей на удаление. Значение указывается в количестве запросов
+**delete.records.purgatory.purge.interval.requests** -- The purge interval (in number of requests) of the delete records request purgatory
 
 + TYPE -- int
 + DEFAULT -- 1
 + IMPORTANCE -- medium
 + DYNAMIC UPDATE MODE -- read-only
 
-**fetch.purgatory.purge.interval.requests** -- Интервал очистки запросов выборки. Значение указывается в количестве запросов
+**fetch.purgatory.purge.interval.requests** -- The purge interval (in number of requests) of the fetch request purgatory
 
 + TYPE -- int
 + DEFAULT -- 1000
