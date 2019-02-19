@@ -653,42 +653,42 @@ The following is a list of settings with a description and an indication of thei
 + IMPORTANCE -- medium
 + DYNAMIC UPDATE MODE -- read-only
 
-**group.initial.rebalance.delay.ms** -- Время, в течение которого координатор группы ожидает присоединения большего числа потребителей к новой группе перед выполнением первой перебалансировки. Более длительная задержка означает потенциально меньшее количество перебалансировок, но увеличивает время до начала обработки. Указывается в миллисекундах
+**group.initial.rebalance.delay.ms** -- The amount of time the group coordinator will wait for more consumers to join a new group before performing the first rebalance. A longer delay means potentially fewer rebalances, but increases the time until processing begins
 
 + TYPE -- int
 + DEFAULT -- 3000
 + IMPORTANCE -- medium
 + DYNAMIC UPDATE MODE -- read-only
 
-**group.max.session.timeout.ms** -- Максимально допустимое время ожидания сессии для зарегистрированных потребителей. Более длительные тайм-ауты дают потребителям больше времени для обработки данных между heartbeat-сообщениями за счет большего времени для выявления сбоев. Указывается в миллисекундах
+**group.max.session.timeout.ms** -- The maximum allowed session timeout for registered consumers. Longer timeouts give consumers more time to process messages in between heartbeats at the cost of a longer time to detect failures
 
 + TYPE -- int
 + DEFAULT -- 300000
 + IMPORTANCE -- medium
 + DYNAMIC UPDATE MODE -- read-only
 
-**group.min.session.timeout.ms** -- Минимально допустимое время ожидания сессии для зарегистрированных потребителей. Более короткие тайм-ауты приводят к более быстрому обнаружению сбоев за счет более частых heartbeat-сообщений, которые могут перегружать ресурсы брокера. Указывается в миллисекундах
+**group.min.session.timeout.ms** -- The minimum allowed session timeout for registered consumers. Shorter timeouts result in quicker failure detection at the cost of more frequent consumer heartbeating, which can overwhelm broker resources
 
 + TYPE -- int
 + DEFAULT -- 6000
 + IMPORTANCE -- medium
 + DYNAMIC UPDATE MODE -- read-only
 
-**inter.broker.listener.name** -- Имя слушателя для связи между брокерами. Если параметр не задан, имя слушателя определяется свойством *security.inter.broker.protocol*. Одновременная установка параметров *inter.broker.listener.name* и *security.inter.broker.protocol* вызывает ошибку
+**inter.broker.listener.name** -- Name of listener used for communication between brokers. If this is unset, the listener name is defined by *security.inter.broker.protocol*. It is an error to set this and *security.inter.broker.protocol* properties at the same time
 
 + TYPE -- string
 + DEFAULT -- null
 + IMPORTANCE -- medium
 + DYNAMIC UPDATE MODE -- read-only
 
-**inter.broker.protocol.version** -- Версия межброкерского протокола. Обычно параметр задается после обновления всех брокеров до новой версии. Пример некоторых допустимых значений: "0.8.0", "0.8.1", "0.8.1.1", "0.8.2", "0.8.2.0", "0.8.2.1", "0.9.0.0", "0.9.0.1". Необходимо проверить ApiVersion для полного списка
+**inter.broker.protocol.version** -- Specify which version of the inter-broker protocol will be used. This is typically bumped after all brokers were upgraded to a new version. Example of some valid values are: "0.8.0", "0.8.1", "0.8.1.1", "0.8.2", "0.8.2.0", "0.8.2.1", "0.9.0.0", "0.9.0.1". Check ApiVersion for the full list
 
 + TYPE -- string
 + DEFAULT -- 1.1-IV0
 + IMPORTANCE -- medium
 + DYNAMIC UPDATE MODE -- read-only
 
-**log.cleaner.backoff.ms** -- Время спящего режима при отсутствии журналов для очистки. Указывается в миллисекундах
+**log.cleaner.backoff.ms** -- The amount of time to sleep when there are no logs to clean
 
 + TYPE -- long
 + DEFAULT -- 15000
@@ -696,35 +696,35 @@ The following is a list of settings with a description and an indication of thei
 + IMPORTANCE -- medium
 + DYNAMIC UPDATE MODE -- cluster-wide
 
-**log.cleaner.dedupe.buffer.size** -- Общая память, используемая для дедупликации журнала во всех чистых потоках
+**log.cleaner.dedupe.buffer.size** -- The total memory used for log deduplication across all cleaner threads
 
 + TYPE -- long
 + DEFAULT -- 134217728
 + IMPORTANCE -- medium
 + DYNAMIC UPDATE MODE -- cluster-wide
 
-**log.cleaner.delete.retention.ms** -- Длительность хранения удаленных записей. Указывается в миллисекундах
+**log.cleaner.delete.retention.ms** -- How long are delete records retained?
 
 + TYPE -- long
 + DEFAULT -- 86400000
 + IMPORTANCE -- medium
 + DYNAMIC UPDATE MODE -- cluster-wide
 
-**log.cleaner.enable** -- Включение процесса очистки журналов для запуска на сервере. Параметр должен быть включен, если используются какие-либо топики с помощью *cleanup.policy=compact*, включая топик внутренних смещений. Если параметр отключен, данные топики не сжимаются и постоянно растут в объеме
+**log.cleaner.enable** -- Enable the log cleaner process to run on the server. Should be enabled if using any topics with a *cleanup.policy=compact* including the internal offsets topic. If disabled those topics will not be compacted and continually grow in size
 
 + TYPE -- boolean
 + DEFAULT -- true
 + IMPORTANCE -- medium
 + DYNAMIC UPDATE MODE -- read-only
 
-**log.cleaner.io.buffer.load.factor** -- Коэффициент загрузки буфера дедуплирования журнала очистки -- процент заполнения буфера дедуплирования. Более высокое значение позволит очистить больше журнала, но приведет к большему количеству хэш-конфликтов
+**log.cleaner.io.buffer.load.factor** -- Log cleaner dedupe buffer load factor. The percentage full the dedupe buffer can become. A higher value will allow more log to be cleaned at once but will lead to more hash collisions
 
 + TYPE -- double
 + DEFAULT -- 0.9
 + IMPORTANCE -- medium
 + DYNAMIC UPDATE MODE -- cluster-wide
 
-**log.cleaner.io.buffer.size** -- Общая память, используемая для ввода-вывода буферов журнала очистки через все чистые потоки
+**log.cleaner.io.buffer.size** -- The total memory used for log cleaner I/O buffers across all cleaner threads
 
 + TYPE -- int
 + DEFAULT -- 524288
@@ -732,28 +732,28 @@ The following is a list of settings with a description and an indication of thei
 + IMPORTANCE -- medium
 + DYNAMIC UPDATE MODE -- cluster-wide
 
-**log.cleaner.io.max.bytes.per.second** -- Очистка журнала дросселируется таким образом, чтобы сумма операций чтения и записи была меньше установленного значения
+**log.cleaner.io.max.bytes.per.second** -- The log cleaner will be throttled so that the sum of its read and write i/o will be less than this value on average
 
 + TYPE -- double
 + DEFAULT -- 1.7976931348623157E308
 + IMPORTANCE -- medium
 + DYNAMIC UPDATE MODE -- cluster-wide
 
-**log.cleaner.min.cleanable.ratio** -- Минимальное отношение грязного журнала к общему журналу для журнала, пригодного для очистки
+**log.cleaner.min.cleanable.ratio** -- The minimum ratio of dirty log to total log for a log to eligible for cleaning
 
 + TYPE -- double
 + DEFAULT -- 0.5
 + IMPORTANCE -- medium
 + DYNAMIC UPDATE MODE -- cluster-wide
 
-**log.cleaner.min.compaction.lag.ms** -- Минимальное время, в течение которого сообщение остается несжатым в журнале. Применяется только для журналов с функцией сжатия. Указывается в миллисекундах
+**log.cleaner.min.compaction.lag.ms** -- The minimum time a message will remain uncompacted in the log. Only applicable for logs that are being compacted
 
 + TYPE -- long
 + DEFAULT -- 0
 + IMPORTANCE -- medium
 + DYNAMIC UPDATE MODE -- cluster-wide
 
-**log.cleaner.threads** -- Количество фоновых потоков для очистки журнала 
+**log.cleaner.threads** -- The number of background threads to use for log cleaning
 
 + TYPE -- int
 + DEFAULT -- 1
@@ -761,7 +761,7 @@ The following is a list of settings with a description and an indication of thei
 + IMPORTANCE -- medium
 + DYNAMIC UPDATE MODE -- cluster-wide
 
-**log.cleanup.policy** -- Политика очистки по умолчанию для сегментов, превышающих период хранения. Допустимые политики: "delete" и "compact"
+**log.cleanup.policy** -- The default cleanup policy for segments beyond the retention window. A comma separated list of valid policies. Valid policies are: "delete" and "compact"
 
 + TYPE -- list
 + DEFAULT -- delete
@@ -769,7 +769,7 @@ The following is a list of settings with a description and an indication of thei
 + IMPORTANCE -- medium
 + DYNAMIC UPDATE MODE -- cluster-wide
 
-**log.index.interval.bytes** -- Интервал добавления записи в индекс смещения
+**log.index.interval.bytes** -- The interval with which we add an entry to the offset index
 
 + TYPE -- int
 + DEFAULT -- 4096
@@ -777,7 +777,7 @@ The following is a list of settings with a description and an indication of thei
 + IMPORTANCE -- medium
 + DYNAMIC UPDATE MODE -- cluster-wide
 
-**log.index.size.max.bytes** -- Максимальный размер индекса смещения. Указывается в байтах
+**log.index.size.max.bytes** -- The maximum size in bytes of the offset index
 
 + TYPE -- int
 + DEFAULT -- 10485760
@@ -785,21 +785,21 @@ The following is a list of settings with a description and an indication of thei
 + IMPORTANCE -- medium
 + DYNAMIC UPDATE MODE -- cluster-wide
 
-**log.message.format.version** -- Версия формата сообщений, которую брокер использует для добавления данных в журналы. Значение должно быть действительным ApiVersion. Некоторые примеры: "0.8.2", "0.9.0.0", "0.10.0". Необходимо проверить ApiVersion для получения более подробной информации. Установив версию формата сообщений, пользователь подтверждает, что все существующие данные на диске меньше или равны указанной версии. Неправильное задание параметра приводит к тому, что потребители с более старыми версиями получают данные в нечитаемом формате
+**log.message.format.version** -- Specify the message format version the broker will use to append messages to the logs. The value should be a valid ApiVersion. Some examples are: "0.8.2", "0.9.0.0", "0.10.0", check ApiVersion for more details. By setting a particular message format version, the user is certifying that all the existing messages on disk are smaller or equal than the specified version. Setting this value incorrectly will cause consumers with older versions to break as they will receive messages with a format that they don't understand
 
 + TYPE -- string
 + DEFAULT -- 1.1-IV0
 + IMPORTANCE -- medium
 + DYNAMIC UPDATE MODE -- read-only
 
-**log.message.timestamp.difference.max.ms** -- Максимальное допустимое различие между отметкой времени, когда брокер получает сообщение, и отметкой времени, указанной в сообщении. При *log.message.timestamp.type=CreateTime* сообщение отклоняется, если разница в отметке времени превышает указанный порог. Конфигурация игнорируется, если *log.message.timestamp.type=LogAppendTime*. Максимально допустимое различие временных отметок должно быть не больше, чем *log.retention.ms*. Указывается в миллисекундах 
+**log.message.timestamp.difference.max.ms** -- The maximum difference allowed between the timestamp when a broker receives a message and the timestamp specified in the message. If *log.message.timestamp.type=CreateTime*, a message will be rejected if the difference in timestamp exceeds this threshold. This configuration is ignored if *log.message.timestamp.type=LogAppendTime*.The maximum timestamp difference allowed should be no greater than *log.retention.ms* to avoid unnecessarily frequent log rolling
 
 + TYPE -- long
 + DEFAULT -- 9223372036854775807
 + IMPORTANCE -- medium
 + DYNAMIC UPDATE MODE -- cluster-wide
 
-**log.message.timestamp.type** -- Определить, является ли отметка времени в сообщении временем создания сообщения или временем добавления журнала. Параметр может принимать значение "CreateTime" либо "LogAppendTime"
+**log.message.timestamp.type** -- Define whether the timestamp in the message is message create time or log append time. The value should be either "CreateTime" or "LogAppendTime"
 
 + TYPE -- string
 + DEFAULT -- CreateTime
@@ -807,14 +807,14 @@ The following is a list of settings with a description and an indication of thei
 + IMPORTANCE -- medium
 + DYNAMIC UPDATE MODE -- cluster-wide
 
-**log.preallocate** -- Предварительное выделение файла при создании нового сегмента. При испольовании платформы ADS в Windows рекомендуется установить значение "true"
+**log.preallocate** -- Should pre allocate file when create new segment? If you are using ADS on Windows, you probably need to set it to "true"
 
 + TYPE -- boolean
 + DEFAULT -- false
 + IMPORTANCE -- medium
 + DYNAMIC UPDATE MODE -- cluster-wide
 
-**log.retention.check.interval.ms** -- Частота проверки журналом очистки на наличие какого-либо журнала на удаление. Указывается в миллисекундах
+**log.retention.check.interval.ms** -- The frequency in milliseconds that the log cleaner checks whether any log is eligible for deletion
 
 + TYPE -- long
 + DEFAULT -- 300000
@@ -822,7 +822,7 @@ The following is a list of settings with a description and an indication of thei
 + IMPORTANCE -- medium
 + DYNAMIC UPDATE MODE -- read-only
 
-**max.connections.per.ip** -- Максимальное количество подключений с каждого IP-адреса
+**max.connections.per.ip** -- The maximum number of connections we allow from each ip address. This can be set to "0" if there are overrides configured using *max.connections.per.ip.overrides property*
 
 + TYPE -- int
 + DEFAULT -- 2147483647
@@ -830,14 +830,14 @@ The following is a list of settings with a description and an indication of thei
 + IMPORTANCE -- medium
 + DYNAMIC UPDATE MODE -- read-only
 
-**max.connections.per.ip.overrides** -- Ip или hostname переопределяет максимальное количество подключений по умолчанию
+**max.connections.per.ip.overrides** -- A comma-separated list of per-ip or hostname overrides to the default maximum number of connections. An example value is "hostName:100,127.0.0.1:200"
 
 + TYPE -- string
 + DEFAULT -- ""
 + IMPORTANCE -- medium
 + DYNAMIC UPDATE MODE -- read-only
 
-**max.incremental.fetch.session.cache.slots** -- Максимальное количество сессий инкрементной выборки
+**max.incremental.fetch.session.cache.slots** -- The maximum number of incremental fetch sessions that we will maintain
 
 + TYPE -- int
 + DEFAULT -- 1000
@@ -845,7 +845,7 @@ The following is a list of settings with a description and an indication of thei
 + IMPORTANCE -- medium
 + DYNAMIC UPDATE MODE -- read-only
 
-**num.partitions** -- Число партиций по умолчанию для каждого топика
+**num.partitions** -- The default number of log partitions per topic
 
 + TYPE -- int
 + DEFAULT -- 1
@@ -853,42 +853,42 @@ The following is a list of settings with a description and an indication of thei
 + IMPORTANCE -- medium
 + DYNAMIC UPDATE MODE -- read-only
 
-**password.encoder.old.secret** -- Старый секрет для кодирования динамически настроенных паролей. Установка параметра требуется только при обновлении секрета. Если параметр задан, все динамически закодированные пароли декодируются и перекодируются с помощью *password.encoder.secret* при запуске брокера
+**password.encoder.old.secret** -- The old secret that was used for encoding dynamically configured passwords. This is required only when the secret is updated. If specified, all dynamically encoded passwords are decoded using this old secret and re-encoded using *password.encoder.secret* when broker starts up
 
 + TYPE -- password
 + DEFAULT -- null
 + IMPORTANCE -- medium
 + DYNAMIC UPDATE MODE -- read-only
 
-**password.encoder.secret** -- Секрет для кодирования динамически настроенных паролей для данного брокера
+**password.encoder.secret** -- The secret used for encoding dynamically configured passwords for this broker
 
 + TYPE -- password
 + DEFAULT -- null
 + IMPORTANCE -- medium
 + DYNAMIC UPDATE MODE -- read-only
 
-**principal.builder.class** -- Полное имя класса, реализующего интерфейс ADSPrincipalBuilder, который используется для создания объекта ADSPrincipal во время авторизации. Конфигурация также поддерживает устаревший интерфейс PrincipalBuilder, который ранее использовался для аутентификации клиентов по протоколу SSL. Если параметр не задан, действие по умолчанию зависит от используемого протокола безопасности. Для аутентификации SSL имя принципала отличается от имени из сертификата клиента, если он предоставлен; в противном случае, если аутентификация клиента не требуется, имя принципала задается "ANONYMOUS". Для аутентификации SASL принципал задается на основании правил, определенных в *sasl.kerberos.principal.to.local.rules* с использованием GSSAPI и идентификатора аутентификации SASL для других механизмов. Для PLAINTEXT имя принципала -- "ANONYMOUS"
+**principal.builder.class** -- The fully qualified name of a class that implements the ADSPrincipalBuilder interface, which is used to build the ADSPrincipal object used during authorization. This config also supports the deprecated PrincipalBuilder interface which was previously used for client authentication over SSL. If no principal builder is defined, the default behavior depends on the security protocol in use. For SSL authentication, the principal name will be the distinguished name from the client certificate if one is provided; otherwise, if client authentication is not required, the principal name will be "ANONYMOUS". For SASL authentication, the principal will be derived using the rules defined by *sasl.kerberos.principal.to.local.rules* if GSSAPI is in use, and the SASL authentication ID for other mechanisms. For PLAINTEXT, the principal will be "ANONYMOUS"
 
 + TYPE -- class
 + DEFAULT -- null
 + IMPORTANCE -- medium
 + DYNAMIC UPDATE MODE -- per-broker
 
-**producer.purgatory.purge.interval.requests** -- Интервал очистки запросов поставщика. Значение указывается в количестве запросов
+**producer.purgatory.purge.interval.requests** -- The purge interval (in number of requests) of the producer request purgatory
 
 + TYPE -- int
 + DEFAULT -- 1000
 + IMPORTANCE -- medium
 + DYNAMIC UPDATE MODE -- read-only
 
-**queued.max.request.bytes** -- Разрешенное число байтов в очереди до того, как запросы не будут прочитаны
+**queued.max.request.bytes** -- The number of queued bytes allowed before no more requests are read
 
 + TYPE -- long
 + DEFAULT -- - 1
 + IMPORTANCE -- medium
 + DYNAMIC UPDATE MODE -- read-only
 
-**replica.fetch.backoff.ms** -- Длительность спящего режима при возникновении ошибки партиции. Указывается в миллисекундах
+**replica.fetch.backoff.ms** -- The amount of time to sleep when fetch partition error occurs
 
 + TYPE -- int
 + DEFAULT -- 1000
@@ -896,7 +896,7 @@ The following is a list of settings with a description and an indication of thei
 + IMPORTANCE -- medium
 + DYNAMIC UPDATE MODE -- read-only
 
-**replica.fetch.max.bytes** -- Количество байтов сообщений, получаемых каждой партицией. Параметр не является абсолютным максимумом. Если первый пакет записей в первой непустой партиции выборки больше установленного значения, пакет данных все равно будет возвращен для обеспечения гарантии возможности выполнения. Максимальный размер пакета записей, принятый брокером, определяется через *message.max.bytes* (конфигурация брокера) или *max.message.bytes* (конфигурация топика)
+**replica.fetch.max.bytes** -- The number of bytes of messages to attempt to fetch for each partition. This is not an absolute maximum, if the first record batch in the first non-empty partition of the fetch is larger than this value, the record batch will still be returned to ensure that progress can be made. The maximum record batch size accepted by the broker is defined via *message.max.bytes* (broker config) or *max.message.bytes* (topic config)
 
 + TYPE -- int
 + DEFAULT -- 1048576
@@ -904,7 +904,7 @@ The following is a list of settings with a description and an indication of thei
 + IMPORTANCE -- medium
 + DYNAMIC UPDATE MODE -- read-only
 
-**replica.fetch.response.max.bytes** -- Максимальное количество байтов, ожидаемое для полного ответа на выборку. Параметр не является абсолютным максимумом. Записи извлекаются пакетами, и если первый пакет записей в первой непустой партиции выборки больше установленного значения, пакет данных все равно будет возвращен для обеспечения гарантии возможности выполнения. Максимальный размер пакета записей, принятый брокером, определяется через *message.max.bytes* (конфигурация брокера) или *max.message.bytes* (конфигурация топика)
+**replica.fetch.response.max.bytes** -- Maximum bytes expected for the entire fetch response. Records are fetched in batches, and if the first record batch in the first non-empty partition of the fetch is larger than this value, the record batch will still be returned to ensure that progress can be made. As such, this is not an absolute maximum. The maximum record batch size accepted by the broker is defined via *message.max.bytes* (broker config) or *max.message.bytes* (topic config)
 
 + TYPE -- int
 + DEFAULT -- 10485760
@@ -912,7 +912,7 @@ The following is a list of settings with a description and an indication of thei
 + IMPORTANCE -- medium
 + DYNAMIC UPDATE MODE -- read-only
 
-**reserved.broker.max.id** -- Максимальное число, которое можно использовать для broker.id
+**reserved.broker.max.id** -- Max number that can be used for a *broker.id*
 
 + TYPE -- int
 + DEFAULT -- 1000
@@ -920,88 +920,144 @@ The following is a list of settings with a description and an indication of thei
 + IMPORTANCE -- medium
 + DYNAMIC UPDATE MODE -- read-only
 
-**sasl.enabled.mechanisms** -- Список механизмов SASL, включенных на сервере ADS. Список может содержать любой механизм, для которого обеспечивается безопасность. По умолчанию включен только GSSAPI
+**sasl.client.callback.handler.class** -- The fully qualified name of a SASL client callback handler class that implements the AuthenticateCallbackHandler interface
+
++ TYPE -- class
++ DEFAULT -- null
++ IMPORTANCE -- medium
++ DYNAMIC UPDATE MODE -- per-broker
+
+**sasl.enabled.mechanisms** -- The list of SASL mechanisms enabled in the ADS server. The list may contain any mechanism for which a security provider is available. Only "GSSAPI" is enabled by default
 
 + TYPE -- list
 + DEFAULT -- GSSAPI
 + IMPORTANCE -- medium
 + DYNAMIC UPDATE MODE -- per-broker
 
-**sasl.jaas.config** -- Параметры контекста входа JAAS для соединений SSL в формате, используемом файлами конфигурации JAAS. Формат файла конфигурации JAAS описан по `ссылке <http://docs.oracle.com/javase/8/docs/technotes/guides/security/jgss/tutorials/LoginConfigFile.html>`_. Формат значения: "(=)*;"
+**sasl.jaas.config** -- AAS login context parameters for SASL connections in the format used by JAAS configuration files. JAAS configuration file format is described `here <http://docs.oracle.com/javase/8/docs/technotes/guides/security/jgss/tutorials/LoginConfigFile.html>`_. The format for the value is: "loginModuleClass controlFlag (optionName=optionValue)*;". For brokers, the config must be prefixed with listener prefix and SASL mechanism name in lower-case. For example, *listener.name.sasl_ssl.scram-sha-256.sasl.jaas.config=com.example.ScramLoginModule required;*
 
 + TYPE -- password
 + DEFAULT -- null
 + IMPORTANCE -- medium
 + DYNAMIC UPDATE MODE -- per-broker
 
-**sasl.kerberos.kinit.cmd** -- Путь команд Kerberos kinit
+**sasl.kerberos.kinit.cmd** -- Kerberos kinit command path
 
 + TYPE -- string
 + DEFAULT -- /usr/bin/kinit
 + IMPORTANCE -- medium
 + DYNAMIC UPDATE MODE -- per-broker
 
-**sasl.kerberos.min.time.before.relogin** -- Время ожидания авторизации потока между попытками обновления
+**sasl.kerberos.min.time.before.relogin** -- Login thread sleep time between refresh attempts
 
 + TYPE -- long
 + DEFAULT -- 60000
 + IMPORTANCE -- medium
 + DYNAMIC UPDATE MODE -- per-broker
 
-**sasl.kerberos.principal.to.local.rules** -- Список правил для сопоставления имен принципалов с короткими именами (обычно с именами пользователей операционной системы). Правила оцениваются по порядку, и первое правило, совпадающее с именем принципала, используется для сопоставления его с коротким именем. Все последующие правила в списке игнорируются. По умолчанию имена принципалов формы {username}/{hostname}@{REALM} сопоставляются с именем {username}. Важно обратить внимание, что данная конфигурация игнорируется, если расширение ADSPrincipalBuilder обеспечивается настройкой *main.builder.class*
+**sasl.kerberos.principal.to.local.rules** -- A list of rules for mapping from principal names to short names (typically operating system usernames). The rules are evaluated in order and the first rule that matches a principal name is used to map it to a short name. Any later rules in the list are ignored. By default, principal names of the form *{username}/{hostname}@{REALM}* are mapped to *{username}*. Note that this configuration is ignored if an extension of ADSPrincipalBuilder is provided by the *principal.builder.class* configuration
 
 + TYPE -- list
 + DEFAULT -- DEFAULT
 + IMPORTANCE -- medium
 + DYNAMIC UPDATE MODE -- per-broker
 
-**sasl.kerberos.service.name** -- Имя принципала Kerberos, которое запускает ADS. Значение можно определить в конфигурации ADS JAAS либо в конфигурации ADS
+**sasl.kerberos.service.name** -- The Kerberos principal name that ADS runs as. This can be defined either in ADS's JAAS config or in ADS's config
 
 + TYPE -- string
 + DEFAULT -- null
 + IMPORTANCE -- medium
 + DYNAMIC UPDATE MODE -- per-broker
 
-**sasl.kerberos.ticket.renew.jitter** -- Процент случайного джиттера по отношению к времени возобновления 
+**sasl.kerberos.ticket.renew.jitter** -- Percentage of random jitter added to the renewal time 
 
 + TYPE -- double
 + DEFAULT -- 0.05
 + IMPORTANCE -- medium
 + DYNAMIC UPDATE MODE -- per-broker
 
-**sasl.kerberos.ticket.renew.window.factor** -- Время ожидания авторизации потока до тех пор, пока не будет достигнут указанный коэффициент времени от последнего обновления до истечения срока действия тикета, и попытка возобновления тикета за этот период времени
+**sasl.kerberos.ticket.renew.window.factor** -- Login thread will sleep until the specified window factor of time from last refresh to ticket's expiry has been reached, at which time it will try to renew the ticket
 
 + TYPE -- double
 + DEFAULT -- 0.8
 + IMPORTANCE -- medium
 + DYNAMIC UPDATE MODE -- per-broker
 
-**sasl.mechanism.inter.broker.protocol** -- Механизм SASL для взаимодействия между брокерами. По умолчанию используется GSSAPI
+**sasl.login.callback.handler.class** -- The fully qualified name of a SASL login callback handler class that implements the AuthenticateCallbackHandler interface. For brokers, login callback handler config must be prefixed with listener prefix and SASL mechanism name in lower-case. For example, *listener.name.sasl_ssl.scram-sha-256.sasl.login.callback.handler.class=com.example.CustomScramLoginCallbackHandler*
+
++ TYPE -- class
++ DEFAULT -- null
++ IMPORTANCE -- medium
++ DYNAMIC UPDATE MODE -- read-only
+
+**sasl.login.class** -- The fully qualified name of a class that implements the Login interface. For brokers, login config must be prefixed with listener prefix and SASL mechanism name in lower-case. For example, *listener.name.sasl_ssl.scram-sha-256.sasl.login.class=com.example.CustomScramLogin*
+
++ TYPE -- class
++ DEFAULT -- null
++ IMPORTANCE -- medium
++ DYNAMIC UPDATE MODE -- read-only
+
+**sasl.login.refresh.buffer.seconds** -- The amount of buffer time before credential expiration to maintain when refreshing a credential, in seconds. If a refresh would otherwise occur closer to expiration than the number of buffer seconds then the refresh will be moved up to maintain as much of the buffer time as possible. Legal values are between "0" and "3600" (1 hour); a default value of "300" (5 minutes) is used if no value is specified. This value and *sasl.login.refresh.min.period.seconds* are both ignored if their sum exceeds the remaining lifetime of a credential. Currently applies only to "OAUTHBEARER"
+
++ TYPE -- short
++ DEFAULT -- 300
++ IMPORTANCE -- medium
++ DYNAMIC UPDATE MODE -- per-broker
+
+**sasl.login.refresh.min.period.seconds** -- The desired minimum time for the login refresh thread to wait before refreshing a credential, in seconds. Legal values are between "0" and "900" (15 minutes); a default value of "60" (1 minute) is used if no value is specified. This value and *sasl.login.refresh.buffer.seconds* are both ignored if their sum exceeds the remaining lifetime of a credential. Currently applies only to "OAUTHBEARER"
+
++ TYPE -- short
++ DEFAULT -- 60
++ IMPORTANCE -- medium
++ DYNAMIC UPDATE MODE -- per-broker
+
+**sasl.login.refresh.window.factor** -- Login refresh thread will sleep until the specified window factor relative to the credential's lifetime has been reached, at which time it will try to refresh the credential. Legal values are between "0.5" (50%) and "1.0" (100%) inclusive; a default value of "0.8" (80%) is used if no value is specified. Currently applies only to "OAUTHBEARER"
+
++ TYPE -- double
++ DEFAULT -- 0.8
++ IMPORTANCE -- medium
++ DYNAMIC UPDATE MODE -- per-broker
+
+**sasl.login.refresh.window.jitter** -- The maximum amount of random jitter relative to the credential's lifetime that is added to the login refresh thread's sleep time. Legal values are between "0" and "0.25" (25%) inclusive; a default value of "0.05" (5%) is used if no value is specified. Currently applies only to "OAUTHBEARER"
+
++ TYPE -- double
++ DEFAULT -- 0.05
++ IMPORTANCE -- medium
++ DYNAMIC UPDATE MODE -- per-broker
+
+**sasl.mechanism.inter.broker.protocol** -- SASL mechanism used for inter-broker communication. Default is "GSSAPI"
 
 + TYPE -- string
 + DEFAULT -- GSSAPI
 + IMPORTANCE -- medium
 + DYNAMIC UPDATE MODE -- per-broker
 
-**security.inter.broker.protocol** -- Протокол безопасности для связи между брокерами. Допустимые значения: "PLAINTEXT", "SSL", "SASL_PLAINTEXT", "SASL_SSL". Одновременная установка параметров *security.inter.broker.protocol* и *inter.broker.listener.name* вызывает ошибку
+**sasl.server.callback.handler.class** -- SASL mechanism used for inter-broker communication. Default is "GSSAPI"
+
++ TYPE -- string
++ DEFAULT -- GSSAPI
++ IMPORTANCE -- medium
++ DYNAMIC UPDATE MODE -- per-broker
+
+**security.inter.broker.protocol** -- Security protocol used to communicate between brokers. Valid values are: "PLAINTEXT", "SSL", "SASL_PLAINTEXT", "SASL_SSL". It is an error to set this and *inter.broker.listener.name* properties at the same time
 
 + TYPE -- string
 + DEFAULT -- PLAINTEXT
 + IMPORTANCE -- medium
 + DYNAMIC UPDATE MODE -- read-only
 
-**ssl.cipher.suites** -- Список наборов шифров. Именованная комбинация аутентификации, шифрования, MAC и ключей обмена алгоритма для согласования параметров безопасности для сетевого подключения с использованием протокола TLS или SSL. По умолчанию поддерживаются все доступные варианты шифрования
+**ssl.cipher.suites** -- A list of cipher suites. This is a named combination of authentication, encryption, MAC and key exchange algorithm used to negotiate the security settings for a network connection using TLS or SSL network protocol. By default all the available cipher suites are supported
 
 + TYPE -- list
-+ DEFAULT -- ""
++ DEFAULT -- null
 + IMPORTANCE -- medium
 + DYNAMIC UPDATE MODE -- per-broker
 
-**ssl.client.auth** -- Конфигурация брокера ADS для запроса аутентификации клиента. Следующие настройки являются общими:
+**ssl.client.auth** -- Configures kafka broker to request client authentication. The following settings are common:
 
-  + *ssl.client.auth=required* -- требование проверки подлинности клиента;
-  + *ssl.client.auth=request* -- аутентификация клиента является необязательной;
-  + *ssl.client.auth=none* -- аутентификация клиента не требуется
+  + *ssl.client.auth=required* -- If set to required client authentication is required;
+  + *ssl.client.auth=request* -- This means client authentication is optional. unlike requested , if this option is set client can choose not to provide authentication information about itself;
+  + *ssl.client.auth=none* -- This means client authentication is not needed
 
 + TYPE -- string
 + DEFAULT -- none
@@ -1009,150 +1065,126 @@ The following is a list of settings with a description and an indication of thei
 + IMPORTANCE -- medium
 + DYNAMIC UPDATE MODE -- per-broker
 
-**ssl.enabled.protocols** -- Список протоколов, включенных для соединений SSL
+**ssl.enabled.protocols** -- The list of protocols enabled for SSL connections
 
 + TYPE -- list
 + DEFAULT -- TLSv1.2,TLSv1.1,TLSv1
 + IMPORTANCE -- medium
 + DYNAMIC UPDATE MODE -- per-broker
 
-**ssl.key.password** -- Пароль закрытого ключа в файле хранилища ключей. Необязательный параметр для клиента
+**ssl.key.password** -- The password of the private key in the key store file. This is optional for client
 
 + TYPE -- password
 + DEFAULT -- null
 + IMPORTANCE -- medium
 + DYNAMIC UPDATE MODE -- per-broker
 
-**ssl.keymanager.algorithm** -- Алгоритм службы управления ключами для SSL-соединений. Значением по умолчанию является алгоритм, настроенный для Java Virtual Machine
+**ssl.keymanager.algorithm** -- The algorithm used by key manager factory for SSL connections. Default value is the key manager factory algorithm configured for the Java Virtual Machine
 
 + TYPE -- string
 + DEFAULT -- SunX509
 + IMPORTANCE -- medium
 + DYNAMIC UPDATE MODE -- per-broker
 
-**ssl.keystore.location** -- Расположение файла хранилища ключей. Необязательный параметр для клиента, может использоваться для двусторонней аутентификации клиента
+**ssl.keystore.location** -- The location of the key store file. This is optional for client and can be used for two-way authentication for client
 
 + TYPE -- string
 + DEFAULT -- null
 + IMPORTANCE -- medium
 + DYNAMIC UPDATE MODE -- per-broker
 
-**ssl.keystore.password** -- Пароль хранилища для файла хранения ключей. Необязательный параметр для клиента, требуется только при настройке *ssl.keystore.location*
+**ssl.keystore.password** -- The store password for the key store file. This is optional for client and only needed if *ssl.keystore.location is configured*
 
 + TYPE -- password
 + DEFAULT -- null
 + IMPORTANCE -- medium
 + DYNAMIC UPDATE MODE -- per-broker
 
-**ssl.keystore.type** -- Формат файла хранилища ключей. Необязательный параметр для клиента
+**ssl.keystore.type** -- The file format of the key store file. This is optional for client
 
 + TYPE -- string
 + DEFAULT -- JKS
 + IMPORTANCE -- medium
 + DYNAMIC UPDATE MODE -- per-broker
 
-**ssl.protocol** -- Протокол SSL для генерации SSLContext. Значение по умолчанию -- "TLS", что подходит для большинства случаев. Допустимыми значениями в последних JVM являются "TLS", "TLSv1.1" и "TLSv1.2". Протоколы "SSL", "SSLv2" и "SSLv3" могут поддерживаться в более старых JVM, но их использование не рекомендуется из-за известных уязвимостей безопасности
+**ssl.protocol** -- The SSL protocol used to generate the SSLContext. Default setting is "TLS", which is fine for most cases. Allowed values in recent JVMs are "TLS", "TLSv1.1" and "TLSv1.2". "SSL", "SSLv2" and "SSLv3" may be supported in older JVMs, but their usage is discouraged due to known security vulnerabilities
 
 + TYPE -- string
 + DEFAULT -- TLS
 + IMPORTANCE -- medium
 + DYNAMIC UPDATE MODE -- per-broker
 
-**ssl.provider** -- Имя поставщика безопасности для соединений SSL. Значением по умолчанию является поставщик безопасности по умолчанию для JVM
+**ssl.provider** -- The name of the security provider used for SSL connections. Default value is the default security provider of the JVM
 
 + TYPE -- string
 + DEFAULT -- null
 + IMPORTANCE -- medium
 + DYNAMIC UPDATE MODE -- per-broker
 
-**ssl.trustmanager.algorithm** -- Алгоритм доверенной службы управления ключами для SSL-соединений. Значением по умолчанию является алгоритм, настроенный для Java Virtual Machine
+**ssl.trustmanager.algorithm** -- The algorithm used by trust manager factory for SSL connections. Default value is the trust manager factory algorithm configured for the Java Virtual Machine
 
 + TYPE -- string
 + DEFAULT -- PKIX
 + IMPORTANCE -- medium
 + DYNAMIC UPDATE MODE -- per-broker
 
-**ssl.truststore.location** -- Расположение файла хранилища trust store  
+**ssl.truststore.location** -- The location of the trust store file  
 
 + TYPE -- string
 + DEFAULT -- null
 + IMPORTANCE -- medium
 + DYNAMIC UPDATE MODE -- per-broker
 
-**ssl.truststore.password** -- Пароль для файла хранилища trust store. При неустановленном пароле доступ к хранилищу есть, но осуществляется с отключенной проверкой надежности
+**ssl.truststore.password** -- The password for the trust store file. If a password is not set access to the truststore is still available, but integrity checking is disabled
 
 + TYPE -- password
 + DEFAULT -- null
 + IMPORTANCE -- medium
 + DYNAMIC UPDATE MODE -- per-broker
 
-**ssl.truststore.type** -- Формат файла хранилища trust store
+**ssl.truststore.type** -- The file format of the trust store file
 
 + TYPE -- string
 + DEFAULT -- JKS
 + IMPORTANCE -- medium
 + DYNAMIC UPDATE MODE -- per-broker
 
-**alter.config.policy.class.name** -- Класс политики изменяемых конфигураций для их валидации. Класс осуществляет интерфейс *org.apache.kafka.server.policy.AlterConfigPolicy*
+**alter.config.policy.class.name** -- The alter configs policy class that should be used for validation. The class should implement the *org.apache.kafka.server.policy.AlterConfigPolicy* interface
 
 + TYPE -- class
 + DEFAULT -- null
 + IMPORTANCE -- low
 + DYNAMIC UPDATE MODE -- read-only
 
-**alter.log.dirs.replication.quota.window.num** -- Количество выборок для сохранения в памяти для квот репликации изменяемых журналов
-
-+ TYPE -- int
-+ DEFAULT -- 11
-+ VALID VALUES -- [1,...]
-+ IMPORTANCE -- low
-+ DYNAMIC UPDATE MODE -- read-only
-
-**alter.log.dirs.replication.quota.window.size.seconds** -- Временной интервал каждой выборки для квот репликации изменяемых журналов. Указывается в секундах
-
-+ TYPE -- int
-+ DEFAULT -- 1
-+ VALID VALUES -- [1,...]
-+ IMPORTANCE -- low
-+ DYNAMIC UPDATE MODE -- read-only
-
-**authorizer.class.name** -- Класс используемой авторизации
+**authorizer.class.name** -- The authorizer class that should be used for authorization
 
 + TYPE -- string
 + DEFAULT -- ""
 + IMPORTANCE -- low
 + DYNAMIC UPDATE MODE -- read-only
 
-**create.topic.policy.class.name** -- Создание класса политики топика для его валидации. Класс осуществляет интерфейс *org.apache.kafka.server.policy.CreateTopicPolicy*
+**create.topic.policy.class.name** -- The create topic policy class that should be used for validation. The class should implement the *org.apache.kafka.server.policy.CreateTopicPolicy* interface
 
 + TYPE -- class
 + DEFAULT -- null
 + IMPORTANCE -- low
 + DYNAMIC UPDATE MODE -- read-only
 
-**delegation.token.expiry.check.interval.ms** -- Интервал сканирования для удаления делегированных токенов с истекшим сроком действия. Указывается в миллисекундах
-
-+ TYPE -- long
-+ DEFAULT -- 3600000
-+ VALID VALUES -- [1,...]
-+ IMPORTANCE -- low
-+ DYNAMIC UPDATE MODE -- read-only
-
-**listener.security.protocol.map** -- Сопоставление имен слушателей и протоколов безопасности. Параметр должен быть определен для того, чтобы один и тот же протокол безопасности мог использоваться в нескольких портах или IP-адресах. Например, внутренний и внешний трафик могут быть разделены, даже если для обоих требуется SSL. То есть, пользователь может определить слушателей с именами "INTERNAL" и "EXTERNAL" свойством: "INTERNAL:SSL, EXTERNAL:SSL", где ключ и значение разделяются двоеточием, а записи карты разделяются запятыми (без пробелов). Каждое имя слушателя должно отображаться на карте только один раз. Различные настройки безопасности (SSL и SASL) могут быть настроены для каждого слушателя путем добавления стандартизированного префикса (имя слушателя в нижнем регистре) к имени конфигурации. Например, чтобы установить другое хранилище ключей для внутреннего слушателя, будет установлена конфигурация с именем *listener.name.internal.ssl.keystore.location*. Если конфигурация для имени слушателя не задана, используется общая конфигурация (то есть *ssl.keystore.location*)
+**listener.security.protocol.map** -- Map between listener names and security protocols. This must be defined for the same security protocol to be usable in more than one port or IP. For example, internal and external traffic can be separated even if SSL is required for both. Concretely, the user could define listeners with names INTERNAL and EXTERNAL and this property as: "INTERNAL:SSL,EXTERNAL:SSL". As shown, key and value are separated by a colon and map entries are separated by commas. Each listener name should only appear once in the map. Different security (SSL and SASL) settings can be configured for each listener by adding a normalised prefix (the listener name is lowercased) to the config name. For example, to set a different keystore for the INTERNAL listener, a config with name *listener.name.internal.ssl.keystore.location* would be set. If the config for the listener name is not set, the config will fallback to the generic config (i.e. *ssl.keystore.location*)
 
 + TYPE -- string
 + DEFAULT -- PLAINTEXT:PLAINTEXT,SSL:SSL,SASL_PLAINTEXT:SASL_PLAINTEXT,SASL_SSL:SASL_SSL
 + IMPORTANCE -- low
 + DYNAMIC UPDATE MODE -- per-broker
 
-**metric.reporters** -- Список классов для использования в качестве репортеров метрик. Реализация интерфейса *org.apache.kafka.common.metrics.MetricsReporter* позволяет подключать классы, которые будут уведомлены о создании новой метрики. JmxReporter всегда включен в реестр статистических данных JMX
+**metric.reporters** -- A list of classes to use as metrics reporters. Implementing the *org.apache.kafka.common.metrics.MetricsReporter* interface allows plugging in classes that will be notified of new metric creation. The JmxReporter is always included to register JMX statistics
 
 + TYPE -- list
 + DEFAULT -- ""
 + IMPORTANCE -- low
 + DYNAMIC UPDATE MODE -- cluster-wide
 
-**metrics.num.samples** -- Количество выборок, поддерживаемых для вычисления метрик
+**metrics.num.samples** -- The number of samples maintained to compute metrics
 
 + TYPE -- int
 + DEFAULT -- 2
@@ -1160,14 +1192,14 @@ The following is a list of settings with a description and an indication of thei
 + IMPORTANCE -- low
 + DYNAMIC UPDATE MODE -- read-only
 
-**metrics.recording.level** -- Самый высокий уровень записи для метрик
+**metrics.recording.level** -- The highest recording level for metrics
 
 + TYPE -- string
 + DEFAULT -- INFO 
 + IMPORTANCE -- low
 + DYNAMIC UPDATE MODE -- read-only
 
-**metrics.sample.window.ms** -- Время ожидания вычисления метрик выборки. Указывается в миллисекундах
+**metrics.sample.window.ms** -- The window of time a metrics sample is computed over
 
 + TYPE -- long
 + DEFAULT -- 30000
@@ -1175,37 +1207,7 @@ The following is a list of settings with a description and an indication of thei
 + IMPORTANCE -- low
 + DYNAMIC UPDATE MODE -- read-only
 
-**password.encoder.cipher.algorithm** -- Алгоритм шифрования, используемый для кодирования динамически настроенных паролей
-
-+ TYPE -- string
-+ DEFAULT -- AES/CBC/PKCS5Padding
-+ IMPORTANCE -- low
-+ DYNAMIC UPDATE MODE -- read-only
-
-**password.encoder.iterations** -- Число итераций для кодирования динамически настроенных паролей
-
-+ TYPE -- int
-+ DEFAULT -- 4096
-+ VALID VALUES -- [1024,...]
-+ IMPORTANCE -- low
-+ DYNAMIC UPDATE MODE -- read-only
-
-**password.encoder.key.length** -- Длина ключа, используемая для кодирования динамически настроенных паролей
-
-+ TYPE -- int
-+ DEFAULT -- 128
-+ VALID VALUES -- [8,...]
-+ IMPORTANCE -- low
-+ DYNAMIC UPDATE MODE -- read-only
-
-**password.encoder.keyfactory.algorithm** -- Алгоритм SecretKeyFactory, используемый для кодирования динамически настроенных паролей. По умолчанию используется "PBKDF2WithHmacSHA512", если имеется, и "PBKDF2WithHmacSHA1" в противном случае
-
-+ TYPE -- string
-+ DEFAULT -- null
-+ IMPORTANCE -- low
-+ DYNAMIC UPDATE MODE -- read-only
-
-**quota.window.num** -- Количество выборок, сохраняемых в памяти для квот клиента
+**quota.window.num** -- The number of samples to retain in memory for client quotas
 
 + TYPE -- int
 + DEFAULT -- 11
@@ -1213,7 +1215,7 @@ The following is a list of settings with a description and an indication of thei
 + IMPORTANCE -- low
 + DYNAMIC UPDATE MODE -- read-only
 
-**quota.window.size.seconds** -- Временной интервал каждой выборки для квот клиента. Указывается в секундах
+**quota.window.size.seconds** -- The time span of each sample for client quotas
 
 + TYPE -- int
 + DEFAULT -- 1
@@ -1221,7 +1223,7 @@ The following is a list of settings with a description and an indication of thei
 + IMPORTANCE -- low
 + DYNAMIC UPDATE MODE -- read-only
 
-**replication.quota.window.num** -- Количество выборок, сохраняемых в памяти для квот репликации
+**replication.quota.window.num** -- The number of samples to retain in memory for replication quotas
 
 + TYPE -- int
 + DEFAULT -- 11
@@ -1229,7 +1231,7 @@ The following is a list of settings with a description and an indication of thei
 + IMPORTANCE -- low
 + DYNAMIC UPDATE MODE -- read-only
 
-**replication.quota.window.size.seconds** -- Временной интервал каждой выборки для квот репликации. Указывается в секундах
+**replication.quota.window.size.seconds** -- The time span of each sample for replication quotas
 
 + TYPE -- int
 + DEFAULT -- 1
@@ -1237,21 +1239,21 @@ The following is a list of settings with a description and an indication of thei
 + IMPORTANCE -- low
 + DYNAMIC UPDATE MODE -- read-only
 
-**ssl.endpoint.identification.algorithm** -- Алгоритм идентификации конечных точек для валидации имени хоста сервера с использованием сертификата сервера
+**ssl.endpoint.identification.algorithm** -- The endpoint identification algorithm to validate server hostname using server certificate
 
 + TYPE -- string
 + DEFAULT -- null
 + IMPORTANCE -- low
 + DYNAMIC UPDATE MODE -- per-broker
 
-**ssl.secure.random.implementation** -- Реализация SecureRandom PRNG, используемая для операций шифрования SSL
+**ssl.secure.random.implementation** -- The SecureRandom PRNG implementation to use for SSL cryptography operations
 
 + TYPE -- string
 + DEFAULT -- null
 + IMPORTANCE -- low
 + DYNAMIC UPDATE MODE -- per-broker
 
-**transaction.abort.timed.out.transaction.cleanup.interval.ms** -- Интервал, в течение которого выполняются отложенные транзакции. Указывается в миллисекундах
+**transaction.abort.timed.out.transaction.cleanup.interval.ms** -- The interval at which to rollback transactions that have timed out
 
 + TYPE -- int
 + DEFAULT -- 60000
@@ -1259,7 +1261,7 @@ The following is a list of settings with a description and an indication of thei
 + IMPORTANCE -- low
 + DYNAMIC UPDATE MODE -- read-only
 
-**transaction.remove.expired.transaction.cleanup.interval.ms** -- Интервал удаления транзакций, срок действия которых истекает по установленному параметру *transactional.id.expiration.ms passing*. Указывается в миллисекундах
+**transaction.remove.expired.transaction.cleanup.interval.ms** -- The interval at which to remove transactions that have expired due to *transactional.id.expiration.ms passing*
 
 + TYPE -- int
 + DEFAULT -- 3600000
@@ -1267,11 +1269,12 @@ The following is a list of settings with a description and an indication of thei
 + IMPORTANCE -- low
 + DYNAMIC UPDATE MODE -- read-only
 
-**zookeeper.sync.time.ms** -- Удаленность последователя Zookeeper от лидера Zookeeper. Указывается в миллисекундах
+**zookeeper.sync.time.ms** -- How far a ZK follower can be behind a ZK leader
 
 + TYPE -- int
 + DEFAULT -- 2000
 + IMPORTANCE -- low
 + DYNAMIC UPDATE MODE -- read-only
 
-Более подробную информацию о конфигурации брокера можно найти в классе scala *kafka.server.KafkaConfig*.
+
+More details about broker configuration can be found in the scala class *kafka.server.KafkaConfig*.
