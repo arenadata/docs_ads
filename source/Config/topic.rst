@@ -1,11 +1,12 @@
-Настройка на уровне топика
-===========================
+Topic-Level Configs
+======================
 
-Настройки топиков имеют как сервер по умолчанию, так и опциональное переопределение каждого топика. Если топику не задана конфигурация, то используется сервер по умолчанию. Переопределение можно установить во время создания топика, указав один или несколько параметров *--config*.
 
-Далее приведены конфигурации на уровне топика. Настройка сервера по умолчанию указана в Server Default Property. Заданное значение по умолчанию для сервера относится только к топику, если у него нет явного переопределения конфигурации.
+Configurations pertinent to topics have both a server default as well an optional per-topic override. If no per-topic configuration is given the server default is used. The override can be set at topic creation time by giving one or more *--config* options. 
 
-**cleanup.policy** -- Определение политики хранения старых сегментов журнала. Политика по умолчанию "delete" отбрасывает старые сегменты при достижении их срока хранения или предельного размера. Значение "compact" включает `сжатие журнала <http://docs.arenadata.io/adh/v1.4/Streaming/Architecture.html#id15>`_ по топику
+The following are the topic-level configurations. The server's default configuration for this property is given under the Server Default Property heading. A given server default config value only applies to a topic if it does not have an explicit topic config override.
+
+**cleanup.policy** -- A string that is either "delete" or "compact". This string designates the retention policy to use on old log segments. The default policy ("delete") will discard old segments when their retention time or size limit has been reached. The "compact" setting will enable log compaction on the topic
 
 + TYPE -- list
 + DEFAULT -- delete
@@ -13,7 +14,7 @@
 + SERVER DEFAULT PROPERTY --log.cleanup.policy
 + IMPORTANCE -- medium
 
-**compression.type** -- Окончательный тип сжатия топика. Конфигурация принимает стандартные кодеки сжатия ("gzip", "snappy", "lz4"). Также принимает "uncompressed", что эквивалентно отсутствию сжатия; и "producer", что означает сохранение исходного кодека сжатия, установленного поставщиком
+**compression.type** -- Specify the final compression type for a given topic. This configuration accepts the standard compression codecs ("gzip", "snappy", "lz4"). It additionally accepts "uncompressed" which is equivalent to no compression; and "producer" which means retain the original compression codec set by the producer
 
 + TYPE -- string
 + DEFAULT -- producer
@@ -21,7 +22,7 @@
 + SERVER DEFAULT PROPERTY -- compression.type
 + IMPORTANCE -- medium
 
-**delete.retention.ms** -- Время хранения маркированных на удаление данных с целью сжатия топиков журнала. Параметр также дает ограничение на время, в течение которого потребитель должен выполнить чтение, если данные начинаются со смещения *0*, для гарантии валидности снапшота заключительного этапа (в противном случае удаление маркированных данных может произойти до завершения их сканирования). Указывается в миллисекундах
+**delete.retention.ms** -- The amount of time to retain delete tombstone markers for log compacted topics. This setting also gives a bound on the time in which a consumer must complete a read if they begin from offset "0" to ensure that they get a valid snapshot of the final stage (otherwise delete tombstones may be collected before they complete their scan)
 
 + TYPE -- long
 + DEFAULT -- 86400000
@@ -29,7 +30,7 @@
 + SERVER DEFAULT PROPERTY -- log.cleaner.delete.retention.ms
 + IMPORTANCE -- medium
 
-**file.delete.delay.ms** -- Время ожидания перед удалением файла из файловой системы. Указывается в миллисекундах
+**file.delete.delay.ms** -- The time to wait before deleting a file from the filesystem
 
 + TYPE -- long
 + DEFAULT -- 60000
@@ -37,7 +38,7 @@
 + SERVER DEFAULT PROPERTY -- log.segment.delete.delay.ms
 + IMPORTANCE -- medium
 
-**flush.messages** -- Интервал принудительной синхронизации данных, записанных в журнал. Например, если параметр установлен на *1*, синхронизация выполняется после каждого сообщения; если на значение *5* -- после каждых пяти сообщений. Установка данного параметра не рекомендуется, эффективней использовать репликацию для обеспечения устойчивости и возможности фоновой очистки операционной системы. Параметр можно переопределить в базовых настройках каждого топика
+**flush.messages** -- This setting allows specifying an interval at which we will force an fsync of data written to the log. For example if this was set to "1" we would fsync after every message; if it were "5" we would fsync after every five messages. In general we recommend you not set this and use replication for durability and allow the operating system's background flush capabilities as it is more efficient. This setting can be overridden on a per-topic basis 
 
 + TYPE -- long
 + DEFAULT -- 9223372036854775807
@@ -45,7 +46,7 @@
 + SERVER DEFAULT PROPERTY -- log.flush.interval.messages
 + IMPORTANCE -- medium
 
-**flush.ms** -- Временной интервал принудительной синхронизации данных, записанных в журнал. Например, если параметр установлен на *1000*, синхронизация выполняется по истечении 1000 мс. Установка данного параметра не рекомендуется, эффективней использовать репликацию для обеспечения устойчивости и возможности фоновой очистки операционной системы. Указывается в миллисекундах
+**flush.ms** -- This setting allows specifying a time interval at which we will force an fsync of data written to the log. For example if this was set to "1000" we would fsync after 1000 ms had passed. In general we recommend you not set this and use replication for durability and allow the operating system's background flush capabilities as it is more efficient
 
 + TYPE -- long
 + DEFAULT -- 9223372036854775807
@@ -53,7 +54,7 @@
 + SERVER DEFAULT PROPERTY -- log.flush.interval.ms
 + IMPORTANCE -- medium
 
-**follower.replication.throttled.replicas** -- Список реплик, для которых репликация журнала должна дросселироваться на стороне подписчика. Список должен описывать набор реплик в формате "[PartitionId]:[BrokerId],[PartitionId]:[BrokerId]:..." или можно использовать специальный символ "*" для дросселирования всех реплик в данном топике
+**follower.replication.throttled.replicas** -- A list of replicas for which log replication should be throttled on the follower side. The list should describe a set of replicas in the form "[PartitionId]:[BrokerId],[PartitionId]:[BrokerId]:..." or alternatively the wildcard "*" can be used to throttle all replicas for this topic
 
 + TYPE -- list
 + DEFAULT -- ""
