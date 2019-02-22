@@ -78,7 +78,7 @@
 
 .. _kafka_actions:
 
-.. figure:: ../../imgs/kafka_actions.png
+.. figure:: ../../imgs/kafka1.png
    :align: center
 
    Запуск проверки состояния сервиса *Kafka*
@@ -113,7 +113,7 @@
 
 .. _kafka_actions:
 
-.. figure:: ../../imgs/kafka_actions.png
+.. figure:: ../../imgs/kafka1.png
    :align: center
 
    Допустимые операции над сервисом *Kafka*
