@@ -42,8 +42,8 @@ When the group coordinator receives an *OffsetCommitRequest*, it appends the req
 When the coordinator receives an offset fetch request, it simply returns the last committed offset vector from the offsets cache. In case coordinator was just started or if it just became the coordinator for a new set of consumer groups (by becoming a leader for a partition of the offsets topic), it may need to load the offsets topic partition into the cache. In this case, the offset fetch will fail with an *CoordinatorLoadInProgressException* and the consumer may retry the *OffsetFetchRequest* after backing off.
 
 
-Миграция смещений из ZooKeeper в ADS
---------------------------------------
+Migrating offsets from ZooKeeper to ADS
+----------------------------------------
 
 To migrate consumers and their offsets from **ZooKeeper** to **ADS**:
 
