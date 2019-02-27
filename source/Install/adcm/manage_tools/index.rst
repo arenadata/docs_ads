@@ -74,11 +74,11 @@
 
 Для проверки результатов действий над сервисом *Kafka* необходимо:
 
-1. Перейти в кластер *ads* в ADCM, на вкладке "Services" для сервиса *Kafka* в поле "Actions" нажать на пиктограмму и выбрать действие *Check* (:numref:`Рис.%s <kafka_actions_ads>`).
+1. Перейти в кластер *ads* в ADCM, на вкладке "Services" для сервиса *Kafka* в поле "Actions" нажать на пиктограмму и выбрать действие *Check* (:numref:`Рис.%s <manage_tools_kafka>`).
 
-.. _kafka_actions_ads:
+.. _manage_tools_kafka:
 
-.. figure:: ../../imgs/kafka_actions_ads.png
+.. figure:: ../../imgs/manage_tools_kafka.png
    :align: center
 
    Запуск проверки состояния сервиса *Kafka*
@@ -109,15 +109,15 @@
 
 Для каждого из сервисов есть возможность управления им независимо от остальных, выполнять такие операции как *Stop*, *Start*, *Restart*.
 
-Например, для того чтобы перезапустить все компоненты сервиса *Kafka* необходимо перейти в кластер *ads* в ADCM, на вкладке "Services" для сервиса *Kafka* в поле "Actions" нажать на пиктограмму и выбрать действие *Restart* (:numref:`Рис.%s <kafka_actions_ads>`).
+Например, для того чтобы перезапустить все компоненты сервиса *Kafka* необходимо перейти в кластер *ads* в ADCM, на вкладке "Services" для сервиса *Kafka* в поле "Actions" нажать на пиктограмму и выбрать действие *Restart* (:numref:`Рис.%s <manage_tools_kafka>`).
 
-.. _kafka_actions_ads:
+.. _manage_tools_kafka:
 
-.. figure:: ../../imgs/kafka_actions_ads.png
+.. figure:: ../../imgs/manage_tools_kafka.png
    :align: center
    
    Допустимые операции над сервисом *Kafka*
 
-**666**
+**777**
 
 В результате того или иного действия статус сервиса меняется на *running* или *stopped*, в том случае если сервис уже был проинсталлирован и не находится в состоянии *created*. 
