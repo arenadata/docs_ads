@@ -1,346 +1,340 @@
-Конфигурирование Producer
+Producer Configs
 ==========================
 
-Далее приведены конфигурации Java-поставщика.
+Below is the configuration of the Java producer.
 
-**key.serializer** -- Класс Serializer для ключа, реализующего интерфейс *org.apache.kafka.common.serialization.Serializer*
+**key.serializer** -- Serializer class for key that implements the *org.apache.kafka.common.serialization.Serializer* interface
 
 + TYPE -- class
 + IMPORTANCE -- high
 
-**value.serializer** -- Класс Serializer для значения, реализующего интерфейс *org.apache.kafka.common.serialization.Serializer*
+**value.serializer** -- Serializer class for value that implements the *org.apache.kafka.common.serialization.Serializer* interface
 
 + TYPE -- class
 + IMPORTANCE -- high 
 
-**acks** -- Количество подтверждений, которые поставщик требует от лидера перед рассмотрением запроса. Параметр контролирует устойчивость отправляемых записей. Возможны следующие настройки:
+**acks** -- The number of acknowledgments the producer requires the leader to have received before considering a request complete. This controls the durability of records that are sent. The following settings are allowed:
 
-  + *acks=0* -- поставщик не ждет подтверждения с сервера. Запись немедленно добавляется в буфер сокета и считается отправленной. Данная настройка не гарантирует получение сервером записи, и конфигурация повторных попыток не вступает в силу (так как клиент обычно не знает о каких-либо сбоях). Смещение, возвращаемое для каждой записи, всегда равно "-1".
+  + *acks=0* -- If set to zero then the producer will not wait for any acknowledgment from the server at all. The record will be immediately added to the socket buffer and considered sent. No guarantee can be made that the server has received the record in this case, and the *retries* configuration will not take effect (as the client won't generally know of any failures). The offset given back for each record will always be set to "-1"
 
-  + *acks=1* -- лидер фиксирует запись в свой локальный журнал, но отвечает, не дожидаясь полного подтверждения от всех подписчиков. В этом случае лидер может выйти из строя сразу после подтверждения записи и до того, как подписчики реплицируют ее, тогда запись теряется
+  + *acks=1* -- This will mean the leader will write the record to its local log but will respond without awaiting full acknowledgement from all followers. In this case should the leader fail immediately after acknowledging the record but before the followers have replicated it then the record will be lost
 
-  + *acks=all* -- лидер ожидает полного набора синхронизированных реплик для подтверждения записи. Данная настройка гарантирует, что запись не будет потеряна, пока хотя бы одна синхронизированная реплика остается в строе. Это наивысшая гарантия. Эквивалентно настройке *acks=-1*
+  + *acks=all* -- This means the leader will wait for the full set of in-sync replicas to acknowledge the record. This guarantees that the record will not be lost as long as at least one in-sync replica remains alive. This is the strongest available guarantee. This is equivalent to the *acks=-1* setting
 
 + TYPE -- string
 + DEFAULT -- 1
 + VALID VALUES -- [all, - 1, 0, 1]
 + IMPORTANCE -- high
 
-**bootstrap.servers** -- Список пар хост/порт, используемых для установления первоначального подключения к платформе ADS. В дальнейшем клиент будет использовать все сервера, независимо от того, какие указаны в данном параметре -- этот список влияет только на начальные хосты, используемые для обнаружения полного набора серверов. Параметр должен быть задан в формате "host1:port1, host2:port2,..." (через запятую и без пробелов). Поскольку данные сервера используются только для первоначального подключения с целью обнаружения полного набора в кластере (который может динамически меняться), списку необязательно содержать полный набор серверов (можно указать более одного, на случай отказа первого)
-
-+ TYPE -- list
-+ DEFAULT -- ""
-+ VALID VALUES -- org.apache.kafka.common.config.ConfigDef$NonNullValidator@685cb137
-+ IMPORTANCE -- high
-
-**buffer.memory** -- Общий объем памяти в байтах, которую поставщик может использовать для буферизации записей, ожидающих отправки на сервер. Если записи отправляются быстрее, чем они могут быть доставлены на сервер, поставщик блокирует параметр *max.block.ms*, после чего будет сделано исключение. Параметр должен соответствовать примерно общему объему памяти, которая используется поставщиком, но не полному объему, так как не вся память используется для буферизации. Некоторый дополнительный объем используется для сжатия (если оно включено), а также для поддержания запросов на лету
+**buffer.memory** -- The total bytes of memory the producer can use to buffer records waiting to be sent to the server. If records are sent faster than they can be delivered to the server the producer will block for *max.block.ms* after which it will throw an exception.
+This setting should correspond roughly to the total memory the producer will use, but is not a hard bound since not all memory the producer uses is used for buffering. Some additional memory will be used for compression (if compression is enabled) as well as for maintaining in-flight requests
 
 + TYPE -- long
 + DEFAULT -- 33554432
 + VALID VALUES -- [0,...]
 + IMPORTANCE -- high
 
-**compression.type** -- Тип сжатия для всех данных, созданных поставщиком. По умолчанию используется значение "none" (без сжатия). Допустимые значения: "none", "gzip", "snappy" и "lz4". Сжатие выполняется над полной партией данных, поэтому эффективность дозирования влияет на коэффициент сжатия (более многочисленное порционирование означает лучшее сжатие)
+**compression.type** -- The compression type for all data generated by the producer. The default is none (i.e. no compression). Valid values are "none", "gzip", "snappy", or "lz4". Compression is of full batches of data, so the efficacy of batching will also impact the compression ratio (more batching means better compression)
 
 + TYPE -- string
 + DEFAULT -- none
 + IMPORTANCE -- high
 
-**retries** -- Установка значения больше нуля приводит к тому, что клиент переотправляет любую запись, передача которой завершается с временной ошибкой. Повторная попытка ничем не отличается от повторной отправки записи клиентом при получении ошибки. Повторная отправка данных без установки параметра *max.in.flight.requests.per.connection* в значение "1" потенциально может изменить порядок записей, так как если две партии данных отправляются в одну партицию, при этом первая партия не выполняется и повторно отправляется, а вторая выполняется успешно, то данные второго пакета появляются в партиции первыми
+**retries** -- Setting a value greater than zero will cause the client to resend any record whose send fails with a potentially transient error. Note that this retry is no different than if the client resent the record upon receiving the error. Allowing retries without setting *max.in.flight.requests.per.connection* to "1" will potentially change the ordering of records because if two batches are sent to a single partition, and the first fails and is retried but the second succeeds, then the records in the second batch may appear first
 
 + TYPE -- int
 + DEFAULT -- 0
 + VALID VALUES -- [0,...,2147483647]
 + IMPORTANCE -- high
 
-**ssl.key.password** -- Пароль закрытого ключа в файле хранилища ключей. Необязательный параметр для клиента
+**ssl.key.password** -- The password of the private key in the key store file. This is optional for client
 
 + TYPE -- password
 + DEFAULT -- null
 + IMPORTANCE -- high
 
-**ssl.keystore.location** -- Расположение файла хранилища ключей. Необязательный параметр для клиента, может использоваться для двусторонней аутентификации клиента
+**ssl.keystore.location** -- The location of the key store file. This is optional for client and can be used for two-way authentication for client
 
 + TYPE -- string
 + DEFAULT -- null
 + IMPORTANCE -- high
 
-**ssl.keystore.password** -- Пароль хранилища для файла хранения ключей. Необязательный параметр для клиента, требуется только при настройке *ssl.keystore.location*
+**ssl.keystore.password** -- The store password for the key store file. This is optional for client and only needed if *ssl.keystore.location* is configured
 
 + TYPE -- password
 + DEFAULT -- null
 + IMPORTANCE -- high
 
-**ssl.truststore.location** -- Расположение файла хранилища trust store
+**ssl.truststore.location** -- The location of the trust store file
 
 + TYPE -- string
 + DEFAULT -- null
 + IMPORTANCE -- high
 
-**ssl.truststore.password** -- Пароль для файла хранилища trust store. При неустановленном пароле доступ к хранилищу есть, но осуществляется с отключенной проверкой надежности
+**ssl.truststore.password** -- The password for the trust store file. If a password is not set access to the truststore is still available, but integrity checking is disabled
 
 + TYPE -- password
 + DEFAULT -- null
 + IMPORTANCE -- high
 
-**batch.size** -- При отправке нескольких записей в одну и ту же партицию поставщик пытается объединить их. Это помогает производительности как на клиенте, так и на сервере. Конфигурация управляет размером пакета в байтах. Пакетирование большего размера, чем задан в параметре, не осуществляется. В таком случае отправленные брокерам запросы содержат несколько пакетов (по одному для каждой партиции) с доступными для отправки данными. Небольшой размер пакета делает его менее востребованным и может снизить пропускную способность (нулевой размер пакета полностью отключает пакетирование). Очень большой размер пакета может использовать память расточительно, так как всегда выделяется буфер указанного размера пакета в ожидании дополнительных записей
+**batch.size** -- The producer will attempt to batch records together into fewer requests whenever multiple records are being sent to the same partition. This helps performance on both the client and the server. This configuration controls the default batch size in bytes. No attempt will be made to batch records larger than this size. Requests sent to brokers will contain multiple batches, one for each partition with data available to be sent. A small batch size will make batching less common and may reduce throughput (a batch size of zero will disable batching entirely). A very large batch size may use memory a bit more wastefully as we will always allocate a buffer of the specified batch size in anticipation of additional records
 
 + TYPE -- int
 + DEFAULT -- 16384
 + VALID VALUES -- [0,...]
 + IMPORTANCE -- medium
 
-**client.id** -- Строка id для передачи на сервер при выполнении запросов. Целью является возможность отслеживания источника запросов за пределами ip/port, позволяя включать логическое имя приложения в журнал запросов на стороне сервера
+**client.id** -- An id string to pass to the server when making requests. The purpose of this is to be able to track the source of requests beyond just ip/port by allowing a logical application name to be included in server-side request logging
 
 + TYPE -- string
 + DEFAULT -- ""
 + IMPORTANCE -- medium
 
-**connections.max.idle.ms** -- Закрытие бездействующих соединений по истечению заданного периода. Указывается в миллисекундах
+**connections.max.idle.ms** -- Close idle connections after the number of milliseconds specified by this config
 
 + TYPE -- long
 + DEFAULT -- 540000
 + IMPORTANCE -- medium
 
-**linger.ms** -- Поставщик объединяет в один пакет все записи, поступающие между трансмиссиями запросов. Обычно это происходит, когда данные поступают быстрее, чем могут быть отправлены. Однако клиент может уменьшить количество запросов даже при умеренной загрузке. Это реализуется путем добавления небольшого промежутка времени искусственной задержки, то есть вместо немедленной отправки данных поставщик ждет до указанной отметки с целью пакетирования данных. Это можно рассматривать как аналог алгоритма Nagle в TCP. Параметр дает верхнюю границу задержки по времени для пакетной обработки. Но как только достигается установленный размер пакета данных *batch.size* для партиции, пакет немедленно отправляется (независимо от заданного параметра *linger.ms*). Однако, имея меньший объем байт пакета, чем в указаном параметре *batch.size*, осуществляется задержка в течение времени, заданного *linger.ms*, с целью ожидания появления новых данных. По умолчанию параметр *linger.ms* равен "0" (то есть без задержки). Например, установка "linger.ms=5" приведет к уменьшению количества отправленных запросов, но добавит до *5 мс* задержки для данных, отправленных при отсутствии нагрузки. Указывается в миллисекундах
+**linger.ms** -- The producer groups together any records that arrive in between request transmissions into a single batched request. Normally this occurs only under load when records arrive faster than they can be sent out. However in some circumstances the client may want to reduce the number of requests even under moderate load. This setting accomplishes this by adding a small amount of artificial delay -- that is, rather than immediately sending out a record the producer will wait for up to the given delay to allow other records to be sent so that the sends can be batched together. This can be thought of as analogous to Nagle's algorithm in TCP. This setting gives the upper bound on the delay for batching: once we get *batch.size* worth of records for a partition it will be sent immediately regardless of this setting, however if we have fewer than this many bytes accumulated for this partition we will "linger" for the specified time waiting for more records to show up. This setting defaults to "0" (i.e. no delay). Setting *linger.ms=5*, for example, would have the effect of reducing the number of requests sent but would add up to *5ms* of latency to records sent in the absence of load
 
 + TYPE -- long
 + DEFAULT -- 0
 + VALID VALUES -- [0,...]
 + IMPORTANCE -- medium
 
-**max.block.ms** -- Время блокировки *ADSProducer.send()* и *ADSProducer.partitionsFor()*. Данные методы могут быть заблокированы либо по причине заполненного буфера, либо из-за недоступности метаданных. Блокировка в предоставленных пользователем сериализаторах или разделителе не учитывается по таймауту данного параметра. Указывается в миллисекундах
+**max.block.ms** -- The configuration controls how long *KafkaProducer.send()* and *KafkaProducer.partitionsFor()* will block. These methods can be blocked either because the buffer is full or metadata *unavailable.Blocking* in the user-supplied serializers or partitioner will not be counted against this timeout
 
 + TYPE -- long
 + DEFAULT -- 60000
 + VALID VALUES -- [0,...]
 + IMPORTANCE -- medium
 
-**max.request.size** -- Максимальный размер запроса в байтах. Параметр ограничивает количество пакетов данных, которые поставщик отправляет в одном запросе во избежание отправки огромных запросов. Параметр также эффективно ограничивает максимальный размер пакета данных. При этом сервер имеет свой собственный предел размера пакета данных, который может отличаться от указанного
+**max.request.size** -- The maximum size of a request in bytes. This setting will limit the number of record batches the producer will send in a single request to avoid sending huge requests. This is also effectively a cap on the maximum record batch size. Note that the server has its own cap on record batch size which may be different from this
 
 + TYPE -- int
 + DEFAULT -- 1048576
 + VALID VALUES -- [0,...]
 + IMPORTANCE -- medium
 
-**partitioner.class** -- Класс Partitioner, реализующий интерфейс *org.apache.kafka.clients.producer.Partitioner*
+**partitioner.class** -- Partitioner class that implements the *org.apache.kafka.clients.producer.Partitioner* interface
 
 + TYPE -- class
 + DEFAULT -- org.apache.kafka.clients.producer.internals.DefaultPartitioner
 + IMPORTANCE -- medium
 
-**receive.buffer.bytes** -- Размер буфера приема TCP (SO_RCVBUF) при чтении данных. Если значение равно "-1", используется ОС по умолчанию
+**receive.buffer.bytes** -- The size of the TCP receive buffer (*SO_RCVBUF*) to use when reading data. If the value is "-1", the OS default will be used
 
 + TYPE -- int
 + DEFAULT -- 32768
 + VALID VALUES -- [-1,...]
 + IMPORTANCE -- medium
 
-**request.timeout.ms** -- Максимальное время ожидания клиентом ответа на запрос. Если ответ не получен до истечения установленного значения, клиент повторно отправляет запрос при необходимости. Значение параметра должно быть больше, чем *replica.lag.time.max.ms* (конфигурация брокера), с целью сокращения возможного дублирования данных по причине излишних попыток поставщика. Указывается в миллисекундах
+**request.timeout.ms** -- The configuration controls the maximum amount of time the client will wait for the response of a request. If the response is not received before the timeout elapses the client will resend the request if necessary or fail the request if retries are exhausted. This should be larger than *replica.lag.time.max.ms* (a broker configuration) to reduce the possibility of message duplication due to unnecessary producer retries
 
 + TYPE -- int
 + DEFAULT -- 30000
 + VALID VALUES -- [0,...]
 + IMPORTANCE -- medium
 
-**sasl.jaas.config** -- Параметры контекста входа JAAS для соединений SSL в формате, используемом файлами конфигурации JAAS. Формат файла конфигурации JAAS описан по `ссылке <http://docs.oracle.com/javase/8/docs/technotes/guides/security/jgss/tutorials/LoginConfigFile.html>`_. Формат значения: "(=)*;"
+**sasl.jaas.config** -- JAAS login context parameters for SASL connections in the format used by JAAS configuration files. JAAS configuration file format is described `here <http://docs.oracle.com/javase/8/docs/technotes/guides/security/jgss/tutorials/LoginConfigFile.html>`_. The format for the value is: "(=)*;"
 
 + TYPE -- password
 + DEFAULT -- null
 + IMPORTANCE -- medium
 
-**sasl.kerberos.service.name** -- Имя принципала Kerberos, которое запускает ADS. Значение можно определить в конфигурации ADS JAAS либо в конфигурации ADS
+**sasl.kerberos.service.name** -- The Kerberos principal name that ADS runs as. This can be defined either in ADS's JAAS config or in ADS's config
 
 + TYPE -- string
 + DEFAULT -- null
 + IMPORTANCE -- medium
 
-**sasl.mechanism** -- Механизм SASL для клиентских подключений. Может быть любой механизм, для которого обеспечивается безопасность. По умолчанию используется GSSAPI
+**sasl.mechanism** -- SASL mechanism used for client connections. This may be any mechanism for which a security provider is available. GSSAPI is the default mechanism
 
 + TYPE -- string
 + DEFAULT -- GSSAPI
 + IMPORTANCE -- medium
 
-**security.protocol** -- Протокол безопасности для связи между брокерами. Допустимые значения: "PLAINTEXT", "SSL", "SASL_PLAINTEXT", "SASL_SSL"
+**security.protocol** -- Protocol used to communicate with brokers. Valid values are: "PLAINTEXT", "SSL", "SASL_PLAINTEXT", "SASL_SSL"
 
 + TYPE -- string
 + DEFAULT -- PLAINTEXT
 + IMPORTANCE -- medium
 
-**send.buffer.bytes** -- Размер буфера отправки TCP (SO_SNDBUF) при отправке данных. Если значение равно "-1", используется ОС по умолчанию
+**send.buffer.bytes** -- The size of the TCP send buffer (*SO_SNDBUF*) to use when sending data. If the value is "-1", the OS default will be used
 
 + TYPE -- int
 + DEFAULT -- 131072
 + VALID VALUES -- [-1,...]
 + IMPORTANCE -- medium
 
-**ssl.enabled.protocols** -- Список протоколов, включенных для соединений SSL
+**ssl.enabled.protocols** -- The list of protocols enabled for SSL connections
 
 + TYPE -- list
 + DEFAULT -- TLSv1.2,TLSv1.1,TLSv1
 + IMPORTANCE -- medium
 
-**ssl.keystore.type** -- Формат файла хранилища ключей. Необязательный параметр для клиента
+**ssl.keystore.type** -- The file format of the key store file. This is optional for client
 
 + TYPE -- string
 + DEFAULT -- JKS
 + IMPORTANCE -- medium
 
-**ssl.protocol** -- Протокол SSL для генерации SSLContext. Значение по умолчанию – "TLS", что подходит для большинства случаев. Допустимыми значениями в последних JVM являются "TLS", "TLSv1.1" и "TLSv1.2". Протоколы "SSL", "SSLv2" и "SSLv3" могут поддерживаться в более старых JVM, но их использование не рекомендуется из-за известных уязвимостей безопасности
+**ssl.protocol** -- The SSL protocol used to generate the SSLContext. Default setting is "TLS", which is fine for most cases. Allowed values in recent JVMs are "TLS", "TLSv1.1" and "TLSv1.2". "SSL", "SSLv2" and "SSLv3" may be supported in older JVMs, but their usage is discouraged due to known security vulnerabilities
 
 + TYPE -- string
 + DEFAULT -- TLS
 + IMPORTANCE -- medium
 
-**ssl.provider** -- Имя поставщика безопасности для соединений SSL. Значением по умолчанию является поставщик безопасности по умолчанию для JVM
+**ssl.provider** --The name of the security provider used for SSL connections. Default value is the default security provider of the JVM
 
 + TYPE -- string
 + DEFAULT -- null
 + IMPORTANCE -- medium
 
-**ssl.truststore.type** -- Формат файла хранилища trust store
+**ssl.truststore.type** -- The file format of the trust store file
 
 + TYPE -- string
 + DEFAULT -- JKS
 + IMPORTANCE -- medium
 
-**enable.idempotence** -- При установленном значении "true" поставщик гарантирует, что ровно одна копия каждого сообщения записывается в поток. При значении "false" в поток могут быть записаны дубликаты сообщений при повторных попытках отправки данных поставщиком из-за сбоев брокера или по другим причинам. Данный параметр требует, чтобы свойство *max.in.flight.requests.per.connection* было меньше или равно "5", повторные попытки более "0", и acks установлены на "all". Если перечисленные настройки явно не заданы пользователем, выбираются подходящие значения. При установке несовместимых значений, выдается ConfigException
+**enable.idempotence** -- When set to "true", the producer will ensure that exactly one copy of each message is written in the stream. If "false", producer retries due to broker failures, etc., may write duplicates of the retried message in the stream. Note that enabling idempotence requires *max.in.flight.requests.per.connection* to be less than or equal to "5", retries to be greater than "0" and acks must be "all". If these values are not explicitly set by the user, suitable values will be chosen. If incompatible values are set, a *ConfigException* will be thrown
 
 + TYPE -- boolean
 + DEFAULT -- false
 + IMPORTANCE -- low
 
-**interceptor.classes** -- Список классов для использования в качестве интерсепторов. Реализация интерфейса *org.apache.kafka.clients.producer.ProducerInterceptor* позволяет перехватывать (и, возможно, видоизменять) записи, полученные поставщиком до их публикации в кластере ADS. По умолчанию интерсепторы не установлены
+**interceptor.classes** -- A list of classes to use as interceptors. Implementing the *org.apache.kafka.clients.producer.ProducerInterceptor* interface allows you to intercept (and possibly mutate) the records received by the producer before they are published to the ADS cluster. By default, there are no interceptors
 
 + TYPE -- list
 + DEFAULT -- ""
 + VALID VALUES -- org.apache.kafka.common.config.ConfigDef$NonNullValidator@6a41eaa2
 + IMPORTANCE -- low
 
-**max.in.flight.requests.per.connection** -- Максимальное количество неподтвержденных запросов, отправляемых клиентом по одному соединению перед блокировкой. Если параметр имеет значение больше *1*, то в случае сбоев существует риск переупорядочения данных из-за повторных попыток (если они включены)
+**max.in.flight.requests.per.connection** -- The maximum number of unacknowledged requests the client will send on a single connection before blocking. Note that if this setting is set to be greater than "1" and there are failed sends, there is a risk of message re-ordering due to retries (i.e., if retries are enabled)
 
 + TYPE -- int
 + DEFAULT -- 5
 + VALID VALUES -- [1,...]
 + IMPORTANCE -- low
 
-**metadata.max.age.ms** -- Период времени, после которого принудительно обновляются метаданные даже при отсутствии видимых изменений в лидере партиции с целью предварительного обнаружения новых брокеров или партиций. Указывается в миллисекундах
+**metadata.max.age.ms** -- The period of time in milliseconds after which we force a refresh of metadata even if we haven't seen any partition leadership changes to proactively discover any new brokers or partitions
 
 + TYPE -- long
 + DEFAULT -- 300000
 + VALID VALUES -- [0,...]
 + IMPORTANCE -- low
 
-**metric.reporters** -- Список классов для использования в качестве репортеров метрик. Реализация интерфейса *org.apache.kafka.common.metrics.MetricsReporter* позволяет подключать классы, которые будут уведомлены о создании новой метрики. JmxReporter всегда включен в реестр статистических данных JMX
+**metric.reporters** -- A list of classes to use as metrics reporters. Implementing the *org.apache.kafka.common.metrics.MetricsReporter* interface allows plugging in classes that will be notified of new metric creation. The JmxReporter is always included to register JMX statistics
 
 + TYPE -- list
 + DEFAULT -- ""
 + VALID VALUES -- org.apache.kafka.common.config.ConfigDef$NonNullValidator@7cd62f43
 + IMPORTANCE -- low
 
-**metrics.num.samples** -- Количество выборок, поддерживаемых для вычисления метрик
+**metrics.num.samples** -- The number of samples maintained to compute metrics
 
 + TYPE -- int
 + DEFAULT -- 2
 + VALID VALUES -- [1,...]
 + IMPORTANCE -- low
 
-**metrics.recording.level** -- Самый высокий уровень записи для метрик
+**metrics.recording.level** -- The highest recording level for metrics
 
 + TYPE -- string
 + DEFAULT -- INFO
 + VALID VALUES -- [INFO, DEBUG]
 + IMPORTANCE -- low
 
-**metrics.sample.window.ms** -- Время ожидания вычисления метрик выборки. Указывается в миллисекундах
+**metrics.sample.window.ms** -- The window of time a metrics sample is computed over
 
 + TYPE -- long
 + DEFAULT -- 30000
 + VALID VALUES -- [0,...]
 + IMPORTANCE -- low
 
-**reconnect.backoff.max.ms** -- Максимальный период времени ожидания повторного подключения к брокеру при неоднократных сбоях соединения. Отсрочка на хост увеличивается экспоненциально для каждого последующего сбоя соединения, вплоть до установленного максимума. После расчета увеличения отсрочки к значению добавляется *20%* случайного джиттера во избежание помех связи. Указывается в миллисекундах
+**reconnect.backoff.max.ms** -- The maximum amount of time in milliseconds to wait when reconnecting to a broker that has repeatedly failed to connect. If provided, the backoff per host will increase exponentially for each consecutive connection failure, up to this maximum. After calculating the backoff increase, *20%* random jitter is added to avoid connection storms
 
 + TYPE -- long
 + DEFAULT -- 1000
 + VALID VALUES -- [0,...]
 + IMPORTANCE -- low
 
-**reconnect.backoff.ms** -- Базовый период времени ожидания повторного подключения к хосту. Позволяет избегать многократного подключения к узлу в узком цикле. Данная отсрочка применяется ко всем попыткам подключения клиента к брокеру. Указывается в миллисекундах
+**reconnect.backoff.ms** -- The base amount of time to wait before attempting to reconnect to a given host. This avoids repeatedly connecting to a host in a tight loop. This backoff applies to all connection attempts by the client to a broker
 
 + TYPE -- long
 + DEFAULT -- 50
 + VALID VALUES -- [0,...]
 + IMPORTANCE -- low
 
-**retry.backoff.ms** -- Время ожидания перед повторной попыткой отправки неудавшегося запроса в партицию топика. Указывается в миллисекундах
+**retry.backoff.ms** -- The amount of time to wait before attempting to retry a failed request to a given topic partition. This avoids repeatedly sending requests in a tight loop under some failure scenarios
 
 + TYPE -- long	
 + DEFAULT -- 100
 + VALID VALUES -- [0,...]
 + IMPORTANCE -- low
 
-**sasl.kerberos.kinit.cmd** -- Путь команд Kerberos kinit
+**sasl.kerberos.kinit.cmd** -- Kerberos kinit command path
 
 + TYPE -- string
 + DEFAULT -- /usr/bin/kinit
 + IMPORTANCE -- low
 
-**sasl.kerberos.min.time.before.relogin** -- Время ожидания авторизации потока между попытками обновления
+**sasl.kerberos.min.time.before.relogin** -- Login thread sleep time between refresh attempts
 
 + TYPE -- long
 + DEFAULT -- 60000
 + IMPORTANCE -- low
 
-**sasl.kerberos.ticket.renew.jitter** -- Процент случайного джиттера по отношению к времени возобновления
+**sasl.kerberos.ticket.renew.jitter** -- Percentage of random jitter added to the renewal time
 
 + TYPE -- double
 + DEFAULT -- 0.05
 + IMPORTANCE -- low
 
-**sasl.kerberos.ticket.renew.window.factor** -- Время ожидания авторизации потока до тех пор, пока не будет достигнут указанный коэффициент времени от последнего обновления до истечения срока действия тикета, и попытка возобновления тикета за этот период времени
+**sasl.kerberos.ticket.renew.window.factor** -- Login thread will sleep until the specified window factor of time from last refresh to ticket's expiry has been reached, at which time it will try to renew the ticket
 
 + TYPE -- double
 + DEFAULT -- 0.8
 + IMPORTANCE -- low
 
-**ssl.cipher.suites** -- Список наборов шифров. Именованная комбинация аутентификации, шифрования, MAC и ключей обмена алгоритма для согласования параметров безопасности для сетевого подключения с использованием протокола TLS или SSL. По умолчанию поддерживаются все доступные варианты шифрования
+**ssl.cipher.suites** -- A list of cipher suites. This is a named combination of authentication, encryption, MAC and key exchange algorithm used to negotiate the security settings for a network connection using TLS or SSL network protocol. By default all the available cipher suites are supported
 
 + TYPE -- list
 + DEFAULT -- null
 + IMPORTANCE -- low
 
-**ssl.endpoint.identification.algorithm** -- Алгоритм идентификации конечных точек для валидации имени хоста сервера с использованием сертификата сервера
+**ssl.endpoint.identification.algorithm** -- The endpoint identification algorithm to validate server hostname using server certificate
 
 + TYPE -- string
 + DEFAULT -- null
 + IMPORTANCE -- low
 
-**ssl.keymanager.algorithm** -- Алгоритм службы управления ключами для SSL-соединений. Значением по умолчанию является алгоритм, настроенный для Java Virtual Machine
+**ssl.keymanager.algorithm** -- The algorithm used by key manager factory for SSL connections. Default value is the key manager factory algorithm configured for the Java Virtual Machine
 
 + TYPE -- string
 + DEFAULT -- SunX509
 + IMPORTANCE -- low
 
-**ssl.secure.random.implementation** -- Реализация SecureRandom PRNG, используемая для операций шифрования SSL
+**ssl.secure.random.implementation** -- The SecureRandom PRNG implementation to use for SSL cryptography operations
 
 + TYPE -- string
 + DEFAULT -- null
 + IMPORTANCE -- low
 
-**ssl.trustmanager.algorithm** -- Алгоритм доверенной службы управления ключами для SSL-соединений. Значением по умолчанию является алгоритм, настроенный для Java Virtual Machine
+**ssl.trustmanager.algorithm** -- The algorithm used by trust manager factory for SSL connections. Default value is the trust manager factory algorithm configured for the Java Virtual Machine
 
 + TYPE -- string	
 + DEFAULT -- PKIX
 + IMPORTANCE -- low
 
-**transaction.timeout.ms** -- Максимальный интервал времени, который координатор транзакции ожидает для обновления статуса транзакции от поставщика перед тем, как будет прервана текущая транзакция. Если установленное значение больше, чем значение *transaction.max.timeout.ms* в настройках брокера, запрос завершается ошибкой *InvalidTransactionTimeout*
+**transaction.timeout.ms** -- The maximum amount of time in ms that the transaction coordinator will wait for a transaction status update from the producer before proactively aborting the ongoing transaction.If this value is larger than the *transaction.max.timeout.ms* setting in the broker, the request will fail with a *InvalidTransactionTimeout* error
 
 + TYPE -- int
 + DEFAULT -- 60000
 + IMPORTANCE -- low
 
-**transactional.id** -- Идентификатор транзакции. Параметр позволяет использовать семантику достоверности, которая охватывает несколько сессий поставщика, и позволяет гарантировать клиенту, что транзакции, использующие тот же TransactionalId, завершены до начала любых новых транзакций. Если TransactionalId не указан, то поставщик ограничивается идемпотентной доставкой. Важно, что параметр *enable.idempotence* должен быть включен при сконфигурированном *TransactionalId*. Значение по умолчанию "null", что означает невозможность использования транзакций. Для транзакций требуется по меньшей мере три брокера по умолчанию, что является рекомендуемым параметром для продуктивной системы; для разработки можно изменить настройки в параметре брокера *transaction.state.log.replication.factor*
+**transactional.id** -- The *TransactionalId* to use for transactional delivery. This enables reliability semantics which span multiple producer sessions since it allows the client to guarantee that transactions using the same *TransactionalId* have been completed prior to starting any new transactions. If no *TransactionalId* is provided, then the producer is limited to idempotent delivery. Note that *enable.idempotence* must be enabled if a *TransactionalId* is configured. The default is "null", which means transactions cannot be used. Note that transactions requires a cluster of at least three brokers by default what is the recommended setting for production; for development you can change this, by adjusting broker setting *transaction.state.log.replication.factor*
 
 + TYPE -- string
 + DEFAULT -- null
