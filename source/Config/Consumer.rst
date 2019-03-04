@@ -178,181 +178,181 @@ Below is the configuration for the new consumer.
 + DEFAULT -- PLAINTEXT
 + IMPORTANCE -- medium
 
-**send.buffer.bytes** -- Буфер SO_SNDBUF сокета сервера сокетов. При значении параметра "-1" используется ОС по умолчанию
+**send.buffer.bytes** -- The size of the TCP send buffer (*SO_SNDBUF*) to use when sending data. If the value is "-1", the OS default will be used
 
 + TYPE -- int
 + DEFAULT -- 131072
 + VALID VALUES -- [-1,...]
 + IMPORTANCE -- medium
 
-**ssl.enabled.protocols** -- Список протоколов, включенных для соединений SSL
+**ssl.enabled.protocols** -- The list of protocols enabled for SSL connections
 
 + TYPE -- list
 + DEFAULT -- TLSv1.2,TLSv1.1,TLSv1
 + IMPORTANCE -- medium
 
-**ssl.keystore.type** -- Формат файла хранилища ключей. Необязательный параметр для клиента
+**ssl.keystore.type** -- The file format of the key store file. This is optional for client
 
 + TYPE -- string
 + DEFAULT -- JKS
 + IMPORTANCE -- medium
 
-**ssl.protocol** -- Протокол SSL для генерации SSLContext. Значение по умолчанию – "TLS", что подходит для большинства случаев. Допустимыми значениями в последних JVM являются "TLS", "TLSv1.1" и "TLSv1.2". Протоколы "SSL", "SSLv2" и "SSLv3" могут поддерживаться в более старых JVM, но их использование не рекомендуется из-за известных уязвимостей безопасности
+**ssl.protocol** -- The SSL protocol used to generate the SSLContext. Default setting is "TLS", which is fine for most cases. Allowed values in recent JVMs are "TLS", "TLSv1.1" and "TLSv1.2". "SSL", "SSLv2" and "SSLv3" may be supported in older JVMs, but their usage is discouraged due to known security vulnerabilities
 
 + TYPE -- string
 + DEFAULT -- TLS
 + IMPORTANCE -- medium
 
-**ssl.provider** -- Имя поставщика безопасности для соединений SSL. Значением по умолчанию является поставщик безопасности по умолчанию для JVM
+**ssl.provider** -- The name of the security provider used for SSL connections. Default value is the default security provider of the JVM
 
 + TYPE -- string
 + DEFAULT -- null
 + IMPORTANCE -- medium
 
-**ssl.truststore.type** -- Формат файла хранилища trust store
+**ssl.truststore.type** -- The file format of the trust store file
 
 + TYPE -- string
 + DEFAULT -- JKS
 + IMPORTANCE -- medium
 
-**auto.commit.interval.ms** -- Частота автофиксации потребительских смещений при включенном параметре *enable.auto.commit* (значение "true"). Указывается в миллисекундах
+**auto.commit.interval.ms** -- The frequency in milliseconds that the consumer offsets are auto-committed to ADS if *enable.auto.commit* is set to "true"
 
 + TYPE -- int
 + DEFAULT -- 5000
 + VALID VALUES -- [0,...]	
 + IMPORTANCE -- low
 
-**check.crcs** -- Автоматическая проверка CRC32 считываемых записей. Проверка добавляет некоторые накладные расходы, поэтому она может быть отключена в случаях, требующих высокой производительности
+**check.crcs** -- Automatically check the CRC32 of the records consumed. This ensures no on-the-wire or on-disk corruption to the messages occurred. This check adds some overhead, so it may be disabled in cases seeking extreme performance
 
 + TYPE -- boolean
 + DEFAULT -- true
 + IMPORTANCE -- low
 
-**client.id** -- Строка id для передачи на сервер при выполнении запросов. Целью является возможность отслеживания источника запросов за пределами ip/port, позволяя включать логическое имя приложения в журнал запросов на стороне сервера
+**client.id** -- An id string to pass to the server when making requests. The purpose of this is to be able to track the source of requests beyond just ip/port by allowing a logical application name to be included in server-side request logging
 
 + TYPE -- string	
 + DEFAULT -- ""
 + IMPORTANCE -- low
 
-**fetch.max.wait.ms** -- Максимальный период времени, в течение которого сервер блокируется, прежде чем ответить на запрос выборки (в случае недостаточного объема данных для незамедлительного ответа, заданного функцией *fetch.min.bytes*). Указывается в миллисекундах
+**fetch.max.wait.ms** -- The maximum amount of time the server will block before answering the fetch request if there isn't sufficient data to immediately satisfy the requirement given by *fetch.min.bytes*
 
 + TYPE -- int
 + DEFAULT -- 500
 + VALID VALUES -- [0,...]
 + IMPORTANCE -- low
 
-**interceptor.classes** -- Список классов для использования в качестве интерсепторов. Реализация интерфейса *org.apache.kafka.clients.consumer.ConsumerInterceptor* позволяет перехватывать (и, возможно, видоизменять) полученные потребителем записи. По умолчанию интерсепторы не установлены
+**interceptor.classes** -- A list of classes to use as interceptors. Implementing the *org.apache.kafka.clients.consumer.ConsumerInterceptor* interface allows you to intercept (and possibly mutate) records received by the consumer. By default, there are no interceptors
 
 + TYPE -- list
 + DEFAULT -- ""
 + VALID VALUES -- org.apache.kafka.common.config.ConfigDef$NonNullValidator@6093dd95
 + IMPORTANCE -- low
 
-**metadata.max.age.ms** -- Период времени, после которого принудительно обновляются метаданные даже при отсутствии видимых изменений в лидере партиции с целью предварительного обнаружения новых брокеров или партиций. Указывается в миллисекундах
+**metadata.max.age.ms** -- The period of time in milliseconds after which we force a refresh of metadata even if we haven't seen any partition leadership changes to proactively discover any new brokers or partitions
 
 + TYPE -- long
 + DEFAULT -- 300000
 + VALID VALUES -- [0,...]
 + IMPORTANCE -- low
 
-**metric.reporters** -- Список классов для использования в качестве репортеров метрик. Реализация интерфейса *org.apache.kafka.common.metrics.MetricsReporter* позволяет подключать классы, которые будут уведомлены о создании новой метрики. JmxReporter всегда включен в реестр статистических данных JMX
+**metric.reporters** -- A list of classes to use as metrics reporters. Implementing the *org.apache.kafka.common.metrics.MetricsReporter* interface allows plugging in classes that will be notified of new metric creation. The JmxReporter is always included to register JMX statistics
 
 + TYPE -- list
 + DEFAULT -- ""
 + VALID VALUES -- org.apache.kafka.common.config.ConfigDef$NonNullValidator@5622fdf
 + IMPORTANCE -- low
 
-**metrics.num.samples** -- Количество выборок, поддерживаемых для вычисления метрик
+**metrics.num.samples** -- The number of samples maintained to compute metrics
 
 + TYPE -- int
 + DEFAULT -- 2
 + VALID VALUES -- [1,...]
 + IMPORTANCE -- low
 
-**metrics.recording.level** -- Самый высокий уровень записи для метрик
+**metrics.recording.level** -- The highest recording level for metrics
 
 + TYPE -- string
 + DEFAULT -- INFO
 + VALID VALUES -- [INFO, DEBUG]
 + IMPORTANCE -- low
 
-**metrics.sample.window.ms** -- Время ожидания вычисления метрик выборки. Указывается в миллисекундах
+**metrics.sample.window.ms** -- The window of time a metrics sample is computed over
 
 + TYPE -- long
 + DEFAULT -- 30000
 + VALID VALUES -- [0,...]
 + IMPORTANCE -- low
 
-**reconnect.backoff.max.ms** -- Максимальный период времени ожидания повторного подключения к брокеру при неоднократных сбоях соединения. Отсрочка на хост увеличивается экспоненциально для каждого последующего сбоя соединения, вплоть до установленного максимума. После расчета увеличения отсрочки к значению добавляется *20%* случайного джиттера во избежание помех связи. Указывается в миллисекундах
+**reconnect.backoff.max.ms** -- The maximum amount of time in milliseconds to wait when reconnecting to a broker that has repeatedly failed to connect. If provided, the backoff per host will increase exponentially for each consecutive connection failure, up to this maximum. After calculating the backoff increase, *20%* random jitter is added to avoid connection storms
 
 + TYPE -- long
 + DEFAULT -- 1000
 + VALID VALUES -- [0,...]
 + IMPORTANCE -- low
 
-**reconnect.backoff.ms** -- Базовый период времени ожидания повторного подключения к хосту. Позволяет избегать многократного подключения к узлу в узком цикле. Данная отсрочка применяется ко всем попыткам подключения клиента к брокеру. Указывается в миллисекундах
+**reconnect.backoff.ms** -- The base amount of time to wait before attempting to reconnect to a given host. This avoids repeatedly connecting to a host in a tight loop. This backoff applies to all connection attempts by the client to a broker
 
 + TYPE -- long
 + DEFAULT -- 50
 + VALID VALUES -- [0,...]
 + IMPORTANCE -- low
 
-**retry.backoff.ms** -- Время ожидания перед повторной попыткой отправки неудавшегося запроса в партицию топика. Указывается в миллисекундах
+**retry.backoff.ms** -- The amount of time to wait before attempting to retry a failed request to a given topic partition. This avoids repeatedly sending requests in a tight loop under some failure scenarios
 
 + TYPE -- long
 + DEFAULT -- 100
 + VALID VALUES -- [0,...]
 + IMPORTANCE -- low
 
-**sasl.kerberos.kinit.cmd** -- Путь команд Kerberos kinit
+**sasl.kerberos.kinit.cmd** -- Kerberos kinit command path
 
 + TYPE -- string
 + DEFAULT -- /usr/bin/kinit
 + IMPORTANCE -- low
 
-**sasl.kerberos.min.time.before.relogin** -- Время ожидания авторизации потока между попытками обновления
+**sasl.kerberos.min.time.before.relogin** -- Login thread sleep time between refresh attempts
 
 + TYPE -- long
 + DEFAULT -- 60000
 + IMPORTANCE -- low
 
-**sasl.kerberos.ticket.renew.jitter** -- Процент случайного джиттера по отношению к времени возобновления
+**sasl.kerberos.ticket.renew.jitter** -- Percentage of random jitter added to the renewal time
 
 + TYPE -- double
 + DEFAULT -- 0.05
 + IMPORTANCE -- low
 
-**sasl.kerberos.ticket.renew.window.factor** -- Время ожидания авторизации потока до тех пор, пока не будет достигнут указанный коэффициент времени от последнего обновления до истечения срока действия тикета, и попытка возобновления тикета за этот период времени
+**sasl.kerberos.ticket.renew.window.factor** -- Login thread will sleep until the specified window factor of time from last refresh to ticket's expiry has been reached, at which time it will try to renew the ticket
 
 + TYPE -- double
 + DEFAULT -- 0.8
 + IMPORTANCE -- low
 
-**ssl.cipher.suites** -- Список наборов шифров. Именованная комбинация аутентификации, шифрования, MAC и ключей обмена алгоритма для согласования параметров безопасности для сетевого подключения с использованием протокола TLS или SSL. По умолчанию поддерживаются все доступные варианты шифрования
+**ssl.cipher.suites** -- A list of cipher suites. This is a named combination of authentication, encryption, MAC and key exchange algorithm used to negotiate the security settings for a network connection using TLS or SSL network protocol. By default all the available cipher suites are supported
 
 + TYPE -- list
 + DEFAULT -- null
 + IMPORTANCE -- low
 
-**ssl.endpoint.identification.algorithm** -- Алгоритм идентификации конечных точек для валидации имени хоста сервера с использованием сертификата сервера
+**ssl.endpoint.identification.algorithm** -- The endpoint identification algorithm to validate server hostname using server certificate
 
 + TYPE -- string
 + DEFAULT -- null
 + IMPORTANCE -- low
 
-**ssl.keymanager.algorithm** -- Алгоритм службы управления ключами для SSL-соединений. Значением по умолчанию является алгоритм, настроенный для Java Virtual Machine
+**ssl.keymanager.algorithm** -- The algorithm used by key manager factory for SSL connections. Default value is the key manager factory algorithm configured for the Java Virtual Machine
 
 + TYPE -- string
 + DEFAULT -- SunX509
 + IMPORTANCE -- low
 
-**ssl.secure.random.implementation** -- Реализация SecureRandom PRNG, используемая для операций шифрования SSL
+**ssl.secure.random.implementation** -- The SecureRandom PRNG implementation to use for SSL cryptography operations
 
 + TYPE -- string
 + DEFAULT -- null
 + IMPORTANCE -- low
 
-**ssl.trustmanager.algorithm** -- Алгоритм доверенной службы управления ключами для SSL-соединений. Значением по умолчанию является алгоритм, настроенный для Java Virtual Machine
+**ssl.trustmanager.algorithm** -- The algorithm used by trust manager factory for SSL connections. Default value is the trust manager factory algorithm configured for the Java Virtual Machine
 
 + TYPE -- string
 + DEFAULT -- PKIX
