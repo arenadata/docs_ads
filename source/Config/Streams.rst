@@ -1,156 +1,150 @@
-Конфигурирование Streams
+Streams Configs
 =========================
 
-Далее приведены конфигурации для клиентской библиотеки ADS Streams.
+Below is the configuration of the Kafka Streams client library.
 
-**application.id** -- Идентификатор приложения потоковой обработки. Должен быть уникальным в пределах платформы ADS. Используется как: 1) префикс идентификатора клиента по умолчанию, 2) идентификатор группы для управления членством, 3) префикс топика изменений в журнале
+**application.id** -- An identifier for the stream processing application. Must be unique within the Kafka cluster. It is used as 1) the default client-id prefix, 2) the group-id for membership management, 3) the changelog topic prefix
 
 + TYPE -- string
 + IMPORTANCE -- high
 
-**bootstrap.servers** -- Список пар хост/порт, используемых для установления первоначального подключения к платформе ADS. В дальнейшем клиент будет использовать все сервера, независимо от того, какие указаны в данном параметре – этот список влияет только на начальные хосты, используемые для обнаружения полного набора серверов. Параметр должен быть задан в формате “host1:port1, host2:port2,...” (через запятую и без пробелов). Поскольку данные сервера используются только для первоначального подключения с целью обнаружения полного набора в кластере (который может динамически меняться), списку необязательно содержать полный набор серверов (можно указать более одного, на случай отказа первого)
+**bootstrap.servers** -- A list of host/port pairs to use for establishing the initial connection to the Kafka cluster. The client will make use of all servers irrespective of which servers are specified here for bootstrapping—this list only impacts the initial hosts used to discover the full set of servers. This list should be in the form "host1:port1,host2:port2,...". Since these servers are just used for the initial connection to discover the full cluster membership (which may change dynamically), this list need not contain the full set of servers (you may want more than one, though, in case a server is down)
 
 + TYPE -- list
 + IMPORTANCE -- high
 
-**replication.factor** -- Коэффициент репликации для топиков журнала изменений и репартицирования топиков, созданных приложением потоковой обработки
+**replication.factor** -- The replication factor for change log topics and repartition topics created by the stream processing application
 
 + TYPE -- int
 + DEFAULT -- 1
 + IMPORTANCE -- high
 
-**state.dir** -- Местоположение каталога хранилища state store
+**state.dir** -- Directory location for state store
 
 + TYPE -- string
 + DEFAULT -- /tmp/kafka-streams
 + IMPORTANCE -- high
 
-**cache.max.bytes.buffering** -- Максимальный объем памяти в байтах, используемый для буферизации всех потоков
+**cache.max.bytes.buffering** -- Maximum number of memory bytes to be used for buffering across all threads
 
 + TYPE -- long
 + DEFAULT -- 10485760
 + VALID VALUES -- [0,...]
 + IMPORTANCE -- medium
 
-**client.id** -- Строка префикса ID, используемая для идентификаторов клиента внутреннего потребителя и поставщика (восстановления потребителя); шаблон "-StreamThread--"
+**client.id** -- An ID prefix string used for the client IDs of internal consumer, producer and restore-consumer, with pattern "-StreamThread--"
 
 + TYPE -- string
 + DEFAULT -- ""
 + IMPORTANCE -- medium
 
-**default.deserialization.exception.handler** -- Класс обработки исключений, реализующий интерфейс *org.apache.kafka.streams.errors.DeserializationExceptionHandler*
+**default.deserialization.exception.handler** -- Exception handling class that implements the *org.apache.kafka.streams.errors.DeserializationExceptionHandler* interface
 
 + TYPE -- class
 + DEFAULT -- org.apache.kafka.streams.errors.LogAndFailExceptionHandler
 + IMPORTANCE -- medium
 
-**default.key.serde** -- Класс сериализатора/десериализатора по умолчанию для ключа, реализующего интерфейс *org.apache.kafka.common.serialization.Serde*
+**default.key.serde** -- Default serializer / deserializer class for key that implements the *org.apache.kafka.common.serialization.Serde* interface
 
 + TYPE -- class
 + DEFAULT -- org.apache.kafka.common.serialization.Serdes$ByteArraySerde
 + IMPORTANCE -- medium
 
-**default.production.exception.handler** -- Класс обработки исключений, реализующий интерфейс *org.apache.kafka.streams.errors.ProductionExceptionHandler*
-
-+ TYPE -- class
-+ DEFAULT -- org.apache.kafka.streams.errors.DefaultProductionExceptionHandler
-+ IMPORTANCE -- medium
-
-**default.timestamp.extractor** -- Класс выделения временных меток по умолчанию, реализующий интерфейс *org.apache.kafka.streams.processor.TimestampExtractor*
+**default.timestamp.extractor** -- Default timestamp extractor class that implements the *org.apache.kafka.streams.processor.TimestampExtractor* interface
 
 + TYPE -- class
 + DEFAULT -- org.apache.kafka.streams.processor.FailOnInvalidTimestamp
 + IMPORTANCE -- medium
 
-**default.value.serde** -- Класс сериализатора/десериализатора по умолчанию для значения, реализующего интерфейс *org.apache.kafka.common.serialization.Serde*
+**default.value.serde** -- Default serializer/deserializer class for value that implements the *org.apache.kafka.common.serialization.Serde* interface
 
 + TYPE -- class
 + DEFAULT -- org.apache.kafka.common.serialization.Serdes$ByteArraySerde
 + IMPORTANCE -- medium
 
-**num.standby.replicas** -- Число резервных реплик для каждой задачи
+**num.standby.replicas** -- The number of standby replicas for each task
 
 + TYPE -- int
 + DEFAULT -- 0
 + IMPORTANCE -- medium
 
-**num.stream.threads** -- Количество потоков для выполнения потоковой обработки
+**num.stream.threads** -- The number of threads to execute stream processing
 
 + TYPE -- int
 + DEFAULT -- 1
 + IMPORTANCE -- medium
 
-**processing.guarantee** -- Гарантия на обработку. Возможные значения: "at_least_once" (по умолчанию) и "exact_once". Для обработки "exact_once" требуется по меньшей мере три брокера по умолчанию, что является рекомендуемой настройкой для продуктивной среды; для разработки можно изменить параметр, при этом переустановив настройку брокера *transaction.state.log.replication.factor*
+**processing.guarantee** -- The processing guarantee that should be used. Possible values are "at_least_once" (default) and "exactly_once". Note that "exactly-once" processing requires a cluster of at least three brokers by default what is the recommended setting for production; for development you can change this, by adjusting broker setting *transaction.state.log.replication.factor*
 
 + TYPE -- string
 + DEFAULT -- at_least_once
 + VALID VALUES -- [at_least_once, exactly_once]
 + IMPORTANCE -- medium
 
-**security.protocol** -- Протокол безопасности для связи между брокерами. Допустимые значения: "PLAINTEXT", "SSL", "SASL_PLAINTEXT", "SASL_SSL"
+**security.protocol** -- Protocol used to communicate with brokers. Valid values are: "PLAINTEXT", "SSL", "SASL_PLAINTEXT", "SASL_SSL"
 
 + TYPE -- string
 + DEFAULT -- PLAINTEXT
 + IMPORTANCE -- medium
 
-**application.server** -- Пара "host:port", указывающая на встроенную конечную точку пользователя, которая может использоваться для обнаружения местоположений хранилищ state stores в рамках одного приложения
+**application.server** -- A host:port pair pointing to an embedded user defined endpoint that can be used for discovering the locations of state stores within a single KafkaStreams application
 
 + TYPE -- string
 + DEFAULT -- ""
 + IMPORTANCE -- low
 
-**buffered.records.per.partition** -- Максимальное количество записей в буфере для каждой партиции
+**buffered.records.per.partition** -- The maximum number of records to buffer per partition
 
 + TYPE -- int
 + DEFAULT -- 1000
 + IMPORTANCE -- low
 
-**commit.interval.ms** -- Частота сохранения положения процессора. Если параметр *processing.guarantee* установлен на "exactly_once", значение по умолчанию равно "100", иначе (при "at_least_once") значение по умолчанию равно "30000". Указывается в миллисекундах
+**commit.interval.ms** -- The frequency with which to save the position of the processor. Note, if *processing.guarantee* is set to "exactly_once", the default value is "100", otherwise the default value is "30000"
 
 + TYPE -- long
 + DEFAULT -- 30000
 + IMPORTANCE -- low
 
-**connections.max.idle.ms** -- Закрытие бездействующих соединений по истечению заданного периода. Указывается в миллисекундах
+**connections.max.idle.ms** -- Close idle connections after the number of milliseconds specified by this config
 
 + TYPE -- long
 + DEFAULT -- 540000
 + IMPORTANCE -- low
 
-**key.serde** -- Сериализатор/десериализатор для ключа, реализующего интерфейс *org.apache.kafka.common.serialization.Serde*. Данная конфигурация устарела, вместо нее используется *default.key.serde*
+**key.serde** -- Serializer/deserializer class for key that implements the *org.apache.kafka.common.serialization.Serde* interface. This config is deprecated, use *default.key.serde* instead
 
 + TYPE -- class
 + DEFAULT -- null
 + IMPORTANCE -- low
 
-**metadata.max.age.ms** -- Период времени, после которого принудительно обновляются метаданные даже при отсутствии видимых изменений в лидере партиции с целью предварительного обнаружения новых брокеров или партиций. Указывается в миллисекундах
+**metadata.max.age.ms** -- The period of time in milliseconds after which we force a refresh of metadata even if we haven't seen any partition leadership changes to proactively discover any new brokers or partitions
 
 + TYPE -- long
 + DEFAULT -- 300000
 + VALID VALUES -- [0,...]
 + IMPORTANCE -- low
 
-**metric.reporters** -- Список классов для использования в качестве репортеров метрик. Реализация интерфейса *org.apache.kafka.common.metrics.MetricsReporter* позволяет подключать классы, которые будут уведомлены о создании новой метрики. JmxReporter всегда включен в реестр статистических данных JMX
+**metric.reporters** -- A list of classes to use as metrics reporters. Implementing the *org.apache.kafka.common.metrics.MetricsReporter* interface allows plugging in classes that will be notified of new metric creation. The JmxReporter is always included to register JMX statistics
 
 + TYPE -- list
 + DEFAULT -- ""
 + IMPORTANCE -- low
 
-**metrics.num.samples** -- Количество выборок, поддерживаемых для вычисления метрик
+**metrics.num.samples** -- The number of samples maintained to compute metrics
 
 + TYPE -- int
 + DEFAULT -- 2
 + VALID VALUES -- [1,...]
 + IMPORTANCE -- low
 
-**metrics.recording.level** -- Самый высокий уровень записи для метрик
+**metrics.recording.level** -- The highest recording level for metrics
 
 + TYPE -- string
 + DEFAULT -- INFO
 + VALID VALUES -- [INFO, DEBUG]
 + IMPORTANCE -- low
 
-**metrics.sample.window.ms** -- Время ожидания вычисления метрик выборки. Указывается в миллисекундах
+**metrics.sample.window.ms** -- The window of time a metrics sample is computed over
 
 + TYPE -- long
 + DEFAULT -- 30000
