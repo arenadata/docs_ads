@@ -62,7 +62,7 @@ The following are the topic-level configurations. The server's default configura
 + SERVER DEFAULT PROPERTY -- follower.replication.throttled.replicas
 + IMPORTANCE -- medium
 
-**index.interval.bytes** -- Частота добавления индексной записи в индекс смещения. Значение по умолчанию гарантирует индексацию сообщения примерно каждые 4096 байт. Большее индексирование позволяет потребителям приближаться к более точному положению в журнале, но увеличивает сам индекс. Рекомендуется значение не менять
+**index.interval.bytes** -- This setting controls how frequently Kafka adds an index entry to it's offset index. The default setting ensures that we index a message roughly every *4096* bytes. More indexing allows reads to jump closer to the exact position in the log but makes the index larger. You probably don't need to change this
 
 + TYPE -- int
 + DEFAULT -- 4096
@@ -70,7 +70,7 @@ The following are the topic-level configurations. The server's default configura
 + SERVER DEFAULT PROPERTY -- log.index.interval.bytes
 + IMPORTANCE -- medium
 
-**leader.replication.throttled.replicas** -- Список реплик, для которых репликация журнала должна дросселироваться на стороне лидера. Список должен описывать набор реплик в формате "[PartitionId]:[BrokerId],[PartitionId]:[BrokerId]:..." или можно использовать специальный символ "*" для дросселирования всех реплик в данном топике
+**leader.replication.throttled.replicas** -- A list of replicas for which log replication should be throttled on the leader side. The list should describe a set of replicas in the form "[PartitionId]:[BrokerId],[PartitionId]:[BrokerId]:..." or alternatively the wildcard "*" can be used to throttle all replicas for this topic
 
 + TYPE -- list
 + DEFAULT -- ""
@@ -78,7 +78,7 @@ The following are the topic-level configurations. The server's default configura
 + SERVER DEFAULT PROPERTY -- leader.replication.throttled.replicas
 + IMPORTANCE -- medium
 
-**max.message.bytes** -- Наибольший размер пакета данных, разрешенный ADS. При увеличении параметра следует также увеличить размер выборки для потребителей с целью обеспечения возможности получения пакета данных установленного размера
+**max.message.bytes** -- The largest record batch size allowed by **ADS**. If this is increased the consumers' fetch size must also be increased so that the they can fetch record batches this large
 
 + TYPE -- int
 + DEFAULT -- 1000012
@@ -86,14 +86,14 @@ The following are the topic-level configurations. The server's default configura
 + SERVER DEFAULT PROPERTY -- message.max.bytes
 + IMPORTANCE -- medium
 
-**message.format.version** -- Версия формата сообщений, которую брокер использует для добавления данных в журналы. Значение должно быть действительным ApiVersion. Некоторые примеры: “0.8.2”, “0.9.0.0”, “0.10.0”. Необходимо проверить ApiVersion для получения более подробной информации. Установив версию формата сообщений, пользователь подтверждает, что все существующие данные на диске меньше или равны указанной версии. Неправильное задание параметра приводит к тому, что потребители с более старыми версиями получают данные в нечитаемом формате
+**message.format.version** -- Specify the message format version the broker will use to append messages to the logs. The value should be a valid ApiVersion. Some examples are: "0.8.2", "0.9.0.0", "0.10.0", check ApiVersion for more details. By setting a particular message format version, the user is certifying that all the existing messages on disk are smaller or equal than the specified version. Setting this value incorrectly will cause consumers with older versions to break as they will receive messages with a format that they don't understand
 
 + TYPE -- string
 + DEFAULT -- 1.1-IV0
 + SERVER DEFAULT PROPERTY -- log.message.format.version
 + IMPORTANCE -- medium
 
-**message.timestamp.difference.max.ms** -- Максимальное допустимое различие между отметкой времени, когда брокер получает сообщение, и отметкой времени, указанной в сообщении. При *message.timestamp.type=CreateTime* сообщение отклоняется, если разница в отметке времени превышает указанный порог. Конфигурация игнорируется, если *message.timestamp.type=LogAppendTime*. Указывается в миллисекундах
+**message.timestamp.difference.max.ms** -- The maximum difference allowed between the timestamp when a broker receives a message and the timestamp specified in the message. If *message.timestamp.type=CreateTime*, a message will be rejected if the difference in timestamp exceeds this threshold. This configuration is ignored if *message.timestamp.type=LogAppendTime*
 
 + TYPE -- long
 + DEFAULT -- 9223372036854775807
@@ -101,14 +101,14 @@ The following are the topic-level configurations. The server's default configura
 + SERVER DEFAULT PROPERTY -- log.message.timestamp.difference.max.ms
 + IMPORTANCE -- medium
 
-**message.timestamp.type** -- Определить, является ли отметка времени в сообщении временем создания сообщения или временем добавления журнала. Параметр может принимать значение "CreateTime" либо "LogAppendTime"
+**message.timestamp.type** -- Define whether the timestamp in the message is message create time or log append time. The value should be either "CreateTime" or "LogAppendTime"
 
 + TYPE -- string
 + DEFAULT -- CreateTime
 + SERVER DEFAULT PROPERTY -- log.message.timestamp.type
 + IMPORTANCE -- medium
 
-**min.cleanable.dirty.ratio** -- Частота очистки журнала (при условии включенного сжатия). По умолчанию избегается очистка, где сжато более 50% журнала. Это ограничивает максимальное пространство, выделенное в журнале на дубликаты (не более 50% журнала могут занимать дубликаты). Более высокое отношение означает меньшее количество дубликатов и более эффективную очистку, но при этом большее количество потерянного пространства в журнале
+**min.cleanable.dirty.ratio** -- This configuration controls how frequently the log compactor will attempt to clean the log (assuming log compaction is enabled). By default we will avoid cleaning a log where more than *50%* of the log has been compacted. This ratio bounds the maximum space wasted in the log by duplicates (at *50%* at most *50%* of the log could be duplicates). A higher ratio will mean fewer, more efficient cleanings but will mean more wasted space in the log
 
 + TYPE -- double
 + DEFAULT -- 0.5
@@ -116,7 +116,7 @@ The following are the topic-level configurations. The server's default configura
 + SERVER DEFAULT PROPERTY -- log.cleaner.min.cleanable.ratio
 + IMPORTANCE -- medium
 
-**min.compaction.lag.ms** -- Минимальное время, в течение которого сообщение остается несжатым в журнале. Применяется только для журналов с функцией сжатия. Указывается в миллисекундах
+**min.compaction.lag.ms** -- The minimum time a message will remain uncompacted in the log. Only applicable for logs that are being compacted
 
 + TYPE -- long
 + DEFAULT -- 0
@@ -124,7 +124,7 @@ The following are the topic-level configurations. The server's default configura
 + SERVER DEFAULT PROPERTY -- log.cleaner.min.compaction.lag.ms
 + IMPORTANCE -- medium
 
-**min.insync.replicas** -- При установленном поставщиком подтверждении acks на "all" или "-1", *min.insync.replicas* задается на минимальное количество реплик для подтверждения записи. Если этот минимум не может быть удовлетворен, то поставщик задает исключение (*NotEnoughReplicas* или *NotEnoughReplicasAfterAppend*). Совместное использование *min.insync.replicas* и acks обеспечивает более высокую гарантию к устойчивости. Типичным сценарием является создание топика с коэффициентом репликации *3*, параметром *min.insync.replicas* равным *2* и acks установленным на "all". Это гарантирует, что поставщик задает исключение, если большинство реплик не принимает запись
+**min.insync.replicas** -- When a producer sets acks to "all" (or "-1"), this configuration specifies the minimum number of replicas that must acknowledge a write for the write to be considered successful. If this minimum cannot be met, then the producer will raise an exception (either *NotEnoughReplicas* or *NotEnoughReplicasAfterAppend*). When used together, *min.insync.replicas* and acks allow you to enforce greater durability guarantees. A typical scenario would be to create a topic with a replication factor of "3", set *min.insync.replicas* to "2", and produce with acks of "all". This will ensure that the producer raises an exception if a majority of replicas do not receive a write
 
 + TYPE -- int
 + DEFAULT -- 1
@@ -132,28 +132,28 @@ The following are the topic-level configurations. The server's default configura
 + SERVER DEFAULT PROPERTY -- min.insync.replicas
 + IMPORTANCE -- medium
 
-**preallocate** -- Предварительное выделение файла на диске при создании нового сегмента журнала
+**preallocate** -- True if we should preallocate the file on disk when creating a new log segment
 
 + TYPE -- boolean
 + DEFAULT -- false
 + SERVER DEFAULT PROPERTY -- log.preallocate
 + IMPORTANCE -- medium
 
-**retention.bytes** -- Контроль максимального размера партиции (состоящей из сегментов журнала), который может увеличиваться до момента отказа от старых сегментов журнала с целью освобождения места при использовании политики хранения "delete". По умолчанию ограничения по размеру нет, есть только ограничение по времени. Поскольку данный предел применяется на уровне партиции, необходимо умножить значение лимита по времени на количество партиций, чтобы вычислить объем хранения топика в байтах
+**retention.bytes** -- This configuration controls the maximum size a partition (which consists of log segments) can grow to before we will discard old log segments to free up space if we are using the "delete" retention policy. By default there is no size limit only a time limit. Since this limit is enforced at the partition level, multiply it by the number of partitions to compute the topic retention in bytes
 
 + TYPE -- long
 + DEFAULT -- - 1
 + SERVER DEFAULT PROPERTY -- log.retention.bytes
 + IMPORTANCE -- medium
 
-**retention.ms** -- Контроль максимального времени, в течение которого хранится журнал, прежде чем отбрасываются старые сегменты журнала с целью освобождения места при использовании политики хранения "delete". Параметр представляет собой SLA о том, как скоро потребители должны читать свои данные. Указывается в миллисекундах
+**retention.ms** -- This configuration controls the maximum time we will retain a log before we will discard old log segments to free up space if we are using the "delete" retention policy. This represents an SLA on how soon consumers must read their data
 
 + TYPE -- long
 + DEFAULT -- 604800000
 + SERVER DEFAULT PROPERTY -- log.retention.ms
 + IMPORTANCE -- medium
 
-**segment.bytes** -- Контроль размера файла сегмента для журнала. Сохранение и очистка файла всегда выполняются единовременно, поэтому больший размер сегмента означает меньшее количество файлов, но при этом менее гранулированный контроль над хранением
+**segment.bytes** -- This configuration controls the segment file size for the log. Retention and cleaning is always done a file at a time so a larger segment size means fewer files but less granular control over retention
 
 + TYPE -- int
 + DEFAULT -- 1073741824
@@ -161,7 +161,7 @@ The following are the topic-level configurations. The server's default configura
 + SERVER DEFAULT PROPERTY -- log.segment.bytes
 + IMPORTANCE -- medium
 
-**segment.index.bytes** -- Контроль размера индекса, который отображает смещения в позициях файла. Предварительно индексный файл выделяется и сокращается только после сжатия журнала. Обычно параметр не требует изменений
+**segment.index.bytes** -- This configuration controls the size of the index that maps offsets to file positions. We preallocate this index file and shrink it only after log rolls. You generally should not need to change this setting
 
 + TYPE -- int
 + DEFAULT -- 10485760
@@ -169,7 +169,7 @@ The following are the topic-level configurations. The server's default configura
 + SERVER DEFAULT PROPERTY -- log.index.size.max.bytes
 + IMPORTANCE -- medium
 
-**segment.jitter.ms** -- Максимальный рандомный джиттер. Вычитается из запланированного времени сжатия сегмента во избежание проблемы сегментации thundering herd (огромное количество процессов, ждущих события, в то время как требуется только один процесс). Указывается в миллисекундах
+**segment.jitter.ms** -- The maximum random jitter subtracted from the scheduled segment roll time to avoid thundering herds of segment rolling
 
 + TYPE -- long
 + DEFAULT -- 0
@@ -177,7 +177,7 @@ The following are the topic-level configurations. The server's default configura
 + SERVER DEFAULT PROPERTY -- log.roll.jitter.ms
 + IMPORTANCE -- medium
 
-**segment.ms** -- Период времени, после которого ADS выполняет сжатие журнала, даже если файл сегмента не заполнен, с целью обеспечения сохранения или сжатия устаревших данных. Указывается в миллисекундах
+**segment.ms** -- This configuration controls the period of time after which **ADS** will force the log to roll even if the segment file isn't full to ensure that retention can delete or compact old data
 
 + TYPE -- long
 + DEFAULT -- 604800000
@@ -185,7 +185,7 @@ The following are the topic-level configurations. The server's default configura
 + SERVER DEFAULT PROPERTY -- log.roll.ms
 + IMPORTANCE -- medium
 
-**unclean.leader.election.enable** -- Указывает, следует ли включить не входящие в набор ISR реплики и установка последнего средства в качестве лидера, даже если это может привести к потере данных
+**unclean.leader.election.enable** -- Indicates whether to enable replicas not in the ISR set to be elected as leader as a last resort, even though doing so may result in data loss
 
 + TYPE -- boolean
 + DEFAULT -- false
