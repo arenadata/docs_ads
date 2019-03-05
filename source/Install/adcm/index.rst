@@ -1,60 +1,56 @@
-Установка ADS с помощью ADCM
-============================
+Installing ADS cluster with ADCM
+=================================
 
-Самым простым вариантом установки кластера **ADS** является использование **Arenadata Cluster Manager** -- `ADCM <https://arenadata.tech/products/adcm/>`_.
+The simplest way to install an **ADS** cluster is to use an **Arenadata Cluster Manager** -- `ADCM <https://arenadata.tech/en/products/adcm/>`_.
 
 
 
-Преимущества
+Benefits
 ------------
 
-Преимуществами установки кластера **ADS** через **ADCM** являются:
+The advantages of installing the **ADS** cluster through the **ADCM** are:
 
-#. Вся логика по установке и конфигурированию находится внутри бандла ADS:
+1. All installation and configuration logic is encapsulated in the ADS bundle:
 
-   * Пользователю нет необходимости вручную вводить множество команд в консоли;
-   * Сконфигурированы все важные настройки ОС и сервисов;
++ User doesn't have to enter a large number of console commands;
++ All important settings of OS and database are configured.
 
-#. Единый интерфейс доступа и управления конфигурациями:
+2. Single interface for access and configuration management:
 
-   * Возможность управления несколькоми сервисами через единый интерфейс;
-   * Возможность управления несколькими кластерами через единый интерфейс;
++ Ability to manage multiple services through a single interface
++ Ability to manage multiple clusters through a single interface
 
-#. Существует возможность использования как облачной, так и физической инфраструктуры;
+3. There is a possibility to use both cloud and physical infrastructure.
 
-#. Все rpm-пакеты для ADS берутся из репозитория Arenadata:
+4. All ADS rpm packets are taken from the Arenadata repository:
 
-   * Все rpm протестированы;
-   * Используется фиксированный набор пакетов, что упрощает помощь пользователям и составление баг-репортов.
++ All rpms have been tested;
++ A fixed set of packages is used which simplifies user assistance and compiling bug reports.
+
 
 
 .. _preliminary_actions:
 
-Предварительные действия
+Preliminary actions
 -------------------------
 
-Для установки кластера **ADS** посредством **ADCM** необходимо выполнить следующие предварительные шаги:
+To install the **ADS** cluster using **ADCM** you must complete the following preliminary steps:
 
-#. Установить ADCM;
+1. Install ADCM;
+2. Create the hosts for the ADS cluster:
 
-#. Создать хосты для кластера ADS:
++ Load required host bundle. The current example uses the *Datafort* bundle;
++ Initialize the required number of hosts (in the current example, this step is skipped because the hosts are ready, not the cloud provider);
++ Add hosts to ADCM (the current example uses 4 hosts): for Zookeeper (*zk*), for Kafka brokers (*kafka 1* and *kafka2*), for Nifi (*nifi1*);
 
-   * Загрузить выбранный бандл хоста. В текущем примере используется бандл *SSH*;
+3. (Optional) Create the monitoring cluster:
 
-   * Инициализировать необходимое количество хостов (в текущем примере данный шаг пропускается, так как используются готовые хосты, а не облачный провайдер);
-
-   * Добавить хосты в ADCM (в текущем примере используется 4 хоста): для Zookeeper (*zk*), для Kafka брокеров (*kafka1* и *kafka2*), для Nifi (*nifi1*);
-
-#. (Опционально) Создать кластер мониторинга:
-
-   * Загрузить бандл мониторинга;
-
-   * Создать экземпляр кластера мониторинга и установить его.
++ Load monitoring bundle;
++ Instantiate and install monitoring cluster.
 
 
-
-Установочные шаги
------------------
+Installation steps
+-------------------
 
 .. toctree::
    :maxdepth: 2
@@ -63,6 +59,4 @@
    create_cluster/index
    manage_tools/index
 
-
-.. important:: Контактная информация службы поддержки -- e-mail: info@arenadata.io
 
