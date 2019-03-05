@@ -1,37 +1,37 @@
 .. _upload_bundle:
 
-Загрузка бандла ADS
+Upload ADS bundle
 ===================
 
-Загрузка бандла **ADS** необходима для создания в **ADCM** прототипа кластера, из которого в дальнейшем возможно создание его экземпляров. 
+Loading the **ADS** bundle is necessary to create a cluster prototype in the **ADCM** from which it is possible to generate the cluster instances later.
 
-Для загрузки бандла следует выполнить следующие действия:
+To load the bundle:
 
-1. Открыть в ADCM вкладку "BUNDLES" (:numref:`Рис.%s.<bundles>`).
+1. Open "BUNDLES" tab in ADCM (:numref:`Pic.%s.<bundles>`).
 
 .. _bundles:
 
 .. figure:: ../../imgs/bundles.png
    :align: center
 
-   Вкладка "BUNDLES"
+   "BUNDLES" tab
 
 
-2. Нажать "Upload bundle" и в открывшейся форме выбрать файл бандла ADS (:numref:`Рис.%s.<choose_bundle>`).
+2. Press the "Upload bundle" button and select the ADS bundle file in the opened form (:numref:`Pic.%s.<choose_bundle>`).
 
 .. _choose_bundle:
 
 .. figure:: ../../imgs/choose_bundle.png
    :align: center
 
-   Выбор бандла
+   Сhoose a bundle
 
 
-3. В результате выполненных действий факт успешной загрузки отображается в общем списке бандлов на вкладке "BUNDLES" (:numref:`Рис.%s.<load_bundle>`).
+3. As a result the fact of successful loading is displayed in the list of bundles on the "BUNDLES" tab (:numref:`Pic.%s.<load_bundle>`).
 
 .. _load_bundle:
 
 .. figure:: ../../imgs/load_bundle.png
    :align: center
 
-   Результат успешной загрузки бандла
+   Bundle load success
