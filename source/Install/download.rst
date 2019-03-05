@@ -5,7 +5,7 @@ To download the platform distribution **Arenadata Streaming** you need to select
 
 .. _install_download_form-download_eng:
 
-.. figure:: ../imgs/install_download_form-download_eng.*
+.. figure:: imgs/install_download_form-download_eng.*
    :align: center
 
    Application for product download
