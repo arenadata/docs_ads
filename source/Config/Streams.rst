@@ -151,98 +151,91 @@ Below is the configuration of the Kafka Streams client library.
 + VALID VALUES -- [0,...]
 + IMPORTANCE -- low
 
-**partition.grouper** -- Класс Partition grouper, реализующий интерфейс *org.apache.kafka.streams.processor.PartitionGrouper*
+**partition.grouper** -- Partition grouper class that implements the *org.apache.kafka.streams.processor.PartitionGrouper* interface
 
 + TYPE -- class
 + DEFAULT -- org.apache.kafka.streams.processor.DefaultPartitionGrouper
 + IMPORTANCE -- low
 
-**poll.ms** -- Время блокировки ожидания ввода. Указывается в миллисекундах
+**poll.ms** -- The amount of time in milliseconds to block waiting for input
 
 + TYPE -- long
 + DEFAULT -- 100
 + IMPORTANCE -- low
 
-**receive.buffer.bytes** -- Размер буфера приема TCP (SO_RCVBUF) при чтении данных. Если значение равно "-1", используется ОС по умолчанию
+**receive.buffer.bytes** -- The size of the TCP receive buffer (*SO_RCVBUF*) to use when reading data. If the value is "-1", the OS default will be used
 
 + TYPE -- int
 + DEFAULT -- 32768
 + VALID VALUES -- [0,...]
 + IMPORTANCE -- low
 
-**reconnect.backoff.max.ms** -- Максимальный период времени ожидания повторного подключения к брокеру при неоднократных сбоях соединения. Отсрочка на хост увеличивается экспоненциально для каждого последующего сбоя соединения, вплоть до установленного максимума. После расчета увеличения отсрочки к значению добавляется *20%* случайного джиттера во избежание помех связи. Указывается в миллисекундах
+**reconnect.backoff.max.ms** -- The maximum amount of time in milliseconds to wait when reconnecting to a broker that has repeatedly failed to connect. If provided, the backoff per host will increase exponentially for each consecutive connection failure, up to this maximum. After calculating the backoff increase, *20%* random jitter is added to avoid connection storms
 
 + TYPE -- long
 + DEFAULT -- 1000
 + VALID VALUES -- [0,...]
 + IMPORTANCE -- low
 
-**reconnect.backoff.ms** -- Базовый период времени ожидания повторного подключения к хосту. Позволяет избегать многократного подключения к узлу в узком цикле. Данная отсрочка применяется ко всем попыткам подключения клиента к брокеру. Указывается в миллисекундах
+**reconnect.backoff.ms** -- The base amount of time to wait before attempting to reconnect to a given host. This avoids repeatedly connecting to a host in a tight loop. This backoff applies to all connection attempts by the client to a broker
 
 + TYPE -- long
 + DEFAULT -- 50
 + VALID VALUES -- [0,...]
 + IMPORTANCE -- low
 
-**request.timeout.ms** -- Максимальное время ожидания клиентом ответа на запрос. Если ответ не получен до истечения установленного значения, клиент повторно отправляет запрос при необходимости. Указывается в миллисекундах
+**request.timeout.ms** -- The configuration controls the maximum amount of time the client will wait for the response of a request. If the response is not received before the timeout elapses the client will resend the request if necessary or fail the request if retries are exhausted
 
 + TYPE -- int
 + DEFAULT -- 40000
 + VALID VALUES -- [0,...]
 + IMPORTANCE -- low
 
-**retries** -- Установка значения больше нуля приводит к тому, что клиент переотправляет любую запись, передача которой завершается с временной ошибкой
-
-+ TYPE -- int
-+ DEFAULT -- 0
-+ VALID VALUES -- [0,...,2147483647]
-+ IMPORTANCE -- low
-
-**retry.backoff.ms** -- Время ожидания перед повторной попыткой отправки неудавшегося запроса в партицию топика. Позволяет избежать неоднократной отправки запросов в сжатом цикле. Указывается в миллисекундах
+**retry.backoff.ms** -- The amount of time to wait before attempting to retry a failed request to a given topic partition. This avoids repeatedly sending requests in a tight loop under some failure scenarios
 
 + TYPE -- long
 + DEFAULT -- 100
 + VALID VALUES -- [0,...]
 + IMPORTANCE -- low
 
-**rocksdb.config.setter** -- Класс или имя класса установщика конфигурации базы данных Rocks, реализующий интерфейс *org.apache.kafka.streams.state.RocksDBConfigSetter*
+**rocksdb.config.setter** -- A Rocks DB config setter class or class name that implements the *org.apache.kafka.streams.state.RocksDBConfigSetter* interface
 
 + TYPE -- class
 + DEFAULT -- null
 + IMPORTANCE -- low
 
-**send.buffer.bytes** -- Размер буфера отправки TCP (SO_SNDBUF) при отправке данных. Если значение равно "-1", используется ОС по умолчанию
+**send.buffer.bytes** -- The size of the TCP send buffer (*SO_SNDBUF*) to use when sending data. If the value is "-1", the OS default will be used
 
 + TYPE -- int
 + DEFAULT -- 131072
 + VALID VALUES -- [0,...]
 + IMPORTANCE -- low
 
-**state.cleanup.delay.ms** -- Время ожидания перед удалением state каталогов после перемещения партиции. Удаляются только state каталоги, которые не были изменены. Указывается в миллисекундах
+**state.cleanup.delay.ms** -- The amount of time in milliseconds to wait before deleting state when a partition has migrated. Only state directories that have not been modified for at least *state.cleanup.delay.ms* will be removed
 
 + TYPE -- long
 + DEFAULT -- 600000
 + IMPORTANCE -- low
 
-**timestamp.extractor** -- Класс выделения временных меток, реализующий интерфейс *org.apache.kafka.streams.processor.TimestampExtractor*. Данная конфигурация устарела, вместо нее используется *default.timestamp.extractor*
+**timestamp.extractor** -- Timestamp extractor class that implements the *org.apache.kafka.streams.processor.TimestampExtractor* interface. This config is deprecated, use *default.timestamp.extractor* instead
 
 + TYPE -- class
 + DEFAULT -- null
 + IMPORTANCE -- low
 
-**value.serde** -- Класс сериализатора/десериализатора для значения, реализующего интерфейс *org.apache.kafka.common.serialization.Serde*. Данная конфигурация устарела, вместо нее используется *ddefault.value.serde*
+**value.serde** -- Serializer/deserializer class for value that implements the *org.apache.kafka.common.serialization.Serde* interface. This config is deprecated, use *default.value.serde* instead
 
 + TYPE -- class
 + DEFAULT -- null
 + IMPORTANCE -- low
 
-**windowstore.changelog.additional.retention.ms** -- Добавление *maintainMs* с целью исключения риска преждевременного удаления данных из журнала. Позволяет осуществлять отставание часов. По умолчанию устанавливается 1 день. Указывается в миллисекундах
+**windowstore.changelog.additional.retention.ms** -- Added to a windows *maintainMs* to ensure data is not deleted from the log prematurely. Allows for clock drift. Default is *1 day*
 
 + TYPE -- long
 + DEFAULT -- 86400000
 + IMPORTANCE -- low
 
-**zookeeper.connect** -- Соединение строки для управления топиками ADS через Zookeeper. Конфигурация устарела и игнорируется, поскольку Streams API больше не использует Zookeeper
+**zookeeper.connect** -- Zookeeper connect string for ADS topics management. This config is deprecated and will be ignored as Streams API does not use Zookeeper anymore
 
 + TYPE -- string
 + DEFAULT -- ""
