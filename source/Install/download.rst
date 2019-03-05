@@ -1,62 +1,59 @@
-Загрузка дистрибутива платформы
+Download distribution platform
 ===============================
 
+To download the platform distribution **Arenadata Streaming** you need to select the tab "Download" on the site `arenadata.io <https://arenadata.tech/en/index.php>`_. This takes you to the *App Store* (`store.arenadata.io <https://store.arenadata.io/index_en.html>`_, :numref:`Pic.%s.<install_download_app-store>`), and opens the on-screen application form to download the product (:numref:`Pic.%s.<install_download_form-download_eng>`).
 
-Для загрузки дистрибутива платформы **Arenadata Streaming** необходимо на сайте `arenadata.io <https://arenadata.tech/>`_ выбрать вкладку *"Скачать"*. При этом происходит переход на страницу *Магазин Программного Обеспечения Arenadata* (`store.arenadata.io <https://store.arenadata.io/>`_, :numref:`Рис.%s.<install_download_app-store>`), и открывается экранная форма заявки для загрузки продукта (:numref:`Рис.%s.<install_download_form-download>`).
+.. _install_download_form-download_eng:
 
-.. _install_download_form-download:
-
-.. figure:: ../imgs/install_download_form-download.*
+.. figure:: ../imgs/install_download_form-download_eng.*
    :align: center
 
-   Заявка для загрузки продукта
+   Application for product download
 
 
-В экранной форме заявки следует заполнить следующие поля:
+In the screen form of the application should fill in the following fields:
 
-+ *ФИО* – ФИО пользователя;
-+ *E-Mail* – адрес электронной почты пользователя;
-+ *Компания* – наименование компании пользователя;
-+ *Цель использования* – описание цели использования платформы.
++ *Full name* -- full name of user;
++ *E-Mail* -- user email address;
++ *Company* -- user company name;
++ *Purpose of use* -- description of the purpose of using the platform.
 
-Все поля являются обязательными для заполнения. После ввода данных необходимо нажать кнопку *Отправить*. При корректном заполнении полей выдается соответствующее сообщение (:numref:`Рис.%s.<install_download_accepted>`).
+All fields are required. After entering the data, press the the *Send* button. If the fields are filled in correctly, a corresponding message is displayed (:numref:`Pic.%s.<install_download_accepted_eng>`).
 
-.. _install_download_accepted:
+.. _install_download_accepted_eng:
 
-.. figure:: ../imgs/install_download_accepted.*
+.. figure:: ../imgs/install_download_accepted_eng*
    :align: center
 
-   Заявка принята
+   Application accepted
 
 
-Окно сообщения следует закрыть. При этом происходит переход на страницу *Магазин Приложений* с перечнем продуктов **Arenadata** (:numref:`Рис.%s.<install_download_app-store>`).
+The message box should be closed. This takes you to the page *App Store* with a list of products **Arenadata** (:numref:`Pic.%s.<install_download_app-store_eng>`).
 
-.. _install_download_app-store:
+.. _install_download_app-store_eng:
 
-.. figure:: ../imgs/install_download_app-store.*
+.. figure:: ../imgs/install_download_app-store_eng.*
    :align: center
 
-   Магазин Приложений
+   App Store
 
 
-При наведении курсора на продукт **ARENADATA STREAMING** предоставляется выбор действий:
+When hovering the cursor over the product **ARENADATA STREAMING**, a choice of actions is provided:
 
-+ *Скачать* -- переход на страницу загрузки дистрибутива платформы **ADS**;
-+ *Документация* -- переход на страницу он-лайн документации платформы **ADS**.
++ *Download* -- go to the download page of the platform distributive;
++ *Documentation* -- go to the online documentation page of the platform.
 
-Для загрузки дистрибутива платформы следует выбрать пункт *Скачать*, при этом происходит переход на соответствующую страницу с кратким описанием продукта, ссылками на компоненты дистрибутива и информацией о релизе (:numref:`Рис.%s.<install_download_download-ADS>`).
+To download the platform distribution package, select the *Download* item, this will lead to the corresponding page with a brief description of the product, links to distribution components and release information (:numref:`Pic.%s.<install_download_download-ADS_eng>`).
 
-.. _install_download_download-ADS:
+.. _install_download_download-ADS_eng:
 
-.. figure:: ../imgs/install_download_download-ADS.*
+.. figure:: ../imgs/install_download_download-ADS_eng.*
    :align: center
 
-   Страница загрузки платформы Arenadata Streaming
+   Download Page
 
 
-В разделе *"Выберите версию продукта"* следует указать интересующую версию платформы **ADS**, а в поле *"Выберите ОС"* -- используемую операционную систему. При этом в разделе *"Информация о релизе"* отображается дата выхода и тип релиза выбранной версии, ее номер, ссылки на лицензию использования и Release Notes.
+In the section *Choose version* you should indicate the version of the platform **ADS** you are interested in, and in the field *Choose OS* -- the operating system to be used. At the same time, the release date and release type of the selected version, its number, links to the license of use and Release Notes are displayed in the section *Release information*.
 
-В разделе *Ссылки на компоненты дистрибутива* находятся ссылки для загрузки компонентов выбранной версии платформы. После загрузки компонентов следует установить их, действуя в соответствии с последующими разделами настоящего документа.
-
-
+In the section *Links to distribution components* there are links to download components of the selected platform version. After downloading the components, install them, acting in accordance with the subsequent sections of this document.
 
