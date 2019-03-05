@@ -22,7 +22,7 @@ All fields are required. After entering the data, press the the *Send* button. I
 
 .. _install_download_accepted_eng:
 
-.. figure:: ../imgs/install_download_accepted_eng.png
+.. figure:: imgs/install_download_accepted_eng.png
    :align: center
 
    Application accepted
@@ -32,7 +32,7 @@ The message box should be closed. This takes you to the page *App Store* with a 
 
 .. _install_download_app-store_eng:
 
-.. figure:: ../imgs/install_download_app-store_eng.png
+.. figure:: imgs/install_download_app-store_eng.png
    :align: center
 
    App Store
@@ -47,7 +47,7 @@ To download the platform distribution package, select the *Download* item, this 
 
 .. _install_download_download-ADS_eng:
 
-.. figure:: ../imgs/install_download_download-ADS_eng.png
+.. figure:: imgs/install_download_download-ADS_eng.png
    :align: center
 
    Download Page
