@@ -1,61 +1,65 @@
-Создание кластера ADS
+Create ADS cluster
 =====================
 
-После выполнения :ref:`предварительных действий <preliminary_actions>` и :ref:`загрузки бандла <upload_bundle>` в кластер-менеджере **ADCM** содержится следующий список объектов (:numref:`Рис.%s. <hosts>`):
+After you complete :ref:`preliminary actions <preliminary_actions>` and :ref:`upload ADB bundle <installation_steps>`,
+the **ADCM** cluster Manager contains the following list of objects (:numref:`Pic.%s. <hosts>`):
 
-* Прототип кластера мониторинга и созданный на его основе экземпляр (программа мониторинга развернута на хосте, ADCM содержит записи о его результатах и настройках);
+* A monitoring cluster prototype and instantiated cluster (a real monitoring program running on a host, ADCM records its results and settings);
 
-* Прототип кластера *ads* для создания экземпляров;
+* An *ads* cluster prototype for instantiation;
 
-* Предварительно подготовленные хосты, в базе данных ADCM хранятся записи о них и их учетных данных -- ssh-ключах или паролях.
+* Pre-prepared hosts, the ADCM database stores records of them and their credentials - ssh keys or passwords.
 
 .. _hosts:
 
 .. figure:: ../../imgs/hosts.png
    :align: center
 
-   Список объектов в ADCM
+   List of objects of ADCM
 
-Данным объектам доступен следующий функционал:
+The following functionality is available:
 
-+ `Создание экземпляра кластера`_;
-+ `Конфигурация кластера`_;
-+ `Добавление сервисов`_;
-+ `Добавление хостов`_;
-+ `Размещение компонентов сервисов на хостах`_;
-+ `Установка сервиса Zookeeper`_;
-+ `Установка сервиса Kafka`_;
-+ `Установка сервиса Nifi`_;
-+ `Установка сервиса Monitoring Clients`_.
++ `Instantiate cluster`_;
++ `Configure cluster`_;
++ `Add services`_;
++ `Add hosts`_;
++ `Map service components to hosts`_;
++ `Ways to install services`_;
++ `Install Zookeeper service`_;
++ `Install Kafka service`_;
++ `Install Nifi service`_;
++ `Install Monitoring Clients service`_.
 
 
 
-Создание экземпляра кластера
-----------------------------
+Instantiate cluster
+--------------------
 
-При создании кластера в веб-интерфейсе **ADCM** генерируется новый экземпляр кластера *ads*, что означает только добавление данных о нем в базу данных **ADCM** -- на этом этапе не производится установка *ads* на хосты.
+When cluster instance *ads* is created in web interface of **ADCM** it means only adding data about it to the database **ADCM**, this step doesn't install *ads* on the hosts.
 
-1. Открыть в ADCM вкладку "CLUSTERS" (:numref:`Рис.%s. <cluster_mon>`).
+To instantiate cluster:
+
+1. Open the "CLUSTERS" tab in ADCM (:numref:`Pic.%s. <cluster_mon>`).
 
 .. _cluster_mon:
 
 .. figure:: ../../imgs/cluster_mon.png
    :align: center
 
-   Вкладка "CLUSTERS"
+   "CLUSTERS" tab
 
 
-2. Нажать "Add cluster" и в открывшейся форме создать экземпляр кластера из прототипа *ads*, полученного из бандла (:numref:`Рис.%s. <add_cluster>`).
+2. Press the "Add cluster" button and in the opened form create an instance of the cluster from the prototype *ads* obtained from the bundle (:numref:`Pic.%s. <add_cluster>`).
 
 .. _add_cluster:
 
 .. figure:: ../../imgs/add_cluster.png
    :align: center
 
-   Создание экземпляра кластера
+   Creating a cluster instance
 
 
-3. В результате выполненных действий факт создания экземпляра кластера отображается в базе данных ADCM на вкладке "CLUSTERS" (:numref:`Рис.%s. <clusters_list>`).
+3. As a result of the actions performed, the creation of the cluster instance is displayed in the ADCM database on the "CLUSTERS" tab (:numref:`Pic.%s. <clusters_list>`).
 
 
 .. _clusters_list:
@@ -63,193 +67,192 @@
 .. figure:: ../../imgs/clusters_list.png
    :align: center
 
-   Результат успешного создания экземпляра кластера
+   Cluster instance creation success
 
 
 
-Конфигурация кластера
+Configure cluster
 ---------------------
 
-Для перехода к настройкам экземпляра кластера *ads* необходимо нажать кнопку с пиктограммой шестеренки в соответствующей строке вкладки "CLUSTERS" (:numref:`Рис.%s. <clusters_list>`) и перейти в раздел меню "Configuration". При этом открывается окно конфигурации выбранного экземпляра (:numref:`Рис.%s. <cluster_config>`).
+To go to the settings of the cluster instance *ads*, press the button with the gear icon in the necessary row of the "CLUSTERS" tab (:numref:`Pic.%s. <clusters_list>`) and go to the "Configuration" menu section. This opens the configuration window for the selected instance (:numref:`Pic.%s. <cluster_config>`).
 
 .. _cluster_config:
 
 .. figure:: ../../imgs/cluster_config.png
    :align: center
 
-   Окно конфигурации кластера
+   Cluster configuration window
 
 
-В блоке "ADCM" есть возможность настройки адресов:
+In the block "ADCM" it is possible to configure addresses:
 
-* *Host* (можно указать fqdn и IP-адрес);
+* *Host* (or fqdn and IP address);
 * *Port*.
 
-В блоке настроек "Repositories" указываются требуемые для установки *ads* пакеты из различных yum-репозиториев, при этом в каждом из параметров можно изменить заданный по умолчанию url на необходимый:
+In the "repos" settings block, you specify the packages required for *ads* installation from various yum repositories, and in each of the parameters you can change the default url to the required one:
 
 * *ads*;
 * *monitoring*;
 * *epel*.
 
-Каждый компонент сервиса кластера имеет возможность отсылать статусную информацию о своем состоянии (keep alive) процессу **ADCM** в докер-контейнере. В ряде случаев **ADCM** может оказаться за NAT, и тогда исключается очевидный вариант автоматического определения его адреса, видимого со стороны сервисного компонента на хосте кластера. Поэтому данный адрес указывается вручную. Во время установки **ADS** адрес **ADCM** используется для заполнения конфигурации компонентов, отвечающих за передачу статусной информации.
+Any cluster's service component is able to send keep alive status information to the **ADCM** process in the docker container. Sometimes **ADCM** can be behind NAT and there is no evident way to automatically tell the address of **ADCM** to the service components located on cluster's hosts. That is why it should be configured manually. During the **ADB** installation the **ADCM** address would be used to fill component's keep alive status configuration.
 
 
+Add services
+--------------
 
-Добавление сервисов
--------------------
+Cluster **ADS** contains the following services:
 
-Кластер **ADS** содержит следующие сервисы:
+* *Zookeeper* -- service for storing configurations, performing distributed process synchronization;
+* *Kafka* -- distributed platform for streaming operations and data;
+* *Nifi* -- distributed platform for building and automating data flows between different systems;
+* *Monitoring Clients* -- agents that send host and ADS information to monitoring.
 
-* *Zookeeper* -- сервис, предназначенный для хранения конфигураций, выполнения распределенной синхронизации процессов;
-* *Kafka* -- распределенная пплатформа для потоковых операций и данных;
-* *Nifi* -- распрделенная платформа, предназначенная для построения и автоматизации потоков данных между различными системами;
-* *Monitoring Clients* -- агенты, отсылающие информацию о хосте и ADS в мониторинг.
+Not all services are required to be installed. For example if you do not plan to use **Nifi** then there is no need to add this service. If you have your own monitoring server (not **Graphite** based) there is no need for agents from the *monitoring clients* service. However, if you plan to use **Kafka**, the service of the same name and **Zookeeper** are required, the same can be said about the service **Nifi**. At the same time, the service may consist of mandatory and optional components. For example, the *Kafka* service consists of the mandatory component *broker* and the optional components: *manager* and *schema-registry*.
 
-Не все сервисы являются обязательными для установки. Например, если вы не планируете использовать **Nifi**, то нет необходимости добавлять этот сервис. Или в случае, когда применяется сервис мониторинга (не на базе **Graphite**), незачем ставить агенты из *Monitoring Clients*. Однако, если планируется использование **Kafka**, одноименный сервис и **Zookeeper** обязательны, тоже самое можно сказать и про сервис **Nifi**. В тоже время сервис может состоять из обязательных и необязательных компонентов. Например, сервис *Kafka* состоит из обязательного компонента *broker* и необязательных: *manager* и *schema-registry*.
+In this example, all services are added to the cluster:
 
-В настоящем примере в кластер добавлены все сервисы:
-
-+ `Настройка сервиса Zookeeper`_;
-+ `Настройка сервиса Kafka`_;
-+ `Настройка сервиса Nifi`_;
-+ `Настройка сервиса Monitoring Clients`_.
-
-
-.. important:: На текущий момент невозможно удалить из кластера уже добавленный сервис
++ `Setting up the Zookeeper service`_;
++ `Setting up the Kafka service`_;
++ `Setting up the Nifi service`_;
++ `Setting up the Monitoring Clients service`_.
 
 
-Настройка сервиса Zookeeper
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. important:: Currently it is not possible to remove already added service from the cluster
 
-Для перехода к настройкам сервиса *Zookeeper* необходимо нажать кнопку с пиктограммой шестеренки в соответствующей строке вкладки "SERVICES" в интерфейсе **ADCM** и перейти в раздел меню "Configuration". При этом открывается окно конфигурации сервиса *Zookeeper* (:numref:`Рис.%s. <zk_config>`).
+
+Setting up the Zookeeper service
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+To go to the settings of the service *Zookeeper*, press the button with the gear icon in the necessary row of the "SERVICES" tab in the **ADCM** and go to the "Configuration" menu section. This opens the configuration window for the selected service (:numref:`Pic.%s. <zk_config>`).
 
 .. _zk_config:
 
 .. figure:: ../../imgs/zk_config.png
    :align: center
 
-   Окно конфигурации сервиса Zookeeper
+   Configuration window of Zookeeper service
 
 
-В блоке настроек "Main" задаются основные параметры:
+The settings block "Main" contains the following parameters:
 
-* *connect* -- строка подключения к Znode, в которой Zookeeper хранит конфигурацию текущего кластера, используется сервисом Kafka. В текущей реализации данный параметр недоступен для редактирования и генеруруется на стороне ADCM автоматически;
+* *connect* -- the Znode connection string, in which Zookeeper stores the configuration of the current cluster, is used by the *Kafka* service. In the current implementation, this parameter is not editable and is automatically generated on the ADCM side;
 
-* *data_dirs* -- каталог для хранения транзакционных логов Zookeeper. Данный параметр указывается как *dataDir* в конфигурационном файле *zoo.cfg*; 
+* *data_dirs* -- directory for storing transaction logs Zookeeper. This parameter is specified as *dataDir* in the configuration file *zoo.cfg*; 
 
-* *client_port* -- порт, на котором Zookeeper слушает клиентские подключения.
+* *client_port* -- the port on which Zookeeper listens to client connections.
 
-В блоке настроек "Advanced" задаются следующие расширенные параметры:
+The settings block "Advanced" contains the following parameters:
 
-* *zoo_cfg_content* -- содержимое файла *zoo.cfg*, которое в дальнейшем шаблонизируется. Данный параметр может использоваться для внесения `дополнительных настроек <https://zookeeper.apache.org/doc/r3.4.12/zookeeperAdmin.html#sc_configuration>`_;
+* *zoo_cfg_content* -- the contents of the file *zoo.cfg*, which is further templateable. This parameter can be used to make `additional settings <https://zookeeper.apache.org/doc/r3.4.12/zookeeperAdmin.html#sc_configuration>`_;
 
-* *zookeeper_env_content* -- содержимое файла *zookeeper-env.sh*, которое в дальнейшем шаблонизируется. Данный параметр может использоваться для внесения переменных окружения.
+* *zookeeper_env_content* -- the contents of the file *zookeeper-env.sh*, which is further template. This parameter can be used to make environment variables.
 
 
-Настройка сервиса Kafka
-^^^^^^^^^^^^^^^^^^^^^^^^^
+Setting up the Kafka service
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Для перехода к настройкам сервиса *Kafka* необходимо нажать кнопку с пиктограммой шестеренки в соответствующей строке вкладки "SERVICES" и перейти в раздел меню "Configuration". При этом открывается окно конфигурации сервиса *Kafka* (:numref:`Рис.%s. <kafka_config>`).
+To go to the settings of the service *Kafka*, press the button with the gear icon in the necessary row of the "SERVICES" tab in the **ADCM** and go to the "Configuration" menu section. This opens the configuration window for the selected service (:numref:`Pic.%s. <kafka_config>`).
 
 .. _kafka_config:
 
 .. figure:: ../../imgs/kafka_config.png
    :align: center
 
-   Окно конфигурации сервиса Kafka
+   Configuration window of Kafka service
 
 
-В блоке настроек "Main" задаются основные параметры:
+The settings block "Main" contains the following parameters:
 
-* *data_dirs* -- каталог для хранения данных в *Kafka*. Указывается к качестве параметра *log.dirs* в конфигурационном файле `server.properties <../../../Config/broker>`_;
+* *data_dirs* -- directory for storing data in *Kafka*. Indicated to the quality of the parameter *log.dirs* in the configuration file `server.properties <../../../Config/broker>`_;
 
-* *listeners* -- список URI (протокол, хост и порт, на котором поднят брокер), разделенный запятыми. Если используется не *PLAINTEXT*  протокол, то необходимо также указать *listener.security.protocol.map*. Для привязки ко всем интерфейсам указать имя хоста как *0.0.0.0*. Оставить имя хоста пустым для привязки к интерфейсу по умолчанию. Указывается в качестве параметра *listeners* в конфигурационном файле `server.properties <../../../Config/broker>`_; 
+* *listeners* -- a list of URIs (protocol, host, and port on which the broker is run), separated by commas. If you are not using the *PLAINTEXT* protocol, then you must also specify *listener.security.protocol.map*. To bind to all interfaces, specify the host name as *0.0.0.0*. Leave the host name blank for binding to the default interface. It is specified as the *listeners* parameter in the configuration file `server.properties <../../../Config/broker>`_; 
 
-* *default_replication_factor* -- фактор репликации, с которым по умолчанию создаются и хранятся топики. Указывается в качестве параметра *default.replication.factor* в конфигурационном файле `server.properties <../../../Config/broker>`_;
+* *default_replication_factor* -- replication factor, with which topics are created and stored by default. It is specified as the parameter *efault.replication.factor* in the configuration file `server.properties <../../../Config/broker>`_;
 
-* *delete_topic_enable* -- данный параметр позволяет удалять топики. Если параметр выключен, то удаление топика через инструменты администрирования не приводит к фактическому удалению. Указывается в качестве параметра *default.replication.factor* в конфигурационном файле `server.properties <../../../Config/broker>`_; 
+* *delete_topic_enable* -- this option allows you to delete topics. If the parameter is disabled, deleting the topic through the administration tools does not lead to the actual deletion. It is specified as the parameter *default.replication.factor* in the configuration file `server.properties <../../../Config/broker>`_; 
 
-* *log_retention_hours* -- количество часов, в течение которых топики хранятся в *Kafka*. Указывается в качестве параметра *log.retention.hours* в конфигурационном файле `server.properties <../../../Config/broker>`_;
+* *log_retention_hours* -- the number of hours that topics are stored in *Kafka*. It is specified as the *log.retention.hours* parameter in the configuration file `server.properties <../../../Config/broker>`_;
 
-* *log_roll_hours* -- максимальное время, после которого пояляется новый журнал сегмента, даже если старый журнал не переполнен. Указывается в качестве параметра *log.roll.hours* в конфигурационном файле `server.properties <../../../Config/broker>`_;
+* *log_roll_hours* -- the maximum time after which a new segment log appears, even if the old log is not full. It is specified as the parameter *log.roll.hours* in the configuration file `server.properties <../../../Config/broker>`_;
 
-* *broker_jmx_port* -- порт, по которому *Kafka* брокер отдает jmx-метрики. Указывается в качестве параметра *JMX_PORT* в файле *kafka-env.sh*;
+* *broker_jmx_port* -- port on which *Kafka* broker gives jmx-metrics. It is specified as the parameter *JMX_PORT* in the file *kafka-env.sh*;
 
-* *manager_port* -- порт, на котором поднимается *Kafka-Manager*. Указывается в файле *kafka-manager-env.sh*;
+* *manager_port* -- port on which *Kafka-Manager* runs. Indicated in the file *kafka-manager-env.sh*;
 
-* *schema_registry_heap_opts* -- размер кучи, выделяемoй процессу *schema-registry*. Указывается в качестве параметра *SCHEMA_REGISTRY_HEAP_OPTS* в *schema-registry-env.sh*;
+* *schema_registry_heap_opts* -- heap size allocated to the *schema-registry* process. Specified as the *SCHEMA_REGISTRY_HEAP_OPTS* parameter in *schema-registry-env.sh*;
 
-* *schema_registry_listener_port* -- порт, который слушает *schema-registry*. Указывается в качестве параметра *listeners* в конфигурационном файле *schema-registry.properties*;
+* *schema_registry_listener_port* -- port that is listening on *schema-registry*. Specified as the parameter *listeners* in the configuration file *schema-registry.properties*;
 
-В блоке настроек "Advanced" задаются следующие расширенные параметры:
+The settings block "Advanced" contains the following parameters:
 
-* *server_properties_content* -- содержимое файла *server.properties*, которое в дальнейшем шаблонизируется. Данный параметр может использоваться для внесения `дополнительных настроек <../../../Config/index>`_;
+* *server_properties_content* -- the contents of the *server.properties* file, which is further templateable. This parameter can be used to make `additional settings <../../../Config/index>`_;
 
-* *kafka_env_content* -- содержимое файла *kafka-env.sh*, которое в дальнейшем шаблонизируется. Данный параметр может использоваться для внесения переменных окружения.
+* *kafka_env_content* -- the contents of the file *kafka-env.sh*, which is further template. This parameter can be used to make environment variables.
 
 
-Настройка сервиса Nifi
-^^^^^^^^^^^^^^^^^^^^^^^^
+Setting up the Nifi service
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Для перехода к настройкам сервиса *Nifi* необходимо нажать кнопку с пиктограммой шестеренки в соответствующей строке вкладки "SERVICES" и перейти в раздел меню "Configuration". При этом открывается окно конфигурации сервиса *Nifi* (:numref:`Рис.%s. <nifi_config>`).
+To go to the settings of the service *Nifi*, press the button with the gear icon in the necessary row of the "SERVICES" tab in the **ADCM** and go to the "Configuration" menu section. This opens the configuration window for the selected service (:numref:`Pic.%s. <nifi_config>`).
 
 .. _nifi_config:
 
 .. figure:: ../../imgs/nifi_config.png
    :align: center
 
-   Окно конфигурации сервиса Nifi
+   Configuration window of Nifi service 
 
 
-В блоке настроек "Main" задаются основные параметры:
+The settings block "Main" contains the following parameters:
 
-* *nifi_ui_port* -- http-порт, на котором поднимается веб-интерфейс сервиса *Nifi*. Указывается в качестве параметра *nifi.web.http.port* в конфигурационном файле *nifi.properties*;
+* *nifi_ui_port* -- http-port on which the web interface of the service *Nifi* runs. It is specified as the parameter *nifi.web.http.port* in the configuration file *nifi.properties*;
 
-* *nifi_node_jvm_memory* -- размер кучи, выделяемой процессу сервиса *Nifi*. Указывается в конфигурационном файле *bootstrap.conf*.
+* *nifi_node_jvm_memory* -- heap size allocated to the service process *Nifi*. It is specified in the configuration file *bootstrap.conf*.
 
-В блоке настроек "Custom" задаются следующие необязательные параметры:
+The following optional parameters are set in the “Custom” settings block:
 
-* *nifi_custom_nars* -- параметр следует использовать в случае добавления *custom nars*; перечисляются через запятую. Указываются в качестве *nifi.nar.library.directory.lib...* в конфигурационном файле *nifi.properties*;
+* *nifi_custom_nars* -- parameter should be used when adding *custom nars*; comma separated. Specified as *nifi.nar.library.directory.lib...* in the configuration file *nifi.properties*;
 
-В блоке настроек "Advanced" задаются следующие расширенные параметры:
+The settings block "Advanced" contains the following parameters:
 
-* *nifi_properties_content* -- содержимое файла *nifi.properties*, которое в дальнейшем шаблонизируется. Данный параметр может использоваться для внесения дополнительных настроек;
+* *nifi_properties_content* -- the contents of the file *nifi.properties*, which will be further templateable. This parameter can be used to make additional settings;
 
-* *nifi_env_content* -- содержимое файла *nifi-env.sh*, которое в дальнейшем шаблонизируется. Данный параметр может использоваться для внесения переменных окружения;
+* *nifi_env_content* -- the contents of the file *nifi-env.sh*, which is further templateable. This parameter can be used to make environment variables;
 
-* *bootstrap_content* -- содержимое файла *bootstrap.conf*, которое в дальнейшем шаблонизируется. Данное поле может использоваться для внесения настроек, связанных с запуском сервиса;
+* *bootstrap_content* -- the contents of the file *bootstrap.conf*, which is further templateable. This field can be used to make settings related to the start of the service;
 
-* *logback_content* -- содержимое файла *logback.xml*, которое в дальнейшем шаблонизируется. Данное поле может использоваться для внесения настроек, связанных с логированием;
+* *logback_content* -- the contents of the file *logback.xml*, which is further templateable. This field can be used to make settings related to logging;
 
-* *state_management_content* -- содержимое файла *state_management.xml*, которое в дальнейшем шаблонизируется. Данное поле может использоваться для внесения настроек, связанных с хранением состояния сервиса *Nifi*;
+* *state_management_content* -- the contents of the file *state_management.xml*, which is further templateable. This field can be used to make settings related to storing the state of the service *Nifi*;
 
-* *authorizers_content* -- содержимое файла *authorizers.xml*, которое в дальнейшем шаблонизируется. Данное поле может использоваться для внесения настроек авторизации в сервис *Nifi* в том случае, если настроены политики безопасности;
+* *authorizers_content* -- the contents of the file *authorizers.xml*, which is further template. This field can be used to make authorization settings to the *Nifi* service if security policies are configured;
 
-* *login_identity_providers_content* -- содержимое файла *login_identity_providers.xml*, которое в дальнейшем шаблонизируется. Данное поле может использоваться для внесения настроек авторизации, используемые *state* провайдером, в том случае, если настроены политики безопасности.
+* *login_identity_providers_content* -- the contents of the file *login_identity_providers.xml*, which is further template. This field can be used to make authorization settings used by the *state* provider, if security policies are configured.
 
 
-Настройка сервиса monitoring clients
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Setting up the Monitoring Clients service
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Для перехода к настройкам сервиса *monitoring clients* необходимо нажать кнопку с пиктограммой шестеренки в соответствующей строке вкладки "SERVICES" и перейти в раздел меню "Configuration". При этом открывается окно конфигурации сервиса *monitoring clients* (:numref:`Рис.%s. <mc_config>`).
+To go to the settings of the service *monitoring clients*, press the button with the gear icon in the necessary row of the "SERVICES" tab in the **ADCM** and go to the "Configuration" menu section. This opens the configuration window for the selected service (:numref:`Pic.%s. <mc_config>`).
 
 .. _mc_config:
 
 .. figure:: ../../imgs/mc_config.png
    :align: center
 
-   Окно конфигурации сервиса Monitoring Clients
+   Configuration window of Monitoring Clients service 
 
-В блоке настроек "Advanced" задаются следующие расширенные параметры:
+The settings block "Advanced" contains the following parameters:
 
-* *kafka_dashboard* -- файл в формате *json*, который в дальнейшем шаблонизируется и отправляется в *Grafana*;
+* *kafka_dashboard* -- a file in the format *json*, which is further template and sent to *Grafana*;
 
-* *kafka_metrics* -- файл в формате *yaml*, который в дальнейшем шаблонизируется. Включает в себя *jmx* метрики брокеров *Kafka*.
+* *kafka_metrics* -- a file in the format *yaml*, which will be further template. Includes *jmx* broker metrics *Kafka*.
 
 
 
-Добавление хостов
------------------
+Add hosts
+-----------
 
 Для добавления хостов в кластер *ads* необходимо:
 
@@ -281,8 +284,8 @@
    Результат успешного добавления хостов
 
 
-Размещение компонентов сервисов на хостах
------------------------------------------
+Map service components to hosts
+---------------------------------
 
 Каждый сервис состоит из обязательных компонентов, которые должны быть размещены, и необязательных, которые могут быть не разщены на хостах кластера. Для этого необходимо на вкладке кластера "Hosts - Components" выбрать компонент посредством нажатия на него мышкой в колонке "Components" и определить для него необходимый хост в колонке "Hosts" (:numref:`Рис.%s. <components>`).
 
@@ -351,7 +354,7 @@
    Компоненты сервиса Monitoring Clients
 
 
-Способы установки сервисов
+Ways to install services
 -----------------------------
 
 Существует два способа установки сервисов:
@@ -387,8 +390,8 @@
 
 
 
-Установка сервиса Zookeeper
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Install Zookeeper service 
+----------------------------
 
 Для установки сервиса *Zookeeper* на вкладке кластера "Services" необходимо выполнить:
 
@@ -406,8 +409,8 @@
 
 
 
-Установка сервиса Kafka
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Install Kafka service
+-----------------------
 
 Для установки сервиса *Kafka* на вкладке кластера "Services" необходимо выполнить:
 
@@ -424,8 +427,8 @@
 * По результатам инсталляции сервис *Kafka* меняет состояние с *created* -- создан, на *installed* -- установлен.
 
 
-Установка сервиса Nifi
-^^^^^^^^^^^^^^^^^^^^^^^^^
+Install Nifi service
+-----------------------
 
 Для установки сервиса *Nifi* на вкладке кластера "Services" необходимо выполнить:
 
@@ -442,8 +445,8 @@
 * По результатам инсталляции сервис *Nifi* меняет состояние с *created* -- создан, на *installed* -- установлен.
 
 
-Установка сервиса Monitoring Clients
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Install Monitoring Clients service
+------------------------------------
 
 Сервис *Monitoring Clients* требует импорта конфигурационных параметров кластера мониторинга (адреса, логин/пароль) в кластер *ads*:
 
