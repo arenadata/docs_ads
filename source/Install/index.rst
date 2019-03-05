@@ -1,23 +1,22 @@
-.. _ADCM: https://arenadata.tech/products/adcm/
+Installing Arenadata Streaming
+===============================
 
-Установка Arenadata Streaming
-=============================
+Currently, there are several ways to install a cluster **ADS**: using **Ambari 2.7.0** as well as **Arenadata Cluster Manager** -- `ADCM <https://arenadata.tech/products/adcm/>`_.
 
-На текущий момент существует несколько способов установки кластера **ADS**: с помощью Ambari 2.7.0, а также **Arenadata Cluster Manager** -- `ADCM <https://arenadata.tech/products/adcm/>`_.
+Documentation includes:
 
-В документации приведены:
-* принцип установки платформы Arenadata Streaming c помощью Ambari 2.7.0 и порядок подготовки к установке Arenadata Streaming MPack.
-* принцип установки платформы Arenadata Streaming c помощью ADCM и порядок подготовки к загрузке и установке бандла Arenadata Streaming.
++ The principle of installing the Arenadata Streaming platform using Ambari 2.7.0 and the procedure for preparing to install Arenadata Streaming MPack;
++ the principle of installing the Arenadata Streaming platform using ADCM and the procedure for preparing to download and install the Arenadata Streaming bundle.
 
-Инструкция может быть полезна администраторам, программистам, разработчикам и сотрудникам подразделений информационных технологий, осуществляющих внедрение системы.
+The instruction can be useful to administrators, programmers, developers and employees of information technology departments who implement and maintain the system.
 
 
-.. important:: Контактная информация службы поддержки -- e-mail: info@arenadata.io
+.. important:: Contact information support service -- e-mail: info@arenadata.io
 
 
 .. toctree::
    :maxdepth: 3
-   :caption: Оглавление:
+   :caption: Table of contents:
 
    download
    adcm/index
