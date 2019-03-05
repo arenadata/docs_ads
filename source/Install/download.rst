@@ -1,7 +1,7 @@
 Download distribution platform
 ===============================
 
-To download the platform distribution **Arenadata Streaming** you need to select the tab "Download" on the site `arenadata.io <https://arenadata.tech/en/index.php>`_. This takes you to the *App Store* (`store.arenadata.io <https://store.arenadata.io/index_en.html>`_, :numref:`Pic.%s.<install_download_app-store>`), and opens the on-screen application form to download the product (:numref:`Pic.%s.<install_download_form-download_eng>`).
+To download the platform distribution **Arenadata Streaming** you need to select the tab "Download" on the site `arenadata.io <https://arenadata.tech/en/index.php>`_. This takes you to the *App Store* (`store.arenadata.io <https://store.arenadata.io/index_en.html>`_, :numref:`Pic.%s.<install_download_app-store_eng>`), and opens the on-screen application form to download the product (:numref:`Pic.%s.<install_download_form-download_eng>`).
 
 .. _install_download_form-download_eng:
 
