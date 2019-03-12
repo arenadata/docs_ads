@@ -356,45 +356,45 @@ Because the a*Zookeeper*, *Kafka*, *Nifi* and *Monitoring Clients* services adde
 Ways to install services
 -----------------------------
 
-Существует два способа установки сервисов:
+There are two ways to install services:
 
-* Установка всех сервисов кластера. Операция на уровне кластера, представляет собой последовательный вызов процессов установки и конфигурирования всех добавленных сервисов;
+* Install all cluster services. The operation at the cluster level is a sequential call to the installation and configuration of all added services;
 
-* Выборочная установка сервиса. Операция на уровне сервиса, представляет собой установку отдельно взятого сервиса.
+* Custom installation service. The operation at the service level is the installation of a single service.
 
-.. important:: Независимо от выбранного типа установки изначально необходимо импортировать настройки из кластера *Monitoring*, в случае если добавлен сервис *Monitoring Clients*
+.. important:: Regardless of the type of installation selected, you initially need to import the settings from the *Monitoring* cluster in case the *Monitoring Clients* service is added
 
 
-Установка всех сервисов кластера
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Install all cluster services
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Для установки всех добаленных сервисов в кластере *ads* необходимо выбрать соответствующий кластер в **ADCM** и нажать кнопку *Install* в правом вехнем углу экранной формы (:numref:`Рис.%s. <cluster_install>`).
+To install all added services in a cluster *ads*, select the corresponding cluster in **ADCM** and click the *Install* button in the upper right corner of the screen form (:numref:`Pic.%s. <cluster_install>`).
 
 .. _cluster_install:
 
 .. figure:: ../../imgs/cluster_install.png
    :align: center
 
-   Установка всех сервисов кластера
+   Install all cluster services
 
 
-По результатам установки все добавленные сервисы меняют состояние с *created* -– создан, на *installed* -– установлен (:numref:`Рис.%s. <cluster_actions>`).
+As a result of the installation all the added services change the state from *created* to *installed* (:numref:`Pic.%s. <cluster_actions>`).
 
 .. _cluster_actions:
 
 .. figure:: ../../imgs/cluster_actions.png
    :align: center
 
-   Установка всех сервисов кластера
+   Result of the installation
 
 
 
 Install Zookeeper service 
 ----------------------------
 
-Для установки сервиса *Zookeeper* на вкладке кластера "Services" необходимо выполнить:
+To install the *Zookeeper* service, you need to perform a number of actions on the cluster tab "Services":
 
-* В поле "Actions" нажать на пиктограмму в строке сервиса *Zookeeper* и выбрать действие *Install* (:numref:`Рис.%s. <zk_install>`). Производится настройка хостов, установка необходимых пакетов.
+* In the "Actions" field click on the icon in the *Zookeeper* service row and select the action *Install* (:numref:`Pic.%s. <zk_install>`). At this point, the hosts are configured, the necessary packages are installed.
 
 .. _zk_install:
 
@@ -404,16 +404,16 @@ Install Zookeeper service
    Install Zookeeper
 
 
-* По результатам инсталляции сервис *Zookeeper* меняет состояние с *created* -- создан, на *installed* -- установлен.
+* As a result of the installation, the service *Zookeeper* changes state from *created* to *installed*.
 
 
 
 Install Kafka service
 -----------------------
 
-Для установки сервиса *Kafka* на вкладке кластера "Services" необходимо выполнить:
+To install the *Kafka* service, you need to perform a number of actions on the cluster tab "Services":
 
-* В строке сервиса *Kafka* в поле "Actions" нажать на пиктограмму и выбрать действие *Install* (:numref:`Рис.%s. <kafka_install>`).
+* In the "Actions" field click on the icon in the *Kafka* service row and select the action *Install* (:numref:`Pic.%s. <kafka_install>`).
 
 .. _kafka_install:
 
@@ -423,15 +423,15 @@ Install Kafka service
    Install Kafka
 
 
-* По результатам инсталляции сервис *Kafka* меняет состояние с *created* -- создан, на *installed* -- установлен.
+* As a result of the installation, the service *Kafka* changes state from *created* to *installed*.
 
 
 Install Nifi service
 -----------------------
 
-Для установки сервиса *Nifi* на вкладке кластера "Services" необходимо выполнить:
+To install the *Nifi* service, you need to perform a number of actions on the cluster tab "Services":
 
-* В строке сервиса *Nifi* в поле "Actions" нажать на пиктограмму и выбрать действие *Install* (:numref:`Рис.%s. <nifi_install>`).
+* In the "Actions" field click on the icon in the *Nifi* service row and select the action *Install* (:numref:`Pic.%s. <nifi_install>`).
 
 .. _nifi_install:
 
@@ -441,36 +441,37 @@ Install Nifi service
    Install Nifi
 
 
-* По результатам инсталляции сервис *Nifi* меняет состояние с *created* -- создан, на *installed* -- установлен.
+* As a result of the installation, the service *Nifi* changes state from *created* to *installed*.
 
 
 Install Monitoring Clients service
 ------------------------------------
 
-Сервис *Monitoring Clients* требует импорта конфигурационных параметров кластера мониторинга (адреса, логин/пароль) в кластер *ads*:
+The *monitoring clients* service is optional and requires importing the configuration parameters of the monitoring cluster (addresses, login/password) to the cluster *ads*:
 
-1. Для импорта конфигурации мониторинга в кластер *ads* необходимо открыть в ADCM вкладку "CLUSTERS", выбрать опцию *Import* и отметить импортируемые настройки сервисов с помощью простановки флажков в открывшейся форме (:numref:`Рис.%s. <import_configs>`).
+
+1. To import the monitoring configuration to the *ads* cluster, open the "CLUSTERS" tab in **ADCM**, select the *Import* option and mark the imported service settings using the checkboxes in the opened form (:numref:`Pic.%s. <import_configs>`).
 
 .. _import_configs:
 
 .. figure:: ../../imgs/import_configs.png
    :align: center
 
-   Импорт конфигурации мониторинга
+   Import monitoring configuration
 
 
-2. Установка клиентов мониторинга в кластер *ads*:
+2. To install monitoring clients in the cluster *ads*:
 
-* В кластере *ads* на вкладке "Services" в поле "Actions" нажать на пиктограмму и выбрать действие *Install* для службы *monitoring clients* (:numref:`Рис.%s. <mc_install>`).
+* Return to the cluster tab "Services". Press in the "Actions" field on the icon in the *monitoring clients* service row and select the action *Install* (:numref:`Pic.%s. <mc_install>`).
 
 .. _mc_install:
 
 .. figure:: ../../imgs/mc_install.png
    :align: center
 
-   Установка клиентов мониторинга
+   Install monitoring clients
 
 
-* По результатам инсталляции служба *monitoring clients* меняет состояние с *created* -- создана, на *monitored* -- мониторится.
+* As a result of the installation, the service *monitoring clients* changes state from *created* to *monitored*.
 
 
