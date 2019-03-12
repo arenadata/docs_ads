@@ -254,40 +254,40 @@ The settings block "Advanced" contains the following parameters:
 Add hosts
 -----------
 
-Для добавления хостов в кластер *ads* необходимо:
+To add hosts to the cluster *ads*:
 
-1. В меню кластера *ads* открыть вкладку "Hosts" (:numref:`Рис.%s. <hosts_list>`).
+1. Open the "Hosts" tab in the *ads* cluster menu (:numref:`Pic.%s. <hosts_list>`).
 
 .. _hosts_list:
 
 .. figure:: ../../imgs/hosts_list.png
    :align: center
 
-   Вкладка "Hosts" кластера ads
+   "Hosts" tab of the ads cluster
 
-2. Нажать "Add hosts" и в открывшейся форме выбрать необходимые хосты (:numref:`Рис.%s. <add_hosts>`).
+2. Press the "Add hosts" button and in the opened form select the required hosts (:numref:`Pic.%s. <add_hosts>`).
 
 .. _add_hosts:
 
 .. figure:: ../../imgs/add_hosts.png
    :align: center
 
-   Выбор хостов
+   Сhoose hosts
 
-3. В результате выполненных действий факт добавления хостов отображается в кластере *ads* в списке вкладки "Hosts" (:numref:`Рис.%s. <hosts_list2>`).
+3. As a result, the fact of adding hosts is displayed in the *ads* cluster in the list of the "Hosts" tab (:numref:`Pic.%s. <hosts_list2>`).
 
 .. _hosts_list2:
 
 .. figure:: ../../imgs/hosts_list2.png
    :align: center
 
-   Результат успешного добавления хостов
+   Result of successfully adding hosts
 
 
 Map service components to hosts
 ---------------------------------
 
-Каждый сервис состоит из обязательных компонентов, которые должны быть размещены, и необязательных, которые могут быть не разщены на хостах кластера. Для этого необходимо на вкладке кластера "Hosts - Components" выбрать компонент посредством нажатия на него мышкой в колонке "Components" и определить для него необходимый хост в колонке "Hosts" (:numref:`Рис.%s. <components>`).
+Each service consists of components that should be mapped to some hosts in the cluster. To do this, a component should be selected on the "Hosts - Components" tab by clicking on it in the "Components" column and mapped with a click to the required host in the "Hosts" column (:numref:`Pic.%s. <components>`).
 
 
 .. _components:
@@ -295,63 +295,62 @@ Map service components to hosts
 .. figure:: ../../imgs/components.png
    :align: center
 
-   Размещение компонентов сервисов на хостах
+   Map service components to hosts
 
+Because the a*Zookeeper*, *Kafka*, *Nifi* and *Monitoring Clients* services added to the **ADS** cluster, but are not mapped yet, initially there are no components on any of the hosts:
 
-Поскольку сервисы *Zookeeper*, *Kafka*, *Nifi* и *Monitoring Clients* добавлены в кластер **ADS**, но еще не размещены на хостах, то изначально ни на одном из хостов нет компонентов:
+1. Components of the *Zookeeper* service are (:numref:`Pic.%s. <zk_components>`):
 
-1. Компоненты сервиса *Zookeeper* (:numref:`Рис.%s. <zk_components>`):
-
-* *Zookeeper.SERVER* -- необходимо добавить на один или нечетное количество хостов (*zk1*); для больших кластеров рекмоендуется не более *5*.
+* *Zookeeper.SERVER* -- should be added to one or an odd number of hosts (*zk1*); for large clusters no more than *5* are recommended.
 
 .. _zk_components:
 
 .. figure:: ../../imgs/zk_components.png
    :align: center
 
-   Компоненты сервиса *Zookeeper*
+   Components of the *Zookeeper* service
 
 
-2. Компоненты сервиса *Kafka* (:numref:`Рис.%s. <kafka_components>`):
+2. Components of the *Kafka* service are (:numref:`Pic.%s. <kafka_components>`):
 
-* *kafka.BROKER* -- необходимо добавить на один и более хостов брокеров (*kafka1*, *kafka2*);
+* *kafka.BROKER* -- should be added to one or more broker hosts (*kafka1*, *kafka2*);
 
-* *kafka.MANAGER* -- опционально может быть добавлен на один любой хост (*kafka1*);
+* *kafka.MANAGER* -- optionally could be added to any one host (*kafka1*);
 
-* *kafka.SCHEMA_REGISTRY* -- опционально может быть добавлен на один любой хост (*kafka2*).
+* *kafka.SCHEMA_REGISTRY* -- optionally could be added to any one host (*kafka2*).
 
 .. _kafka_components:
 
 .. figure:: ../../imgs/kafka_components.png
    :align: center
 
-   Компоненты сервиса *Kafka*
+   Components of the *Kafka* service
 
 
-3. Компоненты сервиса *Nifi* (:numref:`Рис.%s. <nifi_components>`):
+3. Components of the *Nifi* service are (:numref:`Pic.%s. <nifi_components>`):
 
-* *nifi.SERVER* -- необходимо добавить на один или более хостов (*df-mdw*);
+* *nifi.SERVER* -- should be added to one or more hosts (*df-mdw*);
 
 .. _nifi_components:
 
 .. figure:: ../../imgs/nifi_components.png
    :align: center
 
-   Компоненты сервиса *Nifi*
+   Components of the *Nifi* service
 
 
-4. Компоненты сервиса *monitoring clients* (:numref:`Рис.%s. <mc_components>`):
+4. Components of the *monitoring clients* service are (:numref:`Pic.%s. <mc_components>`):
 
-* *monitoring_clients.diamond* -- должен быть добавлен на все хосты (*zk1*, *kafka1*, *kafka2*, *nifi2*). Собирает системные метрики и отправляет их в **ADCM**;
+* *monitoring_clients.diamond* -- must be added to all hosts (*zk1*, *kafka1*, *kafka2*, *nifi2*). Collects system metrics and sends them to **ADCM**;
 
-* *monitoring_clients.jmxtrans* -- необходимо добавить на один хост (*zk1*). Собирает специфичные для cервисов метрики и отправляет их в **ADCM**;
+* *monitoring_clients.jmxtrans* -- must be added to one host (*zk1*). Collects service-specific metrics and sends them to **ADCM**;
 
 .. _mc_components:
 
 .. figure:: ../../imgs/mc_components.png
    :align: center
 
-   Компоненты сервиса Monitoring Clients
+   Components of the *Monitoring Clients* service
 
 
 Ways to install services
