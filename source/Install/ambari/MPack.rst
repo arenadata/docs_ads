@@ -1,38 +1,38 @@
-Подготовка к установке Arenadata Streaming MPack
+Preparing to install Arenadata Streaming MPack
 ==================================================
 
-Основные компоненты **ADS** устанавливаются с помощью **Ambari Management Pack** (**MPack**):
+The main components **ADS** are installed using **Ambari Management Pack** (**MPack**):
 
-+ `Загрузка Arenadata Streaming MPack`_
-+ `Импортирование MPack в Ambari стек`_
++ `Download Arenadata Streaming MPack`_
++ `Import MPack to Ambari stack`_
 
 
-Загрузка Arenadata Streaming MPack
+Download Arenadata Streaming MPack
 ------------------------------------
 
-Для инсталляции **Arenadata Streaming MPack** необходимо загрузить и распаковать следующие архивы в выделенном для них месте (при этом следует избегать использования каталога */tmp*):
+To install **Arenadata Streaming MPack**, you need to download and unpack the following archives in a dedicated place (you should avoid using the */tmp* directory):
 
-+ *ads-ambari-mpack-{version}.tar.gz* – набор конфигураций сервисов и скриптов для развертывания и настройки платформы через **Ambari**.
++ *ads-ambari-mpack-{version}.tar.gz* -- a set of service and script configurations for deploying and configuring the platform via **Ambari**.
 
-В случае если архивы загружены в каталог */tmp*, то для их распаковки в каталоге, например, */staging*, необходимо выполнить следующую команду:
+If archives are loaded into the */tmp* directory then to unpack them in a directory for example */staging* you need to run the following command:
 
   :command:`tar –xzvf /tmp/ads-ambari-mpack-{version}.tar.gz -C /staging/`
 
 
 
-Импортирование MPack в Ambari стек
-------------------------------------
+Import MPack to Ambari stack
+----------------------------------
 
-Для импортирования стека **ADS** в **Ambari** необходимо выполнить следующие команды:
+To import the **ADS** stack into **Ambari** you need to run the following commands:
 
-1. Сохранить текущую папку *Ambari Resources* для возможного восстановления системы:
+1. Save the current folder *Ambari Resources* for possible system recovery:
 
   :command:`cp -r /var/lib/ambari-server/resources /var/lib/ambari-server/resources.backup`
 
-2. Запустить команду импорта стека **ADS**:
+2. Run the stack import command:
 
   :command:`ambari-server install-mpack --mpack=/staging/ads-ambari-mpack-{version}.tar.gz --purge --verbose`
 
-3. Перезапустить **Ambari**:
+3. Restart **Ambari**:
 
   :command:`ambari-server restart`
