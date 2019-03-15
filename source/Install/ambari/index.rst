@@ -1,16 +1,13 @@
-Установка ADS c помощью Ambari  
-==============================
+Installing ADS cluster with Ambari  
+===================================
 
-В документации приведен принцип установки платформы Arenadata Streaming c помощью Ambari 2.7.0 и порядок подготовки к установке Arenadata Streaming MPack.
+Further, the documentation describes the principle of installing the Arenadata Streaming platform using Ambari 2.7.0 and the procedure for preparing to install Arenadata Streaming MPack.
 
-Прежде чем перейти к следующим пунктам, необходимо скачать ADS 1.0.0.
-
-.. important:: Контактная информация службы поддержки -- e-mail: info@arenadata.io
+.. important:: Before proceeding to the following points, you need to download `ADS 1.0.0 <../../downloadr>`_
 
 
 .. toctree::
    :maxdepth: 2
-   :caption: Оглавление:
 
    Ambari
    MPack
