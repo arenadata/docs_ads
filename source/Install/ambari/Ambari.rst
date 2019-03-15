@@ -1,91 +1,89 @@
-Установка Arenadata Streaming c помощью Ambari 2.7.0
-======================================================
+Installing Arenadata Streaming with Ambari 2.7.0
+==================================================
 
-Установка сервера **Ambari 2.7.0** проходит в несколько этапов:
+Installing the **Ambari 2.7.0** server goes through several steps:
 
-+ `Настройка удаленного репозитория YUM`_
-+ `Установка сервера Ambari`_
-+ `Настройка сервера Ambari`_
-+ `Запуск сервера Ambari`_
++ `Setting up a remote YUM repository`_
++ `Install Ambari Server`_
++ `Ambari Server setup`_
++ `Start Ambari Server`_
 
 
-Настройка удаленного репозитория YUM
+Setting up a remote YUM repository
 -------------------------------------
 
-Настройка удаленного репозитория не отличается от настройки любого дополнительного репозитория **YUM**. Для добавления репозитория необходимо выполнить от имени *root* команду:
+Setting up a remote repository is no different from setting up any additional repository *YUM*. To add a repository, you must run the following command as *root*:
 
   :command:`yum-config-manager –-add-repo http://public-repo-1.hortonworks.com/ambari/centos7/2.x/updates/2.7.0.0/ambari.repo`
 
 
-Установка сервера Ambari
--------------------------
+Install Ambari Server
+-----------------------
 
-Сервер **Ambari** устанавливается из RPM-пакета по команде **YUM**:
+The **Ambari** server is installed from the RPM package using the *YUM* command:
 
   :command:`yum install ambari-server`
 
-Команда устанавливает сервер **Ambari**, являющийся сервером веб-приложений, на порт *8080*. Также устанавливается инстанс сервера
-**PostgreSQL** на порт *5432*.
+The command sets the **Ambari** server which is the web application server to the port *8080*. Also installed is the server instance **PostgreSQL** on port *5432*.
 
 
+Ambari Server setup
+-----------------------
 
-Настройка сервера Ambari
--------------------------
-
-Сервер **Ambari** необходимо настроить для корректной работы. В случае если инстанс **PostgreSQL** настроен на порт по умолчанию, следует выполнить следующую команду:
+**Ambari** server must be configured to work correctly. If the instance **PostgreSQL** is configured on the default port you should run the following command:
 
   :command:`ambari-server setup`
 
-В процессе настройки необходимо указать или принять по умолчанию параметры:
+During the setup process you must specify or accept the default settings:
 
-+ *Учетная запись пользователя* – для запуска Ambari-сервера можно выбрать любую учетную запись (необязательно выполнять вход от *root*). В случае если пользователя не существует, он создается автоматически;
-+ *Java JDK* – для загрузки **Oracle JDK 1.8** необходимо ввести значение *1* и принять лицензию **Oracle JDK** для загрузки файлов из **Oracle**. При этом установка **JDK** выполняется автоматически;
-+ *База данных* – выбор базы данных:
++ *User account* -- you can choose any account to start the Ambari server (it is not necessary to log in from *root*). If the user does not exist, it is automatically created;
++ *Java JDK* -- to download **Oracle JDK 1.8**, you must enter the value *1* and accept the license **Oracle JDK** to download files from **Oracle**. The installation of **JDK** is done automatically;
++ *Database* -- select database:
 
   :command:`Enter advanced database configuration`
 
-  В командной строке необходимо ответить *n* или *y*:
+  At the command line you must answer *n* or *y*:
 
-    + *n* – для использования с **Ambari** стандартной встроенной базы данных **PostgreSQL**. По умолчанию для базы данных **PostgreSQL** устанавливается имя *ambari* и логин/пароль принимают значения *ambari/bigdata*.
+    + *n* -- for use with Ambari standard built-in database PostgreSQL. By default, the database name PostgreSQL is set to *ambari* and the login/password is *ambari/bigdata*;
 
-    + *y* – при необходимости использования с **Ambari** уже существующей базы данных **PostgreSQL**, **MySQL** или **Oracle** вместо предлагаемой по умолчанию. Далее для выбранной базы данных необходимо указать параметры подключения.
+    + *y* -- if you want to use with Ambari an existing PostgreSQL database, MySQL or Oracle instead of the default one. Next, for the selected database you must specify the connection parameters.
 
 
 
-Запуск сервера Ambari
+Start Ambari Server
 ----------------------
 
-После установки сервера **Ambari** запуск осуществляется по команде:
+After installing the **Ambari** server start is performed by the command:
 
   :command:`ambari-server start`
 
-Для проверки статуса сервера необходимо использовать команду:
+To check the server status use the command:
 
   :command:`ambari-server status`
 
-Для остановки сервера необходимо использовать команду:
+To stop the server use the command:
 
   :command:`ambari-server stop`
 
-Сервер **Ambari** доступен на порту *8080*. По умолчанию для него установлена следующая учетная запись:
+**Ambari** server is available on port *8080*. By default it is set to the following account:
 
 +  User: *admin*
 +  Password: *admin*
 
-.. important:: Рекомендуется сменить пароль после первого входа в систему
+.. important:: It is recommended to change the password after the first login
 
-Для входа в веб-интерфейс **Ambari** необходимо в адресной строке браузера указать адрес сервера:
+To enter the web interface **Ambari** you need to specify the server address in the address bar of the browser:
 
   :command:`http://<адрес сервера>:8080`
 
-При этом запрашивается логин и пароль. После авторизации открывается веб-интерфейс **Ambari** (:numref:`Рис.%s.<ADS_install_welcom-to-ambari-before-config>`).
+This requests a login and password.  After authorization opens the web interface **Ambari** (:numref:`Pic.%s.<ADS_install_welcom-to-ambari-before-config>`).
 
 .. _ADS_install_welcom-to-ambari-before-config:
 
 .. figure:: ../imgs/ADS_install_welcom-to-ambari-before-config.*
    :align: center
 
-   Веб-интерфейс Ambari до настройки кластера
+   Ambari web interface before cluster setup
 
 
 
