@@ -74,11 +74,11 @@ Health check of the *Kafka* service is the creation of test topics on each of th
 
 To check the results of actions on the service *Kafka* you need:
 
-1. Go to the cluster *ads* in ADCM, on the "Services" tab for the *Kafka* service in the "Actions" field click on the icon and select the *Check* action (:numref:`Pic.%s <kafka_actions>`).
+1. Go to the cluster *ads* in ADCM, on the "Services" tab for the *Kafka* service in the "Actions" field click on the icon and select the *Check* action (:numref:`Pic.%s <manage_tools_kafka>`).
 
-.. _kafka_actions:
+.. _manage_tools_kafka:
 
-.. figure:: ../../imgs/kafka1.png
+.. figure:: ../../imgs/manage_tools_kafka.png
    :align: center
 
    Run the *Kafka* service health check
@@ -109,14 +109,6 @@ Start and stop services
 
 For each of the services it is possible to control it independently of the others, to perform such operations as *Stop*, *Start*, *Restart*.
 
-For example, in order to restart all the components of the service *Kafka* you need to go to the cluster *ads* in **ADCM**, on the "Services" tab for the *Kafka* service in the "Actions" field click on the icon and select the *Restart* action (:numref:`Pic.%s <kafka_actions>`).
-
-.. _kafka_actions:
-
-.. figure:: ../../imgs/kafka1.png
-   :align: center
-
-   Valid service operations
-
+For example, in order to restart all the components of the service *Kafka* you need to go to the cluster *ads* in **ADCM**, on the "Services" tab for the *Kafka* service in the "Actions" field click on the icon and select the *Restart* action (see :numref:`Pic.%s <manage_tools_kafka>`).
 
 As a result, the service status changes to *running* or *stopped*, if the service has already been installed and is not in the *created* state. 
