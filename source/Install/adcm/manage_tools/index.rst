@@ -1,5 +1,5 @@
 Manage tools
-=================
+==============
 
 **ADS** provides for 2 types of operations:
 
