@@ -31,7 +31,7 @@ Connectors & Tasks
 
 .. _DeveloperKafka_Connect_Example-connector-model:
 
-.. figure:: ../imgs/DeveloperKafka_Connect_Example-connector-model.*
+.. figure:: ../imgs/DeveloperKafka_Connect_Example-connector-model.png
    :align: center
 
    Пример реализации *Source Connector* 
@@ -46,7 +46,7 @@ Partitions & Records
 
 .. _DeveloperKafka_Connect_data-model:
 
-.. figure:: ../imgs/DeveloperKafka_Connect_data-model.*
+.. figure:: ../imgs/DeveloperKafka_Connect_data-model.png
    :align: center
 
    Пример партиционированного потока 
