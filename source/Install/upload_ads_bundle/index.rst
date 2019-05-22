@@ -11,7 +11,7 @@
 
 .. _bundles:
 
-.. figure:: ../../imgs/bundles.png
+.. figure:: ../imgs/bundles.png
    :align: center
 
    Вкладка "BUNDLES"
@@ -21,7 +21,7 @@
 
 .. _choose_bundle:
 
-.. figure:: ../../imgs/choose_bundle.png
+.. figure:: ../imgs/choose_bundle.png
    :align: center
 
    Выбор бандла
@@ -31,7 +31,7 @@
 
 .. _load_bundle:
 
-.. figure:: ../../imgs/load_bundle.png
+.. figure:: ../imgs/load_bundle.png
    :align: center
 
    Результат успешной загрузки бандла

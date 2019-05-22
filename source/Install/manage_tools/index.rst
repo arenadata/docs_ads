@@ -11,11 +11,11 @@
 Операции на уровне кластера
 ---------------------------
 
-**Запуск и остановка ADS** -- существует возможность последовательного запуска и остановки всех сервисов кластера *ads* через **ADCM**. Для этого необходимо открыть в **ADCM** кластер *ads* и нажать кнопку *Start*, *Stop* или *Restart* в зависимости от требуемой работы с кластером (:numref:`Рис.%s <cluster_run>`).
+**Запуск и остановка ADS** -- существует возможность последовательного запуска и остановки всех сервисов кластера *ADS* через **ADCM**. Для этого необходимо открыть в **ADCM** кластер *ADS* и нажать кнопку *Start*, *Stop* или *Restart* в зависимости от требуемой работы с кластером (:numref:`Рис.%s <cluster_run>`).
 
 .. _cluster_run:
 
-.. figure:: ../../imgs/cluster_run.png
+.. figure:: ../imgs/cluster_run.png
    :align: center
 
    Операции на уровне кластера
@@ -37,11 +37,11 @@
 
 Для проверки результатов действий над сервисом *Zookeeper* необходимо:
 
-1. Перейти в кластер *ads* в ADCM, на вкладке "Services" для сервиса *Zookeeper* в поле "Actions" нажать на пиктограмму и выбрать действие *Check* (:numref:`Рис.%s <zk_actions>`).
+1. Перейти в кластер *ADS* в ADCM, на вкладке "Services" для сервиса *Zookeeper* в поле "Actions" нажать на пиктограмму и выбрать действие *Check* (:numref:`Рис.%s <zk_actions>`).
 
 .. _zk_actions:
 
-.. figure:: ../../imgs/zk_actions.png
+.. figure:: ../imgs/service_actions.png
    :align: center
 
    Запуск проверки состояния сервиса *Zookeeper*
@@ -51,22 +51,23 @@
 
 .. _ads_check1:
 
-.. figure:: ../../imgs/ads_check1.png
+.. figure:: ../imgs/ads_check.png
    :align: center
 
    Вкладка "JOBS"
 
 
-3. Выбрать последнее действие над кластером *ads* и в открывшемся окне проверить результаты (:numref:`Рис.%s <zk_status_check>`).
+3. Выбрать последнее действие над кластером *ADS* и в открывшемся окне проверить результаты (:numref:`Рис.%s <zk_status_check>`).
 
 .. _zk_status_check:
 
-.. figure:: ../../imgs/zk_status_check.png
+.. figure:: ../imgs/zk_status_check.png
    :align: center
 
    Проверка состояния сервиса *Zookeeper*
 
 
+(вот эти два пункта хорошо бы объединить с проверкой состояния сервисов)
 Проверка состояния сервиса Kafka
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -74,11 +75,11 @@
 
 Для проверки результатов действий над сервисом *Kafka* необходимо:
 
-1. Перейти в кластер *ads* в ADCM, на вкладке "Services" для сервиса *Kafka* в поле "Actions" нажать на пиктограмму и выбрать действие *Check* (:numref:`Рис.%s <manage_tools_kafka>`).
+1. Перейти в кластер *ADS* в ADCM, на вкладке "Services" для сервиса *Kafka* в поле "Actions" нажать на пиктограмму и выбрать действие *Check* (:numref:`Рис.%s <manage_tools_kafka>`).
 
 .. _manage_tools_kafka:
 
-.. figure:: ../../imgs/manage_tools_kafka.png
+.. figure:: ../imgs/service_actions.png
    :align: center
 
    Запуск проверки состояния сервиса *Kafka*
@@ -88,17 +89,17 @@
 
 .. _ads_check2:
 
-.. figure:: ../../imgs/ads_check2.png
+.. figure:: ../imgs/ads_check.png
    :align: center
 
    Вкладка "JOBS"
 
 
-3. Выбрать последнее действие над кластером *ads* и в открывшемся окне проверить результаты (:numref:`Рис.%s <kafka_status_check>`).
+3. Выбрать последнее действие над кластером *ADS* и в открывшемся окне проверить результаты (:numref:`Рис.%s <kafka_status_check>`).
 
 .. _kafka_status_check:
 
-.. figure:: ../../imgs/kafka_status_check.png
+.. figure:: ../imgs/kafka_status_check.png
    :align: center
 
    Проверка состояния сервиса *Kafka*
@@ -109,6 +110,6 @@
 
 Для каждого из сервисов есть возможность управления им независимо от остальных, выполнять такие операции как *Stop*, *Start*, *Restart*.
 
-Например, для того чтобы перезапустить все компоненты сервиса *Kafka* необходимо перейти в кластер *ads* в ADCM, на вкладке "Services" для сервиса *Kafka* в поле "Actions" нажать на пиктограмму и выбрать действие *Restart* (см. :numref:`Рис.%s <manage_tools_kafka>`).
+Например, для того чтобы перезапустить все компоненты сервиса *Kafka* необходимо перейти в кластер *ADS* в ADCM, на вкладке "Services" для сервиса *Kafka* в поле "Actions" нажать на пиктограмму и выбрать действие *Restart* (см. :numref:`Рис.%s <manage_tools_kafka>`).
 
 В результате того или иного действия статус сервиса меняется на *running* или *stopped*, в том случае если сервис уже был проинсталлирован и не находится в состоянии *created*. 
