@@ -6,7 +6,8 @@
 
 .. _install_download_form-download:
 
-.. figure:: ../imgs/install_download_form-download.*
+.. figure:: ../imgs/install_download_form-download.png
+   :scale: 60 %
    :align: center
 
    Заявка для загрузки продукта
@@ -14,26 +15,27 @@
 
 В экранной форме заявки следует заполнить следующие поля:
 
-+ *ФИО* – ФИО пользователя;
-+ *E-Mail* – адрес электронной почты пользователя;
-+ *Компания* – наименование компании пользователя;
-+ *Цель использования* – описание цели использования платформы.
++ *ФИО* -- ФИО пользователя;
++ *E-Mail* -- адрес электронной почты пользователя;
++ *Компания* -- наименование компании пользователя;
++ *Цель использования* -- описание цели использования платформы.
 
-Все поля являются обязательными для заполнения. После ввода данных необходимо нажать кнопку *Отправить*. При корректном заполнении полей выдается соответствующее сообщение (:numref:`Рис.%s.<install_download_accepted>`).
+Все поля являются обязательными для заполнения. После ввода данных необходимо нажать кнопку *Отправить*, в результате чего выдается соответствующее сообщение (:numref:`Рис.%s.<install_download_accepted>`).
 
 .. _install_download_accepted:
 
-.. figure:: ../imgs/install_download_accepted.*
+.. figure:: ../imgs/install_download_accepted.jpg
+   :scale: 80 %
    :align: center
 
    Заявка принята
 
 
-Окно сообщения следует закрыть. При этом происходит переход на страницу *Магазин Приложений* с перечнем продуктов **Arenadata** (:numref:`Рис.%s.<install_download_app-store>`).
+При закрытии окна происходит переход на страницу *Магазин Приложений* с перечнем продуктов **Arenadata** (:numref:`Рис.%s.<install_download_app-store>`).
 
 .. _install_download_app-store:
 
-.. figure:: ../imgs/install_download_app-store.*
+.. figure:: ../imgs/install_download_app-store.png
    :align: center
 
    Магазин Приложений
@@ -48,7 +50,7 @@
 
 .. _install_download_download-ADS:
 
-.. figure:: ../imgs/install_download_download-ADS.*
+.. figure:: ../imgs/install_download_download-ADS.png
    :align: center
 
    Страница загрузки платформы Arenadata Streaming
