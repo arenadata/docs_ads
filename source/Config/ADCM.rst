@@ -48,7 +48,7 @@ Kafka
 
 .. _kafka_config:
 
-.. figure:: ../imgs/kafka_config.png
+.. figure:: ../Install/imgs/kafka_config.png
    :align: center
 
    Окно конфигурации сервиса Kafka
@@ -90,7 +90,7 @@ Nifi
 
 .. _nifi_config:
 
-.. figure:: ../imgs/nifi_config.png
+.. figure:: ../Install/imgs/nifi_config.png
    :align: center
 
    Окно конфигурации сервиса Nifi
@@ -151,7 +151,7 @@ Monitoring Clients
 
 .. _mc_config:
 
-.. figure:: ../imgs/mc_config.png
+.. figure:: ../Install/imgs/mc_config.png
    :align: center
 
    Окно конфигурации сервиса Monitoring Clients
