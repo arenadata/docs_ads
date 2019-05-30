@@ -1,6 +1,6 @@
-Новые функциональности Arenadata Streaming
-============================================
+Новые функциональности 
+=========================
 
-Release Notes - Arenadata Streaming - Version Arenadata Streaming 1.3
----------------------------------------------------------------------
+Release Notes - Arenadata Streaming - Version Arenadata Streaming 1.4
+----------------------------------------------------------------------
                     
