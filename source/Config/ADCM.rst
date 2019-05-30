@@ -20,7 +20,7 @@ Zookeeper
 
 .. _zk_config:
 
-.. figure:: ../imgs/zk_config.png
+.. figure:: ../Install/imgs/zk_config.png
    :align: center
 
    Окно конфигурации сервиса Zookeeper
