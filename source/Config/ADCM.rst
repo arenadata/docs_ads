@@ -86,25 +86,40 @@ Kafka
 Nifi
 --------
 
-Для перехода к настройкам сервиса *Nifi* необходимо нажать кнопку с пиктограммой шестеренки в соответствующей строке вкладки "SERVICES" и перейти в раздел меню "Configuration". При этом открывается окно конфигурации сервиса *Nifi* (:numref:`Рис.%s. <nifi_config>`).
+Для перехода к настройкам сервиса *Nifi* необходимо нажать кнопку с пиктограммой шестеренки в соответствующей строке вкладки "SERVICES" и перейти в раздел меню "Configuration". При этом открывается окно настроек сервиса *Nifi* (:numref:`Рис.%s. <nifi_config>`).
 
 .. _nifi_config:
 
 .. figure:: ../Install/imgs/nifi_config.png
    :align: center
 
-   Окно конфигурации сервиса Nifi
+   Настройки сервиса Nifi
 
 
 В блоке настроек "Main" задаются основные параметры:
 
-* *nifi_ui_port* -- http-порт, на котором поднимается веб-интерфейс сервиса *Nifi*. Указывается в качестве параметра *nifi.web.http.port* в конфигурационном файле *nifi.properties*;
+* *nifi_ui_port* -- http-порт, на котором поднимается веб-интерфейс сервиса *Nifi*. Указывается в качестве параметра ``nifi.web.http.port`` в конфигурационном файле *nifi.properties*;
 
-* *nifi_node_jvm_memory* -- размер кучи, выделяемой процессу сервиса *Nifi*. Указывается в конфигурационном файле *bootstrap.conf*.
+* *nifi_node_jvm_memory* -- размер кучи, выделяемой процессу сервиса *Nifi*. Указывается в конфигурационном файле *bootstrap.conf*;
+
+* *nifi_registry_ui_port* -- http-порт реестра *Nifi*. Указывается в качестве параметра ``nifi.registry.web.http.port`` в файле конфигурации *nifi.properties*;
+
+* *nifi_registry_node_jvm_memory* -- размер кучи, выделяемой реестру *Nifi*. Указывается в конфигурационном файле *bootstrap.conf*.
+
 
 В блоке настроек "Custom" задаются следующие необязательные параметры:
 
-* *nifi_custom_nars* -- параметр следует использовать в случае добавления *custom nars*; перечисляются через запятую. Указываются в качестве *nifi.nar.library.directory.lib...* в конфигурационном файле *nifi.properties*;
+* *nifi_custom_nars* -- параметр следует использовать в случае добавления *custom nars*; перечисление через запятую. Указываются в качестве ``nifi.nar.library.directory.lib...`` в конфигурационном файле *nifi.properties*;
+
+* *database_repository* -- 
+
+* *flowfile_repository* -- 
+
+* *content_repositories* -- 
+
+* *provenance_repositories* -- 
+
+* *nifi_registry_flow_storage* -- 
 
 В блоке настроек "Advanced" задаются следующие расширенные параметры:
 
