@@ -53,8 +53,6 @@
 
 .. important:: Контактная информация службы поддержки -- e-mail: info@arenadata.io
 
-.. important:: В настоящий момент автоматическая установка Arenadata Streaming доступна только через Ambari версии не ниже 2.7.0
-
 
 .. toctree::
    :maxdepth: 2
