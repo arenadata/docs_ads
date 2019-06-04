@@ -1,5 +1,5 @@
-Настройки платформы Arenadata Streaming
-=========================================
+Настройки платформы 
+=====================
 
 В документации приведены настройки платформы Arenadata Streaming на уровне брокера и топика, а также конфигурирование Producer, Consumer, Connect, Streams.
 
@@ -14,6 +14,7 @@
    :maxdepth: 2
    :caption: Оглавление:
 
+   ADCM
    broker
    topic
    Producer
