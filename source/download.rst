@@ -23,5 +23,5 @@
 `Скачать настройки платформы`_
  .. _Скачать настройки платформы: https://storage.googleapis.com/arenadata-repo/docs/ads/pdf/v1.4-RUS/Настройки%20платформы.pdf
 
-`Скачать новые функциональности`_
- .. _Скачать новые функциональности: https://storage.googleapis.com/arenadata-repo/docs/ads/pdf/v1.4-RUS/Новые%20функциональности.pdf
+`Скачать Release Notes`_
+ .. _Скачать Release Notes: https://storage.googleapis.com/arenadata-repo/docs/ads/pdf/v1.4-RUS/Release%20Notes.pdf
