@@ -1,7 +1,7 @@
 
 .. _ADS_index_logo:
 
-.. figure:: imgs/ADS_index_logo.*
+.. figure:: imgs/ADS_index_logo.png
    :align: center
 
 
@@ -13,7 +13,7 @@
 
 .. _ADS_index_scheme:
 
-.. figure:: imgs/ADS_index_scheme.*
+.. figure:: imgs/ADS_index_scheme.png
    :align: center
 
    Принципиальная схема платформы ADS
