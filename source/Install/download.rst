@@ -50,11 +50,10 @@
 
 .. _install_download_download-ADS:
 
-.. figure:: ../imgs/install_download_download-ADS.png
+.. figure:: ../imgs/install_download_download-ADS_1.4.png
    :align: center
 
    Страница загрузки Arenadata Streaming
-
 
 В разделе *"Выберите версию продукта"* следует указать интересующую версию **ADS**, а в поле *"Выберите ОС"* -- используемую операционную систему. При этом в разделе *"Информация о релизе"* отображается дата выхода и тип релиза выбранной версии, ее номер, ссылки на лицензию использования и Release Notes.
 
