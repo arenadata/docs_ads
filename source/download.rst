@@ -5,6 +5,9 @@
 `Скачать общий обзор`_
  .. _Скачать общий обзор: https://storage.googleapis.com/arenadata-repo/docs/ads/pdf/v1.4-RUS/Общий%20обзор.pdf
 
+`Скачать требования к инфраструктуре`_
+ .. _Скачать требования к инфраструктуре: https://storage.googleapis.com/arenadata-repo/docs/ads/pdf/v1.4-RUS/Требования%20к%20инфраструктуре.pdf
+
 `Скачать установку с помощью ADCM`_
  .. _Скачать установку с помощью ADCM: https://storage.googleapis.com/arenadata-repo/docs/ads/pdf/v1.4-RUS/Установка%20с%20помощью%20ADCM.pdf
  

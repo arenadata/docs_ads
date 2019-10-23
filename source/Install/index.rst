@@ -33,6 +33,10 @@
    upload_ads_bundle/index
    create_cluster/index
    manage_tools/index
+   manage_tools/upgrade
+   manage_tools/zk_operations
+   manage_tools/kafka_operations
+   manage_tools/nifi_operations
 
 
 .. important:: Контактная информация службы поддержки -- e-mail: info@arenadata.io
