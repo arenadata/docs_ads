@@ -64,6 +64,7 @@
    Intro/index
    Requirements/index
    Install/index
+   OperationGuide/index
    AdminNIFI/index
    UserNIFI/index
    DeveloperKafka/index
