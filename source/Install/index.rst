@@ -1,7 +1,7 @@
-Установка с помощью ADCM
+Инструкция по установке
 ============================
 
-Кластер **ADS** устанавливается при помощи **Arenadata Cluster Manager**, описание которого приведено на сайте: `ADCM <https://arenadata.tech/products/adcm/>`_. При этом обеспечивается следующее:
+Кластер ADS устанавливается при помощи Arenadata Cluster Manager, описание которого приведено на сайте: `ADCM <https://arenadata.tech/products/adcm/>`_. При этом обеспечивается следующее:
 
 1. Вся логика по установке и конфигурированию находится внутри бандла ADS:
 
@@ -24,6 +24,9 @@
    * Используется фиксированный набор пакетов в помощь пользователям и для составления баг-репортов.
 
 
+.. important:: Контактная информация службы поддержки -- e-mail: info@arenadata.io
+
+
 .. toctree::
    :maxdepth: 2
    :caption: Оглавление:
@@ -37,7 +40,3 @@
    manage_tools/zk_operations
    manage_tools/kafka_operations
    manage_tools/nifi_operations
-
-
-.. important:: Контактная информация службы поддержки -- e-mail: info@arenadata.io
-
