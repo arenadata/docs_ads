@@ -18,6 +18,6 @@
    Authentication
    Policies
    Kerberos
-   Install/manage_tools/nifi_operations
+   ../Install/manage_tools/nifi_operations
    
   
