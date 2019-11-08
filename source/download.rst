@@ -8,8 +8,8 @@
 `Скачать требования к инфраструктуре`_
  .. _Скачать требования к инфраструктуре: https://storage.googleapis.com/arenadata-repo/docs/ads/pdf/v1.4-RUS/Требования%20к%20инфраструктуре.pdf
 
-`Скачать установку с помощью ADCM`_
- .. _Скачать установку с помощью ADCM: https://storage.googleapis.com/arenadata-repo/docs/ads/pdf/v1.4-RUS/Установка%20с%20помощью%20ADCM.pdf
+`Скачать инструкцию по установке`_
+ .. _Скачать инструкцию по установке: https://storage.googleapis.com/arenadata-repo/docs/ads/pdf/v1.4-RUS/Инструкция%20по%20установке.pdf
  
 `Скачать руководство администратора по работе с сервисом Nifi`_
  .. _Скачать руководство администратора по работе с сервисом Nifi: https://storage.googleapis.com/arenadata-repo/docs/ads/pdf/v1.4-RUS/Руководство%20администратора%20по%20работе%20с%20сервисом%20Nifi.pdf 
