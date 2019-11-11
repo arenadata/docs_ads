@@ -8,7 +8,7 @@
 
 .. important:: Контактная информация службы поддержки -- e-mail: info@arenadata.io
 
-Платформа **ADS** использует пары ключ-значение в `формате файла свойств <http://en.wikipedia.org/wiki/.properties>`_ для конфигурации. Данные значения могут быть поставлены либо из файла, либо программно.
+Платформа ADS использует пары ключ-значение в `формате файла свойств <http://en.wikipedia.org/wiki/.properties>`_ для конфигурации. Данные значения могут быть поставлены либо из файла, либо программно.
 
 .. toctree::
    :maxdepth: 2
@@ -20,4 +20,5 @@
    Consumer
    Connect
    Streams
-   
+   ../Install/manage_tools/kafka_operations
+   ../Install/manage_tools/zk_operations
