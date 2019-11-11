@@ -19,5 +19,5 @@
    ../AdminNIFI/index
    ../UserNIFI/index
    ../DeveloperKafka/index
-   ../AdminKafka/index
+   ../Config/index
    
