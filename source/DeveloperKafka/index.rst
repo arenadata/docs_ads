@@ -18,6 +18,5 @@
    Producer
    Connect
    Streams
-   ../Install/manage_tools/kafka_operations
-   ../Install/manage_tools/zk_operations
+
 
