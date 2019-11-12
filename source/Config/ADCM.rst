@@ -241,7 +241,11 @@ Nifi
 
    Настройки переменных окружения сервиса Nifi
 
-в группе настроек *registry_provider_content* находятся конфигурации потоков сервиса *Nifi* (:numref:`Рис.%s. <nifi_reg_config_adv>`).
+В группе настроек *registry_provider_content* находятся конфигурации потоков сервиса *Nifi* (:numref:`Рис.%s. <nifi_reg_config_adv>`):
+
+* *Flow Persistence Provider Type* -- ;
+
+* *Flow Storage Directory* -- директория хранения потока.
 
 .. _nifi_reg_config_adv:
 
@@ -250,9 +254,6 @@ Nifi
 
    Настройки Nifi-Registry Flow Persistence Provider
    
-* *Flow Persistence Provider Type* -- ;
-
-* *Flow Storage Directory* -- директория хранения потока.
 
 Далее в группе настроек файла *nifi-registry-env.sh* задаются параметры, которые используются для внесения переменных окружения сервиса *Nifi Regisrtry* (:numref:`Рис.%s. <nifi_reg_config_env>`).
 
@@ -263,14 +264,7 @@ Nifi
 
    Настройки переменных окружения сервиса Nifi Registry
 
-в группе настроек *Registry* находится ряд опциональных индивидуальных конфигураций сервиса *Nifi* (:numref:`Рис.%s. <nifi_config_reg>`).
-
-.. _nifi_config_reg:
-
-.. figure:: ../Install/imgs/nifi_config_reg.png
-   :align: center
-
-   Настройки Registry сервиса Nifi
+В группе настроек *Registry* находится ряд опциональных индивидуальных конфигураций сервиса *Nifi* (:numref:`Рис.%s. <nifi_config_reg>`):
 
 * *nifi_registry_properties_content* -- дополнительные индивидуальные свойства, указывается в файле *nifi-registry.properties*;
 
@@ -286,6 +280,13 @@ Nifi
 
 * *identity_providers_content* -- индивидуальные свойства входа в систему при условии настроенной политики безопасности, указывается в файле *identity-providers.xml*.
 
+
+.. _nifi_config_reg:
+
+.. figure:: ../Install/imgs/nifi_config_reg.png
+   :align: center
+
+   Настройки Registry сервиса Nifi
 
 
 Schema-registry
