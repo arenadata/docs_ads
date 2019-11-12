@@ -59,7 +59,7 @@ Zookeeper
 
 Если необходимая настройка отсутствует в списке группы *zoo.cfg*, то для добавления таковой следует воспользоваться полем *Add key,value*, где требуется написать ключ и значение в соответствующих строчках.
 
-Далее в группе настроек файла *zookeeper-env.sh* задаются параметры, которые используются для внесения переменных окружения (:numref:`Рис.%s. <zk_config_env>`).
+Далее в группе настроек файла *zookeeper-env.sh* задаются параметры, которые используются для внесения переменных окружения сервиса *Zookeeper* (:numref:`Рис.%s. <zk_config_env>`).
 
 .. _zk_config_env:
 
@@ -86,7 +86,7 @@ Kafka
 
 * *data_dirs* -- каталог для хранения данных в Kafka, по умолчанию используется */kafka-logs*; (Указывается в качестве параметра ``log.dirs`` в конфигурационном файле `server.properties <../Config/broker>`_)
 
-* *broker_jmx_port* -- порт, по которому Kafka-брокер отдает jmx-метрики. Указывается в качестве параметра ``JMX_PORT`` в файле *kafka-env.sh*;
+* *broker_jmx_port* -- порт, по которому Kafka-брокер отдает jmx-метрики; (Указывается в качестве параметра ``JMX_PORT`` в файле *kafka-env.sh*;)
 
 * *log.dirs* -- каталоги, в которых Kafka хранит данные журнала. Указывается как свойство *log.dirs* в файле конфигурации *serverserver.properties*;
 
@@ -100,7 +100,7 @@ Kafka
 
 * *log.roll.hours* -- максимальное время до развертывания нового сегмента журнала (в часах). Указывается в качестве свойства *log.roll.hours* в файле конфигурации *server.properties*. (количество часов, по истечению которых пояляется новый журнал сегмента, даже если старый журнал не переполнен. Указывается в качестве параметра ``log.roll.hours`` в конфигурационном файле `server.properties <../Config/broker>`_.)
 
-При простановке галочки в поле "Advanced" открывается блок дополнительных настроек (:numref:`Рис.%s. <kafka_config_adv>`).
+При простановке галочки в поле "Advanced" открывается блок дополнительных настроек сервиса *Kafka* (:numref:`Рис.%s. <kafka_config_adv>`).
 
 .. _kafka_config_adv:
 
@@ -135,7 +135,7 @@ Kafka
 
 Если необходимая настройка отсутствует в списке группы *server.properties*, то для добавления таковой следует воспользоваться полем *Add key,value*, где требуется написать ключ и значение в соответствующих строчках.
 
-Далее в группе настроек файла *kafka-env.sh* задаются параметры, которые используются для внесения переменных окружения (:numref:`Рис.%s. <kafka_config_env>`).
+Далее в группе настроек файла *kafka-env.sh* задаются параметры, которые используются для внесения переменных окружения сервиса *Kafka* (:numref:`Рис.%s. <kafka_config_env>`).
 
 .. _kafka_config_env:
 
@@ -148,7 +148,7 @@ Kafka
 Nifi
 --------
 
-Для перехода к настройкам сервиса *Nifi* необходимо нажать кнопку с пиктограммой шестеренки в соответствующей строке вкладки "SERVICES" и перейти в раздел меню "Configuration". При этом открывается окно настроек сервиса *Nifi* (:numref:`Рис.%s. <nifi_config>`).
+Для перехода к настройкам сервиса *Nifi* необходимо нажать кнопку с пиктограммой шестеренки в соответствующей строке вкладки "SERVICES" в интерфейсе **ADCM** и перейти в раздел меню "Configuration". При этом открывается окно настроек сервиса *Nifi* (:numref:`Рис.%s. <nifi_config>`).
 
 .. _nifi_config:
 
@@ -160,20 +160,21 @@ Nifi
 
 В блоке настроек "Main" задаются основные параметры:
 
-* *nifi_ui_port* -- http-порт, на котором поднимается веб-интерфейс сервиса *Nifi*. Указывается в качестве параметра ``nifi.web.http.port`` в конфигурационном файле *nifi.properties*;
+* *Nifi UI port* -- http-порт, на котором поднимается веб-интерфейс сервиса Nifi. Указывается в качестве параметра ``nifi.web.http.port`` в конфигурационном файле *nifi.properties*;
 
-* *nifi_node_jvm_memory* -- размер кучи, выделяемой процессу сервиса *Nifi*. Указывается в конфигурационном файле *bootstrap.conf*;
+* *Nifi server Heap size* -- размер кучи, выделяемой процессу сервиса Nifi. Указывается в конфигурационном файле *bootstrap.conf*;
 
-* *nifi_registry_ui_port* -- http-порт реестра *Nifi*. Указывается в качестве параметра ``nifi.registry.web.http.port`` в файле конфигурации *nifi.properties*;
+* *Nifi Registry UI port* -- http-порт реестра Nifi. Указывается в качестве параметра ``nifi.registry.web.http.port`` в файле конфигурации *nifi.properties*;
 
-* *nifi_registry_node_jvm_memory* -- размер кучи, выделяемой реестру *Nifi*. Указывается в конфигурационном файле *bootstrap.conf*.
+* *Nifi Registry Heap size* -- размер кучи, выделяемой реестру Nifi. Указывается в конфигурационном файле *bootstrap.conf*.
 
+* *nifi.queue.backpressure.count* -- ;
+
+* *nifi.queue.backpressure.size* -- .
 
 В блоке настроек "Custom" задаются следующие необязательные параметры:
 
 * *nifi_custom_nars* -- параметр следует использовать в случае добавления *custom nars*; перечисление через запятую. Указываются в качестве ``nifi.nar.library.directory.lib...`` в конфигурационном файле *nifi.properties*;
-
-* *database_repository* -- ;
 
 * *flowfile_repository* -- ;
 
@@ -181,7 +182,89 @@ Nifi
 
 * *provenance_repositories* -- ;
 
+* *database_repository* -- ;
+
 * *nifi_registry_flow_storage* -- .
+
+В блоке настроек "Directories" задаются следующие параметры расположения репозиториев сервиса *Nifi* (:numref:`Рис.%s. <nifi_config_dirs>`):
+
+* *nifi.flowfile.repository.directory* -- ;
+
+* *nifi.content.repository.directory* -- ;
+
+* *nifi.provenance.repository.directory* -- ;
+
+* *nifi.database.directory* -- ;
+
+* *nifi.registry.db.directory* -- ;
+
+* *nifi.nar.library.directory.lib* -- (необязательный параметр).
+
+.. _nifi_config_dirs:
+
+.. figure:: ../Install/imgs/nifi_config_dirs.png
+   :align: center
+
+   Настройки директорий репозиториев сервиса Nifi
+
+При простановке галочки в поле "Advanced" открывается блок дополнительных настроек сервиса *Nifi* (:numref:`Рис.%s. <nifi_config_adv>`).
+
+.. _nifi_config_adv:
+
+.. figure:: ../Install/imgs/nifi_config_adv.png
+   :align: center
+
+   Дополнительные настройки сервиса Nifi
+
+В группе настроек *nifi.properties* находится ряд конфигураций, представляющих собой одноименные настройки в *nifi.properties*-файле:
+
+* *nifi.flow.configuration.file* -- ;
+
+* *nifi.flow.configuration.archive.enabled* -- ;
+
+* *nifi.cluster.node.connection.timeout* -- ;
+
+* *nifi.cluster.node.read.timeout* -- ;
+
+* *nifi.zookeeper.connect.timeout* -- ;
+
+* *nifi.zookeeper.session.timeout* -- ;
+
+* *nifi.variable.registry.properties* -- .
+
+Далее в группе настроек файла *nifi-env.sh* задаются параметры, которые используются для внесения переменных окружения сервиса *Nifi* (:numref:`Рис.%s. <nifi_config_env>`).
+
+.. _nifi_config_env:
+
+.. figure:: ../Install/imgs/nifi_config_env.png
+   :align: center
+
+   Настройки переменных окружения сервиса Nifi
+
+в группе настроек *registry_provider_content* находится ряд конфигураций, представляющих собой одноименные настройки в *registry_provider_content*-файле сервиса *Nifi* (:numref:`Рис.%s. <nifi_reg_config_adv>`).
+
+.. _nifi_reg_config_adv:
+
+.. figure:: ../Install/imgs/nifi_reg_config_adv.png
+   :align: center
+
+   Настройки Nifi-Registry Flow Persistence Provider
+   
+* *Flow Persistence Provider Type* -- ;
+
+* *Flow Storage Directory* -- директория хранения потока.
+
+Далее в группе настроек файла *nifi-registry-env.sh* задаются параметры, которые используются для внесения переменных окружения сервиса *Nifi Regisrtry* (:numref:`Рис.%s. <nifi_reg_config_env>`).
+
+.. _nifi_reg_config_env:
+
+.. figure:: ../Install/imgs/nifi_reg_config_env.png
+   :align: center
+
+   Настройки переменных окружения сервиса Nifi Regisrtry
+
+
+
 
 В блоке настроек "Advanced" задаются следующие расширенные параметры:
 
