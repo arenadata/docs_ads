@@ -172,19 +172,6 @@ Nifi
 
 * *nifi.queue.backpressure.size* -- .
 
-В блоке настроек "Custom" задаются следующие необязательные параметры:
-
-* *nifi_custom_nars* -- параметр следует использовать в случае добавления *custom nars*; перечисление через запятую. Указываются в качестве ``nifi.nar.library.directory.lib...`` в конфигурационном файле *nifi.properties*;
-
-* *flowfile_repository* -- ;
-
-* *content_repositories* -- ;
-
-* *provenance_repositories* -- ;
-
-* *database_repository* -- ;
-
-* *nifi_registry_flow_storage* -- .
 
 В блоке настроек "Directories" задаются параметры расположения репозиториев сервиса *Nifi* (:numref:`Рис.%s. <nifi_config_dirs>`):
 
@@ -198,7 +185,7 @@ Nifi
 
 * *nifi.registry.db.directory* -- ;
 
-* *nifi.nar.library.directory.lib* -- (необязательный параметр).
+* *nifi.nar.library.directory.lib* -- параметр следует использовать в случае добавления custom nars (необязательный параметр).
 
 .. _nifi_config_dirs:
 
@@ -241,7 +228,7 @@ Nifi
 
    Настройки переменных окружения сервиса Nifi
 
-В группе настроек *registry_provider_content* находятся конфигурации потоков сервиса *Nifi* (:numref:`Рис.%s. <nifi_reg_config_adv>`):
+В группе настроек *Nifi-Registry Flow Persistence Provider* находятся конфигурации потоков сервиса *Nifi* (:numref:`Рис.%s. <nifi_reg_config_adv>`):
 
 * *Flow Persistence Provider Type* -- ;
 
@@ -264,29 +251,6 @@ Nifi
 
    Настройки переменных окружения сервиса Nifi Registry
 
-В группе настроек *Registry* находится ряд опциональных индивидуальных конфигураций сервиса *Nifi* (:numref:`Рис.%s. <nifi_config_reg>`):
-
-* *nifi_registry_properties_content* -- дополнительные индивидуальные свойства, указывается в файле *nifi-registry.properties*;
-
-* *nifi_registry_env_content* -- среда Java, указывается в файле *nifi-registry-env.sh*;
-
-* *bootstrap_content* -- индивидуальные свойства boot, связанные с запуском сервиса, указывается в файле *bootstrap.conf*;
-
-* *logback_content* -- индивидуальные свойства логирования, указывается в файле *logback.xml*;
-
-* *providers_content* -- индивидуальные свойства провайдеров, указывается в файле *providers.xml*;
-
-* *authorizers_content* -- индивидуальные свойства авторизации, указывается в файле *authorizers.xml*;
-
-* *identity_providers_content* -- индивидуальные свойства входа в систему при условии настроенной политики безопасности, указывается в файле *identity-providers.xml*.
-
-
-.. _nifi_config_reg:
-
-.. figure:: ../Install/imgs/nifi_config_reg.png
-   :align: center
-
-   Настройки Registry сервиса Nifi
 
 
 Schema-registry
