@@ -107,27 +107,27 @@ Kafka
 
 В группе настроек *server.properties* находится ряд конфигураций, представляющих собой одноименные настройки в *server.properties*-файле:
 
-* *auto.leader.rebalance.enable* -- ;
+* *auto.leader.rebalance.enable* -- включение автоматической балансировки лидера. Балансировка лидера в фоновом режиме через регулярные промежутки времени;
 
-* *queued.max.requests* -- ;
+* *queued.max.requests* -- количество запросов в очереди до блокировки сетевых потоков;
 
-* *num.network.threads* -- ;
+* *num.network.threads* -- количество потоков, используемых сервером для получения запросов от сети и отправки ответов в сеть;
 
-* *num.io.threads* -- ;
+* *num.io.threads* -- число потоков, используемых сервером для обработки запросов, которые могут включать дисковые операции ввода-вывода;
 
-* *unclean.leader.election.enable* -- ;
+* *unclean.leader.election.enable* -- указывает, следует ли включить не входящие в набор ISR реплики и установка последнего средства в качестве лидера, даже если это может привести к потере данных;
 
-* *offsets.topic.replication.factor* -- ;
+* *offsets.topic.replication.factor* -- коэффициент репликации для топика смещения (устанавливается выше с целью обеспечения доступности). Создание внутреннего топика невозможно, пока размер кластера не соответствует данному требованию коэффициента репликации;
 
-* *transaction.state.log.min.isr* -- ;
+* *transaction.state.log.min.isr* -- переопределение конфигурации *min.insync.replicas* для топика транзакции;
 
-* *transaction.state.log.replication.factor* -- ;
+* *transaction.state.log.replication.factor* -- коэффициент репликации для топика транзакции (задается выше для обеспечения доступности). Создание внутреннего топика завершается ошибкой, пока размер кластера не соответствует данному требованию к фактору репликации;
 
-* *zookeeper.connection.timeout.ms* -- ;
+* *zookeeper.connection.timeout.ms* -- максимальное время ожидания клиентом установки соединения с Zookeeper. Если параметр не задан, используется значение для *zookeeper.session.timeout.ms*. Указывается в миллисекундах;
 
-* *zookeeper.session.timeout.ms* -- ;
+* *zookeeper.session.timeout.ms* -- тайм-аут сессии Zookeeper. Указывается в миллисекундах;
 
-* *zookeeper.sync.time.ms* -- .
+* *zookeeper.sync.time.ms* -- удаленность последователя Zookeeper от лидера Zookeeper. Указывается в миллисекундах.
 
 Если необходимая настройка отсутствует в списке группы *server.properties*, то для добавления таковой следует воспользоваться строкой *Add key,value*, где требуется написать ключ и значение в соответствующих полях.
 
@@ -164,20 +164,19 @@ Nifi
 
 * *Nifi Registry Heap size* -- размер кучи, выделяемой реестру Nifi. Указывается в конфигурационном файле *bootstrap.conf*.
 
-* *nifi.queue.backpressure.count* -- ;
+* *nifi.queue.backpressure.count* -- при создании нового соединения между двумя компонентами это значение по умолчанию для порогового значения объекта обратного воздействия этого соединения. Значение должно быть целым числом (integer);
 
-* *nifi.queue.backpressure.size* -- .
-
+* *nifi.queue.backpressure.size* -- при создании нового соединения между двумя компонентами это значение по умолчанию для порогового значения размера данных обратного воздействия этого соединения. Значение должно быть размером данных, включая единицу измерения.
 
 В блоке настроек "Directories" задаются параметры расположения репозиториев сервиса *Nifi* (:numref:`Рис.%s. <nifi_config_dirs>`):
 
-* *nifi.flowfile.repository.directory* -- ;
+* *nifi.flowfile.repository.directory* -- расположение репозитория FlowFile. Значением по умолчанию является *./flowfile_repository*;
 
-* *nifi.content.repository.directory* -- ;
+* *nifi.content.repository.directory* -- расположение репозитория Content. Значением по умолчанию является *./content_repository*;
 
-* *nifi.provenance.repository.directory* -- ;
+* *nifi.provenance.repository.directory* -- расположение репозитория Provenance. Значением по умолчанию является *./provenance_repository*;
 
-* *nifi.database.directory* -- ;
+* *nifi.database.directory* -- расположение директории H2 database. Значением по умолчанию является *./database_repository*;
 
 * *nifi.registry.db.directory* -- ;
 
@@ -201,19 +200,19 @@ Nifi
 
 В группе настроек *nifi.properties* находится ряд конфигураций, представляющих собой одноименные настройки в *nifi.properties*-файле:
 
-* *nifi.flow.configuration.file* -- ;
+* *nifi.flow.configuration.file* -- расположение файла конфигурации потока (то есть файла, который содержит то, что в текущий момент отображается на графике NiFi). Значением по умолчанию является *./conf/flow.xml.gz*;
 
-* *nifi.flow.configuration.archive.enabled* -- ;
+* *nifi.flow.configuration.archive.enabled* -- указывает, создает ли NiFi автоматически резервную копию потока при обновлении потока. Значение по умолчанию *true*;
 
-* *nifi.cluster.node.connection.timeout* -- ;
+* *nifi.cluster.node.connection.timeout* -- при подключении к другому узлу в кластере указывает, как долго этот узел должен ждать, прежде чем считать соединение неудачным;
 
-* *nifi.cluster.node.read.timeout* -- ;
+* *nifi.cluster.node.read.timeout* -- при связи с другим узлом в кластере указывает, как долго этот узел должен ожидать получения информации от удаленного узла, прежде чем считать связь с узлом неудачной;
 
-* *nifi.zookeeper.connect.timeout* -- ;
+* *nifi.zookeeper.connect.timeout* -- время ожидания при подключении к ZooKeeper, прежде чем подключение считается неудачным;
 
-* *nifi.zookeeper.session.timeout* -- ;
+* *nifi.zookeeper.session.timeout* -- время ожидания после потери соединения с ZooKeeper до истечения сессии;
 
-* *nifi.variable.registry.properties* -- .
+* *nifi.variable.registry.properties* -- разделенный запятыми список путей расположения файлов для одного или нескольких файлов индивидуальных свойств.
 
 Далее в группе настроек файла *nifi-env.sh* задаются параметры, которые используются для внесения переменных окружения сервиса *Nifi* (:numref:`Рис.%s. <nifi_config_env>`).
 
