@@ -500,7 +500,7 @@
 + IMPORTANCE -- high
 + DYNAMIC UPDATE MODE -- read-only
 
-**transaction.state.log.replication.factor** -- Коэффициент репликации для топика транзакции (задается выше для обеспечения доступности). Создание внутреннего топика завершится ошибкой, пока размер кластера не будет соответствовать данному требованию к фактору репликации
+**transaction.state.log.replication.factor** -- Коэффициент репликации для топика транзакции (задается выше для обеспечения доступности). Создание внутреннего топика завершается ошибкой, пока размер кластера не соответствует данному требованию к фактору репликации
 
 + TYPE -- short
 + DEFAULT -- 3
@@ -546,7 +546,7 @@
 + IMPORTANCE -- high
 + DYNAMIC UPDATE MODE -- read-only
 
-**zookeeper.session.timeout.ms** -- Тайм-аут сеанса Zookeeper. Указывается в миллисекундах
+**zookeeper.session.timeout.ms** -- Тайм-аут сессии Zookeeper. Указывается в миллисекундах
 
 + TYPE -- int
 + DEFAULT -- int
