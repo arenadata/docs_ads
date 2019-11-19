@@ -65,6 +65,7 @@
    Requirements/index
    Install/index
    OperationGuide/index
+   UserGuide/index
    Architecture/index
    Release/index
    glossary

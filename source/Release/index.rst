@@ -18,7 +18,7 @@ Arenadata Streaming 1.4.11
    :widths: 10, 45, 45
 
    "1", "Apache Kafka", "2.2.0"
-   "2", "Apache Zookeeper", "3.4.13"
+   "2", "Apache Zookeeper", "3.4.14"
    "3", "Apache Nifi", "1.10.1"
    "4", "Apache Nifi-Registry", "0.3.0"
    "5", "Schema-Registry", "5.2.1"
