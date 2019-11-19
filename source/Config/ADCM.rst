@@ -178,7 +178,7 @@ Nifi
 
 * ``nifi.database.directory`` -- расположение директории H2 database. Значением по умолчанию является *./database_repository*;
 
-* ``nifi.registry.db.directory`` -- ;
+* ``nifi.registry.db.directory`` -- расположение директории Registry database;
 
 * ``nifi.nar.library.directory.lib`` -- параметр следует использовать в случае добавления custom nars (необязательный параметр).
 
