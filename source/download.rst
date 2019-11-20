@@ -11,12 +11,6 @@
 `Скачать инструкцию по установке`_
  .. _Скачать инструкцию по установке: https://storage.googleapis.com/arenadata-repo/docs/ads/pdf/v1.4-RUS/Инструкция%20по%20установке.pdf
 
-`Скачать руководство администратора по работе с ADS`_
- .. _Скачать руководство администратора по работе с ADS: https://storage.googleapis.com/arenadata-repo/docs/ads/pdf/v1.4-RUS/Руководство%20администратора%20по%20работе%20с%20ADS.pdf 
-
-`Скачать руководство пользователя по работе с ADS`_
- .. _Скачать руководство пользователя по работе с ADS: https://storage.googleapis.com/arenadata-repo/docs/ads/pdf/v1.4-RUS/Руководство%20пользователя%20по%20работе%20с%20ADS.pdf 
-
 `Скачать архитектурные особенности`_
  .. _Скачать архитектурные особенности: https://storage.googleapis.com/arenadata-repo/docs/ads/pdf/v1.4-RUS/Архитектурные%20особенности.pdf
 
