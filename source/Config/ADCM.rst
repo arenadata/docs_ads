@@ -189,6 +189,19 @@ Nifi
 
    Настройки директорий репозиториев сервиса Nifi
 
+В группе настроек *Nifi-Registry Provider* находятся конфигурации потоков сервиса *Nifi* (:numref:`Рис.%s. <nifi_reg_config_adv>`):
+
+* ``Flow Persistence Provider Type`` -- ;
+
+* ``Flow Storage Directory`` -- директория хранения потока.
+
+.. _nifi_reg_config_adv:
+
+.. figure:: ../Install/imgs/nifi_reg_config_adv.png
+   :align: center
+
+   Настройки Nifi-Registry Provider
+   
 При простановке галочки в поле "Advanced" открывается блок дополнительных настроек сервиса *Nifi* (:numref:`Рис.%s. <nifi_config_adv>`).
 
 .. _nifi_config_adv:
@@ -223,19 +236,6 @@ Nifi
 
    Настройки переменных окружения сервиса Nifi
 
-В группе настроек *Nifi-Registry Flow Persistence Provider* находятся конфигурации потоков сервиса *Nifi* (:numref:`Рис.%s. <nifi_reg_config_adv>`):
-
-* ``Flow Persistence Provider Type`` -- ;
-
-* ``Flow Storage Directory`` -- директория хранения потока.
-
-.. _nifi_reg_config_adv:
-
-.. figure:: ../Install/imgs/nifi_reg_config_adv.png
-   :align: center
-
-   Настройки Nifi-Registry Flow Persistence Provider
-   
 
 Далее в группе настроек файла *nifi-registry-env.sh* задаются параметры, которые используются для внесения переменных окружения сервиса *Nifi Regisrtry* (:numref:`Рис.%s. <nifi_reg_config_env>`).
 
