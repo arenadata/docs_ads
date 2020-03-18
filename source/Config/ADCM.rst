@@ -189,6 +189,26 @@ Nifi
 
    Настройки директорий репозиториев сервиса Nifi
 
+В группе настроек *Analytics Framework* (:numref:`Рис.%s. <nifi_config_analyst>`) можно задать следующие параметры:
+
+* ``nifi.`` -- 
+
+* ``nifi.`` -- 
+
+* ``nifi.`` -- 
+
+* ``nifi.`` -- 
+
+* ``nifi.`` -- 
+
+.. _nifi_config_analyst:
+
+.. figure:: ../Install/imgs/nifi_config_analyst.png
+   :align: center
+
+   Настройки секции Analytics Framework
+
+
 В группе настроек *Nifi-Registry Provider* находятся конфигурации потоков сервиса *Nifi* (:numref:`Рис.%s. <nifi_reg_config_adv>`):
 
 * ``Flow Persistence Provider Type`` -- ;
