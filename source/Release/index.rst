@@ -25,7 +25,8 @@ Arenadata Streaming 1.5.0.1
    "6", "Kafka REST Proxy", "5.4.0"
    "7", "KSQL", "5.4.0"
    "8", "Kafka-Manager", "2.0.0.2"
-   "9", "Monitoring Clients", "1.3"
+   "9", "MiNiFi", "0.5.0"
+   "10", "Monitoring Clients", "1.3"
 
 
 Новые функции
