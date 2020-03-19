@@ -10,6 +10,7 @@
 + `Kafka REST Proxy`_;
 + `KSQL`_;
 + `Kafka-Manager`_;
++ `MiNifi`_;
 + `Monitoring Clients`_.
 
 
@@ -338,7 +339,6 @@ KSQL
 * ``ksql_server_listener_port`` -- порт, который слушает сервер KSQL. Указывается в качестве параметра ``listeners`` в конфигурационном файле *ksql-server.properties*.
 
 
-
 Kafka-Manager
 ---------------
 
@@ -354,6 +354,55 @@ Kafka-Manager
 В блоке настроек "Main" задается следующий параметр:
 
 * ``manager_port`` -- порт, на котором поднимается Kafka-Manager. Указывается в файле *kafka-manager-env.sh*.
+
+
+MiNifi
+--------
+
+Для перехода к настройкам сервиса *MiNifi* необходимо нажать кнопку с пиктограммой шестеренки в соответствующей строке вкладки "SERVICES" и перейти в раздел меню "Configuration". При этом открывается окно конфигурации сервиса *MiNifi* (:numref:`Рис.%s. <minifi_config>`).
+
+.. _minifi_config:
+
+.. figure:: ../Install/imgs/minifi_config.png
+   :align: center
+
+   Окно конфигурации сервиса MiNifi
+
+В блоке настроек "Main" задаются следующие параметры:
+
+* ``MiNiFi C2 Server port`` -- порт сервера, по умолчанию *10080*;
+
+* ``nifi.minifi.notifier.ingestors.pull.http.query`` -- строка запроса для извлечения конфигураций.
+
+При простановке галочки в поле "Advanced" открывается блок дополнительных настроек сервиса *MiNifi*, где задаются параметры, используемые для внесения переменных окружения сервиса (:numref:`Рис.%s. <minifi_config_env>`).
+
+.. _minifi_config_env:
+
+.. figure:: ../Install/imgs/minifi_config_env.png
+   :align: center
+
+   Настройки переменных окружения сервиса MiNifi
+
+Параметр ``minifi-env.sh`` отображает директории для ``MINIFI_HOME``, ``MINIFI_PID_DIR``, ``MINIFI_LOG_DIR``.
+
+Далее в группе дополнительных настроек *MiNiFi Agent bootstrap.conf* задаются параметры, которые используются для агента *Bootstrap* (:numref:`Рис.%s. <minifi_config_boot>`).
+
+.. _minifi_config_boot:
+
+.. figure:: ../Install/imgs/minifi_config_boot.png
+   :align: center
+
+   Группа настроек MiNiFi Agent bootstrap.conf
+
+* ``MiNiFi Agent Heap size`` -- Heap-размер агента, по умолчанию *256m*;
+
+* ``nifi.minifi.notifier.ingestors.pull.http.period.ms`` -- период проверки обновлений, по умолчанию *300000* мс;
+
+* ``nifi.minifi.status.reporter.log.query`` -- запрос состояния экземпляра MiNiFi, по умолчанию *instance:health,bulletins*, где *health* -- состояние отчета экземпляра, активные потоки, наличие или отсутствие бюллетеней и каких-либо ошибок проверки; *bulletins* -- список всех текущих бюллетеней (если есть). Так же доступно *stats* -- текущее состояние экземпляра, включая, но не ограничиваясь, байты чтения/записи и отправленные/переданные FlowFiles;
+
+* ``nifi.minifi.status.reporter.log.level`` -- уровень журнала, на котором регистрируется статус. Доступные значения: *TRACE*, *DEBUG*, *INFO*, *WARN* и *ERROR*. По умолчанию *INFO*;
+
+* ``nifi.minifi.status.reporter.log.period`` -- задержка между каждым запросом (в миллисекундах). По умолчанию *60000* мс.
 
 
 Monitoring Clients
