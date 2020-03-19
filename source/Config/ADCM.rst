@@ -383,8 +383,6 @@ MiNifi
 
    Настройки переменных окружения сервиса MiNifi
 
-Параметр ``minifi-env.sh`` отображает директории для ``MINIFI_HOME``, ``MINIFI_PID_DIR``, ``MINIFI_LOG_DIR``.
-
 Далее в группе дополнительных настроек *MiNiFi Agent bootstrap.conf* задаются параметры, которые используются для агента *Bootstrap* (:numref:`Рис.%s. <minifi_config_boot>`).
 
 .. _minifi_config_boot:
