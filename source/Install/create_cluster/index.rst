@@ -171,14 +171,15 @@
 
 В настоящем примере в кластер добавлены все сервисы, подробное описание конфигурации которых приведено по следующим ссылкам:
 
-+ `Настройка сервиса Zookeeper <https://docs.arenadata.io/ads/v1.4-RUS/Config/ADCM.html#zookeeper>`_;
-+ `Настройка сервиса Kafka <https://docs.arenadata.io/ads/v1.4-RUS/Config/ADCM.html#kafka>`_;
-+ `Настройка сервиса Nifi <https://docs.arenadata.io/ads/v1.4-RUS/Config/ADCM.html#nifi>`_;
-+ `Настройка сервиса Schema-registry <https://docs.arenadata.io/ads/v1.4-RUS/Config/ADCM.html#schema-registry>`_.
-+ `Настройка сервиса Kafka REST Proxy <https://docs.arenadata.io/ads/v1.4-RUS/Config/ADCM.html#kafka-rest-proxy>`_;
-+ `Настройка сервиса KSQL <https://docs.arenadata.io/ads/v1.4-RUS/Config/ADCM.html#ksql>`_;
-+ `Настройка сервиса Kafka-Manager <https://docs.arenadata.io/ads/v1.4-RUS/Config/ADCM.html#kafka-manager>`_;
-+ `Настройка сервиса Monitoring Clients <https://docs.arenadata.io/ads/v1.4-RUS/Config/ADCM.html#monitoring-clients>`_.
++ `Настройка сервиса Zookeeper <https://docs.arenadata.io/ads/v1.5-RUS/Config/ADCM.html#zookeeper>`_;
++ `Настройка сервиса Kafka <https://docs.arenadata.io/ads/v1.5-RUS/Config/ADCM.html#kafka>`_;
++ `Настройка сервиса Nifi <https://docs.arenadata.io/ads/v1.5-RUS/Config/ADCM.html#nifi>`_;
++ `Настройка сервиса Schema-registry <https://docs.arenadata.io/ads/v1.5-RUS/Config/ADCM.html#schema-registry>`_.
++ `Настройка сервиса Kafka REST Proxy <https://docs.arenadata.io/ads/v1.5-RUS/Config/ADCM.html#kafka-rest-proxy>`_;
++ `Настройка сервиса KSQL <https://docs.arenadata.io/ads/v1.5-RUS/Config/ADCM.html#ksql>`_;
++ `Настройка сервиса Kafka-Manager <https://docs.arenadata.io/ads/v1.5-RUS/Config/ADCM.html#kafka-manager>`_;
++ `Настройка сервиса MiNifi <https://docs.arenadata.io/ads/v1.5-RUS/Config/ADCM.html#minifi>`_;
++ `Настройка сервиса Monitoring Clients <https://docs.arenadata.io/ads/v1.5-RUS/Config/ADCM.html#monitoring-clients>`_.
 
 
 Особенности сервиса Monitoring Clients
