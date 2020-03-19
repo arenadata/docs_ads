@@ -394,7 +394,7 @@ MiNifi
 
    Группа настроек MiNiFi Agent bootstrap.conf
 
-* ``MiNiFi Agent Heap size`` -- Heap-размер агента, по умолчанию *256m*;
+* ``MiNiFi Agent Heap size`` -- heap-размер агента, по умолчанию *256m*;
 
 * ``nifi.minifi.notifier.ingestors.pull.http.period.ms`` -- период проверки обновлений, по умолчанию *300000* мс;
 
