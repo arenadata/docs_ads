@@ -2,17 +2,23 @@
 ====================
 
 
-`Скачать общий обзор`_
- .. _Скачать общий обзор: https://storage.googleapis.com/arenadata-repo/docs/ads/pdf/v1.4-RUS/Общий%20обзор.pdf
+`Общий обзор`_
+ .. _Общий обзор: https://storage.googleapis.com/arenadata-repo/docs/ads/pdf/v1.5-RUS/Общий%20обзор.pdf
 
-`Скачать требования к инфраструктуре`_
- .. _Скачать требования к инфраструктуре: https://storage.googleapis.com/arenadata-repo/docs/ads/pdf/v1.4-RUS/Требования%20к%20инфраструктуре.pdf
+`Требования к инфраструктуре`_
+ .. _Требования к инфраструктуре: https://storage.googleapis.com/arenadata-repo/docs/ads/pdf/v1.5-RUS/Требования%20к%20инфраструктуре.pdf
 
-`Скачать инструкцию по установке`_
- .. _Скачать инструкцию по установке: https://storage.googleapis.com/arenadata-repo/docs/ads/pdf/v1.4-RUS/Инструкция%20по%20установке.pdf
+`Инструкция по установке`_
+ .. _Инструкция по установке: https://storage.googleapis.com/arenadata-repo/docs/ads/pdf/v1.5-RUS/Инструкция%20по%20установке.pdf
 
-`Скачать архитектурные особенности`_
- .. _Скачать архитектурные особенности: https://storage.googleapis.com/arenadata-repo/docs/ads/pdf/v1.4-RUS/Архитектурные%20особенности.pdf
+`Руководство администратора по работе с ADS`_
+ .. _Руководство администратора по работе с ADS: https://storage.googleapis.com/arenadata-repo/docs/ads/pdf/v1.5-RUS/Руководство%20администратора%20по%20работе%20с%20ADS.pdf
 
-`Скачать Release Notes`_
- .. _Скачать Release Notes: https://storage.googleapis.com/arenadata-repo/docs/ads/pdf/v1.4-RUS/Release%20Notes.pdf
+`Руководство пользователя по работе с ADS`_
+ .. _Руководство пользователя по работе с ADS: https://storage.googleapis.com/arenadata-repo/docs/ads/pdf/v1.5-RUS/Руководство%20пользователя%20по%20работе%20с%20ADS.pdf
+
+`Архитектурные особенности`_
+ .. _Архитектурные особенности: https://storage.googleapis.com/arenadata-repo/docs/ads/pdf/v1.5-RUS/Архитектурные%20особенности.pdf
+
+`Release Notes`_
+ .. _Release Notes: https://storage.googleapis.com/arenadata-repo/docs/ads/pdf/v1.5-RUS/Release%20Notes.pdf
