@@ -34,7 +34,7 @@
 
 .. _install_download_app-store:
 
-.. figure:: ../imgs/install_download_app-store.png
+.. figure:: ../imgs/install_download_app-store.PNG
    :align: center
 
    Магазин Приложений
