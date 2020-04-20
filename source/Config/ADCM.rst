@@ -33,7 +33,7 @@ Zookeeper
 
 * ``dataDir`` -- каталог для хранения снапшотов и транзакционных логов Zookeeper. Одноименный параметр в конфигурационном файле *zoo.cfg*.
 
-При простановке галочки в поле "Advanced" открывается блок дополнительных настроек сервиса *Zookeeper* (:numref:`Рис.%s. <zk_config_adv>`).
+При простановке флага в поле "Advanced" открывается блок дополнительных настроек сервиса *Zookeeper* (:numref:`Рис.%s. <zk_config_adv>`).
 
 .. _zk_config_adv:
 
@@ -99,7 +99,7 @@ Kafka
 
 * ``log.roll.hours`` -- количество часов, по истечению которых пояляется новый журнал сегмента, даже если старый журнал не переполнен. Одноименный параметр в конфигурационном файле `server.properties <../Config/broker>`_.
 
-При простановке галочки в поле "Advanced" открывается блок дополнительных настроек сервиса *Kafka* (:numref:`Рис.%s. <kafka_config_adv>`).
+При простановке флага в поле "Advanced" открывается блок дополнительных настроек сервиса *Kafka* (:numref:`Рис.%s. <kafka_config_adv>`).
 
 .. _kafka_config_adv:
 
@@ -230,7 +230,7 @@ Nifi
 
    Настройки Nifi-Registry Provider
    
-При простановке галочки в поле "Advanced" открывается блок дополнительных настроек сервиса *Nifi* (:numref:`Рис.%s. <nifi_config_adv>`).
+При простановке флага в поле "Advanced" открывается блок дополнительных настроек сервиса *Nifi* (:numref:`Рис.%s. <nifi_config_adv>`).
 
 .. _nifi_config_adv:
 
@@ -290,11 +290,16 @@ Schema-registry
 
 В блоке настроек "Main" задаются следующие параметры:
 
-* ``schema_registry_heap_opts`` -- размер кучи, выделяемoй процессу *schema-registry*. Указывается в качестве параметра ``SCHEMA_REGISTRY_HEAP_OPTS`` в файле *schema-registry-env.sh*;
+* ``listener_port`` -- порт, который слушает *schema-registry*. Указывается в качестве параметра ``listeners`` в конфигурационном файле *schema-registry.properties*;
 
-* ``schema_registry_listener_port`` -- порт, который слушает *schema-registry*. Указывается в качестве параметра ``listeners`` в конфигурационном файле *schema-registry.properties*;
-      
-* ``schema_registry_jmx_port`` -- порт, по которому *schema-registry* отдает jmx-метрики. Указывается в качестве параметра ``JMX_PORT`` в файле *schema-registry-env.sh*.
+При простановке флага в поле "Advanced" открывается блок дополнительных настроек сервиса *Schema-Registry*. В группе настроек файла *schema-registry-env.sh* задаются параметры, которые используются для внесения переменных окружения сервиса *Schema-Registry* (:numref:`Рис.%s. <schemaR_config_env>`).
+
+.. _schemaR_config_env:
+
+.. figure:: ../Install/imgs/schemaR_config_env.png
+   :align: center
+
+   Настройки переменных окружения сервиса Schema-registry
 
 
 
@@ -353,7 +358,16 @@ Kafka-Manager
 
 В блоке настроек "Main" задается следующий параметр:
 
-* ``manager_port`` -- порт, на котором поднимается Kafka-Manager. Указывается в файле *kafka-manager-env.sh*.
+* ``manager_port`` -- порт, на котором поднимается Kafka-Manager. Указывается в файле *kafka-manager-env*.
+
+При простановке флага в поле "Advanced" открывается блок дополнительных настроек сервиса *Kafka-Manager*. В группе настроек файла *Default POST data for Kafka cluster* задаются параметры, которые используются для добавления *Kafka*-кластера в сервис *Kafka-Manager* (:numref:`Рис.%s. <manager_config_adv>`).
+
+.. _manager_config_adv:
+
+.. figure:: ../Install/imgs/manager_config_adv.png
+   :align: center
+
+   Настройки добаления *Kafka*-кластера в сервис Kafka-Manager
 
 
 MiNifi
@@ -374,7 +388,7 @@ MiNifi
 
 * ``nifi.minifi.notifier.ingestors.pull.http.query`` -- строка запроса для извлечения конфигураций.
 
-При простановке галочки в поле "Advanced" открывается блок дополнительных настроек сервиса *MiNifi*, где задаются параметры, используемые для внесения переменных окружения сервиса (:numref:`Рис.%s. <minifi_config_env>`).
+При простановке флага в поле "Advanced" открывается блок дополнительных настроек сервиса *MiNifi*, где задаются параметры, используемые для внесения переменных окружения сервиса (:numref:`Рис.%s. <minifi_config_env>`).
 
 .. _minifi_config_env:
 

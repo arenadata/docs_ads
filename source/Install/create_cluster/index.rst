@@ -42,7 +42,7 @@
    Вкладка "CLUSTERS"
 
 
-2. Нажать "Add cluster" и в открывшейся форме создать экземпляр кластера из прототипа *ADS*, полученного из бандла (:numref:`Рис.%s. <add_cluster>`).
+2. Нажать "Create cluster" и в открывшейся форме создать экземпляр кластера из прототипа *ADS*, полученного из бандла (:numref:`Рис.%s. <add_cluster>`).
 
 .. _add_cluster:
 
@@ -76,11 +76,13 @@
 
    Окно конфигурации кластера
 
-
-В блоке настроек "Repositories" указываются требуемые для установки *ADS* пакеты из различных yum-репозиториев, при этом в каждом из параметров можно изменить заданный по умолчанию url:
+В блоке *RedHat repos* указываются требуемые для установки *ADS* пакеты из различных yum-репозиториев.
+В блоке *AltLinux repos* указываются требуемые для установки *ADS* пакеты из различных apt-репозиториев. 
+При этом в каждом из параметров можно изменить заданный по умолчанию url:
 
 * *ADS*;
 * *monitoring*;
+* *Zookeeper*.
 
 .. important:: При установке в окружении без доступа к сети Интернет (offline) необходимо предварительно развернуть кластер `Arenadata Enterprise Tools <https://docs.arenadata.io/etools/ru/index.html>`_ и импортировать настройки HTTP Mirorr
 
@@ -243,14 +245,36 @@
 Установка всех сервисов кластера
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Для установки всех добавленных сервисов в кластере *ADS* необходимо выбрать соответствующий кластер в **ADCM** и выполнить действие *Install* (:numref:`Рис.%s. <cluster_preinstall>`).
+Для установки всех добавленных сервисов в кластере *ADS* необходимо выбрать соответствующий кластер в **ADCM** и выполнить действие *Install* (:numref:`Рис.%s. <cluster_install>`).
 
 .. _cluster_preinstall:
 
-.. figure:: ../imgs/cluster_preinstall.png
+.. figure:: ../imgs/cluster_install.png
    :align: center
 
    Установка всех сервисов кластера
+
+
+В появившемся диалоговом окне предоставляется выбор опций (:numref:`Рис.%s <install_config_menu>`):
+
+* *Disable SELinux before cluster installation* -- отключение SELinux на добавляемых хостах. Для того, чтобы данная настройка применилась, после завершения операции *Install* необходимо перезагрузить хосты вручную;
+
+* *Disable Firewalld before cluster installation* -- выключение firewalld на хостах;
+
+* *Install OpenJDK before cluster installation* -- установка пакета *java-1.8.0-openjdk* на хостах;
+
+* *Set vm.swappiness to 0 for all hosts* -- отключение *swapping* на хостах;
+
+* *Append hosts into /etc/hosts file before cluster installation* -- запись добавляемых нод в */etc/hosts* на хостах кластера. Данную опцию рекомендуется отключить, если настроен DNS.
+
+
+.. _expand_config_menu:
+
+.. figure:: ../imgs/install_config_menu.png
+   :align: center
+
+   Доступные при кластерной установке настройки
+
 
 
 По результатам установки все добавленные сервисы меняют состояние с *created* на *installed* -- установлен (:numref:`Рис.%s. <cluster_actions>`).
