@@ -24,7 +24,7 @@ Arenadata Streaming 1.5.0.1
    "5", "Schema-Registry", "5.4.0"
    "6", "Kafka REST Proxy", "5.4.0"
    "7", "KSQL", "5.4.0"
-   "8", "Kafka-Manager", "2.0.0.2"
+   "8", "Kafka-Manager", "1.3.3.23"
    "9", "MiNiFi", "0.5.0"
    "10", "Monitoring Clients", "1.3"
 
@@ -44,6 +44,8 @@ Arenadata Streaming 1.5.0.1
 
 + Сбор и автоматическая отправка метрик *MiNiFi* в *Monitoring*-кластер;
 
-+ Добавлен dashboard в **Grafana** для метрик сервиса *MiNiFi*.
++ Добавлен dashboard в **Grafana** для метрик сервиса *MiNiFi*;
+
++ Добавлена поддержка *Analytics Framework* для сервиса *NiFi*.
 
 
