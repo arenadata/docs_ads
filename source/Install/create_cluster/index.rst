@@ -247,7 +247,7 @@
 
 Для установки всех добавленных сервисов в кластере *ADS* необходимо выбрать соответствующий кластер в **ADCM** и выполнить действие *Install* (:numref:`Рис.%s. <cluster_install>`).
 
-.. _cluster_preinstall:
+.. _cluster_install:
 
 .. figure:: ../imgs/cluster_install.png
    :align: center
@@ -255,7 +255,7 @@
    Установка всех сервисов кластера
 
 
-В появившемся диалоговом окне предоставляется выбор опций (:numref:`Рис.%s <install_config_menu>`):
+В появившемся диалоговом окне предоставляется выбор опций (:numref:`Рис.%s. <install_config_menu>`):
 
 * *Disable SELinux before cluster installation* -- отключение SELinux на добавляемых хостах. Для того, чтобы данная настройка применилась, после завершения операции *Install* необходимо перезагрузить хосты вручную;
 
@@ -268,7 +268,7 @@
 * *Append hosts into /etc/hosts file before cluster installation* -- запись добавляемых нод в */etc/hosts* на хостах кластера. Данную опцию рекомендуется отключить, если настроен DNS.
 
 
-.. _expand_config_menu:
+.. _install_config_menu:
 
 .. figure:: ../imgs/install_config_menu.png
    :align: center
