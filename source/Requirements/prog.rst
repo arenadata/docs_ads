@@ -3,7 +3,7 @@
 
 Минимальные программные требования для установки кластера **ADS** следующие:
 
-* ОС -- *RHEL/CentOS 7.6.1810*;
+* ОС -- *RHEL/CentOS 7.6.1810/ALT Linux c8.0*;
 
 * Настроенный NTP на серверах;
 
@@ -11,11 +11,7 @@
 
   * */etc/hosts*
 
-  * */etc/ssh/sshd_config*
-
   * */etc/selinux/config*
-
-  * */etc/security/limits.conf*
 
   * */etc/sysctl.conf*
 
@@ -33,8 +29,20 @@
 
 * Со всех машин в кластере должен быть доступ к официальному репозиторию CentOS Base (например, РБК http://centos-mirror.rbc.ru/pub/centos/7/os/x86_64/ или создано локальное зеркало).
 
-.. important:: В случае инсталляции с доступом в Интернет также должны выполняться требования:
+.. important:: В случае инсталляции с доступом в Интернет машины должны иметь доcтуп к официальным репозиториям:
     
-    * Со всех машин в кластере должен быть доступ к официальному репозиторию ADS: https://storage.googleapis.com/arenadata-repo/ADS/1.4.0/centos7/
+    - **RHEL/CentOS**:
 
-    * Со всех машин в кластере должен быть доступ к официальному репозиторию Arenadata Monitoring: https://storage.googleapis.com/arenadata-repo/ADM/2.1/x64/
+      - Репозиторий *ADS*: http://downloads.arenadata.io/ADS/1.5.0/centos/7/community/x86_64/
+
+      - Репозиторий *Arenadata Monitoring*: http://downloads.arenadata.io/ADM/2.1/x64/
+
+      - Репозитоий *Zookeeper*: http://downloads.arenadata.io/zookeeper/3.5.6/centos7/
+
+    - **Alt Linux**:
+
+      - Репозиторий *ADS*: http://downloads.arenadata.io/ADS/1.5.0/altlinux/8.0/community/x86_64/
+
+      - Репозиторий *Arenadata Monitoring*: http://alt-linux-repo.infra.arenadata.io/monitoring-altlinux/
+
+      - Репозитоий *Zookeeper*: http://downloads.arenadata.io/zookeeper/3.5.6/altlinux/c8.0
