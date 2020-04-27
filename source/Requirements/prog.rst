@@ -35,14 +35,14 @@
 
       - Репозиторий *ADS*: http://downloads.arenadata.io/ADS/1.5.0/centos/7/community/x86_64/
 
-      - Репозиторий *Arenadata Monitoring*: http://downloads.arenadata.io/ADM/2.1/x64/
+      - Репозиторий *Arenadata Monitoring*: http://downloads.arenadata.io/ADM/2.2/centos/7/community/x86_64/
 
-      - Репозитоий *Zookeeper*: http://downloads.arenadata.io/zookeeper/3.5.6/centos7/
+      - Репозитоий *Zookeeper*: http://downloads.arenadata.io/zookeeper/3.5.6/centos/7/community/x86_64/
 
     - **Alt Linux**:
 
-      - Репозиторий *ADS*: http://downloads.arenadata.io/ADS/1.5.0/altlinux/8.0/community/x86_64/
+      - Репозиторий *ADS*: http://downloads.arenadata.io/ADS/1.5.0/altlinux/8.0/community/
 
-      - Репозиторий *Arenadata Monitoring*: http://alt-linux-repo.infra.arenadata.io/monitoring-altlinux/
+      - Репозиторий *Arenadata Monitoring*: http://downloads.arenadata.io/ADM/2.2/altlinux/8.0/community/
 
-      - Репозитоий *Zookeeper*: http://downloads.arenadata.io/zookeeper/3.5.6/altlinux/c8.0
+      - Репозитоий *Zookeeper*: http://downloads.arenadata.io/zookeeper/3.5.6/altlinux/8.0/community/
