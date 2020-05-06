@@ -39,11 +39,11 @@
 
    Магазин Приложений
 
-Для загрузки дистрибутива платформы следует перейти на страницу продукта, кликнув на продукт **Arenadata Streaming**. При этом происходит переход на соответствующую страницу с кратким описанием продукта, ссылками на компоненты дистрибутива и информацией о релизе (:numref:`Рис.%s.<install_download_download-ADS_1.4>`).
+Для загрузки дистрибутива платформы следует перейти на страницу продукта, кликнув на продукт **Arenadata Streaming**. При этом происходит переход на соответствующую страницу с кратким описанием продукта, ссылками на компоненты дистрибутива и информацией о релизе (:numref:`Рис.%s.<install_download_download-ADS_1.5>`).
 
-.. _install_download_download-ADS_1.4:
+.. _install_download_download-ADS_1.5:
 
-.. figure:: ../imgs/install_download_download-ADS_1.4.png
+.. figure:: ../imgs/install_download_download-ADS_1.5.png
    :align: center
 
    Страница загрузки Arenadata Streaming
