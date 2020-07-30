@@ -18,7 +18,7 @@
 
 .. _ADS_AdminNIFI_Policies_Users:
 
-.. figure:: ../../imgs/ADS_AdminNIFI_Policies_Users.*
+.. figure:: ../imgs/ADS_AdminNIFI_Policies_Users.*
    :align: center
 
    Nifi Users
@@ -29,7 +29,7 @@
 
 .. _ADS_AdminNIFI_Policies_Identity:
 
-.. figure:: ../../imgs/ADS_AdminNIFI_Policies_Identity.*
+.. figure:: ../imgs/ADS_AdminNIFI_Policies_Identity.*
    :align: center
 
    Создание пользователя
@@ -40,7 +40,7 @@
 
 .. _ADS_AdminNIFI_Policies_Group:
 
-.. figure:: ../../imgs/ADS_AdminNIFI_Policies_Group.*
+.. figure:: ../imgs/ADS_AdminNIFI_Policies_Group.*
    :align: center
 
    Создание группы
@@ -110,7 +110,7 @@ Component Level Access Policies
 
 .. _ADS_AdminNIFI_Policies_Examples:
 
-.. figure:: ../../imgs/ADS_AdminNIFI_Policies_Examples.*
+.. figure:: ../imgs/ADS_AdminNIFI_Policies_Examples.*
    :align: center
 
    GenerateFlowFile и LogAttribute
@@ -120,7 +120,7 @@ Component Level Access Policies
 
 .. _ADS_AdminNIFI_Policies_User1:
 
-.. figure:: ../../imgs/ADS_AdminNIFI_Policies_User1.*
+.. figure:: ../imgs/ADS_AdminNIFI_Policies_User1.*
    :align: center
 
    User1 (администратор)
@@ -129,7 +129,7 @@ Component Level Access Policies
 
 .. _ADS_AdminNIFI_Policies_User2:
 
-.. figure:: ../../imgs/ADS_AdminNIFI_Policies_User2.*
+.. figure:: ../imgs/ADS_AdminNIFI_Policies_User2.*
    :align: center
 
    User2 (недавно добавленный пользователь)
@@ -148,7 +148,7 @@ Component Level Access Policies
 
 .. _ADS_AdminNIFI_Policies_Modify:
 
-.. figure:: ../../imgs/ADS_AdminNIFI_Policies_Modify.*
+.. figure:: ../imgs/ADS_AdminNIFI_Policies_Modify.*
    :align: center
 
    Modify the component
@@ -158,7 +158,7 @@ Component Level Access Policies
 
 .. _ADS_AdminNIFI_Policies_Override:
 
-.. figure:: ../../imgs/ADS_AdminNIFI_Policies_Override.*
+.. figure:: ../imgs/ADS_AdminNIFI_Policies_Override.*
    :align: center
 
    Override Policy
@@ -168,7 +168,7 @@ Component Level Access Policies
 
 .. _ADS_AdminNIFI_Policies_Modify-add:
 
-.. figure:: ../../imgs/ADS_AdminNIFI_Policies_Modify-add.*
+.. figure:: ../imgs/ADS_AdminNIFI_Policies_Modify-add.*
    :align: center
 
    Добавление User2 в политику
@@ -178,7 +178,7 @@ Component Level Access Policies
 
 .. _ADS_AdminNIFI_Policies_Result:
 
-.. figure:: ../../imgs/ADS_AdminNIFI_Policies_Result.*
+.. figure:: ../imgs/ADS_AdminNIFI_Policies_Result.*
    :align: center
 
    Результат действий
@@ -199,7 +199,7 @@ Component Level Access Policies
 
 .. _ADS_AdminNIFI_Policies_View:
 
-.. figure:: ../../imgs/ADS_AdminNIFI_Policies_View.*
+.. figure:: ../imgs/ADS_AdminNIFI_Policies_View.*
    :align: center
 
    View the component
@@ -211,7 +211,7 @@ Component Level Access Policies
 
 .. _ADS_AdminNIFI_Policies_View-add:
 
-.. figure:: ../../imgs/ADS_AdminNIFI_Policies_View-add.*
+.. figure:: ../imgs/ADS_AdminNIFI_Policies_View-add.*
    :align: center
 
    Добавление User2 в политику 
@@ -221,7 +221,7 @@ Component Level Access Policies
 
 .. _ADS_AdminNIFI_Policies_Result-view:
 
-.. figure:: ../../imgs/ADS_AdminNIFI_Policies_Result-view.*
+.. figure:: ../imgs/ADS_AdminNIFI_Policies_Result-view.*
    :align: center
 
    Результат действий 
@@ -234,7 +234,7 @@ Component Level Access Policies
 
 .. _ADS_AdminNIFI_Policies_Connect:
 
-.. figure:: ../../imgs/ADS_AdminNIFI_Policies_Connect.*
+.. figure:: ../imgs/ADS_AdminNIFI_Policies_Connect.*
    :align: center
 
    User1 -- подключение процессоров 
@@ -244,7 +244,7 @@ Component Level Access Policies
 
 .. _ADS_AdminNIFI_Policies_No-connect:
 
-.. figure:: ../../imgs/ADS_AdminNIFI_Policies_No-connect.*
+.. figure:: ../imgs/ADS_AdminNIFI_Policies_No-connect.*
    :align: center
 
    User2 -- невозможность подключения процессоров 
@@ -265,7 +265,7 @@ Component Level Access Policies
 
 .. _ADS_AdminNIFI_Policies_Connect-modify:
 
-.. figure:: ../../imgs/ADS_AdminNIFI_Policies_Connect-modify.*
+.. figure:: ../imgs/ADS_AdminNIFI_Policies_Connect-modify.*
    :align: center
 
    Modify the component 
@@ -275,7 +275,7 @@ Component Level Access Policies
 
 .. _ADS_AdminNIFI_Policies_Connect-add:
 
-.. figure:: ../../imgs/ADS_AdminNIFI_Policies_Connect-add.*
+.. figure:: ../imgs/ADS_AdminNIFI_Policies_Connect-add.*
    :align: center
 
    Добавление User2 в политику группы 
@@ -285,7 +285,7 @@ Component Level Access Policies
 
 .. _ADS_AdminNIFI_Policies_Connect-confirm:
 
-.. figure:: ../../imgs/ADS_AdminNIFI_Policies_Connect-confirm.*
+.. figure:: ../imgs/ADS_AdminNIFI_Policies_Connect-confirm.*
    :align: center
 
    Проверка наличия политики User2
@@ -295,7 +295,7 @@ Component Level Access Policies
 
 .. _ADS_AdminNIFI_Policies_Connect-result-1:
 
-.. figure:: ../../imgs/ADS_AdminNIFI_Policies_Connect-result-1.*
+.. figure:: ../imgs/ADS_AdminNIFI_Policies_Connect-result-1.*
    :align: center
 
    User2 -- подключение процессоров
@@ -303,7 +303,7 @@ Component Level Access Policies
 
 .. _ADS_AdminNIFI_Policies_Connect-result-2:
 
-.. figure:: ../../imgs/ADS_AdminNIFI_Policies_Connect-result-2.*
+.. figure:: ../imgs/ADS_AdminNIFI_Policies_Connect-result-2.*
    :align: center
 
    User2 -- подключение процессоров
@@ -317,7 +317,7 @@ Component Level Access Policies
 
 .. _ADS_AdminNIFI_Policies_ReplaceText:
 
-.. figure:: ../../imgs/ADS_AdminNIFI_Policies_ReplaceText.*
+.. figure:: ../imgs/ADS_AdminNIFI_Policies_ReplaceText.*
    :align: center
 
    Добавление процессора ReplaceText
@@ -327,7 +327,7 @@ Component Level Access Policies
 
 .. _ADS_AdminNIFI_Policies_EditConnect-user1:
 
-.. figure:: ../../imgs/ADS_AdminNIFI_Policies_EditConnect-user1.*
+.. figure:: ../imgs/ADS_AdminNIFI_Policies_EditConnect-user1.*
    :align: center
 
    User1 -- изменение соединения
@@ -337,7 +337,7 @@ Component Level Access Policies
 
 .. _ADS_AdminNIFI_Policies_EditConnect-user2:
 
-.. figure:: ../../imgs/ADS_AdminNIFI_Policies_EditConnect-user2.*
+.. figure:: ../imgs/ADS_AdminNIFI_Policies_EditConnect-user2.*
    :align: center
 
    User2 недоступно изменение соединения
@@ -353,7 +353,7 @@ Component Level Access Policies
 
 .. _ADS_AdminNIFI_Policies_Connect-view:
 
-.. figure:: ../../imgs/ADS_AdminNIFI_Policies_Connect-view.*
+.. figure:: ../imgs/ADS_AdminNIFI_Policies_Connect-view.*
    :align: center
 
    View the component 
@@ -363,7 +363,7 @@ Component Level Access Policies
 
 .. _ADS_AdminNIFI_Policies_Connect-view-add:
 
-.. figure:: ../../imgs/ADS_AdminNIFI_Policies_Connect-view-add.*
+.. figure:: ../imgs/ADS_AdminNIFI_Policies_Connect-view-add.*
    :align: center
 
    Добавление User2 в политику группы
@@ -373,7 +373,7 @@ Component Level Access Policies
 
 .. _ADS_AdminNIFI_Policies_EditConnect-user2-result:
 
-.. figure:: ../../imgs/ADS_AdminNIFI_Policies_EditConnect-user2-result.*
+.. figure:: ../imgs/ADS_AdminNIFI_Policies_EditConnect-user2-result.*
    :align: center
 
    User2 -- изменение соединения
