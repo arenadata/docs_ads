@@ -13,10 +13,9 @@
    :maxdepth: 2
    :caption: Оглавление:
 
-   ../Install/manage_tools/index
-   ../Install/manage_tools/upgrade
-   ../Config/ADCM
+   Install/manage_tools/index
+   Install/manage_tools/upgrade
+   ./Config/ADCM
    ../MiNiFi/index
    ../AdminNIFI/index
-   ../Config/index
-   
+   ./Config/index
