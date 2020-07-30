@@ -24,7 +24,7 @@
 
 .. _install_download_accepted:
 
-.. figure:: ../../imgs/install_download_accepted.jpg
+.. figure:: ../imgs/install_download_accepted.jpg
    :scale: 80 %
    :align: center
 
@@ -34,7 +34,7 @@
 
 .. _install_download_app-store:
 
-.. figure:: ../../imgs/install_download_app-store.PNG
+.. figure:: ../imgs/install_download_app-store.PNG
    :align: center
 
    Магазин Приложений
@@ -43,7 +43,7 @@
 
 .. _install_download_download-ADS_1.5:
 
-.. figure:: ../../imgs/install_download_download-ADS_1.5.png
+.. figure:: ../imgs/install_download_download-ADS_1.5.png
    :align: center
 
    Страница загрузки Arenadata Streaming
@@ -51,3 +51,4 @@
 В разделе *"Выберите версию продукта"* следует указать интересующую версию **ADS**, а в поле *"Выберите ОС"* -- используемую операционную систему. При этом в разделе *"Информация о релизе"* отображается дата выхода и тип релиза выбранной версии, ее номер, ссылки на лицензию использования и Release Notes.
 
 В разделе *Ссылки на компоненты дистрибутива* находятся ссылки для загрузки компонентов выбранной версии платформы. После загрузки компонентов следует установить их, действуя в соответствии с последующими разделами настоящего документа.
+
