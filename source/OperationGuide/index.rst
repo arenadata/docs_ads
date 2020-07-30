@@ -13,6 +13,7 @@
    :maxdepth: 2
    :caption: Оглавление:
 
+   Install/index
    Install/manage_tools/index
    Install/manage_tools/upgrade
    ./Config/ADCM
