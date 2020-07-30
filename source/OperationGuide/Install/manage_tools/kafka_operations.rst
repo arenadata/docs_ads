@@ -11,7 +11,7 @@
 
 .. _kafka_action:
 
-.. figure:: ../imgs/kafka_action.png
+.. figure:: ../../imgs/kafka_action.png
    :align: center
 
    Список допустимых операций над сервисом Kafka
@@ -34,7 +34,7 @@
 
 .. _expand_config_menu:
 
-.. figure:: ../imgs/expand_config_menu.png
+.. figure:: ../../imgs/expand_config_menu.png
    :align: center
 
    Доступные при расширении настройки
@@ -44,7 +44,7 @@
 
 .. _expand_kafka_hc_menu:
 
-.. figure:: ../imgs/expand_kafka_hc_menu.png
+.. figure:: ../../imgs/expand_kafka_hc_menu.png
    :align: center
    
    Распределение компонента по хостам

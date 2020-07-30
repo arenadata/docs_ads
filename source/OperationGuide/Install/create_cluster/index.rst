@@ -11,7 +11,7 @@
 
 .. _hosts:
 
-.. figure:: ../imgs/hosts.png
+.. figure:: ../../imgs/hosts.png
    :align: center
 
    Список объектов в ADCM
@@ -36,7 +36,7 @@
 
 .. _cluster_mon:
 
-.. figure:: ../imgs/cluster_mon.png
+.. figure:: ../../imgs/cluster_mon.png
    :align: center
 
    Вкладка "CLUSTERS"
@@ -46,7 +46,7 @@
 
 .. _add_cluster:
 
-.. figure:: ../imgs/add_cluster.png
+.. figure:: ../../imgs/add_cluster.png
    :align: center
 
    Создание экземпляра кластера
@@ -57,7 +57,7 @@
 
 .. _clusters_list:
 
-.. figure:: ../imgs/clusters_list.png
+.. figure:: ../../imgs/clusters_list.png
    :align: center
 
    Результат успешного создания экземпляра кластера
@@ -71,7 +71,7 @@
 
 .. _cluster_config:
 
-.. figure:: ../imgs/cluster_config.png
+.. figure:: ../../imgs/cluster_config.png
    :align: center
 
    Окно конфигурации кластера
@@ -90,7 +90,7 @@
 
 .. _import_list:
 
-.. figure:: ../imgs/import_list.png
+.. figure:: ../../imgs/import_list.png
    :align: center
 
    Импорт конфигурации сервиса http
@@ -108,7 +108,7 @@
 
 .. _hosts_list:
 
-.. figure:: ../imgs/hosts_list.png
+.. figure:: ../../imgs/hosts_list.png
    :align: center
 
    Вкладка "Hosts" кластера ADS
@@ -117,7 +117,7 @@
 
 .. _add_hosts:
 
-.. figure:: ../imgs/add_hosts.png
+.. figure:: ../../imgs/add_hosts.png
    :align: center
 
    Выбор хостов
@@ -126,7 +126,7 @@
 
 .. _hosts_list2:
 
-.. figure:: ../imgs/hosts_list2.png
+.. figure:: ../../imgs/hosts_list2.png
    :align: center
 
    Результат успешного добавления хостов
@@ -165,7 +165,7 @@
 
 .. _add_services:
 
-.. figure:: ../imgs/add_services.png
+.. figure:: ../../imgs/add_services.png
    :align: center
 
    Выбор сервисов для кластера ADS
@@ -193,7 +193,7 @@
 
 .. _import_configs:
 
-.. figure:: ../imgs/import_configs.png
+.. figure:: ../../imgs/import_configs.png
    :align: center
 
    Импорт конфигурации мониторинга
@@ -208,7 +208,7 @@
 
 .. _components:
 
-.. figure:: ../imgs/components.png
+.. figure:: ../../imgs/components.png
    :align: center
 
    Размещение компонентов сервисов на хостах
@@ -223,7 +223,7 @@
 
 .. _nifi_components:
 
-.. figure:: ../imgs/nifi_components.png
+.. figure:: ../../imgs/nifi_components.png
    :align: center
 
    Компоненты сервиса *Nifi*
@@ -249,7 +249,7 @@
 
 .. _cluster_install:
 
-.. figure:: ../imgs/cluster_install.png
+.. figure:: ../../imgs/cluster_install.png
    :align: center
 
    Установка всех сервисов кластера
@@ -270,7 +270,7 @@
 
 .. _install_config_menu:
 
-.. figure:: ../imgs/install_config_menu.png
+.. figure:: ../../imgs/install_config_menu.png
    :align: center
 
    Доступные при кластерной установке настройки
@@ -281,7 +281,7 @@
 
 .. _cluster_actions:
 
-.. figure:: ../imgs/cluster_actions.png
+.. figure:: ../../imgs/cluster_actions.png
    :align: center
 
    Состояние сервисов кластера

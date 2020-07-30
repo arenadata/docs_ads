@@ -6,7 +6,7 @@
 
 .. _install_download_form-download:
 
-.. figure:: ../imgs/install_download_form-download.png
+.. figure:: ../../imgs/install_download_form-download.png
    :scale: 60 %
    :align: center
 
@@ -24,7 +24,7 @@
 
 .. _install_download_accepted:
 
-.. figure:: ../imgs/install_download_accepted.jpg
+.. figure:: ../../imgs/install_download_accepted.jpg
    :scale: 80 %
    :align: center
 
@@ -34,7 +34,7 @@
 
 .. _install_download_app-store:
 
-.. figure:: ../imgs/install_download_app-store.PNG
+.. figure:: ../../imgs/install_download_app-store.PNG
    :align: center
 
    Магазин Приложений
@@ -43,7 +43,7 @@
 
 .. _install_download_download-ADS_1.5:
 
-.. figure:: ../imgs/install_download_download-ADS_1.5.png
+.. figure:: ../../imgs/install_download_download-ADS_1.5.png
    :align: center
 
    Страница загрузки Arenadata Streaming

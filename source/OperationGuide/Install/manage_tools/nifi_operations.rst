@@ -11,7 +11,7 @@
 
 .. _nifi_action:
 
-.. figure:: ../imgs/nifi_action.png
+.. figure:: ../../imgs/nifi_action.png
    :align: center
 
    Список допустимых операций над сервисом Nifi
@@ -36,7 +36,7 @@
 
 .. _expand_config_menu:
 
-.. figure:: ../imgs/expand_config_menu.png
+.. figure:: ../../imgs/expand_config_menu.png
    :align: center
 
    Доступные при расширении настройки
@@ -46,7 +46,7 @@
 
 .. _expand_nifi_hc_menu:
 
-.. figure:: ../imgs/expand_nifi_hc_menu.png
+.. figure:: ../../imgs/expand_nifi_hc_menu.png
    :align: center
    
    Распределение компонента по хостам

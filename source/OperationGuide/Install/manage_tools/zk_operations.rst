@@ -11,7 +11,7 @@
 
 .. _zk_action:
 
-.. figure:: ../imgs/zk_action.png
+.. figure:: ../../imgs/zk_action.png
    :align: center
 
    Список допустимых операций над сервисом Zookeeper
@@ -37,7 +37,7 @@
 
 .. _expand_config_menu:
 
-.. figure:: ../imgs/expand_config_menu.png
+.. figure:: ../../imgs/expand_config_menu.png
    :align: center
 
    Доступные при расширении настройки
@@ -47,7 +47,7 @@
 
 .. _expand_zk_hc_menu:
 
-.. figure:: ../imgs/expand_zk_hc_menu.png
+.. figure:: ../../imgs/expand_zk_hc_menu.png
    :align: center
 
    Распределение компонента по хостам
