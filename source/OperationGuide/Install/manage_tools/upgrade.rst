@@ -22,7 +22,7 @@
 
 .. _bundle_upgrade:
 
-.. figure:: ../../imgs/bundle_upgrade.png
+.. figure:: ../imgs/bundle_upgrade.png
    :align: center
 
    Доступно обновление бандла
@@ -32,7 +32,7 @@
 
 .. _choose_bundle_upgrade:
 
-.. figure:: ../../imgs/choose_bundle_upgrade.png
+.. figure:: ../imgs/choose_bundle_upgrade.png
    :align: center
 
    Доступные обновления
@@ -42,7 +42,7 @@
 
 .. _cluster_upgrade_state:
 
-.. figure:: ../../imgs/cluster_upgrade_state.png
+.. figure:: ../imgs/cluster_upgrade_state.png
    :align: center
 
    Изменение состояния кластера после обновления
@@ -60,7 +60,7 @@
 
 .. _cluster_upgrade:
 
-.. figure:: ../../imgs/cluster_upgrade.png
+.. figure:: ../imgs/cluster_upgrade.png
    :align: center
 
    Обновление пакетов сервисов
@@ -68,7 +68,7 @@
 2. Подтвердить действие в открывшемся диалоговом окне нажатием кнопки "Run".
 
 После успешного завершения операции "Upgrade" кластеру присваивается состояние *installed*.
-   
+
 
 .. important:: Если заданные по умолчанию настройки сервисов были изменены перед обновлением, то после операции "Upgrade Configs" необходимо выполнить действия для соответствующих сервисов:
 

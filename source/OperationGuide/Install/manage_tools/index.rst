@@ -6,7 +6,7 @@
 * `Операции на уровне кластера`_ -- предполагают выполнение операций последовательно над всеми сервисами;
 
 * `Операции на уровне сервиса`_ -- предполагают выполнение операций над отдельным сервисом.
- 
+
 
 Операции на уровне кластера
 ---------------------------
@@ -15,7 +15,7 @@
 
 .. _cluster_run:
 
-.. figure:: ../../imgs/cluster_run.png
+.. figure:: ../imgs/cluster_run.png
    :align: center
 
    Операции на уровне кластера
@@ -32,7 +32,7 @@
 
 .. _service_actions:
 
-.. figure:: ../../imgs/service_actions.png
+.. figure:: ../imgs/service_actions.png
    :align: center
 
    Запуск проверки состояния сервиса *Zookeeper*
@@ -42,7 +42,7 @@
 
 .. _ads_check:
 
-.. figure:: ../../imgs/ads_check.png
+.. figure:: ../imgs/ads_check.png
    :align: center
 
    Вкладка "JOBS"
@@ -52,7 +52,7 @@
 
 .. _zk_status_check:
 
-.. figure:: ../../imgs/zk_status_check.png
+.. figure:: ../imgs/zk_status_check.png
    :align: center
 
    Проверка состояния сервиса *Zookeeper*
@@ -65,5 +65,3 @@
 Для каждого из сервисов есть возможность управления им независимо от остальных, выполняя такие операции как *Stop*, *Start*, *Restart*.
 
 Например, чтобы перезапустить все компоненты сервиса *Kafka*, необходимо в **ADCM** перейти в кластер *ADS*, на вкладке "Services" для сервиса *Kafka* в поле "Actions" нажать на пиктограмму и выбрать действие *Restart*.
-
-

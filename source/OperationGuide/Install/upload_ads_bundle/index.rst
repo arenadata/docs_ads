@@ -3,7 +3,7 @@
 Загрузка бандла ADS
 ===================
 
-Загрузка бандла **ADS** необходима для создания в **ADCM** прототипа кластера, из которого в дальнейшем возможно создание его экземпляров. 
+Загрузка бандла **ADS** необходима для создания в **ADCM** прототипа кластера, из которого в дальнейшем возможно создание его экземпляров.
 
 Для загрузки бандла следует выполнить следующие действия:
 
@@ -11,7 +11,7 @@
 
 .. _bundles:
 
-.. figure:: ../../imgs/bundles.png
+.. figure:: ../imgs/bundles.png
    :align: center
 
    Вкладка "BUNDLES"
@@ -21,7 +21,7 @@
 
 .. _choose_bundle:
 
-.. figure:: ../../imgs/choose_bundle.png
+.. figure:: ../imgs/choose_bundle.png
    :align: center
 
    Выбор бандла
@@ -31,7 +31,7 @@
 
 .. _license_agreement:
 
-.. figure:: ../../imgs/license_agreement.png
+.. figure:: ../imgs/license_agreement.png
    :align: center
 
    Лицензионное соглашение
@@ -41,7 +41,7 @@
 
 .. _load_bundle:
 
-.. figure:: ../../imgs/load_bundle.png
+.. figure:: ../imgs/load_bundle.png
    :align: center
 
    Результат успешной загрузки бандла

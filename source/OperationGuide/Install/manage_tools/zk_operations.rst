@@ -11,7 +11,7 @@
 
 .. _zk_action:
 
-.. figure:: ../../imgs/zk_action.png
+.. figure:: ../imgs/zk_action.png
    :align: center
 
    Список допустимых операций над сервисом Zookeeper
@@ -37,17 +37,17 @@
 
 .. _expand_config_menu:
 
-.. figure:: ../../imgs/expand_config_menu.png
+.. figure:: ../imgs/expand_config_menu.png
    :align: center
 
    Доступные при расширении настройки
 
 
-После выбора опций для перехода к следующей странице конфигурации следует нажать кнопку "Next", и в открывшейся форме необходимо распределить компонент *Zookeeper Server* по добавляемым хостам (:numref:`Рис.%s <expand_zk_hc_menu>`). 
+После выбора опций для перехода к следующей странице конфигурации следует нажать кнопку "Next", и в открывшейся форме необходимо распределить компонент *Zookeeper Server* по добавляемым хостам (:numref:`Рис.%s <expand_zk_hc_menu>`).
 
 .. _expand_zk_hc_menu:
 
-.. figure:: ../../imgs/expand_zk_hc_menu.png
+.. figure:: ../imgs/expand_zk_hc_menu.png
    :align: center
 
    Распределение компонента по хостам
@@ -71,4 +71,3 @@
 3. Нажать кнопку "Run" в нижней части окна.
 
 .. important:: Описанная процедура не удаляет данные и пакет *Zookeeper* c хоста -- онa лишь выводит ноду из кластера *Zookeeper*
-
