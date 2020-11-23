@@ -10,6 +10,9 @@
 
 `Инструкция по установке`_
  .. _Инструкция по установке: https://storage.googleapis.com/arenadata-repo/docs/ads/pdf/v1.5-RUS/Инструкция%20по%20установке.pdf
+ 
+`Руководство пользователя`_
+ .. _Руководство пользователя: https://storage.googleapis.com/arenadata-repo/docs/ads/pdf/v1.5-RUS/Руководство%20пользователя.pdf 
 
 `Архитектурные особенности`_
  .. _Архитектурные особенности: https://storage.googleapis.com/arenadata-repo/docs/ads/pdf/v1.5-RUS/Архитектурные%20особенности.pdf
