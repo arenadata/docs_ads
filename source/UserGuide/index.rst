@@ -13,8 +13,8 @@
    :maxdepth: 2
    :caption: Оглавление:
 
-   UserGuide/UserNIFI/index
-   UserGuide/DeveloperKafka/index
+   UserNIFI/index
+   DeveloperKafka/index
    ../UserNIFI/index
    ../DeveloperKafka/index
 
