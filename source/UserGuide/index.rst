@@ -15,6 +15,5 @@
 
    UserNIFI/index
    DeveloperKafka/index
-   ../UserNIFI/index
-   ../DeveloperKafka/index
+
 
