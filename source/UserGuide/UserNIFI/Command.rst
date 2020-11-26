@@ -61,7 +61,7 @@
 
 .. _ADS_UserNIFI_Command_RPG:
 
-.. figure:: ../imgs/ADS_UserNIFI_Command_RPG.*
+.. figure:: ../../imgs/ADS_UserNIFI_Command_RPG.png
    :align: center
 
    Настройка отдельных портов в RPG
@@ -76,7 +76,7 @@
 
 .. _ADS_UserNIFI_Command_RPG-Ports:
 
-.. figure:: ../imgs/ADS_UserNIFI_Command_RPG-Ports.*
+.. figure:: ../../imgs/ADS_UserNIFI_Command_RPG-Ports.png
    :align: center
 
    Настройка отдельных портов в RPG
