@@ -21,7 +21,7 @@
 
 .. _ADS_UserNIFI_Config_SETTINGS:
 
-.. figure:: ../imgs/ADS_UserNIFI_Config_SETTINGS.*
+.. figure:: ../../imgs/ADS_UserNIFI_Config_SETTINGS.png
    :align: center
 
    Вкладка SETTINGS
@@ -48,7 +48,7 @@
 
 .. _ADS_UserNIFI_Config_SCHEDULING:
 
-.. figure:: ../imgs/ADS_UserNIFI_Config_SCHEDULING.*
+.. figure:: ../../imgs/ADS_UserNIFI_Config_SCHEDULING.png
    :align: center
 
    Вкладка SCHEDULING
@@ -133,7 +133,7 @@ Execution
 
 .. _ADS_UserNIFI_Config_Execution:
 
-.. figure:: ../imgs/ADS_UserNIFI_Config_Execution.*
+.. figure:: ../../imgs/ADS_UserNIFI_Config_Execution.png
    :align: center
 
    Процессоры, настроенные на Primary Node
@@ -144,7 +144,7 @@ Execution
 
 .. _ADS_UserNIFI_Config_Execution-Summary:
 
-.. figure:: ../imgs/ADS_UserNIFI_Config_Execution-Summary.*
+.. figure:: ../../imgs/ADS_UserNIFI_Config_Execution-Summary.png
    :align: center
 
    Процессоры, настроенные на Primary Node
@@ -166,7 +166,7 @@ Run Duration
 
 .. _ADS_UserNIFI_Config_PROPERTIES:
 
-.. figure:: ../imgs/ADS_UserNIFI_Config_PROPERTIES.*
+.. figure:: ../../imgs/ADS_UserNIFI_Config_PROPERTIES.png
    :align: center
 
    Вкладка PROPERTIES
@@ -179,7 +179,7 @@ Run Duration
 
 .. _ADS_UserNIFI_Config_PROPERTIES-Property:
 
-.. figure:: ../imgs/ADS_UserNIFI_Config_PROPERTIES-Property.*
+.. figure:: ../../imgs/ADS_UserNIFI_Config_PROPERTIES-Property.png
    :align: center
 
    Выбор значения свойства
@@ -190,7 +190,7 @@ Run Duration
 
 .. _ADS_UserNIFI_Config_PROPERTIES-User-Defined:
 
-.. figure:: ../imgs/ADS_UserNIFI_Config_PROPERTIES-User-Defined.*
+.. figure:: ../../imgs/ADS_UserNIFI_Config_PROPERTIES-User-Defined.png
    :align: center
 
    Добавление свойства
@@ -205,7 +205,7 @@ Run Duration
 
 .. _ADS_UserNIFI_Config_PROPERTIES-Controller:
 
-.. figure:: ../imgs/ADS_UserNIFI_Config_PROPERTIES-Controller.*
+.. figure:: ../../imgs/ADS_UserNIFI_Config_PROPERTIES-Controller.png
    :align: center
 
    Настройка контроллера через свойство Процессора
@@ -219,7 +219,7 @@ Run Duration
 
 .. _ADS_UserNIFI_Config_COMMENTS:
 
-.. figure:: ../imgs/ADS_UserNIFI_Config_COMMENTS.*
+.. figure:: ../../imgs/ADS_UserNIFI_Config_COMMENTS.png
    :align: center
 
    Вкладка COMMENTS
