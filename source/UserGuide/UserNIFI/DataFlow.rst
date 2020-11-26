@@ -13,7 +13,7 @@
 
 .. _ADS_UserNIFI_DataFlow_Components-Toolbar:
 
-.. figure:: ../imgs/ADS_UserNIFI_DataFlow_Components-Toolbar.*
+.. figure:: ../../imgs/ADS_UserNIFI_DataFlow_Components-Toolbar.png
    :align: center
 
    Разбор панели инструментов NiFi
@@ -24,7 +24,7 @@
 
 .. _ADS_UserNIFI_DataFlow_Type-of-Processor:
 
-.. figure:: ../imgs/ADS_UserNIFI_DataFlow_Type-of-Processor.*
+.. figure:: ../../imgs/ADS_UserNIFI_DataFlow_Type-of-Processor.png
    :align: center
 
    Выбор типа Процессора
@@ -35,7 +35,7 @@
 
 .. _ADS_UserNIFI_DataFlow_Add-Processor:
 
-.. figure:: ../imgs/ADS_UserNIFI_DataFlow_Add-Processor.*
+.. figure:: ../../imgs/ADS_UserNIFI_DataFlow_Add-Processor.png
    :align: center
 
    Фильтрация Процессоров по тегам
@@ -54,7 +54,7 @@
 
 .. _ADS_UserNIFI_DataFlow_Processor-options:
 
-.. figure:: ../imgs/ADS_UserNIFI_DataFlow_Processor-options.*
+.. figure:: ../../imgs/ADS_UserNIFI_DataFlow_Processor-options.png
    :align: center
 
    Опции Процессора
@@ -104,7 +104,7 @@
 
 .. _ADS_UserNIFI_DataFlow_Process-Group-options:
 
-.. figure:: ../imgs/ADS_UserNIFI_DataFlow_Process-Group-options.*
+.. figure:: ../../imgs/ADS_UserNIFI_DataFlow_Process-Group-options.png
    :align: center
 
    Опции группы процессов
@@ -145,7 +145,7 @@
 
 .. _ADS_UserNIFI_DataFlow_Remote-Process-Group-options:
 
-.. figure:: ../imgs/ADS_UserNIFI_DataFlow_Remote-Process-Group-options.*
+.. figure:: ../../imgs/ADS_UserNIFI_DataFlow_Remote-Process-Group-options.png
    :align: center
 
    Опции удаленной группы процессов
@@ -189,7 +189,7 @@
 
 .. _ADS_UserNIFI_DataFlow_Template:
 
-.. figure:: ../imgs/ADS_UserNIFI_DataFlow_Template.*
+.. figure:: ../../imgs/ADS_UserNIFI_DataFlow_Template.png
    :align: center
 
    Выбор шаблона
@@ -200,7 +200,7 @@
 
 .. _ADS_UserNIFI_DataFlow_Template-description:
 
-.. figure:: ../imgs/ADS_UserNIFI_DataFlow_Template-description.*
+.. figure:: ../../imgs/ADS_UserNIFI_DataFlow_Template-description.png
    :align: center
 
    Дополнительные сведения о шаблоне
@@ -218,7 +218,7 @@
 
 .. _ADS_UserNIFI_DataFlow_Component-versions:
 
-.. figure:: ../imgs/ADS_UserNIFI_DataFlow_Component-versions.*
+.. figure:: ../../imgs/ADS_UserNIFI_DataFlow_Component-versions.png
    :align: center
 
    Версии компонентов
@@ -229,7 +229,7 @@
 
 .. _ADS_UserNIFI_DataFlow_Component-versions2:
 
-.. figure:: ../imgs/ADS_UserNIFI_DataFlow_Component-versions2.*
+.. figure:: ../../imgs/ADS_UserNIFI_DataFlow_Component-versions2.png
    :align: center
 
    Версия компонента
@@ -247,7 +247,7 @@
 
 .. _ADS_UserNIFI_DataFlow_Change-version:
 
-.. figure:: ../imgs/ADS_UserNIFI_DataFlow_Change-version.*
+.. figure:: ../../imgs/ADS_UserNIFI_DataFlow_Change-version.png
    :align: center
 
    Параметры конфигурации компонента
@@ -257,7 +257,7 @@
 
 .. _ADS_UserNIFI_DataFlow_Version:
 
-.. figure:: ../imgs/ADS_UserNIFI_DataFlow_Version.*
+.. figure:: ../../imgs/ADS_UserNIFI_DataFlow_Version.png
    :align: center
 
    Выбор версии компонента
