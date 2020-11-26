@@ -35,7 +35,7 @@ Expression Language (язык выражений) **NiFi** можно испол
 
 .. _ADS_UserNIFI_Properties_Variables-open1:
 
-.. figure:: ../imgs/ADS_UserNIFI_Properties_Variables-open1.*
+.. figure:: ../../imgs/ADS_UserNIFI_Properties_Variables-open1.png
    :align: center
 
    Переход к "Variables" с рабочей области NiFi
@@ -46,7 +46,7 @@ Expression Language (язык выражений) **NiFi** можно испол
 
 .. _ADS_UserNIFI_Properties_Variables-open2:
 
-.. figure:: ../imgs/ADS_UserNIFI_Properties_Variables-open2.*
+.. figure:: ../../imgs/ADS_UserNIFI_Properties_Variables-open2.png
    :align: center
 
    Переход к "Variables" через группу процессов
@@ -57,7 +57,7 @@ Expression Language (язык выражений) **NiFi** можно испол
 
 .. _ADS_UserNIFI_Properties_Variables:
 
-.. figure:: ../imgs/ADS_UserNIFI_Properties_Variables.*
+.. figure:: ../../imgs/ADS_UserNIFI_Properties_Variables.png
    :align: center
 
    Диалоговое окно "Variables"
@@ -71,7 +71,7 @@ Expression Language (язык выражений) **NiFi** можно испол
 
 .. _ADS_UserNIFI_Properties_Variables-name:
 
-.. figure:: ../imgs/ADS_UserNIFI_Properties_Variables-name.*
+.. figure:: ../../imgs/ADS_UserNIFI_Properties_Variables-name.png
    :align: center
 
    Наименование новой переменной
@@ -82,7 +82,7 @@ Expression Language (язык выражений) **NiFi** можно испол
 
 .. _ADS_UserNIFI_Properties_Variables-value:
 
-.. figure:: ../imgs/ADS_UserNIFI_Properties_Variables-value.*
+.. figure:: ../../imgs/ADS_UserNIFI_Properties_Variables-value.png
    :align: center
 
    Значение новой переменной
@@ -93,7 +93,7 @@ Expression Language (язык выражений) **NiFi** можно испол
 
 .. _ADS_UserNIFI_Properties_Variables-apply:
 
-.. figure:: ../imgs/ADS_UserNIFI_Properties_Variables-apply.*
+.. figure:: ../../imgs/ADS_UserNIFI_Properties_Variables-apply.png
    :align: center
 
    Обновление переменной
@@ -104,7 +104,7 @@ Expression Language (язык выражений) **NiFi** можно испол
 
 .. _ADS_UserNIFI_Properties_Variables-property:
 
-.. figure:: ../imgs/ADS_UserNIFI_Properties_Variables-property.*
+.. figure:: ../../imgs/ADS_UserNIFI_Properties_Variables-property.png
    :align: center
 
    Переменная в свойствах процессора
@@ -123,7 +123,7 @@ Expression Language (язык выражений) **NiFi** можно испол
 
 .. _ADS_UserNIFI_Properties_Variables-override:
 
-.. figure:: ../imgs/ADS_UserNIFI_Properties_Variables-override.*
+.. figure:: ../../imgs/ADS_UserNIFI_Properties_Variables-override.png
    :align: center
 
    Переопределение переменной
@@ -134,7 +134,7 @@ Expression Language (язык выражений) **NiFi** можно испол
 
 .. _ADS_UserNIFI_Properties_Variables-modify:
 
-.. figure:: ../imgs/ADS_UserNIFI_Properties_Variables-modify.*
+.. figure:: ../../imgs/ADS_UserNIFI_Properties_Variables-modify.png
    :align: center
 
    Изменение переменной
@@ -145,7 +145,7 @@ Expression Language (язык выражений) **NiFi** можно испол
 
 .. _ADS_UserNIFI_Properties_Variables-navigate:
 
-.. figure:: ../imgs/ADS_UserNIFI_Properties_Variables-navigate.*
+.. figure:: ../../imgs/ADS_UserNIFI_Properties_Variables-navigate.png
    :align: center
 
    Переход к группе процессов, создавшей переменную
@@ -160,7 +160,7 @@ Expression Language (язык выражений) **NiFi** можно испол
 
 .. _ADS_UserNIFI_Properties_Variables-permissions:
 
-.. figure:: ../imgs/ADS_UserNIFI_Properties_Variables-permissions.*
+.. figure:: ../../imgs/ADS_UserNIFI_Properties_Variables-permissions.png
    :align: center
 
    Отсутствие доступа к экранной форме "Variables"
@@ -180,7 +180,7 @@ Controller Services
 
 .. _ADS_UserNIFI_Properties_Variables-Controller:
 
-.. figure:: ../imgs/ADS_UserNIFI_Properties_Variables-Controller.*
+.. figure:: ../../imgs/ADS_UserNIFI_Properties_Variables-Controller.png
    :align: center
 
    Ссылка на Controller Services в "Variables"
@@ -191,7 +191,7 @@ Controller Services
 
 .. _ADS_UserNIFI_Properties_Variables-Controller-config:
 
-.. figure:: ../imgs/ADS_UserNIFI_Properties_Variables-Controller-config.*
+.. figure:: ../../imgs/ADS_UserNIFI_Properties_Variables-Controller-config.png
    :align: center
 
    Окно конфигурации Controller Services
@@ -205,7 +205,7 @@ Controller Services
 
 .. _ADS_UserNIFI_Properties_Variables-Unauthorized:
 
-.. figure:: ../imgs/ADS_UserNIFI_Properties_Variables-Unauthorized.*
+.. figure:: ../../imgs/ADS_UserNIFI_Properties_Variables-Unauthorized.png
    :align: center
 
    Ссылка на UUID компонента в "Variables"
@@ -216,7 +216,7 @@ Controller Services
 
 .. _ADS_UserNIFI_Properties_Variables-example:
 
-.. figure:: ../imgs/ADS_UserNIFI_Properties_Variables-example.*
+.. figure:: ../../imgs/ADS_UserNIFI_Properties_Variables-example.png
    :align: center
 
    Пример отсутствия прав доступа пользователя к компоненту
