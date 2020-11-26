@@ -28,7 +28,7 @@
 
 .. _ADS_UserNIFI_UI_Global-Menu:
 
-.. figure:: ../imgs/ADS_UserNIFI_UI_Global-Menu.*
+.. figure:: ../../imgs/ADS_UserNIFI_UI_Global-Menu.*
    :align: center
 
    Пармаметры общего меню NiFi
