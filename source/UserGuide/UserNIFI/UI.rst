@@ -11,7 +11,7 @@
 
 .. _ADS_UserNIFI_UI_blank-canvas:
 
-.. figure:: ../imgs/ADS_UserNIFI_UI_blank-canvas.*
+.. figure:: ../../imgs/ADS_UserNIFI_UI_blank-canvas.*
    :align: center
 
    Рабочая область NiFi
@@ -28,7 +28,7 @@
 
 .. _ADS_UserNIFI_UI_Global-Menu:
 
-.. figure:: ../imgs/ADS_UserNIFI_UI_Global-Menu.*
+.. figure:: ../../imgs/ADS_UserNIFI_UI_Global-Menu.*
    :align: center
 
    Пармаметры общего меню NiFi
@@ -39,7 +39,7 @@
 
 .. _ADS_UserNIFI_UI_breadcrumbs:
 
-.. figure:: ../imgs/ADS_UserNIFI_UI_breadcrumbs.*
+.. figure:: ../../imgs/ADS_UserNIFI_UI_breadcrumbs.*
    :align: center
 
    Навигация в NiFi
