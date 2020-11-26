@@ -11,7 +11,7 @@
 
 .. _ADS_UserNIFI_UI_blank-canvas:
 
-.. figure:: ../../../imgs/ADS_UserNIFI_UI_blank-canvas.png
+.. figure:: ../../imgs/ADS_UserNIFI_UI_blank-canvas.png
    :align: center
 
    Рабочая область NiFi
