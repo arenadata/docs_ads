@@ -47,7 +47,7 @@
 
 .. _ADS_Architect_Log-structure:
 
-.. figure:: ../imgs/ADS_Architect_Log-structure.*
+.. figure:: ../imgs/ADS_Architect_Log-structure.png
    :align: center
 
    Логическая структура журнала **ADS** 
@@ -60,7 +60,7 @@
 
 .. _ADS_Architect_Log-compaction:
 
-.. figure:: ../imgs/ADS_Architect_Log-compaction.*
+.. figure:: ../imgs/ADS_Architect_Log-compaction.png
    :align: center
 
    Процесс сжатия сегмента журнала 
