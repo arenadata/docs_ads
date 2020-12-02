@@ -18,7 +18,6 @@
    topic
    Producer
    Consumer
-   Connect
    Streams
    Kafka_operations
    Zk_operations
