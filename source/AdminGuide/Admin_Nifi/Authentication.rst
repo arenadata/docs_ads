@@ -119,7 +119,7 @@ Kerberos
    "Kerberos Config File", "Абсолютный путь к файлу конфигурации клиента Kerberos"
    "Authentication Expiration", "Продолжительность действия проверки подлинности пользователя. Если пользователь никогда не выходит из системы, он должен будет снова войти в систему в течение указанного времени"
 
-Описание настройки допуска по единому входу через клиентские тикеты Kerberos приведено в `Kerberos Service <https://docs.arenadata.io/ads/AdminNIFI/Kerberos.html>`_.
+Описание настройки допуска по единому входу через клиентские тикеты Kerberos приведено в `Kerberos Service <../Kerberos>`_.
 
 
 OpenId Connect
