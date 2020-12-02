@@ -14,11 +14,11 @@
 
 Для выполнения какой-либо задачи *MiNiFi Agent* необходимо создать шаблон в UI *NiFi*. В данном разделе представлен элементарный шаблон для сбора содержимого файла с машин *MiNiFi Agent*.
 
-После установки *NiFi* и *MiNiFi* с помощью **ADCM**, в разделе *Template* появляется шаблон с название *simple-minifi-listener*, который состоит из следующих элементов (:numref:`Рис.%s. <minifi_listener>`).
+После установки *NiFi* и *MiNiFi* с помощью **ADCM**, в разделе *Template* появляется шаблон с название *simple-minifi-listener*, который состоит из следующих элементов (:numref:`Рис.%s. <minifi_simple-minifi-listener>`).
 
-.. _minifi_listener:
+.. _minifi_simple-minifi-listener:
 
-.. figure:: imgs/simple-minifi-listener.png
+.. figure:: ../imgs/minifi_simple-minifi-listener.png
    :align: center
 
    Основные элементы шаблона
@@ -30,7 +30,7 @@
 
 .. _minifi_flow:
 
-.. figure:: imgs/minifi_flow.png
+.. figure:: ../imgs/minifi_flow.png
    :align: center
 
    Flow Агентов
@@ -50,7 +50,7 @@
 
 .. _minifi_c2_api:
 
-.. figure:: imgs/minifi_c2_api.png
+.. figure:: ../imgs/minifi_c2_api.png
    :align: center
 
    Результат обращения к MiNiFi C2 Server
