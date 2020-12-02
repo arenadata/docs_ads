@@ -64,7 +64,7 @@
    Intro/index
    Requirements/index
    Install/index
-   OperationGuide/index
+   AdminGuide/index
    UserGuide/index
    Architecture/index
    Release/index
