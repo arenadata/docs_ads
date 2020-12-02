@@ -11,11 +11,11 @@
 Операции на уровне кластера
 ---------------------------
 
-Запуск и остановка **ADS** -- существует возможность последовательного запуска и остановки всех сервисов кластера *ADS* через **ADCM**. Для этого необходимо открыть в **ADCM** кластер *ADS* и нажать кнопку *Start* или *Stop* в зависимости от требуемой работы с кластером (:numref:`Рис.%s <cluster_run>`).
+Запуск и остановка **ADS** -- существует возможность последовательного запуска и остановки всех сервисов кластера *ADS* через **ADCM**. Для этого необходимо открыть в **ADCM** кластер *ADS* и нажать кнопку *Start* или *Stop* в зависимости от требуемой работы с кластером (:numref:`Рис.%s <manage_tools_cluster_run>`).
 
-.. _cluster_run:
+.. _manage_tools_cluster_run:
 
-.. figure:: ../../imgs/cluster_run.png
+.. figure:: ../../imgs/manage_tools_cluster_run.png
    :align: center
 
    Операции на уровне кластера
@@ -28,31 +28,31 @@
 
 Проверка состояний сервисов и вывод результатов действий над ними осуществляется по единому алгоритму, разобранному на примере сервиса  *Zookeeper*:
 
-1. В ADCM перейти в кластер *ADS*. На вкладке "Services" для сервиса *Zookeeper* в поле "Actions" нажать на пиктограмму и выбрать действие *Check* (:numref:`Рис.%s <service_actions>`).
+1. В ADCM перейти в кластер *ADS*. На вкладке "Services" для сервиса *Zookeeper* в поле "Actions" нажать на пиктограмму и выбрать действие *Check* (:numref:`Рис.%s <manage_tools_service_actions>`).
 
-.. _service_actions:
+.. _manage_tools_service_actions:
 
-.. figure:: ../../imgs/service_actions.png
+.. figure:: ../../imgs/manage_tools_service_actions.png
    :align: center
 
    Запуск проверки состояния сервиса *Zookeeper*
 
 
-2. Открыть вкладку "JOBS" (:numref:`Рис.%s <ads_check>`).
+2. Открыть вкладку "JOBS" (:numref:`Рис.%s <manage_tools_ads_check>`).
 
-.. _ads_check:
+.. _manage_tools_ads_check:
 
-.. figure:: ../../imgs/ads_check.png
+.. figure:: ../../imgs/manage_tools_ads_check.png
    :align: center
 
    Вкладка "JOBS"
 
 
-3. Выбрать последнее действие над кластером *ADS* и в открывшемся окне проверить результаты (:numref:`Рис.%s <zk_status_check>`).
+3. Выбрать последнее действие над кластером *ADS* и в открывшемся окне проверить результаты (:numref:`Рис.%s <manage_tools_zk_status_check>`).
 
-.. _zk_status_check:
+.. _manage_tools_zk_status_check:
 
-.. figure:: ../../imgs/zk_status_check.png
+.. figure:: ../../imgs/manage_tools_zk_status_check.png
    :align: center
 
    Проверка состояния сервиса *Zookeeper*
