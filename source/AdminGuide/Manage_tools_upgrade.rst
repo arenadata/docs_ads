@@ -18,31 +18,31 @@
 
 Для обновления бандла необходимо:
 
-1. Загрузить бандл *ADS* новой версии. После его загрузки на вкладке "Clusters" в строке кластера с более старой версией бандла в колонке "Upgrade" появляется пиктограмма, указывающая на возможность обновления (:numref:`Рис.%s <bundle_upgrade>`).
+1. Загрузить бандл *ADS* новой версии. После его загрузки на вкладке "Clusters" в строке кластера с более старой версией бандла в колонке "Upgrade" появляется пиктограмма, указывающая на возможность обновления (:numref:`Рис.%s <manage_tools_bundle_upgrade>`).
 
-.. _bundle_upgrade:
+.. _manage_tools_bundle_upgrade:
 
-.. figure:: ../imgs/bundle_upgrade.png
+.. figure:: ../imgs/manage_tools_bundle_upgrade.png
    :align: center
 
    Доступно обновление бандла
 
 
-2. Нажать на пиктограмму в колонке "Upgrade" и выбрать доступную требуемую версию из списка (:numref:`Рис.%s <choose_bundle_upgrade>`).
+2. Нажать на пиктограмму в колонке "Upgrade" и выбрать доступную требуемую версию из списка (:numref:`Рис.%s <manage_tools_choose_bundle_upgrade>`).
 
-.. _choose_bundle_upgrade:
+.. _manage_tools_choose_bundle_upgrade:
 
-.. figure:: ../imgs/choose_bundle_upgrade.png
+.. figure:: ../imgs/manage_tools_choose_bundle_upgrade.png
    :align: center
 
    Доступные обновления
 
 
-3. В открывшемся диалоговом окне подтвердить действие, после чего кластер меняет состояние на *upgrade from 1.3.X* или *upgrade from 1.4.X* в зависимости от установленной версии бандла (:numref:`Рис.%s <cluster_upgrade_state>`).
+3. В открывшемся диалоговом окне подтвердить действие, после чего кластер меняет состояние на *upgrade from 1.3.X* или *upgrade from 1.4.X* в зависимости от установленной версии бандла (:numref:`Рис.%s <manage_tools_cluster_upgrade_state>`).
 
-.. _cluster_upgrade_state:
+.. _manage_tools_cluster_upgrade_state:
 
-.. figure:: ../imgs/cluster_upgrade_state.png
+.. figure:: ../imgs/manage_tools_cluster_upgrade_state.png
    :align: center
 
    Изменение состояния кластера после обновления
@@ -56,11 +56,11 @@
 
 После завершения операции "Upgrade Configs" в кластере становится доступным действие "Upgrade". Данная операция применяет новые настройки, полученные на предыдущем шаге, и обновляет пакеты всех сервисов до указанных версий.
 
-1. В поле "Actions" для обновляемого кластера нажать на пиктограмму и выбрать действие "Upgrade" (:numref:`Рис.%s <cluster_upgrade>`).
+1. В поле "Actions" для обновляемого кластера нажать на пиктограмму и выбрать действие "Upgrade" (:numref:`Рис.%s <manage_tools_cluster_upgrade>`).
 
-.. _cluster_upgrade:
+.. _manage_tools_cluster_upgrade:
 
-.. figure:: ../imgs/cluster_upgrade.png
+.. figure:: ../imgs/manage_tools_cluster_upgrade.png
    :align: center
 
    Обновление пакетов сервисов
