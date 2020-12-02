@@ -15,7 +15,7 @@
 
 .. _manage_tools_cluster_run:
 
-.. figure:: ../../imgs/manage_tools_cluster_run.png
+.. figure:: ../imgs/manage_tools_cluster_run.png
    :align: center
 
    Операции на уровне кластера
@@ -32,7 +32,7 @@
 
 .. _manage_tools_service_actions:
 
-.. figure:: ../../imgs/manage_tools_service_actions.png
+.. figure:: ../imgs/manage_tools_service_actions.png
    :align: center
 
    Запуск проверки состояния сервиса *Zookeeper*
@@ -42,7 +42,7 @@
 
 .. _manage_tools_ads_check:
 
-.. figure:: ../../imgs/manage_tools_ads_check.png
+.. figure:: ../imgs/manage_tools_ads_check.png
    :align: center
 
    Вкладка "JOBS"
@@ -52,7 +52,7 @@
 
 .. _manage_tools_zk_status_check:
 
-.. figure:: ../../imgs/manage_tools_zk_status_check.png
+.. figure:: ../imgs/manage_tools_zk_status_check.png
    :align: center
 
    Проверка состояния сервиса *Zookeeper*
