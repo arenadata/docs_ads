@@ -35,11 +35,11 @@
 
    Flow Агентов
 
-Для успешной загрузки *Flow* на *MiNiFi Agent*, необходимо сохранить шаблон с названием указанным в `nifi.minifi.notifier.ingestors.pull.http.query <https://docs.arenadata.io/ads/v1.5-RUS/Config/ADCM.html#minifi>`_ с добавлением версии (например, *minifi.v1*).
+Для успешной загрузки *Flow* на *MiNiFi Agent*, необходимо сохранить шаблон с названием указанным в `nifi.minifi.notifier.ingestors.pull.http.query <https://docs.arenadata.io/ads/v1.6-RUS/Config/ADCM.html#minifi>`_ с добавлением версии (например, *minifi.v1*).
 Если вы изменили *Flow*, то для актуализации его на агентах необходимо увеличить версию шаблона (например, *minifi.v2*)
 
 
-Автоматическое обновление конфигурации *MiNiFi Agent* происходить с периодичностью, заданной `nifi.minifi.notifier.ingestors.pull.http.period.ms <https://docs.arenadata.io/ads/v1.5-RUS/Config/ADCM.html#minifi>`_.
+Автоматическое обновление конфигурации *MiNiFi Agent* происходить с периодичностью, заданной `nifi.minifi.notifier.ingestors.pull.http.period.ms <https://docs.arenadata.io/ads/v1.6-RUS/Config/ADCM.html#minifi>`_.
 Если шаблон был неправильно собран, то Агенты продолжат работу на последней работоспособной конфигурации.
 
 

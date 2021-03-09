@@ -30,19 +30,23 @@
 * Со всех машин в кластере должен быть доступ к официальному репозиторию CentOS Base (например, РБК http://centos-mirror.rbc.ru/pub/centos/7/os/x86_64/ или создано локальное зеркало).
 
 .. important:: В случае инсталляции с доступом в Интернет машины должны иметь доcтуп к официальным репозиториям:
-    
+
     - **RHEL/CentOS**:
 
-      - Репозиторий *ADS*: http://downloads.arenadata.io/ADS/1.5.0/centos/7/community/x86_64/
+      - Репозиторий *ADS*: http://downloads.arenadata.io/ADS/1.6.0/centos/7/community/x86_64
 
-      - Репозиторий *Arenadata Monitoring*: http://downloads.arenadata.io/ADM/2.2/centos/7/community/x86_64/
+      - Репозиторий *Arenadata Monitoring*: http://downloads.arenadata.io/ADM/2.2/centos/7/community/x86_64
 
-      - Репозитоий *Zookeeper*: http://downloads.arenadata.io/zookeeper/3.5.6/centos/7/community/x86_64/
+      - Репозиторий *Zookeeper*: http://downloads.arenadata.io/zookeeper/3.5.8/centos/7/community/x86_64
+
+      Для версии *Enterprise*:
+
+      - Репозиторий *Ranger plugins*: https://downloads.arenadata.io/ADS/1.6.0_1.0.0/centos/7/community/x86_64
 
     - **Alt Linux**:
 
-      - Репозиторий *ADS*: http://downloads.arenadata.io/ADS/1.5.0/altlinux/8.0/community/
+      - Репозиторий *ADS*: http://downloads.arenadata.io/ADS/1.6.0/altlinux/8.0/community
 
-      - Репозиторий *Arenadata Monitoring*: http://downloads.arenadata.io/ADM/2.2/altlinux/8.0/community/
+      - Репозиторий *Arenadata Monitoring*: http://downloads.arenadata.io/ADM/2.2/altlinux/8.0/community
 
-      - Репозитоий *Zookeeper*: http://downloads.arenadata.io/zookeeper/3.5.6/altlinux/8.0/community/
+      - Репозиторий *Zookeeper*: http://downloads.arenadata.io/zookeeper/3.5.8/altlinux/8.0/community
