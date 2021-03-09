@@ -77,12 +77,13 @@
    Окно конфигурации кластера
 
 В блоке *RedHat repos* указываются требуемые для установки *ADS* пакеты из различных yum-репозиториев.
-В блоке *AltLinux repos* указываются требуемые для установки *ADS* пакеты из различных apt-репозиториев. 
+В блоке *AltLinux repos* указываются требуемые для установки *ADS* пакеты из различных apt-репозиториев.
 При этом в каждом из параметров можно изменить заданный по умолчанию url:
 
 * *ADS*;
 * *monitoring*;
-* *Zookeeper*.
+* *Zookeeper*;
+* *Ranger plugins*. Только для *Enterprise* версии.
 
 .. important:: При установке в окружении без доступа к сети Интернет (offline) необходимо предварительно развернуть кластер `Arenadata Enterprise Tools <https://docs.arenadata.io/etools/ru/index.html>`_ и импортировать настройки HTTP Mirorr
 
@@ -173,15 +174,15 @@
 
 В настоящем примере в кластер добавлены все сервисы, подробное описание конфигурации которых приведено по следующим ссылкам:
 
-+ `Настройка сервиса Zookeeper <https://docs.arenadata.io/ads/v1.5-RUS/Config/ADCM.html#zookeeper>`_;
-+ `Настройка сервиса Kafka <https://docs.arenadata.io/ads/v1.5-RUS/Config/ADCM.html#kafka>`_;
-+ `Настройка сервиса Nifi <https://docs.arenadata.io/ads/v1.5-RUS/Config/ADCM.html#nifi>`_;
-+ `Настройка сервиса Schema-registry <https://docs.arenadata.io/ads/v1.5-RUS/Config/ADCM.html#schema-registry>`_.
-+ `Настройка сервиса Kafka REST Proxy <https://docs.arenadata.io/ads/v1.5-RUS/Config/ADCM.html#kafka-rest-proxy>`_;
-+ `Настройка сервиса KSQL <https://docs.arenadata.io/ads/v1.5-RUS/Config/ADCM.html#ksql>`_;
-+ `Настройка сервиса Kafka-Manager <https://docs.arenadata.io/ads/v1.5-RUS/Config/ADCM.html#kafka-manager>`_;
-+ `Настройка сервиса MiNifi <https://docs.arenadata.io/ads/v1.5-RUS/Config/ADCM.html#minifi>`_;
-+ `Настройка сервиса Monitoring Clients <https://docs.arenadata.io/ads/v1.5-RUS/Config/ADCM.html#monitoring-clients>`_.
++ `Настройка сервиса Zookeeper <https://docs.arenadata.io/ads/v1.6-RUS/Config/ADCM.html#zookeeper>`_;
++ `Настройка сервиса Kafka <https://docs.arenadata.io/ads/v1.6-RUS/Config/ADCM.html#kafka>`_;
++ `Настройка сервиса Nifi <https://docs.arenadata.io/ads/v1.6-RUS/Config/ADCM.html#nifi>`_;
++ `Настройка сервиса Schema-registry <https://docs.arenadata.io/ads/v1.6-RUS/Config/ADCM.html#schema-registry>`_.
++ `Настройка сервиса Kafka REST Proxy <https://docs.arenadata.io/ads/v1.6-RUS/Config/ADCM.html#kafka-rest-proxy>`_;
++ `Настройка сервиса KSQL <https://docs.arenadata.io/ads/v1.6-RUS/Config/ADCM.html#ksql>`_;
++ `Настройка сервиса Kafka-Manager <https://docs.arenadata.io/ads/v1.6-RUS/Config/ADCM.html#kafka-manager>`_;
++ `Настройка сервиса MiNifi <https://docs.arenadata.io/ads/v1.6-RUS/Config/ADCM.html#minifi>`_;
++ `Настройка сервиса Monitoring Clients <https://docs.arenadata.io/ads/v1.6-RUS/Config/ADCM.html#monitoring-clients>`_.
 
 
 Особенности сервиса Monitoring Clients
@@ -309,4 +310,3 @@
 * В строке сервиса *Kafka* в поле "Actions" нажать на пиктограмму и выбрать действие *Install*;
 
 * По результатам инсталляции сервис *Kafka* меняет состояние с *created* -- создан, на *installed* -- установлен.
-
