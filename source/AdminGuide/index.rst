@@ -16,6 +16,8 @@
    Manage_tools
    Manage_tools_upgrade
    Config_ADCM
-   Minifi
    Admin_Nifi/index
    Admin_Kafka/index
+   Minifi
+   Security
+   Ranger
