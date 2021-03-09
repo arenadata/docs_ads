@@ -17,4 +17,3 @@
    Consumer
    Producer
    Connect
-   Streams
